@@ -27,5 +27,12 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    #
+    # Redis sessions
+    #
+    app.redis.session_handler:
+        class: 'Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler'
+        arguments:
+            - !service
+                class: 'Predis\Client'
+                arguments: [ '%env(REDIS_URL)%' ]

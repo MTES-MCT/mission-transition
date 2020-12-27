@@ -1,0 +1,24 @@
+{% set current_route = app.request.attributes.get('_route') %}
+{% set current_route_params = app.request.attributes.get('_route_params') %}
+
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="referrer" content="origin" />
+
+        {% block stylesheets encore_entry_link_tags('app') %}
+        <link rel="canonical" href="{% block meta_canonical current_route ? url(current_route, current_route_params) : '' %}" />
+
+        <title>{% block title %}{% block page_title '' %} | France Transition{% endblock %}</title>
+    </head>
+    <body class="{% block body_class '' %}">
+        {% block body %}{% endblock %}
+
+        {% block javascripts encore_entry_script_tags('app') %}
+    </body>
+</html>
