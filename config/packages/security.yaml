@@ -1,7 +1,17 @@
 security:
+    encoders:
+        App\Security\Admin:
+            algorithm: auto
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+#        app_user_provider:
+#            id: App\Security\UserProvider
+        admin_provider:
+            memory:
+                users:
+                    admin: { password: '%env(ADMIN_PASSWORD)%', roles: [ 'ROLE_ADMIN' ] }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -9,7 +19,7 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: users_in_memory
+            provider: admin_provider
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
