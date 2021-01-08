@@ -1,7 +1,6 @@
 .php_cs.cache
 
 ###> symfony/framework-bundle ###
-/.env
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -23,7 +22,3 @@ yarn-error.log
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
-###> project/conf ###
-.idea
-###> project/conf ###
