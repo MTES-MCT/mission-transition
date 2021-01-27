@@ -1,16 +1,16 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        App\Entity\Admin:
+            algorithm: auto
+
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-#        app_user_provider:
-#            id: App\Security\UserProvider
-        admin_provider:
-            memory:
-                users:
-                    admin: { password: '%env(ADMIN_PASSWORD)%', roles: [ 'ROLE_ADMIN' ] }
+        app_user_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -18,7 +18,7 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: admin_provider
+            provider: app_user_provider
             logout:
                 path: app_logout
             guard:
