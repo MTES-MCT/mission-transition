@@ -21,7 +21,6 @@ security:
             guard:
                 authenticators:
                     - App\Security\AdminAuthenticator
-                target: homepage
 
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }

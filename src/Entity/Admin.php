@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=AdminRepository::class)
+ * @ORM\Table(name="admins")
  */
 class Admin implements UserInterface
 {
@@ -24,15 +25,20 @@ class Admin implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
-
-    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $permissions = [];
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isSuperAdmin;
 
     public function getId(): ?int
     {
@@ -66,18 +72,7 @@ class Admin implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
+        return ['ROLE_ADMIN'];
     }
 
     /**
@@ -110,5 +105,29 @@ class Admin implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getPermissions(): ?array
+    {
+        return $this->permissions;
+    }
+
+    public function setPermissions(?array $permissions): self
+    {
+        $this->permissions = $permissions;
+
+        return $this;
+    }
+
+    public function getIsSuperAdmin(): ?bool
+    {
+        return $this->isSuperAdmin;
+    }
+
+    public function setIsSuperAdmin(bool $isSuperAdmin): self
+    {
+        $this->isSuperAdmin = $isSuperAdmin;
+
+        return $this;
     }
 }
