@@ -38,7 +38,7 @@ class Admin implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isSuperAdmin;
+    private $isSuperAdmin = false;
 
     public function getId(): ?int
     {
