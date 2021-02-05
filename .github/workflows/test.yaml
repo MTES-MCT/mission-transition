@@ -25,3 +25,27 @@ jobs:
               run: yarn global add prettier@2.2.1
             - name: Check coding style
               run: ~/.yarn/bin/prettier --check assets --config .prettierrc.json
+
+    build-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Build the docker-compose stack
+              run: docker-compose up -d
+            - name: Check running containers
+              run: docker ps -a
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress --no-suggest
+
+            - name: Install Symfony CLI
+              run: wget https://get.symfony.com/cli/installer -O - | bash
+
+            - name: Apply migrations
+              run: /home/runner/.symfony/bin/symfony console doctrine:migrations:migrate -n
+
+            - name: Generate fixtures
+              run: /home/runner/.symfony/bin/symfony console doctrine:fixture:load -n --group=test
+
+            - name: PHPUnit
+              run: /home/runner/.symfony/bin/symfony php ./bin/phpunit
