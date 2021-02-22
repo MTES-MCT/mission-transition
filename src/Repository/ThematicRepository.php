@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\EnvironmentalAction;
+use App\Entity\EnvironmentalTopic;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method EnvironmentalAction|null find($id, $lockMode = null, $lockVersion = null)
- * @method EnvironmentalAction|null findOneBy(array $criteria, array $orderBy = null)
- * @method EnvironmentalAction[]    findAll()
- * @method EnvironmentalAction[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EnvironmentalTopic|null find($id, $lockMode = null, $lockVersion = null)
+ * @method EnvironmentalTopic|null findOneBy(array $criteria, array $orderBy = null)
+ * @method EnvironmentalTopic[]    findAll()
+ * @method EnvironmentalTopic[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TagRepository extends ServiceEntityRepository
+class ThematicRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EnvironmentalAction::class);
+        parent::__construct($registry, EnvironmentalTopic::class);
     }
 
     // /**
-    //  * @return Tag[] Returns an array of Tag objects
+    //  * @return Thematic[] Returns an array of Thematic objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class TagRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Tag
+    public function findOneBySomeField($value): ?Thematic
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')

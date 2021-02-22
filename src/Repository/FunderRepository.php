@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Aid;
+use App\Entity\Funder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Aid|null find($id, $lockMode = null, $lockVersion = null)
- * @method Aid|null findOneBy(array $criteria, array $orderBy = null)
- * @method Aid[]    findAll()
- * @method Aid[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Funder|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Funder|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Funder[]    findAll()
+ * @method Funder[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FundraisingCardRepository extends ServiceEntityRepository
+class FunderRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Aid::class);
+        parent::__construct($registry, Funder::class);
     }
 
     // /**
-    //  * @return FundraisingCard[] Returns an array of FundraisingCard objects
+    //  * @return Funder[] Returns an array of Funder objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class FundraisingCardRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?FundraisingCard
+    public function findOneBySomeField($value): ?Funder
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.exampleField = :val')

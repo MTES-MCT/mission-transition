@@ -17,28 +17,28 @@ class Admin implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="array", nullable=true)
      */
-    private $permissions = [];
+    private ?array $permissions = [];
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isSuperAdmin = false;
+    private bool $isSuperAdmin = false;
 
     public function getId(): ?int
     {

@@ -1,0 +1,17 @@
+App\Entity\EnvironmentalTopic:
+    environmental_topic_1:
+        name: "Immobilier durable"
+    environmental_topic_2:
+        name: "Production et distribution d'énergie"
+    environmental_topic_3:
+        name: "Efficacité énergétique"
+    environmental_topic_4:
+        name: "Économie circulaire "
+    environmental_topic_5:
+        name: "Mobilité durable"
+    environmental_topic_6:
+        name: "Conservation et restauration des écosystèmes"
+    environmental_topic_7:
+        name: "Innovation durable"
+    environmental_topic_8:
+        name: "Process et matériels"

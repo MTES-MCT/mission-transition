@@ -1,0 +1,19 @@
+App\Entity\Aid:
+    aid_{0..50}:
+        sourceId: <ean13()>
+        name: <catchPhrase()>
+        fundingType: <randomElement(["AAP", "Subvention", "Plan de relance", "Fonds"])>
+        perimeter: <randomElement(["EUROPE", "DOM-TOM", "NATIONAL", "REGIONAL", "LOCAL"])>
+        regionName: <randomElement(["Bourgogne", "IDF", "AURA", "Martinique", "Grand-Est"])>
+        goal: <text()>
+        beneficiary: <text()>
+        aidDetails: <text()>
+        eligibility: <text()>
+        conditions: <text()>
+        fundingSourceUrl: <url()>
+        state: "draft"
+        aidAdvisor: '@aid_advisor_*'
+        environmentalActions: ['@environmental_action_*']
+        funder: '@funder_*'
+        businessActivityAreas: ['@business_activity_area_*']
+        environmentalTopics: ['@environmental_topic_*']
