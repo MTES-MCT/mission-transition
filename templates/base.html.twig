@@ -2,8 +2,9 @@
 {% set current_route_params = app.request.attributes.get('_route_params') %}
 
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }}">
+<html lang="{{ app.request.locale }} data-rf-reset">
     <head>
+        <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -17,8 +18,15 @@
         <title>{% block title %}{% block page_title '' %} | France Transition{% endblock %}</title>
     </head>
     <body class="{% block body_class '' %}">
-        {% block body %}{% endblock %}
+        <div class="wrapper">
+            {% include './_common/header.html.twig' %}
 
+            <main>
+                {% block body %}{% endblock %}
+            </main>
+
+            {% include './_common/footer.html.twig' %}
+        </div>
         {% block javascripts encore_entry_script_tags('app') %}
     </body>
 </html>
