@@ -21,10 +21,7 @@ class DevFixtures extends Fixture
         $admin = new Admin();
 
         $admin->setEmail('test@merouani.net');
-        $admin->setPassword($this->passwordEncoder->encodePassword(
-            $admin,
-            'myPassword1234'
-        ));
+        $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'myPassword1234'));
 
         $manager->persist($admin);
 
