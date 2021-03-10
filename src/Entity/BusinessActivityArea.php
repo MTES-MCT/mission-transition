@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Util\EntityIdTrait;
 use App\Repository\BusinessActivityAreaRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,12 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class BusinessActivityArea
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -28,14 +24,9 @@ class BusinessActivityArea
      * @ORM\Column(type="string", length=255)
      * @Gedmo\Slug(fields={"name"})
      */
-    private $slug;
+    private string $slug;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -47,7 +38,7 @@ class BusinessActivityArea
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSlug(): string
     {
         return $this->slug;
     }

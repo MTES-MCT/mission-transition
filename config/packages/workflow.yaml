@@ -1,0 +1,19 @@
+framework:
+    workflows:
+        aid_publishing:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Aid
+            initial_marking: draft
+            places:
+                - draft
+                - published
+            transitions:
+                publish:
+                    from: draft
+                    to:   published

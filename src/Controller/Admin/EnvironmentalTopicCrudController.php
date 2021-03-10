@@ -3,11 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\EnvironmentalTopic;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class EnvironmentalTopicCrudController extends AbstractCrudController
@@ -30,7 +27,7 @@ class EnvironmentalTopicCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', 'Nom')
+            TextField::new('name', 'Nom'),
         ];
     }
 }

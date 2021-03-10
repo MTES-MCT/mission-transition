@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Util\EntityIdTrait;
+use App\Entity\Util\EntitySoftDeletable;
+use App\Entity\Util\EntityTimestampable;
 use App\Repository\FundraisingCardRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
-use Symfony\Component\Uid\UuidV4;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=false)
@@ -17,30 +19,24 @@ use Symfony\Component\Uid\UuidV4;
  */
 class Aid
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-     */
-    private UuidV4 $id;
+    use EntityIdTrait;
+    use EntityTimestampable;
+    use EntitySoftDeletable;
+
+    public const STATE_DRAFT = 'draft';
+    public const STATE_PUBLISHED = 'published';
+
+    public const TYPE_AAP = 'APP';
+    public const TYPE_AID = 'Aide';
+    public const TYPE_COMPANY = 'Entreprise';
+    public const TYPE_INVESTMENT_FUND = 'Fonds';
+    public const TYPE_RECOVERY_PLAN = 'Plan de Relance';
+    public const TYPE_FIRST_STEP = 'Premier pas';
 
     /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="ulid", unique=true)
      */
-    private \DateTimeInterface $createdAt;
-
-    /**
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private ?\DateTimeInterface $updatedAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private ?\DateTimeInterface $deletedAt;
+    private Ulid $ulid;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -145,45 +141,16 @@ class Aid
 
     public function __construct()
     {
+        $this->ulid = new Ulid();
         $this->environmentalActions = new ArrayCollection();
         $this->environmentalTopics = new ArrayCollection();
         $this->businessActivityAreas = new ArrayCollection();
+        $this->state = self::STATE_DRAFT;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getUlid(): Ulid
     {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTimeInterface
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
+        return $this->ulid;
     }
 
     public function getSourceId(): ?string

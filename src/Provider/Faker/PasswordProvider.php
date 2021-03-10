@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Provider\Faker;
-
 
 use Faker\Provider\Base as BaseProvider;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

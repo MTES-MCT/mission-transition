@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Util\EntityIdTrait;
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,12 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Admin implements UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -39,11 +35,6 @@ class Admin implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private bool $isSuperAdmin = false;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getEmail(): ?string
     {

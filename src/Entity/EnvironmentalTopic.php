@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Util\EntityIdTrait;
 use App\Repository\ThematicRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,12 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class EnvironmentalTopic
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id = null;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,17 +33,17 @@ class EnvironmentalTopic
      */
     private Collection $aids;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->aids = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

@@ -10,38 +10,31 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210305153851 extends AbstractMigration
+final class Version20210310163246 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function up(Schema $schema): void
     {
-        return '';
-    }
-
-    public function up(Schema $schema) : void
-    {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SEQUENCE aid_advisors_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE aids_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE business_activity_areas_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE environmental_actions_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE environmental_topics_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE funders_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE aid_advisors (id INT NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255) DEFAULT NULL, website VARCHAR(255) DEFAULT NULL, phone_number VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE aids (id UUID NOT NULL, aid_advisor_id INT DEFAULT NULL, funder_id INT DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, deleted_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, source_id VARCHAR(255) DEFAULT NULL, name VARCHAR(255) NOT NULL, funding_type VARCHAR(255) NOT NULL, perimeter VARCHAR(255) DEFAULT NULL, region_name VARCHAR(255) DEFAULT NULL, goal TEXT DEFAULT NULL, beneficiary TEXT DEFAULT NULL, aid_details TEXT DEFAULT NULL, eligibility TEXT DEFAULT NULL, conditions TEXT DEFAULT NULL, funding_source_url VARCHAR(255) DEFAULT NULL, application_end_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, application_url VARCHAR(255) DEFAULT NULL, state VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE aids (id INT NOT NULL, aid_advisor_id INT DEFAULT NULL, funder_id INT DEFAULT NULL, ulid UUID NOT NULL, source_id VARCHAR(255) DEFAULT NULL, name VARCHAR(255) NOT NULL, funding_type VARCHAR(255) NOT NULL, perimeter VARCHAR(255) DEFAULT NULL, region_name VARCHAR(255) DEFAULT NULL, goal TEXT DEFAULT NULL, beneficiary TEXT DEFAULT NULL, aid_details TEXT DEFAULT NULL, eligibility TEXT DEFAULT NULL, conditions TEXT DEFAULT NULL, funding_source_url VARCHAR(255) DEFAULT NULL, application_end_date TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, application_url VARCHAR(255) DEFAULT NULL, state VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, deleted_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_2D4531F0C288C859 ON aids (ulid)');
         $this->addSql('CREATE INDEX IDX_2D4531F0C447CBA ON aids (aid_advisor_id)');
         $this->addSql('CREATE INDEX IDX_2D4531F06CC88588 ON aids (funder_id)');
-        $this->addSql('COMMENT ON COLUMN aids.id IS \'(DC2Type:uuid)\'');
-        $this->addSql('CREATE TABLE aid_environmental_action (aid_id UUID NOT NULL, environmental_action_id INT NOT NULL, PRIMARY KEY(aid_id, environmental_action_id))');
+        $this->addSql('COMMENT ON COLUMN aids.ulid IS \'(DC2Type:ulid)\'');
+        $this->addSql('CREATE TABLE aid_environmental_action (aid_id INT NOT NULL, environmental_action_id INT NOT NULL, PRIMARY KEY(aid_id, environmental_action_id))');
         $this->addSql('CREATE INDEX IDX_4784D526CB0C1416 ON aid_environmental_action (aid_id)');
         $this->addSql('CREATE INDEX IDX_4784D526E7205469 ON aid_environmental_action (environmental_action_id)');
-        $this->addSql('COMMENT ON COLUMN aid_environmental_action.aid_id IS \'(DC2Type:uuid)\'');
-        $this->addSql('CREATE TABLE aid_environmental_topic (aid_id UUID NOT NULL, environmental_topic_id INT NOT NULL, PRIMARY KEY(aid_id, environmental_topic_id))');
+        $this->addSql('CREATE TABLE aid_environmental_topic (aid_id INT NOT NULL, environmental_topic_id INT NOT NULL, PRIMARY KEY(aid_id, environmental_topic_id))');
         $this->addSql('CREATE INDEX IDX_D5196A1BCB0C1416 ON aid_environmental_topic (aid_id)');
         $this->addSql('CREATE INDEX IDX_D5196A1B67ABD4B6 ON aid_environmental_topic (environmental_topic_id)');
-        $this->addSql('COMMENT ON COLUMN aid_environmental_topic.aid_id IS \'(DC2Type:uuid)\'');
-        $this->addSql('CREATE TABLE aid_business_activity_area (aid_id UUID NOT NULL, business_activity_area_id INT NOT NULL, PRIMARY KEY(aid_id, business_activity_area_id))');
+        $this->addSql('CREATE TABLE aid_business_activity_area (aid_id INT NOT NULL, business_activity_area_id INT NOT NULL, PRIMARY KEY(aid_id, business_activity_area_id))');
         $this->addSql('CREATE INDEX IDX_6C9B5ACECB0C1416 ON aid_business_activity_area (aid_id)');
         $this->addSql('CREATE INDEX IDX_6C9B5ACE3087BC3B ON aid_business_activity_area (business_activity_area_id)');
-        $this->addSql('COMMENT ON COLUMN aid_business_activity_area.aid_id IS \'(DC2Type:uuid)\'');
         $this->addSql('CREATE TABLE business_activity_areas (id INT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE environmental_actions (id INT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE environmental_topics (id INT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
@@ -56,10 +49,8 @@ final class Version20210305153851 extends AbstractMigration
         $this->addSql('ALTER TABLE aid_business_activity_area ADD CONSTRAINT FK_6C9B5ACE3087BC3B FOREIGN KEY (business_activity_area_id) REFERENCES business_activity_areas (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE aids DROP CONSTRAINT FK_2D4531F0C447CBA');
         $this->addSql('ALTER TABLE aid_environmental_action DROP CONSTRAINT FK_4784D526CB0C1416');
         $this->addSql('ALTER TABLE aid_environmental_topic DROP CONSTRAINT FK_D5196A1BCB0C1416');
@@ -69,6 +60,7 @@ final class Version20210305153851 extends AbstractMigration
         $this->addSql('ALTER TABLE aid_environmental_topic DROP CONSTRAINT FK_D5196A1B67ABD4B6');
         $this->addSql('ALTER TABLE aids DROP CONSTRAINT FK_2D4531F06CC88588');
         $this->addSql('DROP SEQUENCE aid_advisors_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE aids_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE business_activity_areas_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE environmental_actions_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE environmental_topics_id_seq CASCADE');

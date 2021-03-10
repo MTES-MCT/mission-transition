@@ -46,8 +46,8 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'username' => $request->request->get('username'),
-            'password' => $request->request->get('password'),
+            'username' => $request->request->get('_username'),
+            'password' => $request->request->get('_password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
@@ -61,13 +61,9 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-
-        // Load / create our user however you need.
-        // You can do this by calling the user provider, or with custom logic here.
         $user = $userProvider->loadUserByUsername($credentials['username']);
 
         if (!$user) {
-            // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
 
