@@ -30,22 +30,22 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+            - name: Install PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: '7.4'
+                coverage: none
+                extensions: amqp
+                tools: phpunit, composer, symfony
             - name: Build the docker-compose stack
               run: docker-compose up -d
             - name: Check running containers
               run: docker ps -a
-
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress --no-suggest
-
-            - name: Install Symfony CLI
-              run: wget https://get.symfony.com/cli/installer -O - | bash
-
             - name: Apply migrations
-              run: /home/runner/.symfony/bin/symfony console doctrine:migrations:migrate -n
-
+              run: symfony console doctrine:migrations:migrate -n
             - name: Generate fixtures
-              run: /home/runner/.symfony/bin/symfony console doctrine:fixture:load -n --group=test
-
+              run: symfony console hautelook:fixtures:load -n
             - name: PHPUnit
-              run: /home/runner/.symfony/bin/symfony php ./bin/phpunit
+              run: phpunit
