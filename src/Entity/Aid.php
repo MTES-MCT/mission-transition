@@ -357,6 +357,11 @@ class Aid
         return $this;
     }
 
+    public function hasEnvironmentalAction(EnvironmentalAction $environmentalAction): bool
+    {
+        return $this->environmentalActions->contains($environmentalAction);
+    }
+
     public function getAidAdvisor(): ?AidAdvisor
     {
         return $this->aidAdvisor;

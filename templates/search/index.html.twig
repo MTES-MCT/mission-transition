@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de dispositif d'aide{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <button class="rf-btn">
+            Chercher
+        </button>
+    {{ form_end(form) }}
+
+    <hr>
+
+    <div class="rf-container">
+        {% for key, action in aidsByActions %}
+            <h2>{{ key }}</h2>
+            <div class="rf-grid-row">
+                {% for aid in action %}
+                    <div class="rf-col-xs-12 rf-col-lg-4 rf-mb-3v">
+                        <div class="rf-card rf-m-3v">
+                            <div class="rf-card__body">
+                                <p class="rf-card__detail">Détail</p>
+                                <h4 class="rf-card__title">
+                                    <a href="#" class="rf-card__link">{{aid.name}}</a>
+                                </h4>
+                                {% for aidAction in aid.environmentalActions %}
+                                    <p class="rf-tag">{{ aidAction.name }}</p>
+                                {% endfor %}
+                                <p class="rf-tag">{{ aid.fundingType }}</p>
+                                <p class="rf-tag">{{ aid.funder.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}
