@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method EnvironmentalAction[]    findAll()
  * @method EnvironmentalAction[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TagRepository extends ServiceEntityRepository
+class EnvironmentalActionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

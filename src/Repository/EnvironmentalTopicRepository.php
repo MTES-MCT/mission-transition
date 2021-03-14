@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method EnvironmentalTopic[]    findAll()
  * @method EnvironmentalTopic[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ThematicRepository extends ServiceEntityRepository
+class EnvironmentalTopicRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

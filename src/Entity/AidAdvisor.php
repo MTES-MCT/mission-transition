@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use App\Entity\Util\EntityIdTrait;
-use App\Repository\AttributedContactRepository;
+use App\Repository\AidAdvisorRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=AttributedContactRepository::class)
+ * @ORM\Entity(repositoryClass=AidAdvisorRepository::class)
  * @ORM\Table(name="aid_advisors")
  */
 class AidAdvisor

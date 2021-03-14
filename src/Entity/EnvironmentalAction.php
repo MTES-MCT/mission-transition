@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use App\Entity\Util\EntityIdTrait;
-use App\Repository\TagRepository;
+use App\Repository\EnvironmentalActionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass=TagRepository::class)
+ * @ORM\Entity(repositoryClass=EnvironmentalActionRepository::class)
  * @ORM\Table(name="environmental_actions")
  */
 class EnvironmentalAction

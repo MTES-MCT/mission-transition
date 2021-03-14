@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method AidAdvisor[]    findAll()
  * @method AidAdvisor[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AttributedContactRepository extends ServiceEntityRepository
+class AidAdvisorRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

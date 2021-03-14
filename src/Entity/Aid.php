@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Entity\Util\EntityIdTrait;
 use App\Entity\Util\EntitySoftDeletable;
 use App\Entity\Util\EntityTimestampable;
-use App\Repository\FundraisingCardRepository;
+use App\Repository\AidRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +14,7 @@ use Symfony\Component\Uid\Ulid;
 
 /**
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=false)
- * @ORM\Entity(repositoryClass=FundraisingCardRepository::class)
+ * @ORM\Entity(repositoryClass=AidRepository::class)
  * @ORM\Table(name="aids")
  */
 class Aid

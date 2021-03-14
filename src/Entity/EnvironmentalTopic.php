@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use App\Entity\Util\EntityIdTrait;
-use App\Repository\ThematicRepository;
+use App\Repository\EnvironmentalTopicRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass=ThematicRepository::class)
+ * @ORM\Entity(repositoryClass=EnvironmentalTopicRepository::class)
  * @ORM\Table(name="environmental_topics")
  */
 class EnvironmentalTopic

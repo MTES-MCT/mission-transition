@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Aid[]    findAll()
  * @method Aid[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FundraisingCardRepository extends ServiceEntityRepository
+class AidRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
