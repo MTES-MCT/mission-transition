@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Aid;
+use App\Entity\BusinessActivityArea;
 use App\Entity\EnvironmentalAction;
 use App\Form\SearchFormType;
 use App\Model\SearchFormModel;
 use App\Repository\AidRepository;
+use App\Repository\BusinessActivityAreaRepository;
 use App\Repository\EnvironmentalActionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,14 +23,17 @@ class SearchController extends AbstractController
     public function index(
         Request $request,
         EnvironmentalActionRepository $actionRepository,
+        BusinessActivityAreaRepository $businessActivityAreaRepository,
         AidRepository $aidRepository
     ): Response
     {
         $environmentalActions = $actionRepository->findAll();
+        $businessActivityAreas = $businessActivityAreaRepository->findAll();
         $searchFormModel = new SearchFormModel();
 
         $form = $this->createForm(SearchFormType::class, $searchFormModel, [
             'environmentalActions' => $environmentalActions,
+            'businessActivityAreas' => $businessActivityAreas,
             'method' => 'GET'
         ]);
 
@@ -37,7 +42,10 @@ class SearchController extends AbstractController
         $aidsByActions = [];
         if ($form->isSubmitted() && $form->isValid()) {
             $environmentalActionsIds = $searchFormModel->getEnvironmentalActionIds();
-            $aids = $aidRepository->searchByCriteria($environmentalActionsIds);
+            $businessActivityAreasIds = $searchFormModel->getBusinessActivityAreasIds();
+            $regionName = $searchFormModel->getRegionName();
+
+            $aids = $aidRepository->searchByCriteria($environmentalActionsIds, $businessActivityAreasIds, $regionName);
             $aidsByActions = $this->orderAidsByActions($searchFormModel->getEnvironmentalActions(), $aids);
         }
 
