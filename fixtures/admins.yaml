@@ -1,0 +1,4 @@
+App\Entity\Admin:
+    admin_cedric:
+        email: 'admin@fte.com'
+        password: <encodePassword(@admin_cedric, 'password')>

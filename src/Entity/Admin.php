@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Util\EntityIdTrait;
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,38 +13,28 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Admin implements UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="array", nullable=true)
      */
-    private $permissions = [];
+    private ?array $permissions = [];
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isSuperAdmin = false;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    private bool $isSuperAdmin = false;
 
     public function getEmail(): ?string
     {
