@@ -3,6 +3,7 @@ import { useCombobox } from 'downshift';
 import { fetchCompanyBySiren, fetchCompanyBySiret, fetchCompaniesByText } from '../api';
 
 const CompanyDataAutocomplete = () => {
+    const [items, setItems] = useState();
     const menuStyles = {
         maxHeight: 80,
         maxWidth: 300,
@@ -48,11 +49,15 @@ const CompanyDataAutocomplete = () => {
                 if (!data['etablissement']) {
                     setInputItems(['non trouvé']);
                 } else {
-                    setInputItems(data['etablissement'].map((company) => company['nom_raison_sociale']));
+                    console.log(data);
+                    setInputItems(data['etablissement']);
                 }
             });
         }
     };
+    const itemToString = (item) => item['nom_raison_sociale'];
+
+    const onSelectedItemChange = (item) => {};
 
     const {
         isOpen,
@@ -66,7 +71,9 @@ const CompanyDataAutocomplete = () => {
         getItemProps,
     } = useCombobox({
         items: inputItems,
+        itemToString,
         onInputValueChange: onInputValueChange,
+        onSelectedItemChange: onSelectedItemChange,
     });
 
     return (
@@ -85,7 +92,7 @@ const CompanyDataAutocomplete = () => {
                             style={highlightedIndex === index ? { backgroundColor: '#bde4ff' } : {}}
                             key={`${item}${index}`}
                             {...getItemProps({ item, index })}>
-                            {item}
+                            {itemToString(item)}
                         </li>
                     ))}
             </ul>

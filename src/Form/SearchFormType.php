@@ -1,13 +1,9 @@
 <?php
 
-
 namespace App\Form;
-
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,24 +12,37 @@ class SearchFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('companyName', FormType::class, [
-                'mapped' => false,
-                'attr' => [
-                    'data-controller' => 'search'
-                ]
+//            ->add('companyName', FormType::class, [
+//                'mapped' => false,
+//                'attr' => [
+//                    'data-controller' => 'search'
+//                ]
+//            ])
+            ->add('aidType', ChoiceType::class, [
+                'choices' => [
+                    'un financement' => 'funding',
+                    'des actions faciles' => 'first-steps',
+                ],
+                'label' => 'Mon besoin',
             ])
-            ->add('regionName', TextType::class)
-            ->add('businessActivityAreas', ChoiceType::class, [
-                'choices' => $options['businessActivityAreas'],
+            ->add('region', ChoiceType::class, [
+                'choices' => $options['regions'],
                 'choice_value' => 'id',
                 'choice_label' => 'name',
-                'multiple' => true
+                'placeholder' => 'Toute la France',
+                'label' => 'Ma région',
             ])
-            ->add('environmentalActions', ChoiceType::class, [
+//            ->add('businessActivityAreas', ChoiceType::class, [
+//                'choices' => $options['businessActivityAreas'],
+//                'choice_value' => 'id',
+//                'choice_label' => 'name',
+//                'multiple' => true
+//            ])
+            ->add('environmentalAction', ChoiceType::class, [
                 'choices' => $options['environmentalActions'],
                 'choice_value' => 'id',
                 'choice_label' => 'name',
-                'multiple' => true
+                'label' => 'Vos objectifs de transition écologique',
             ])
         ;
     }
@@ -42,11 +51,14 @@ class SearchFormType extends AbstractType
     {
         $resolver->setDefaults([
             'environmentalActions' => [],
-            'businessActivityAreas' => []
+            'businessActivityAreas' => [],
+            'regions' => [],
         ]);
 
         $resolver
             ->setAllowedTypes('environmentalActions', 'array')
-            ->setAllowedTypes('businessActivityAreas', 'array');
+            ->setAllowedTypes('businessActivityAreas', 'array')
+            ->setAllowedTypes('regions', 'array')
+        ;
     }
 }

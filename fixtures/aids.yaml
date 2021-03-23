@@ -2,9 +2,10 @@ App\Entity\Aid:
     aid_action_{1..10}:
         sourceId: <ean13()>
         name: <catchPhrase()>
-        fundingType: <randomElement(["AAP", "Subvention", "Plan de relance", "Fonds"])>
+        type: <randomElement(["AAP", "Aide", "Fonds"])>
+        fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
         perimeter: <randomElement(["EUROPE", "DOM-TOM", "NATIONAL", "REGIONAL", "LOCAL"])>
-        regionName: <randomElement(["Bourgogne", "IDF", "AURA", "Martinique", "Grand-Est"])>
+        region: '@region_*'
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -20,9 +21,10 @@ App\Entity\Aid:
     aid_action_{11..20}:
         sourceId: <ean13()>
         name: <catchPhrase()>
-        fundingType: <randomElement(["AAP", "Subvention", "Plan de relance", "Fonds"])>
+        type: <randomElement(["AAP", "Aide", "Fonds"])>
+        fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
         perimeter: <randomElement(["EUROPE", "DOM-TOM", "NATIONAL", "REGIONAL", "LOCAL"])>
-        regionName: <randomElement(["Bourgogne", "IDF", "AURA", "Martinique", "Grand-Est"])>
+        region: '@region_*'
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -38,9 +40,10 @@ App\Entity\Aid:
     aid_action_unpublished_{1..10}:
         sourceId: <ean13()>
         name: <catchPhrase()>
-        fundingType: <randomElement(["AAP", "Subvention", "Plan de relance", "Fonds"])>
+        type: <randomElement(["AAP", "Aide", "Fonds"])>
+        fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
         perimeter: <randomElement(["EUROPE", "DOM-TOM", "NATIONAL", "REGIONAL", "LOCAL"])>
-        regionName: <randomElement(["Bourgogne", "IDF", "AURA", "Martinique", "Grand-Est"])>
+        region: '@region_*'
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -56,9 +59,10 @@ App\Entity\Aid:
     aid_action_region_{1..10}:
         sourceId: <ean13()>
         name: <catchPhrase()>
-        fundingType: <randomElement(["AAP", "Subvention", "Plan de relance", "Fonds"])>
+        type: <randomElement(["AAP", "Aide", "Fonds"])>
+        fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
         perimeter: <randomElement(["EUROPE", "DOM-TOM", "NATIONAL", "REGIONAL", "LOCAL"])>
-        regionName: "Loire-Atlantique"
+        region: '@region_11'
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -71,3 +75,22 @@ App\Entity\Aid:
         funder: '@funder_*'
         businessActivityAreas: [ '@business_activity_area_3' ]
         environmentalTopics: [ '@environmental_topic_6', '@environmental_topic_2' ]
+    aid_first_steps_{1..10}:
+        sourceId: <ean13()>
+        name: <catchPhrase()>
+        type: 'Premiers Pas'
+        fundingTypes: ["Premiers Pas"]
+        perimeter: <randomElement(["EUROPE", "DOM-TOM", "NATIONAL", "REGIONAL", "LOCAL"])>
+        region: '@region_11'
+        goal: <text()>
+        beneficiary: <text()>
+        aidDetails: <text()>
+        eligibility: <text()>
+        conditions: <text()>
+        fundingSourceUrl: <url()>
+        state: "published"
+        aidAdvisor: '@aid_advisor_*'
+        environmentalActions: [ '@environmental_action_2' ]
+        funder: '@funder_*'
+        businessActivityAreas: [ '@business_activity_area_5' ]
+        environmentalTopics: [ '@environmental_topic_7' ]

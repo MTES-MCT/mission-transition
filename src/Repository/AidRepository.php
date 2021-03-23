@@ -3,9 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Aid;
+use App\Entity\EnvironmentalAction;
+use App\Entity\Region;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Aid|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,36 +22,37 @@ class AidRepository extends ServiceEntityRepository
     }
 
     public function searchByCriteria(
-        array $environmentalActionIds = null,
+        array $aidTypes,
+        EnvironmentalAction $environmentalAction = null,
         array $businessActivityAreaIds = null,
-        string $regionName = null
-    ){
+        Region $region = null
+    ) {
         $qb = $this->createQueryBuilder('aid');
 
-        if (empty($environmentalActionIds)) {
+        if (null === $environmentalAction) {
             return [];
-        }
-
-        if (!empty($environmentalActionIds)) {
+        } else {
             $qb
                 ->join('aid.environmentalActions', 'environmentalActions')
-                ->add('where', $qb->expr()->in('environmentalActions', $environmentalActionIds));
+                ->andWhere('environmentalActions = :environmentalAction')->setParameter('environmentalAction', $environmentalAction);
         }
 
         if (!empty($businessActivityAreaIds)) {
             $qb
                 ->leftJoin('aid.businessActivityAreas', 'businessActivityAreas')
-                ->add('where', $qb->expr()->in('businessActivityAreas', $businessActivityAreaIds));
+                ->andWhere($qb->expr()->in('businessActivityAreas', $businessActivityAreaIds));
         }
 
-        if (null !== $regionName) {
+        if (null !== $region) {
             $qb
-                ->andWhere('aid.regionName LIKE :regionName')
-                ->setParameter('regionName', '%'.addcslashes($regionName, '_%').'%')
-                ;
+                ->andWhere('aid.region = :region')
+                ->setParameter('region', $region)
+            ;
         }
 
-        $qb->andWhere("aid.state = 'published'");
+        $qb
+            ->andWhere("aid.state = 'published'")
+            ->andWhere($qb->expr()->in('aid.type', $aidTypes));
 
         return $qb->getQuery()->getResult();
     }
