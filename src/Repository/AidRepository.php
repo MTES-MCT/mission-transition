@@ -31,10 +31,6 @@ class AidRepository extends ServiceEntityRepository
 
         if (null === $environmentalAction) {
             return [];
-        } else {
-            $qb
-                ->join('aid.environmentalActions', 'environmentalActions')
-                ->andWhere('environmentalActions = :environmentalAction')->setParameter('environmentalAction', $environmentalAction);
         }
 
         if (!empty($businessActivityAreaIds)) {
@@ -45,14 +41,21 @@ class AidRepository extends ServiceEntityRepository
 
         if (null !== $region) {
             $qb
-                ->andWhere('aid.region = :region')
+                ->andWhere('aid.region = :region')->orWhere('aid.perimeter = :perimeter')->setParameter('perimeter', 'NATIONAL')
                 ->setParameter('region', $region)
             ;
         }
 
         $qb
             ->andWhere("aid.state = 'published'")
+            ->andWhere('aid.perimeter = :regional OR aid.perimeter = :national')
+            ->setParameter('regional', 'REGIONAL')
+            ->setParameter('national', 'NATIONAL')
             ->andWhere($qb->expr()->in('aid.type', $aidTypes));
+
+        $qb
+            ->join('aid.environmentalActions', 'environmentalActions')
+            ->andWhere('environmentalActions = :environmentalAction')->setParameter('environmentalAction', $environmentalAction);
 
         return $qb->getQuery()->getResult();
     }

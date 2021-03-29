@@ -4,20 +4,24 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SearchFormType extends AbstractType
+class SearchSecondStepFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('aidType', ChoiceType::class, [
-                'choices' => [
-                    'un financement' => 'funding',
-                    'des actions faciles' => 'first-steps',
+            ->add('companyName', FormType::class, [
+                'mapped' => false,
+                'attr' => [
+                    'data-controller' => 'search',
                 ],
-                'label' => 'Mon besoin',
+            ])
+            ->add('aidType', HiddenType::class)
+            ->add('environmentalAction', HiddenType::class, [
             ])
             ->add('region', ChoiceType::class, [
                 'choices' => $options['regions'],
@@ -26,26 +30,21 @@ class SearchFormType extends AbstractType
                 'placeholder' => 'Toute la France',
                 'label' => 'Ma région',
             ])
-            ->add('environmentalAction', ChoiceType::class, [
-                'choices' => $options['environmentalActions'],
-                'choice_value' => 'name',
-                'choice_label' => 'name',
-                'label' => 'Vos objectifs de transition écologique',
-            ])
         ;
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'search_form';
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'environmentalActions' => [],
-            'businessActivityAreas' => [],
             'regions' => [],
         ]);
 
         $resolver
-            ->setAllowedTypes('environmentalActions', 'array')
-            ->setAllowedTypes('businessActivityAreas', 'array')
             ->setAllowedTypes('regions', 'array')
         ;
     }

@@ -7,8 +7,8 @@ use App\Entity\Region;
 
 class SearchFormModel
 {
-    protected const TYPE_FUNDING = 'funding';
-    protected const TYPE_FIRST_STEPS = 'first-steps';
+    public const TYPE_FUNDING = 'funding';
+    public const TYPE_FIRST_STEPS = 'first-steps';
 
     protected string $aidType = self::TYPE_FUNDING;
     protected ?Region $region = null;
@@ -79,6 +79,11 @@ class SearchFormModel
 //        $this->businessActivityAreas = $businessActivityAreas;
 //        return $this;
 //    }
+
+    public function isFundingType(): bool
+    {
+        return 0 === strcmp($this->aidType, SearchFormModel::TYPE_FUNDING);
+    }
 
     public function getEnvironmentalAction(): EnvironmentalAction
     {

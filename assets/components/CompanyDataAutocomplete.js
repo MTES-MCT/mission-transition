@@ -20,11 +20,11 @@ const CompanyDataAutocomplete = () => {
         //SIRET
         if (inputValue.match('^[0-9]{14}$')) {
             fetchCompanyBySiret(inputValue).then((data) => {
-                console.log(data);
                 if (!data['etablissement']) {
                     setInputItems(['non trouvé']);
                 } else {
-                    setInputItems([data['etablissement']['unite_legale']['denomination']]);
+                    data['etablissement']['_name'] = data['etablissement']['unite_legale']['denomination'];
+                    setInputItems([data['etablissement']]);
                 }
             });
             return;
@@ -33,11 +33,12 @@ const CompanyDataAutocomplete = () => {
         //SIREN
         if (inputValue.match('^[0-9]{9}$')) {
             fetchCompanyBySiren(inputValue).then((data) => {
-                console.log(data);
                 if (!data['unite_legale']) {
                     setInputItems(['non trouvé']);
                 } else {
-                    setInputItems([data['unite_legale']['denomination']]);
+                    //We add `_name` key to access company name easily regardless of data structure
+                    data['unite_legale']['_name'] = data['unite_legale']['denomination'];
+                    setInputItems([data['unite_legale']]);
                 }
             });
             return;
@@ -49,15 +50,28 @@ const CompanyDataAutocomplete = () => {
                 if (!data['etablissement']) {
                     setInputItems(['non trouvé']);
                 } else {
-                    console.log(data);
-                    setInputItems(data['etablissement']);
+                    setInputItems(
+                        data['etablissement'].map((company) => {
+                            company['_name'] = company['nom_raison_sociale'];
+                            return company;
+                        })
+                    );
                 }
             });
         }
     };
-    const itemToString = (item) => item['nom_raison_sociale'];
+    const itemToString = (item) => item['_name'];
 
-    const onSelectedItemChange = (item) => {};
+    const onSelectedItemChange = (item) => {
+        let regionSelect = document.querySelector('#search_form_region');
+        item = item.selectedItem;
+        for (let i = 0, length = regionSelect.length; i < length; i++) {
+            if (regionSelect.options[i].text === item['libelle_region']) {
+                regionSelect.selectedIndex = i;
+                break;
+            }
+        }
+    };
 
     const {
         isOpen,
@@ -92,7 +106,7 @@ const CompanyDataAutocomplete = () => {
                             style={highlightedIndex === index ? { backgroundColor: '#bde4ff' } : {}}
                             key={`${item}${index}`}
                             {...getItemProps({ item, index })}>
-                            {itemToString(item)}
+                            {typeof item === 'object' && item !== null ? itemToString(item) : item}
                         </li>
                     ))}
             </ul>
