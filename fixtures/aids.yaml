@@ -94,40 +94,4 @@ App\Entity\Aid:
         funder: '@funder_*'
         businessActivityAreas: [ '@business_activity_area_5' ]
         environmentalTopics: [ '@environmental_topic_7' ]
-    aid_region_random_{1..400}:
-        sourceId: <ean13()>
-        name: <catchPhrase()>
-        type: <randomElement(["AAP", "Aide", "Fonds", "Premiers Pas"])>
-        fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
-        perimeter: <randomElement(["REGIONAL"])>
-        region: '@region_*'
-        goal: <text()>
-        beneficiary: <text()>
-        aidDetails: <text()>
-        eligibility: <text()>
-        conditions: <text()>
-        fundingSourceUrl: <url()>
-        state: "published"
-        aidAdvisor: '@aid_advisor_*'
-        environmentalActions: [ '@environmental_action_*' ]
-        funder: '@funder_*'
-        businessActivityAreas: [ '@business_activity_area_*' ]
-        environmentalTopics: [ '@environmental_topic_*' ]
-    aid_national_random_{1..100}:
-        sourceId: <ean13()>
-        name: <catchPhrase()>
-        type: <randomElement(["AAP", "Aide", "Fonds", "Premiers Pas"])>
-        fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
-        perimeter: <randomElement(["NATIONAL"])>
-        goal: <text()>
-        beneficiary: <text()>
-        aidDetails: <text()>
-        eligibility: <text()>
-        conditions: <text()>
-        fundingSourceUrl: <url()>
-        state: "published"
-        aidAdvisor: '@aid_advisor_*'
-        environmentalActions: [ '@environmental_action_*' ]
-        funder: '@funder_*'
-        businessActivityAreas: [ '@business_activity_area_*' ]
-        environmentalTopics: [ '@environmental_topic_*' ]
+

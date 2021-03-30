@@ -3,7 +3,6 @@ import { useCombobox } from 'downshift';
 import { fetchCompanyBySiren, fetchCompanyBySiret, fetchCompaniesByText } from '../api';
 
 const CompanyDataAutocomplete = () => {
-    const [items, setItems] = useState();
     const menuStyles = {
         maxHeight: 80,
         maxWidth: 300,

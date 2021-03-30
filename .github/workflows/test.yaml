@@ -46,6 +46,6 @@ jobs:
             - name: Apply migrations
               run: symfony console doctrine:migrations:migrate -n
             - name: Generate fixtures
-              run: symfony console hautelook:fixtures:load -n
+              run: symfony console hautelook:fixtures:load -n --env=test
             - name: PHPUnit
-              run: phpunit
+              run: symfony php ./bin/phpunit
