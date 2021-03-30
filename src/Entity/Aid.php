@@ -49,19 +49,9 @@ class Aid
     private string $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $fundingType;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $perimeter;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $regionName;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -139,6 +129,21 @@ class Aid
      */
     private Collection $businessActivityAreas;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class)
+     */
+    private ?Region $region;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private ?array $fundingTypes = [];
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $type;
+
     public function __construct()
     {
         $this->ulid = new Ulid();
@@ -177,18 +182,6 @@ class Aid
         return $this;
     }
 
-    public function getFundingType(): ?string
-    {
-        return $this->fundingType;
-    }
-
-    public function setFundingType(string $fundingType): self
-    {
-        $this->fundingType = $fundingType;
-
-        return $this;
-    }
-
     public function getPerimeter(): ?string
     {
         return $this->perimeter;
@@ -201,16 +194,9 @@ class Aid
         return $this;
     }
 
-    public function getRegionName(): ?string
+    public function isNational()
     {
-        return $this->regionName;
-    }
-
-    public function setRegionName(?string $regionName): self
-    {
-        $this->regionName = $regionName;
-
-        return $this;
+        return strcmp($this->perimeter, 'NATIONAL');
     }
 
     public function getGoal(): ?string
@@ -357,6 +343,11 @@ class Aid
         return $this;
     }
 
+    public function hasEnvironmentalAction(EnvironmentalAction $environmentalAction): bool
+    {
+        return $this->environmentalActions->contains($environmentalAction);
+    }
+
     public function getAidAdvisor(): ?AidAdvisor
     {
         return $this->aidAdvisor;
@@ -425,6 +416,42 @@ class Aid
     public function removeBusinessActivityArea(BusinessActivityArea $businessActivityArea): self
     {
         $this->businessActivityAreas->removeElement($businessActivityArea);
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getFundingTypes(): ?array
+    {
+        return $this->fundingTypes;
+    }
+
+    public function setFundingTypes(?array $fundingTypes): self
+    {
+        $this->fundingTypes = $fundingTypes;
+
+        return $this;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

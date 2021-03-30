@@ -1,0 +1,27 @@
+App\Entity\Region:
+    region_1:
+        name: 'Auvergne-Rhône-Alpes'
+    region_2:
+        name: 'Bourgogne-Franche-Comté'
+    region_3:
+        name: 'Bretagne'
+    region_4:
+        name: 'Centre-Val de Loire'
+    region_5:
+        name: 'Corse'
+    region_6:
+        name: 'Grand Est'
+    region_7:
+        name: 'Hauts-de-France'
+    region_8:
+        name: 'Île-de-France'
+    region_9:
+        name: 'Normandie'
+    region_10:
+        name: 'Occitanie'
+    region_11:
+        name: 'Pays de la Loire'
+    region_12:
+        name: "Provence-Alpes-Côte d'Azur"
+    region_13:
+        name: 'DOM-TOM'

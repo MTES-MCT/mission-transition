@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de dispositif d'aide{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <button class="rf-btn">
+            ALLER À L'ÉTAPE 2/2
+        </button>
+    {{ form_end(form) }}
+{% endblock %}
+

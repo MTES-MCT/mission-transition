@@ -55,7 +55,7 @@ class AidCrudController extends AbstractCrudController
             TextField::new('name', 'Titre'),
             AssociationField::new('environmentalTopics', 'Thématiques')->autocomplete()->setTemplatePath('admin/aid/environmental_topics.html.twig'),
             AssociationField::new('environmentalActions', 'Actions associées')->setTemplatePath('admin/aid/environmental_actions.html.twig'),
-            ChoiceField::new('fundingType', 'Type')
+            ChoiceField::new('type', 'Type')
                 ->setChoices([
                     'Appel à projet' => Aid::TYPE_AAP,
                     'Aide' => Aid::TYPE_AID,
@@ -65,7 +65,7 @@ class AidCrudController extends AbstractCrudController
                     'Premier pas' => Aid::TYPE_FIRST_STEP,
                 ]),
             TextField::new('perimeter', 'Périmètre')->hideOnIndex(),
-            TextField::new('regionName', 'Région')->hideOnIndex(),
+            TextField::new('region.name', 'Région')->hideOnIndex(),
             TextareaField::new('goal', 'C\'est quoi ?')->hideOnIndex(),
             TextareaField::new('beneficiary', 'Les bénéficiaires')->hideOnIndex(),
             TextareaField::new('aidDetails', 'Accompagnement')->hideOnIndex(),

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de dispositif d'aide{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <button class="rf-btn">
+            Modifier ma recherche
+        </button>
+    {{ form_end(form) }}
+    <hr>
+
+    <div class="rf-container">
+        {% if regionalAids is not empty %}
+            <h2>{{ nbRegionalAids }} {{ isFundingType ? 'dispositifs de financement' : 'actions faciles' }} pour {{ environmentalAction }} {{ region is not null ? "en #{region.name}" }}</h2>
+            <div class="rf-grid-row">
+                {% for aid in regionalAids %}
+                    <div class="rf-col-xs-12 rf-col-lg-4 rf-mb-3v">
+                        <div class="rf-card rf-m-3v">
+                            <div class="rf-card__body">
+                                <p class="rf-card__detail">Détail</p>
+                                <h4 class="rf-card__title">
+                                    <a href="#" class="rf-card__link">{{aid.name}}</a>
+                                </h4>
+                                {% for aidAction in aid.environmentalActions %}
+                                    <p class="rf-tag">{{ aidAction.name }}</p>
+                                {% endfor %}
+                                <p class="rf-tag">{{ aid.type }}</p>
+                                <p class="rf-tag">{{ aid.perimeter }}</p>
+                                {% if aid.region is defined %}
+                                    <p class="rf-tag">{{ aid.region.name }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if nationalAids is not empty %}
+            <h2>{{ nbNationalAids }} {{ isFundingType ? 'dispositifs de financement' : 'actions faciles' }} pour {{ environmentalAction }} au niveau national</h2>
+            <div class="rf-grid-row">
+                {% for aid in nationalAids %}
+                    <div class="rf-col-xs-12 rf-col-lg-4 rf-mb-3v">
+                        <div class="rf-card rf-m-3v">
+                            <div class="rf-card__body">
+                                <p class="rf-card__detail">Détail</p>
+                                <h4 class="rf-card__title">
+                                    <a href="#" class="rf-card__link">{{aid.name}}</a>
+                                </h4>
+                                {% for aidAction in aid.environmentalActions %}
+                                    <p class="rf-tag">{{ aidAction.name }}</p>
+                                {% endfor %}
+                                <p class="rf-tag">{{ aid.type }}</p>
+                                <p class="rf-tag">{{ aid.perimeter }}</p>
+                                {% if aid.region is not empty %}
+                                    <p class="rf-tag">{{ aid.region.name }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+
+
+
+{% endblock %}
