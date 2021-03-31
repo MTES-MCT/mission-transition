@@ -1,6 +1,7 @@
 // French State Design System
-import '@gouvfr/all/dist/css/all.css';
-import '@gouvfr/all/dist/js/all';
+import '@gouvfr/dsfr/dist/css/dsfr.css';
+import '@gouvfr/dsfr/dist/js/dsfr.module';
+// import '@gouvfr/dsfr/dist/js/dsfr.nomodule';
 
 import './styles/app.scss';
 

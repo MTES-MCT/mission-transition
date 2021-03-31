@@ -22,7 +22,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@gouvfr/all": "^0.5.3",
+        "@gouvfr/dsfr": "^0.6.0",
         "downshift": "^6.1.0"
     }
 }

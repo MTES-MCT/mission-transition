@@ -22,7 +22,13 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('homepage', './assets/homepage.js')
 
+    //Copying assets
+    .copyFiles({
+        from: './assets/img',
+        to: 'img/[name].[ext]',
+    })
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
     .enableReactPreset()
@@ -56,13 +62,13 @@ Encore
     })
 
     // enables Sass/SCSS support
-    .enableSassLoader();
+    .enableSassLoader()
 
-// uncomment if you use TypeScript
-//.enableTypeScriptLoader()
+    // uncomment if you use TypeScript
+    //.enableTypeScriptLoader()
 
-// uncomment if you use React
-//.enableReactPreset()
+    // uncomment if you use React
+    .enableReactPreset();
 
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher

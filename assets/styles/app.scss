@@ -1,3 +1,5 @@
+@import '_colors';
+
 html,
 body {
     width: 100%;
@@ -10,4 +12,9 @@ div.wrapper {
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 100%;
+}
+
+.rf-header__service-title,
+.rf-header__service-tagline {
+    color: $blue-navy;
 }

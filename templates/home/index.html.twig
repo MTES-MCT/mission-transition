@@ -2,8 +2,38 @@
 
 {% block title 'France Transition' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
 {% block body %}
-    <h1>
-        Hello World
-    </h1>
+    <div class="homepage-background">
+        <div class="rf-container homepage">
+            <div class="main-title">
+                <div class="rf-row">
+                    <div class="col"><h1>Mission : transition écologique</h1></div>
+                </div>
+                <div class="rf-row">
+                    <div class="col">
+                        <p>
+                            L’objectif de neutralité carbone ne se fera pas sans un élan commun à toutes les entreprises.
+                            Et les gains ne manquent pas pour les entreprises : réduction des coûts, hausse de la compétitivité et de l’attractivité, anticipations de futures réglementations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="illustration">illustration</div>
+            <div class="main-cta">main-cta</div>
+        </div>
+    </div>
+    <div class="rf-container cta-cards">
+        cta-cards
+    </div>
+
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('homepage') }}
 {% endblock %}

@@ -1,0 +1,58 @@
+$main-font: Marianne, sans-serif;
+
+h1 {
+    font-family: $main-font;
+    font-size: 80px;
+    line-height: 100%;
+    letter-spacing: -0.05em;
+}
+
+h2 {
+    font-family: $main-font;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 110%;
+    letter-spacing: -0.06em;
+
+    &.small {
+        font-weight: 300;
+        font-size: 32px;
+        line-height: 120%;
+        letter-spacing: -0.02em;
+    }
+}
+
+h3 {
+    font-family: $main-font;
+    font-size: 24px;
+    line-height: 110%;
+    letter-spacing: -0.04em;
+}
+
+p {
+    font-family: $main-font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 160%;
+
+    &.small {
+        letter-spacing: -0.02em;
+    }
+
+    &.big {
+        font-size: 18px;
+        line-height: 150%;
+    }
+}
+
+.subtitle {
+    font-family: $main-font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 140%;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
