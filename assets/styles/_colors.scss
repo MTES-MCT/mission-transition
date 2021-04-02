@@ -1,6 +1,17 @@
 $blue-navy: #000091;
 $blue-cobalt: #024cbb;
 $blue-gradient-background: linear-gradient(238.24deg, #181b40 42.25%, #252a6b 106.2%);
-$orange-vivid: #ffa07d;
 $orange-apricot: #f1906d;
 $grey-river-bed: #444b59;
+$grey-athens: #f3f5f7;
+$white: #ffffff;
+$white-lilac: #f6f8fc;
+$white-mystic: #dde5ea;
+$white-alabaster: #fbfbfb;
+
+.bg-light {
+    background-color: $white-lilac;
+}
+.bg-dark {
+    background: $blue-gradient-background;
+}

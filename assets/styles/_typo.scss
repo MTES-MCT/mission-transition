@@ -1,4 +1,13 @@
+@import 'colors';
+
 $main-font: Marianne, sans-serif;
+
+h1,
+h2,
+h3,
+p {
+    color: $grey-river-bed;
+}
 
 h1 {
     font-family: $main-font;
@@ -28,6 +37,7 @@ h3 {
     font-size: 24px;
     line-height: 110%;
     letter-spacing: -0.04em;
+    font-weight: 500;
 }
 
 p {
@@ -47,6 +57,10 @@ p {
     }
 }
 
+.h3 {
+    @extend h3;
+}
+
 .subtitle {
     font-family: $main-font;
     font-style: normal;
@@ -55,4 +69,12 @@ p {
     line-height: 140%;
     letter-spacing: 0.03em;
     text-transform: uppercase;
+}
+
+.highlighted {
+    color: $orange-apricot;
+}
+
+.on-dark {
+    color: $white;
 }

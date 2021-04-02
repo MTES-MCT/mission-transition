@@ -23,6 +23,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('homepage', './assets/homepage.js')
+    .addEntry('search', './assets/search.js')
 
     //Copying assets
     .copyFiles({
@@ -62,13 +63,10 @@ Encore
     })
 
     // enables Sass/SCSS support
-    .enableSassLoader()
+    .enableSassLoader();
 
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
-
-    // uncomment if you use React
-    .enableReactPreset();
+// uncomment if you use TypeScript
+//.enableTypeScriptLoader()
 
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher

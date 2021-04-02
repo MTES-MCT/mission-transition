@@ -33,6 +33,8 @@ class Aid
     public const TYPE_RECOVERY_PLAN = 'Plan de Relance';
     public const TYPE_FIRST_STEP = 'Premier pas';
 
+    public const PERIMETER_NATIONAL = 'NATIONAL';
+    public const PERIMETER_REGIONAL = 'REGIONAL';
     /**
      * @ORM\Column(type="ulid", unique=true)
      */

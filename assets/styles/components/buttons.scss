@@ -1,0 +1,16 @@
+@import '../colors';
+
+.rf-btn {
+    background-color: $blue-cobalt;
+}
+
+.rf-btn.secondary {
+    background: #ffffff;
+    box-shadow: 0 10px 20px rgba(2, 76, 187, 0.09);
+    border-radius: 6px;
+    color: $blue-navy;
+}
+
+.rf-btn.big {
+    padding: 16px;
+}
