@@ -62,13 +62,15 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="more-results">
-                    <a href="{{ app.request.requesturi ~ '&search_form[regionalLimit]=' ~ nextRegionalLimit }}">
-                        <button class="rf-btn secondary">
-                            AFFICHER PLUS DE FICHES
-                        </button>
-                    </a>
-                </div>
+                {% if nbRegionalAids is not same as(regionalAids|length) %}
+                    <div class="more-results">
+                        <a href="{{ app.request.requesturi ~ '&search_form[regionalLimit]=' ~ nextRegionalLimit }}">
+                            <button class="rf-btn secondary">
+                                AFFICHER PLUS DE FICHES
+                            </button>
+                        </a>
+                    </div>
+                {% endif %}
             {% endif %}
 
             {% if nationalAids is not empty %}
@@ -98,13 +100,15 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="more-results">
-                    <a href="{{ app.request.requesturi ~ '&search_form[nationalLimit]=' ~ nextNationalLimit }}">
-                        <button class="rf-btn secondary">
-                            AFFICHER PLUS DE FICHES
-                        </button>
-                    </a>
-                </div>
+                {% if nbNationalAids is not same as(nationalAids|length) %}
+                    <div class="more-results">
+                        <a href="{{ app.request.requesturi ~ '&search_form[nationalLimit]=' ~ nextNationalLimit }}">
+                            <button class="rf-btn secondary">
+                                AFFICHER PLUS DE FICHES
+                            </button>
+                        </a>
+                    </div>
+                {% endif %}
             {% endif %}
         </div>
     </div>

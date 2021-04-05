@@ -78,13 +78,13 @@ class SearchController extends AbstractController
         $form->handleRequest($request);
 
         $environmentalAction = $searchFormModel->getEnvironmentalAction();
-        $aidType = $searchFormModel->getAidType();
+        $aidType = SearchFormModel::getAidTypeFilters($searchFormModel->getAidType());
         $region = $searchFormModel->getRegion();
         $nationalLimit = $searchFormModel->getNationalLimit();
         $regionalLimit = $searchFormModel->getRegionalLimit();
 
         $regionalAids = $aidRepository->searchByCriteria(
-            SearchFormModel::getAidTypeFilters($aidType),
+            $aidType,
             $environmentalAction,
             $region,
             Aid::PERIMETER_REGIONAL,
@@ -92,14 +92,14 @@ class SearchController extends AbstractController
         );
 
         $nationalAids = $aidRepository->searchByCriteria(
-            SearchFormModel::getAidTypeFilters($aidType),
+            $aidType,
             $environmentalAction,
             $region,
             Aid::PERIMETER_NATIONAL,
             $nationalLimit
         );
 
-        $counts = $aidRepository->countAids($environmentalAction, $region);
+        $counts = $aidRepository->countAids($aidType, $environmentalAction, $region);
 
         return $this->render('search/results.html.twig', [
             'form' => $form->createView(),

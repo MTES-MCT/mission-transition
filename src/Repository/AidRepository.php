@@ -53,14 +53,21 @@ class AidRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function countAids(EnvironmentalAction $environmentalAction, Region $region = null)
-    {
-        $qb = $this->createQueryBuilder('aid')
+    public function countAids(
+        array $aidTypes,
+        EnvironmentalAction $environmentalAction,
+        Region $region = null
+    ){
+        $qb = $this->createQueryBuilder('aid');
+
+        $qb
             ->select(
                 'COUNT(aid) as total',
                 'SUM(CASE WHEN aid.perimeter = \'REGIONAL\' THEN 1 ELSE 0 END) AS regional',
                 'SUM(CASE WHEN aid.perimeter = \'NATIONAL\' THEN 1 ELSE 0 END) AS national'
             )
+            ->andWhere($qb->expr()->in('aid.type', $aidTypes))
+            ->andWhere("aid.state = 'published'")
         ;
 
         if (null !== $region) {
