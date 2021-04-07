@@ -31,7 +31,7 @@ class Aid
     public const TYPE_COMPANY = 'Entreprise';
     public const TYPE_INVESTMENT_FUND = 'Fonds';
     public const TYPE_RECOVERY_PLAN = 'Plan de Relance';
-    public const TYPE_FIRST_STEP = 'Premier pas';
+    public const TYPE_FIRST_STEP = 'Premiers pas';
 
     public const PERIMETER_NATIONAL = 'NATIONAL';
     public const PERIMETER_REGIONAL = 'REGIONAL';

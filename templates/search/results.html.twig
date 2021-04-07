@@ -40,10 +40,10 @@
                 <h3 class="rf-pt-3w">
                     <span class="highlighted">{{ nbRegionalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> {{ region is not null ? "en #{region.name}" }}
                 </h3>
-                <div class="card-list rf-py-5w">
+                <div class="card-aid-list rf-py-5w">
                     {% for aid in regionalAids %}
-                        <div class="card">
-                            <div class="card-main">
+                        <div class="card-aid">
+                            <div class="card-aid-main">
                                 <h2 class="small">{{ aid.name }}</h2>
                                 <ul class="rf-tags-group">
                                     {% for action in aid.environmentalActions %}
@@ -51,14 +51,16 @@
                                     {% endfor %}
                                 </ul>
                             </div>
-                            <div class="card-details">
+                            <div class="card-aid-details">
                                 <span class="type subtitle">{{ aid.type }}</span>
                                 <span class="funder subtitle">{{ aid.funder.name }}</span>
                                 {% if aid.applicationEndDate is not null %}
                                     <span class="date subtitle">{{ aid.applicationEndDate|date }}</span>
                                 {% endif %}
                             </div>
-                            <button class="rf-btn big card-cta">VOIR LA FICHE</button>
+                            <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                <button class="rf-btn big card-cta">VOIR LA FICHE</button>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
@@ -80,8 +82,8 @@
                 </h3>
                 <div class="card-list rf-py-5w">
                     {% for aid in nationalAids %}
-                        <div class="card">
-                            <div class="card-main">
+                        <div class="card-aid">
+                            <div class="card-aid-main">
                                 <h2 class="small">{{ aid.name }}</h2>
                                 <ul class="rf-tags-group">
                                     {% for action in aid.environmentalActions %}
@@ -89,14 +91,16 @@
                                     {% endfor %}
                                 </ul>
                             </div>
-                            <div class="card-details">
+                            <div class="card-aid-details">
                                 <span class="type subtitle">{{ aid.type }}</span>
                                 <span class="funder subtitle">{{ aid.funder.name }}</span>
                                 {% if aid.applicationEndDate is not null %}
                                     <span class="date subtitle">{{ aid.applicationEndDate|date }}</span>
                                 {% endif %}
                             </div>
-                            <button class="rf-btn big card-cta">VOIR LA FICHE</button>
+                            <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                <button class="rf-btn big card-cta">VOIR LA FICHE</button>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>

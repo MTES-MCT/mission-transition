@@ -1,5 +1,6 @@
-@import '_colors';
-@import '_typo';
+@import 'colors';
+@import 'typo';
+@import 'dsplus';
 
 html,
 body {
@@ -9,7 +10,13 @@ body {
 }
 
 hr {
-    border: 1px solid #cecece;
+    border: 0;
+    border-bottom: 1px solid #cecece;
+
+    &.on-dark {
+        border: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.23);
+    }
 }
 
 div.wrapper {
@@ -19,7 +26,8 @@ div.wrapper {
     grid-template-columns: 100%;
 }
 
-.rf-header__service-title,
-.rf-header__service-tagline {
-    color: $blue-navy;
+@media only screen and (min-width: 768px) {
+    .on-mobile-only {
+        display: none !important;
+    }
 }

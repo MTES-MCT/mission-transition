@@ -1,6 +1,6 @@
 @import '../colors';
 
-.card-list {
+.card-aid-list {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
@@ -8,23 +8,39 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
-.card {
+.card-aid {
     display: grid;
     grid-template-rows: auto 136px 56px;
     border: 0.5px solid $white-mystic;
 
-    .card-main {
+    .card-aid-main {
         padding: 64px 40px;
         background-color: $white;
     }
 
-    .card-details {
+    .card-aid-details {
         background-color: $white-alabaster;
         border-top: 0.5px solid $white-mystic;
     }
 
-    .card-cta {
+    .card-aid-cta {
         display: block;
         width: 100%;
+    }
+}
+
+.card-focus {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 1rem;
+    padding: 2.5rem;
+    background: $blue-gradient-background;
+
+    img {
+        align-self: center;
+    }
+
+    .content {
+        align-self: flex-start;
     }
 }

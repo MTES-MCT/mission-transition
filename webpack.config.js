@@ -24,6 +24,7 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('homepage', './assets/homepage.js')
     .addEntry('search', './assets/search.js')
+    .addEntry('aid', './assets/aid.js')
 
     //Copying assets
     .copyFiles({

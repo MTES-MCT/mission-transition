@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Entity\Aid;
 use App\Entity\EnvironmentalAction;
 use App\Entity\Region;
 
@@ -20,10 +21,10 @@ class SearchFormModel
     public static function getAidTypeFilters(string $aidType): array
     {
         if (0 === strcasecmp($aidType, self::TYPE_FIRST_STEPS)) {
-            return ['Premiers Pas'];
+            return [Aid::TYPE_FIRST_STEP];
         }
 
-        return ['AAP', 'Aide', 'Fonds'];
+        return [Aid::TYPE_AAP, Aid::TYPE_AID, Aid::TYPE_INVESTMENT_FUND];
     }
 
     public function getAidType(): string

@@ -5,45 +5,57 @@ $main-font: Marianne, sans-serif;
 h1,
 h2,
 h3,
+h4,
 p {
     color: $grey-river-bed;
+    font-family: $main-font;
+
+    &.on-dark {
+        color: $white;
+    }
 }
 
 h1 {
-    font-family: $main-font;
-    font-size: 80px;
+    font-size: 48px;
     line-height: 100%;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
+    font-style: normal;
+    font-weight: normal;
 }
 
 h2 {
-    font-family: $main-font;
-    font-size: 56px;
+    font-size: 40px;
+    line-height: 110%;
+    letter-spacing: -0.04em;
     font-style: normal;
     font-weight: normal;
-    line-height: 110%;
-    letter-spacing: -0.06em;
 
     &.small {
-        font-weight: 300;
-        font-size: 32px;
+        font-size: 24px;
         line-height: 120%;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
+        font-style: normal;
+        font-weight: normal;
     }
 }
 
 h3 {
-    font-family: $main-font;
     font-size: 24px;
     line-height: 110%;
     letter-spacing: -0.04em;
-    font-weight: 500;
+    font-style: normal;
+    font-weight: normal;
+}
+
+h4 {
+    font-size: 21px;
+    line-height: 29px;
+    font-style: normal;
+    font-weight: normal;
 }
 
 p {
-    font-family: $main-font;
-    font-style: normal;
-    font-weight: normal;
+    margin: 0;
     font-size: 14px;
     line-height: 160%;
 
@@ -63,8 +75,6 @@ p {
 
 .subtitle {
     font-family: $main-font;
-    font-style: normal;
-    font-weight: normal;
     font-size: 12px;
     line-height: 140%;
     letter-spacing: 0.03em;
@@ -75,6 +85,28 @@ p {
     color: $orange-apricot;
 }
 
-.on-dark {
-    color: $white;
+@media only screen and (min-width: 768px) {
+    h1 {
+        font-size: 80px;
+        letter-spacing: -0.05em;
+    }
+
+    h2 {
+        font-size: 56px;
+        letter-spacing: -0.06em;
+
+        &.small {
+            font-weight: 300;
+            font-size: 32px;
+            letter-spacing: -0.02em;
+        }
+    }
+
+    h3 {
+        font-weight: 500;
+    }
+
+    h4 {
+        line-height: 25px;
+    }
 }
