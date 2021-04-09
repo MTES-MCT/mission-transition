@@ -1,0 +1,10 @@
+database:
+    type: postgresql:13
+    disk: 3072 # 3 G
+
+amqp:
+    type: rabbitmq:3.8
+    disk: 1024
+
+redis:
+    type: redis:6.0

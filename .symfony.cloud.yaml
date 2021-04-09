@@ -2,6 +2,11 @@ name: app
 
 type: php:7.4
 
+relationships:
+    database: "database:postgresql"
+    rabbitmq: "amqp:rabbitmq"
+    redis: "redis:redis"
+
 runtime:
     extensions:
         - apcu
@@ -9,12 +14,15 @@ runtime:
         - sodium
         - ctype
         - iconv
-        
+        - pdo_pgsql
+        - redis
+        - amqp
+        - zip
 
-#variables:
-#    php:
-#        # uncomment on PHP 7.4+
-#        #opcache.preload: /app/config/preload.php
+variables:
+    php:
+        # uncomment on PHP 7.4+
+        opcache.preload: /app/config/preload.php
 
 build:
     flavor: none
@@ -28,18 +36,18 @@ web:
             expires: 1h
             passthru: "/index.php"
 
-workers:
-    messenger:
-        # PHP background workers usually don't require much CPU. See
-        # https://symfony.com/doc/current/cloud/cookbooks/resources_allocation.html
-        # for more information
-        size: XS
-        resources:
-            base_memory: 64 # Keep in sync with the `memory-limit` flag value
-            memory_ratio: 128
-        commands:
-            # Don't forget to update your receiver name(s)
-            start: symfony console --time-limit=3600 --memory-limit=64M messenger:consume async
+#workers:
+#    messenger:
+#        # PHP background workers usually don't require much CPU. See
+#        # https://symfony.com/doc/current/cloud/cookbooks/resources_allocation.html
+#        # for more information
+#        size: XS
+#        resources:
+#            base_memory: 64 # Keep in sync with the `memory-limit` flag value
+#            memory_ratio: 128
+#        commands:
+#            # Don't forget to update your receiver name(s)
+#            start: symfony console --time-limit=3600 --memory-limit=64M messenger:consume async
 
 mounts:
     "/var": { source: local, source_path: var }
@@ -49,7 +57,7 @@ hooks:
         set -x -e
 
         curl -fs https://get.symfony.com/cloud/configurator | (>&2 bash)
-        
+
         (>&2 symfony-build)
 
     deploy: |
