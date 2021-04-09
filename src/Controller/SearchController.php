@@ -76,41 +76,45 @@ class SearchController extends AbstractController
         ]);
 
         $form->handleRequest($request);
+        $regionalLimit = 0;
+        $nationalLimit = 0;
+        if ($form->isSubmitted() && $form->isValid()){
+            $environmentalAction = $searchFormModel->getEnvironmentalAction();
+            $aidType = SearchFormModel::getAidTypeFilters($searchFormModel->getAidType());
+            $region = $searchFormModel->getRegion();
+            $nationalLimit = $searchFormModel->getNationalLimit();
+            $regionalLimit = $searchFormModel->getRegionalLimit();
 
-        $environmentalAction = $searchFormModel->getEnvironmentalAction();
-        $aidType = SearchFormModel::getAidTypeFilters($searchFormModel->getAidType());
-        $region = $searchFormModel->getRegion();
-        $nationalLimit = $searchFormModel->getNationalLimit();
-        $regionalLimit = $searchFormModel->getRegionalLimit();
+            $regionalAids = $aidRepository->searchByCriteria(
+                $aidType,
+                $environmentalAction,
+                $region,
+                Aid::PERIMETER_REGIONAL,
+                $regionalLimit
+            );
 
-        $regionalAids = $aidRepository->searchByCriteria(
-            $aidType,
-            $environmentalAction,
-            $region,
-            Aid::PERIMETER_REGIONAL,
-            $regionalLimit
-        );
+            $nationalAids = $aidRepository->searchByCriteria(
+                $aidType,
+                $environmentalAction,
+                $region,
+                Aid::PERIMETER_NATIONAL,
+                $nationalLimit
+            );
 
-        $nationalAids = $aidRepository->searchByCriteria(
-            $aidType,
-            $environmentalAction,
-            $region,
-            Aid::PERIMETER_NATIONAL,
-            $nationalLimit
-        );
+            $counts = $aidRepository->countAids($aidType, $environmentalAction, $region);
+        }
 
-        $counts = $aidRepository->countAids($aidType, $environmentalAction, $region);
 
         return $this->render('search/results.html.twig', [
             'form' => $form->createView(),
-            'nationalAids' => $nationalAids,
-            'regionalAids' => $regionalAids,
-            'nbAids' => $counts['total'],
-            'nbNationalAids' => $counts['national'],
-            'nbRegionalAids' => $counts['regional'],
-            'region' => $region,
+            'nationalAids' => $nationalAids ?? [],
+            'regionalAids' => $regionalAids ?? [],
+            'nbAids' => $counts['total'] ?? 0,
+            'nbNationalAids' => $counts['national'] ?? 0,
+            'nbRegionalAids' => $counts['regional'] ?? 0,
+            'region' => $region ?? null,
             'isFundingType' => $searchFormModel->isFundingType(),
-            'environmentalAction' => $environmentalAction,
+            'environmentalAction' => $environmentalAction ?? null,
             'nextRegionalLimit' => $regionalLimit + SearchFormModel::LIMIT_INCREASED_BY,
             'nextNationalLimit' => $nationalLimit + SearchFormModel::LIMIT_INCREASED_BY
         ]);

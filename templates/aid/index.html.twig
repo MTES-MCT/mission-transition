@@ -61,7 +61,7 @@
                     <hr class="on-dark">
                     {% if aid.funder.website is not null %}
                         <div class="rf-col-12 rf-my-4w">
-                            <a href="{{ aid.funder.website }}">
+                            <a href="{{ aid.fundingSourceUrl }}" target="_blank">
                                 <button class="rf-btn funder-website-link">ACCÉDER AU SITE DU FINANCEUR</button>
                             </a>
                         </div>
@@ -83,7 +83,7 @@
                         <a class="rf-breadcrumb__link" href="{{ path('search_index') }}">Moteur de recherche</a>
                     </li>
                     <li>
-                        <a class="rf-breadcrumb__link" aria-current="page">Dispositif {{ aid.name }}</a>
+                        <a class="rf-breadcrumb__link" aria-current="page">{{ aid.name }}</a>
                     </li>
                 </ol>
             </div>
@@ -96,20 +96,50 @@
                 <h2 class="small">Les informations principales</h2>
             </div>
             <div class="card-focus">
-                <img src="{{ asset('build/img/buildings.svg') }}" alt="buildings">
+                <img src="{{ asset('build/img/buildings.svg') }}" alt="icon batîment">
                 <div class="content">
-                    <span class="subtitle highlighted">Type de financement</span>
-                    <p class="on-dark">{{ aid.fundingTypes|join(' | ') }}</p>
+                    <span class="subtitle highlighted">Porteur du dispositif</span>
+                    <p class="on-dark">{{ aid.funder.name }}</p>
                 </div>
             </div>
             <div class="card-focus">
-                <img src="{{ asset('build/img/buildings.svg') }}" alt="buildings">
+                <img src="{{ asset('build/img/double_switch.svg') }}" alt="icon switch">
                 <div class="content">
-                    <span class="subtitle highlighted">Type de financement</span>
-                    <p class="on-dark">{{ aid.fundingTypes|join(' | ') }}</p>
+                    <span class="subtitle highlighted">Type de dispositif</span>
+                    <p class="on-dark">{{ aid.type }}</p>
                 </div>
             </div>
-            <a href="{{ aid.funder.website }}">
+            <div class="card-focus">
+                <img src="{{ asset('build/img/papers.svg') }}" alt="icon papiers">
+                <div class="content">
+                    <span class="subtitle highlighted">Type de financement</span>
+                    <p class="on-dark">
+                        {% for fundingType in aid.fundingTypes %}
+                            {% if loop.index is same as 0 %}
+                                ,
+                            {% endif %}
+                            {{ fundingType }}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            {% if aid.applicationEndDate is not null %}
+                <div class="card-focus">
+                    <img src="{{ asset('build/img/hourglass.svg') }}" alt="icon sablier">
+                    <div class="content">
+                        <span class="subtitle highlighted">Date de clôture</span>
+                        <p class="on-dark">{{ aid.applicationEndDate|format_datetime(locale='fr') }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="card-focus">
+                <img src="{{ asset('build/img/map_france.svg') }}" alt="icon carte de la France">
+                <div class="content">
+                    <span class="subtitle highlighted">Echelle</span>
+                    <p class="on-dark">{{ aid.perimeter }}</p>
+                </div>
+            </div>
+            <a href="{{ aid.fundingSourceUrl }}" target="_blank">
                 <button class="rf-btn funder-website-link">ACCÉDER AU SITE DU FINANCEUR</button>
             </a>
         </div>

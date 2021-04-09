@@ -1,3 +1,7 @@
+a {
+    box-shadow: none;
+}
+
 /** Headings **/
 .rf-header__service-title,
 .rf-header__service-tagline {
@@ -23,7 +27,6 @@
 
 /** Tags **/
 .rf-tag {
-    width: max-content;
     background-color: $grey-athens;
     color: $grey-river-bed;
 }
