@@ -36,3 +36,5 @@ services:
             - !service
                 class: 'Predis\Client'
                 arguments: [ '%env(REDIS_URL)%' ]
+
+    Twig\Extra\Intl\IntlExtension: ~

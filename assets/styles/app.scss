@@ -1,3 +1,7 @@
+@import 'colors';
+@import 'typo';
+@import 'dsplus';
+
 html,
 body {
     width: 100%;
@@ -5,9 +9,25 @@ body {
     margin: 0;
 }
 
+hr {
+    border: 0;
+    border-bottom: 1px solid #cecece;
+
+    &.on-dark {
+        border: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.23);
+    }
+}
+
 div.wrapper {
     min-height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .on-mobile-only {
+        display: none !important;
+    }
 }

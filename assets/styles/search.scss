@@ -1,0 +1,35 @@
+@import '_colors';
+@import '_typo';
+@import 'components/cards';
+
+.cta-search {
+    position: relative;
+    top: 1rem;
+}
+
+.card-aid-details {
+    display: grid;
+    grid-template-areas:
+        'type funder'
+        'date date';
+    grid-gap: 3rem;
+    align-content: center;
+    justify-items: center;
+
+    .type {
+        grid-area: type;
+    }
+
+    .funder {
+        grid-area: funder;
+    }
+
+    .date {
+        grid-area: date;
+    }
+}
+
+.more-results {
+    text-align: center;
+    padding-bottom: 6rem;
+}

@@ -2,8 +2,46 @@
 
 {% block title 'France Transition' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
 {% block body %}
-    <h1>
-        Hello World
-    </h1>
+    <div class="homepage-background">
+        <div class="rf-container homepage">
+
+            <div class="main-title">
+                <div class="rf-row rf-mb-8w">
+                    <div class="col-12"><h1 class="title"><span class="highlighted">Mission :</span> transition écologique</h1></div>
+                </div>
+                <div class="rf-row">
+                    <div class="col-12">
+                        <p class="introduction">
+                            L’objectif de neutralité carbone ne se fera pas sans un élan commun à toutes les entreprises.<br>
+                            <br>
+                            Et les gains ne manquent pas pour les entreprises : réduction des coûts, hausse de la compétitivité et de l’attractivité, anticipations de futures réglementations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <img class="illustration" src="{{ asset('build/img/homepage_how-to.svg') }}" alt="Illustration Mission Transition">
+
+            <div class="main-cta">
+                <h2 class="small">
+                    Découvrez les dispositifs de financement ou les ressources de <span class="highlighted">“Premiers pas”</span>
+                </h2>
+                <a href="{{ path('search_results') }}">
+                    <button class="rf-btn rf-btn--lg rf-m-3w">Je commence ma recherche</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('homepage') }}
 {% endblock %}

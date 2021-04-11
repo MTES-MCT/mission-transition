@@ -2,70 +2,138 @@
 
 {% block title %}Recherche de dispositif d'aide{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('search') }}
+{% endblock %}
+
 {% block body %}
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_widget(form) }}
-        <button class="rf-btn">
-            Modifier ma recherche
-        </button>
-    {{ form_end(form) }}
-    <hr>
 
-    <div class="rf-container">
-        {% if regionalAids is not empty %}
-            <h2>{{ nbRegionalAids }} {{ isFundingType ? 'dispositifs de financement' : 'actions faciles' }} pour {{ environmentalAction }} {{ region is not null ? "en #{region.name}" }}</h2>
+    <div class="rf-container-fluid bg-dark">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             <div class="rf-grid-row">
-                {% for aid in regionalAids %}
-                    <div class="rf-col-xs-12 rf-col-lg-4 rf-mb-3v">
-                        <div class="rf-card rf-m-3v">
-                            <div class="rf-card__body">
-                                <p class="rf-card__detail">Détail</p>
-                                <h4 class="rf-card__title">
-                                    <a href="#" class="rf-card__link">{{aid.name}}</a>
-                                </h4>
-                                {% for aidAction in aid.environmentalActions %}
-                                    <p class="rf-tag">{{ aidAction.name }}</p>
-                                {% endfor %}
-                                <p class="rf-tag">{{ aid.type }}</p>
-                                <p class="rf-tag">{{ aid.perimeter }}</p>
-                                {% if aid.region is defined %}
-                                    <p class="rf-tag">{{ aid.region.name }}</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+                <div class="rf-col rf-mx-9w rf-my-7w">
+                    {{ form_row(form.environmentalAction) }}
+                </div>
+                <div class="rf-col rf-mx-9w rf-my-7w">
+                    {{ form_row(form.aidType) }}
+                </div>
+                <div class="rf-col rf-mx-9w rf-my-7w">
+                    {{ form_row(form.region) }}
+                </div>
             </div>
-        {% endif %}
-
-        {% if nationalAids is not empty %}
-            <h2>{{ nbNationalAids }} {{ isFundingType ? 'dispositifs de financement' : 'actions faciles' }} pour {{ environmentalAction }} au niveau national</h2>
-            <div class="rf-grid-row">
-                {% for aid in nationalAids %}
-                    <div class="rf-col-xs-12 rf-col-lg-4 rf-mb-3v">
-                        <div class="rf-card rf-m-3v">
-                            <div class="rf-card__body">
-                                <p class="rf-card__detail">Détail</p>
-                                <h4 class="rf-card__title">
-                                    <a href="#" class="rf-card__link">{{aid.name}}</a>
-                                </h4>
-                                {% for aidAction in aid.environmentalActions %}
-                                    <p class="rf-tag">{{ aidAction.name }}</p>
-                                {% endfor %}
-                                <p class="rf-tag">{{ aid.type }}</p>
-                                <p class="rf-tag">{{ aid.perimeter }}</p>
-                                {% if aid.region is not empty %}
-                                    <p class="rf-tag">{{ aid.region.name }}</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+            <div class="rf-grid-row rf-grid-row--center">
+                <div class="rf-offset-6">
+                    <button type="submit" class="rf-btn secondary cta-search">
+                        AFFICHER LES RÉSULTATS
+                    </button>
+                </div>
             </div>
-        {% endif %}
+        {{ form_end(form) }}
     </div>
 
+    {% if nbAids is not same as 0 %}
+        <div class="bg-light">
+            <div class="rf-container rf-pt-12w">
+                <p class="subtitle">{{ nbAids ~ (isFundingType ? ' dispositifs de financement' : ' actions faciles') ~ ' correspondent à votre recherche' }}</p>
+                {% if regionalAids is not empty %}
+                    <hr>
+                    <h3 class="rf-pt-3w">
+                        <span class="highlighted">{{ nbRegionalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> {{ region is not null ? "en #{region.name}" }}
+                    </h3>
+                    <div class="card-aid-list rf-py-5w">
+                        {% for aid in regionalAids %}
+                            <div class="card-aid">
+                                <div class="card-aid-main">
+                                    <h2 class="small">{{ aid.name }}</h2>
+                                    <ul class="rf-tags-group">
+                                        {% for action in aid.environmentalActions %}
+                                            <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="card-aid-details">
+                                    <span class="type subtitle">{{ aid.type }}</span>
+                                    <span class="funder subtitle">{{ aid.funder.name }}</span>
+                                    {% if aid.applicationEndDate is not null %}
+                                        <span class="date subtitle">{{ aid.applicationEndDate|date }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                    <button class="rf-btn big card-aid-cta">VOIR LA FICHE</button>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if nbRegionalAids is not same as(regionalAids|length) %}
+                        <div class="more-results">
+                            <a href="{{ app.request.requesturi ~ '&search_form[regionalLimit]=' ~ nextRegionalLimit }}">
+                                <button class="rf-btn secondary">
+                                    AFFICHER PLUS DE FICHES
+                                </button>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if nationalAids is not empty %}
+                    <hr>
+                    <h3 class="rf-pt-3w">
+                        <span class="highlighted">{{ nbNationalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> au niveau national
+                    </h3>
+                    <div class="card-aid-list rf-py-5w">
+                        {% for aid in nationalAids %}
+                            <div class="card-aid">
+                                <div class="card-aid-main">
+                                    <h2 class="small">{{ aid.name }}</h2>
+                                    <ul class="rf-tags-group">
+                                        {% for action in aid.environmentalActions %}
+                                            <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="card-aid-details">
+                                    <span class="type subtitle">{{ aid.type }}</span>
+                                    <span class="funder subtitle">{{ aid.funder.name }}</span>
+                                    {% if aid.applicationEndDate is not null %}
+                                        <span class="date subtitle">{{ aid.applicationEndDate|date }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                    <button class="rf-btn big card-aid-cta">VOIR LA FICHE</button>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if nbNationalAids is not same as(nationalAids|length) %}
+                        <div class="more-results">
+                            <a href="{{ app.request.requesturi ~ '&search_form[nationalLimit]=' ~ nextNationalLimit }}">
+                                <button class="rf-btn secondary">
+                                    AFFICHER PLUS DE FICHES
+                                </button>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+{#    {% else %}#}
+{#        <div class="bg-light">#}
+{#            <div class="rf-container rf-pt-12w">#}
+{#                <div class="rf-grid-row fr-grid-row--center">#}
+{#                    <div class="rf-col">#}
+{#                        <p>Définissez votre besoin et lancez la recherche !</p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+    {% endif %}
 
 
 
+
+{% endblock %}
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('search') }}
 {% endblock %}

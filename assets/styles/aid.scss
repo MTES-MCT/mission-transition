@@ -1,0 +1,61 @@
+@import '_colors';
+@import '_typo';
+@import 'components/cards';
+@import 'components/headings';
+
+.funder-website-link {
+    display: block;
+    width: 100%;
+}
+
+.aid-content {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-areas:
+        'goal'
+        'highlighted-info'
+        'details'
+        'beneficiary'
+        'eligibility'
+        'conditions';
+
+    .goal {
+        grid-area: goal;
+    }
+    .highlighted-info {
+        grid-area: highlighted-info;
+
+        > div {
+            margin-bottom: 20px;
+        }
+    }
+    .details {
+        grid-area: details;
+    }
+    .beneficiary {
+        grid-area: beneficiary;
+    }
+    .eligibility {
+        grid-area: eligibility;
+    }
+    .conditions {
+        grid-area: conditions;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .aid-content {
+        grid-template-columns: 20vw auto;
+        grid-column-gap: 2.5rem;
+        grid-template-areas:
+            'highlighted-info goal'
+            'highlighted-info details'
+            'highlighted-info beneficiary'
+            'highlighted-info eligibility'
+            'highlighted-info conditions';
+    }
+
+    .highlighted-info {
+        grid-row: 1/6;
+    }
+}

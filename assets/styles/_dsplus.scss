@@ -1,0 +1,38 @@
+a {
+    box-shadow: none;
+}
+
+/** Headings **/
+.rf-header__service-title,
+.rf-header__service-tagline {
+    color: $blue-navy;
+}
+
+/** Buttons **/
+.rf-btn {
+    font-size: 14px;
+    background-color: $blue-cobalt;
+}
+
+.rf-btn.secondary {
+    background: #ffffff;
+    box-shadow: 0 10px 20px rgba(2, 76, 187, 0.09);
+    border-radius: 6px;
+    color: $blue-navy;
+}
+
+.rf-btn.big {
+    padding: 16px;
+}
+
+/** Tags **/
+.rf-tag {
+    background-color: $grey-athens;
+    color: $grey-river-bed;
+}
+
+@media only screen and (min-width: 768px) {
+    .rf-btn {
+        font-size: 18px;
+    }
+}
