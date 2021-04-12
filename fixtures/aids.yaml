@@ -4,7 +4,7 @@ App\Entity\Aid:
         name: <catchPhrase()>
         type: <randomElement(["AAP", "Aide", "Fonds"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
-        perimeter: <randomElement(["REGIONAL"])>
+        perimeter: "REGIONAL"
         regions: ['@region_*']
         goal: <text()>
         beneficiary: <text()>
@@ -23,7 +23,7 @@ App\Entity\Aid:
         name: <catchPhrase()>
         type: <randomElement(["AAP", "Aide", "Fonds"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
-        perimeter: <randomElement(["REGIONAL"])>
+        perimeter: "REGIONAL"
         regions: ['@region_*']
         goal: <text()>
         beneficiary: <text()>
@@ -42,7 +42,7 @@ App\Entity\Aid:
         name: <catchPhrase()>
         type: <randomElement(["AAP", "Aide", "Fonds"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
-        perimeter: <randomElement(["REGIONAL"])>
+        perimeter: "REGIONAL"
         regions: ['@region_*']
         goal: <text()>
         beneficiary: <text()>
@@ -61,7 +61,7 @@ App\Entity\Aid:
         name: <catchPhrase()>
         type: <randomElement(["AAP", "Aide", "Fonds"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
-        perimeter: <randomElement(["REGIONAL"])>
+        perimeter: "REGIONAL"
         regions: ['@region_11']
         goal: <text()>
         beneficiary: <text()>
@@ -75,12 +75,12 @@ App\Entity\Aid:
         funder: '@funder_*'
         businessActivityAreas: [ '@business_activity_area_3' ]
         environmentalTopics: [ '@environmental_topic_6', '@environmental_topic_2' ]
-    aid_first_steps_{1..10}:
+    aid_regional_first_steps_{1..10}:
         sourceId: <ean13()>
         name: <catchPhrase()>
         type: 'Premiers Pas'
         fundingTypes: ["Premiers Pas"]
-        perimeter: <randomElement(["REGIONAL"])>
+        perimeter: "REGIONAL"
         regions: ['@region_11']
         goal: <text()>
         beneficiary: <text()>
@@ -94,4 +94,22 @@ App\Entity\Aid:
         funder: '@funder_*'
         businessActivityAreas: [ '@business_activity_area_5' ]
         environmentalTopics: [ '@environmental_topic_7' ]
-
+    aid_national_first_steps_{1..10}:
+        sourceId: <ean13()>
+        name: <catchPhrase()>
+        type: 'Premiers Pas'
+        fundingTypes: ["Premiers Pas"]
+        perimeter: "NATIONAL"
+        regions: ['@region_11']
+        goal: <text()>
+        beneficiary: <text()>
+        aidDetails: <text()>
+        eligibility: <text()>
+        conditions: <text()>
+        fundingSourceUrl: <url()>
+        state: "published"
+        aidAdvisor: '@aid_advisor_*'
+        environmentalActions: [ '@environmental_action_2' ]
+        funder: '@funder_*'
+        businessActivityAreas: [ '@business_activity_area_5' ]
+        environmentalTopics: [ '@environmental_topic_7' ]

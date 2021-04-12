@@ -42,8 +42,8 @@ class AidRepository extends ServiceEntityRepository
 
         if (null !== $region) {
             $qb
-                ->andWhere('aid.region = :region')->setParameter('region', $region)
-            ;
+                ->join('aid.regions', 'regions')
+                ->andWhere('regions = :region')->setParameter('region', $region);
         }
 
         $qb
@@ -72,7 +72,8 @@ class AidRepository extends ServiceEntityRepository
 
         if (null !== $region) {
             $qb
-                ->andWhere('aid.region = :region')->setParameter('region', $region)
+                ->join('aid.regions', 'regions')
+                ->andWhere('regions = :region')->setParameter('region', $region);
             ;
         }
 
