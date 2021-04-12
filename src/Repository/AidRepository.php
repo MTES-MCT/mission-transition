@@ -57,7 +57,7 @@ class AidRepository extends ServiceEntityRepository
         array $aidTypes,
         EnvironmentalAction $environmentalAction,
         Region $region = null
-    ){
+    ) {
         $qb = $this->createQueryBuilder('aid');
 
         $qb
@@ -74,7 +74,6 @@ class AidRepository extends ServiceEntityRepository
             $qb
                 ->join('aid.regions', 'regions')
                 ->andWhere('regions = :region')->setParameter('region', $region);
-            ;
         }
 
         $qb

@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\EnvironmentalAction;
 use App\Entity\Region;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -38,7 +37,7 @@ class RegionCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', 'Nom')
+            TextField::new('name', 'Nom'),
         ];
     }
 }

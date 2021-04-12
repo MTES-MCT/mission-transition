@@ -3,7 +3,6 @@
 namespace App\tests;
 
 use App\Entity\Aid;
-use App\Entity\BusinessActivityArea;
 use App\Entity\EnvironmentalAction;
 use App\Entity\Region;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -147,12 +146,12 @@ class AidRepositoryTest extends KernelTestCase
         $this->assertEquals(10, count($aids));
     }
 
-    protected function getFundingTypes() : array
+    protected function getFundingTypes(): array
     {
         return ['AAP', 'Aide', 'Fonds'];
     }
 
-    protected function getFirstStepTypes() : array
+    protected function getFirstStepTypes(): array
     {
         return ['Premiers Pas'];
     }

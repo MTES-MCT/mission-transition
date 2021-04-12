@@ -12,7 +12,7 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20210408235029 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->addSql('CREATE TABLE aid_region (aid_id INT NOT NULL, region_id INT NOT NULL, PRIMARY KEY(aid_id, region_id))');
         $this->addSql('CREATE INDEX IDX_12F3570DCB0C1416 ON aid_region (aid_id)');
@@ -24,7 +24,7 @@ final class Version20210408235029 extends AbstractMigration
         $this->addSql('ALTER TABLE aids DROP region_id');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $this->addSql('DROP TABLE aid_region');
         $this->addSql('ALTER TABLE aids ADD region_id INT DEFAULT NULL');

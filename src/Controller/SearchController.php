@@ -78,7 +78,7 @@ class SearchController extends AbstractController
         $form->handleRequest($request);
         $regionalLimit = 0;
         $nationalLimit = 0;
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $environmentalAction = $searchFormModel->getEnvironmentalAction();
             $aidType = SearchFormModel::getAidTypeFilters($searchFormModel->getAidType());
             $region = $searchFormModel->getRegion();
@@ -104,7 +104,6 @@ class SearchController extends AbstractController
             $counts = $aidRepository->countAids($aidType, $environmentalAction, $region);
         }
 
-
         return $this->render('search/results.html.twig', [
             'form' => $form->createView(),
             'nationalAids' => $nationalAids ?? [],
@@ -116,7 +115,7 @@ class SearchController extends AbstractController
             'isFundingType' => $searchFormModel->isFundingType(),
             'environmentalAction' => $environmentalAction ?? null,
             'nextRegionalLimit' => $regionalLimit + SearchFormModel::LIMIT_INCREASED_BY,
-            'nextNationalLimit' => $nationalLimit + SearchFormModel::LIMIT_INCREASED_BY
+            'nextNationalLimit' => $nationalLimit + SearchFormModel::LIMIT_INCREASED_BY,
         ]);
     }
 }

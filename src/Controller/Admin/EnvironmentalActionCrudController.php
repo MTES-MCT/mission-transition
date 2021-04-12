@@ -37,7 +37,7 @@ class EnvironmentalActionCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name', 'Nom')
+            TextField::new('name', 'Nom'),
         ];
     }
 }

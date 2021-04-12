@@ -71,39 +71,27 @@ class SearchFormModel
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getRegionalLimit(): int
     {
         return $this->regionalLimit;
     }
 
-    /**
-     * @param int $regionalLimit
-     * @return SearchFormModel
-     */
     public function setRegionalLimit(int $regionalLimit): SearchFormModel
     {
         $this->regionalLimit = $regionalLimit;
+
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getNationalLimit(): int
     {
         return $this->nationalLimit;
     }
 
-    /**
-     * @param int $nationalLimit
-     * @return SearchFormModel
-     */
     public function setNationalLimit(int $nationalLimit): SearchFormModel
     {
         $this->nationalLimit = $nationalLimit;
+
         return $this;
     }
 }

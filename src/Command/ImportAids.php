@@ -55,7 +55,7 @@ class ImportAids extends Command
     public function __construct(
         AidRepository $userRepository,
         EntityManagerInterface $em
-    ){
+    ) {
         $this->aidRepository = $userRepository;
         $this->em = $em;
 
@@ -71,9 +71,7 @@ class ImportAids extends Command
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int|null|void
+     * @return int|void|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -89,7 +87,7 @@ class ImportAids extends Command
             throw new FileNotFoundException();
         }
 
-        $file = fopen($fileName,"r");
+        $file = fopen($fileName, 'r');
         $count = 0;
         $aidAdvisors = [];
         $funders = [];
@@ -107,12 +105,12 @@ class ImportAids extends Command
             $state = Aid::STATE_PUBLISHED;
 
             // Clean values
-            $row = array_map(fn(string $value) => trim($value), $row);
+            $row = array_map(fn (string $value) => trim($value), $row);
 
             // Creating the aidAdvisor
             if (array_key_exists($row[self::COL_ADVISOR_DESCRIPTION], $aidAdvisors)) {
                 $aidAdvisor = $aidAdvisors[$row[self::COL_ADVISOR_DESCRIPTION]];
-            } elseif(!empty($row[self::COL_ADVISOR_DESCRIPTION])) {
+            } elseif (!empty($row[self::COL_ADVISOR_DESCRIPTION])) {
                 $aidAdvisor = new AidAdvisor();
                 $aidAdvisor
                     ->setName($row[self::COL_ADVISOR_NAME])
@@ -128,7 +126,7 @@ class ImportAids extends Command
             // Creating the funder
             if (array_key_exists($row[self::COL_FUNDER_NAME], $funders)) {
                 $funder = $funders[$row[self::COL_FUNDER_NAME]];
-            } elseif(!empty($row[self::COL_FUNDER_NAME])) {
+            } elseif (!empty($row[self::COL_FUNDER_NAME])) {
                 $funder = new Funder();
                 $funder
                     ->setName($row[self::COL_FUNDER_NAME])
@@ -217,7 +215,7 @@ class ImportAids extends Command
                 $this->em->persist($area);
             }
 
-            if (strcmp($row[self::COL_PERIMETER], 'NATIONAL') === 0 && empty($row[self::COL_REGION])) {
+            if (0 === strcmp($row[self::COL_PERIMETER], 'NATIONAL') && empty($row[self::COL_REGION])) {
                 $aid->setState(Aid::STATE_DRAFT);
             }
             $tempRegions = explode(',', $row[self::COL_REGION]);
@@ -226,7 +224,6 @@ class ImportAids extends Command
                 if (array_key_exists($tempRegionName, $regions)) {
                     $aid->addRegion($regions[$tempRegionName]);
                 } elseif (!empty($tempRegionName)) {
-
                     $region = new Region();
                     $region->setName($tempRegionName);
                     $aid->addRegion($region);
@@ -238,10 +235,11 @@ class ImportAids extends Command
             $this->em->persist($aid);
             $this->em->flush();
 
-            $count++;
+            ++$count;
         }
 
-        $output->writeln(PHP_EOL . 'Import done');
+        $output->writeln(PHP_EOL.'Import done');
+
         return 1;
     }
 }
