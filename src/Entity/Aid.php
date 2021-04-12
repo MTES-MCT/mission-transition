@@ -31,8 +31,10 @@ class Aid
     public const TYPE_COMPANY = 'Entreprise';
     public const TYPE_INVESTMENT_FUND = 'Fonds';
     public const TYPE_RECOVERY_PLAN = 'Plan de Relance';
-    public const TYPE_FIRST_STEP = 'Premier pas';
+    public const TYPE_FIRST_STEP = 'Premiers pas';
 
+    public const PERIMETER_NATIONAL = 'NATIONAL';
+    public const PERIMETER_REGIONAL = 'REGIONAL';
     /**
      * @ORM\Column(type="ulid", unique=true)
      */
@@ -130,11 +132,6 @@ class Aid
     private Collection $businessActivityAreas;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Region::class)
-     */
-    private ?Region $region;
-
-    /**
      * @ORM\Column(type="array", nullable=true)
      */
     private ?array $fundingTypes = [];
@@ -144,6 +141,11 @@ class Aid
      */
     private string $type;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Region::class, inversedBy="aids")
+     */
+    private Collection $regions;
+
     public function __construct()
     {
         $this->ulid = new Ulid();
@@ -151,6 +153,7 @@ class Aid
         $this->environmentalTopics = new ArrayCollection();
         $this->businessActivityAreas = new ArrayCollection();
         $this->state = self::STATE_DRAFT;
+        $this->regions = new ArrayCollection();
     }
 
     public function getUlid(): Ulid
@@ -420,18 +423,6 @@ class Aid
         return $this;
     }
 
-    public function getRegion(): ?Region
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?Region $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
     public function getFundingTypes(): ?array
     {
         return $this->fundingTypes;
@@ -452,6 +443,30 @@ class Aid
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Region[]
+     */
+    public function getRegions(): Collection
+    {
+        return $this->regions;
+    }
+
+    public function addRegion(Region $region): self
+    {
+        if (!$this->regions->contains($region)) {
+            $this->regions[] = $region;
+        }
+
+        return $this;
+    }
+
+    public function removeRegion(Region $region): self
+    {
+        $this->regions->removeElement($region);
 
         return $this;
     }

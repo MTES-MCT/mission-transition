@@ -76,51 +76,47 @@ class SearchController extends AbstractController
         ]);
 
         $form->handleRequest($request);
-
-        $region = null;
-        $environmentalAction = null;
-        $nationalAids = [];
-        $regionalAids = [];
-        if ($form->isSubmitted() && $form->isValid()) {
+        $regionalLimit = 0;
+        $nationalLimit = 0;
+        if ($form->isSubmitted() && $form->isValid()){
             $environmentalAction = $searchFormModel->getEnvironmentalAction();
-            $aidType = $searchFormModel->getAidType();
+            $aidType = SearchFormModel::getAidTypeFilters($searchFormModel->getAidType());
             $region = $searchFormModel->getRegion();
+            $nationalLimit = $searchFormModel->getNationalLimit();
+            $regionalLimit = $searchFormModel->getRegionalLimit();
 
-            $aids = $aidRepository->searchByCriteria(
-                SearchFormModel::getAidTypeFilters($aidType),
+            $regionalAids = $aidRepository->searchByCriteria(
+                $aidType,
                 $environmentalAction,
-                [],
-                $region
+                $region,
+                Aid::PERIMETER_REGIONAL,
+                $regionalLimit
             );
 
-            list($regionalAids, $nationalAids) = $this->sortAidsByPerimeter($aids);
+            $nationalAids = $aidRepository->searchByCriteria(
+                $aidType,
+                $environmentalAction,
+                $region,
+                Aid::PERIMETER_NATIONAL,
+                $nationalLimit
+            );
+
+            $counts = $aidRepository->countAids($aidType, $environmentalAction, $region);
         }
+
 
         return $this->render('search/results.html.twig', [
             'form' => $form->createView(),
-            'nationalAids' => $nationalAids,
-            'regionalAids' => $regionalAids,
-            'nbNationalAids' => count($nationalAids),
-            'nbRegionalAids' => count($regionalAids),
-            'region' => $region,
+            'nationalAids' => $nationalAids ?? [],
+            'regionalAids' => $regionalAids ?? [],
+            'nbAids' => $counts['total'] ?? 0,
+            'nbNationalAids' => $counts['national'] ?? 0,
+            'nbRegionalAids' => $counts['regional'] ?? 0,
+            'region' => $region ?? null,
             'isFundingType' => $searchFormModel->isFundingType(),
-            'environmentalAction' => $environmentalAction,
+            'environmentalAction' => $environmentalAction ?? null,
+            'nextRegionalLimit' => $regionalLimit + SearchFormModel::LIMIT_INCREASED_BY,
+            'nextNationalLimit' => $nationalLimit + SearchFormModel::LIMIT_INCREASED_BY
         ]);
-    }
-
-    private function sortAidsByPerimeter(array $aids): array
-    {
-        $nationalAids = [];
-        $regionalAids = [];
-        /** @var Aid $aid */
-        foreach ($aids as $aid) {
-            if ($aid->isNational()) {
-                $nationalAids[] = $aid;
-            } else {
-                $regionalAids[] = $aid;
-            }
-        }
-
-        return [$nationalAids, $regionalAids];
     }
 }

@@ -1,0 +1,192 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dispositif {{ aid.name }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('aid') }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="rf-container-fluid">
+        <div class="rf-grid-row">
+            <div class="rf-col-12 rf-col-md-7 rf-pt-9w rf-pt-md-12w bg-light">
+                <div class="grid-row rf-mx-4w rf-mx-md-12w">
+                    <div class="rf-col-12">
+                        <div class="heading-underlined">
+                            <span class="subtitle">
+                                {% if aid.type is same as(constant('TYPE_FIRST_STEP', aid)) %}
+                                    Action facile
+                                {% else %}
+                                    Dispositif de financement
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="rf-col-12 rf-mt-4w rf-mb-md-12w">
+                        <h2 class="small">{{ aid.name }}</h2>
+                    </div>
+                    <div class="rf-col-12 rf-mt-4w">
+                        <ul class="rf-tags-group">
+                            {% for action in aid.environmentalActions %}
+                                <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="rf-col-12 rf-mt-4w rf-mb-6w">
+                        <span class="subtitle">CETTE ACTION FAIT PARTIE DE LA THÉMATIQUE
+                            {% for topic in aid.environmentalTopics %}
+                                {{ topic.name }}
+                                {% if loop.index is not same as(aid.environmentalTopics|length) %}
+                                    ,
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="rf-col-12 rf-col-md-5 rf-pt-9w rf-pt-md-12w bg-dark">
+                <div class="grid-row rf-mx-4w rf-mx-md-12w">
+                    <div class="rf-col-12">
+                        <div class="heading-underlined on-dark">
+                            <span class="subtitle highlighted">
+                                Votre contact pour cette aide
+                            </span>
+                        </div>
+                    </div>
+                    <div class="rf-col-12 rf-my-4w">
+                        <h2 class="on-dark">{{ aid.funder.name }}</h2>
+                    </div>
+                    <hr class="on-dark">
+                    {% if aid.funder.website is not null %}
+                        <div class="rf-col-12 rf-my-4w">
+                            <a href="{{ aid.fundingSourceUrl }}" target="_blank">
+                                <button class="rf-btn funder-website-link">ACCÉDER AU SITE DU FINANCEUR</button>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rf-container-fluid rf-mx-4w rf-mx-md-12w">
+        <nav role="navigation" class="rf-breadcrumb" aria-label="vous êtes ici :">
+            <button class="rf-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-189">Voir le fil d’Ariane</button>
+            <div class="rf-collapse" id="breadcrumb-189">
+                <ol class="rf-breadcrumb__list">
+                    <li>
+                        <a class="rf-breadcrumb__link" href="{{ path('homepage') }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="rf-breadcrumb__link" href="{{ path('search_index') }}">Moteur de recherche</a>
+                    </li>
+                    <li>
+                        <a class="rf-breadcrumb__link" aria-current="page">{{ aid.name }}</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+
+    <div class="rf-container-fluid rf-mx-4w rf-mx-md-12w aid-content">
+        <div class="highlighted-info">
+            <div class="on-mobile-only heading-underlined rf-mt-4w">
+                <h2 class="small">Les informations principales</h2>
+            </div>
+            <div class="card-focus">
+                <img src="{{ asset('build/img/buildings.svg') }}" alt="icon batîment">
+                <div class="content">
+                    <span class="subtitle highlighted">Porteur du dispositif</span>
+                    <p class="on-dark">{{ aid.funder.name }}</p>
+                </div>
+            </div>
+            <div class="card-focus">
+                <img src="{{ asset('build/img/double_switch.svg') }}" alt="icon switch">
+                <div class="content">
+                    <span class="subtitle highlighted">Type de dispositif</span>
+                    <p class="on-dark">{{ aid.type }}</p>
+                </div>
+            </div>
+            <div class="card-focus">
+                <img src="{{ asset('build/img/papers.svg') }}" alt="icon papiers">
+                <div class="content">
+                    <span class="subtitle highlighted">Type de financement</span>
+                    <p class="on-dark">
+                        {% for fundingType in aid.fundingTypes %}
+                            {% if loop.index is same as 0 %}
+                                ,
+                            {% endif %}
+                            {{ fundingType }}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            {% if aid.applicationEndDate is not null %}
+                <div class="card-focus">
+                    <img src="{{ asset('build/img/hourglass.svg') }}" alt="icon sablier">
+                    <div class="content">
+                        <span class="subtitle highlighted">Date de clôture</span>
+                        <p class="on-dark">{{ aid.applicationEndDate|format_datetime(locale='fr') }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="card-focus">
+                <img src="{{ asset('build/img/map_france.svg') }}" alt="icon carte de la France">
+                <div class="content">
+                    <span class="subtitle highlighted">Echelle</span>
+                    <p class="on-dark">{{ aid.perimeter }}</p>
+                </div>
+            </div>
+            <a href="{{ aid.fundingSourceUrl }}" target="_blank">
+                <button class="rf-btn funder-website-link">ACCÉDER AU SITE DU FINANCEUR</button>
+            </a>
+        </div>
+        <div class="goal">
+            <div class="heading-underlined">
+                <h2 class="small">C'est quoi ?</h2>
+            </div>
+            <p class="rf-pt-2w">
+                {{ aid.goal }}
+            </p>
+        </div>
+        <div class="details bg-light rf-p-4w rf-mt-4w">
+            <div class="heading-underlined">
+                <h2 class="small">Détail du financement</h2>
+            </div>
+            <p class="rf-pt-2w">
+                {{ aid.aidDetails }}
+            </p>
+        </div>
+        <div class="beneficiary rf-mt-4w">
+            <div class="heading-underlined">
+                <h2 class="small">Pour quel bénéficiaire ?</h2>
+            </div>
+            <p class="rf-pt-2w">
+                {{ aid.beneficiary }}
+            </p>
+        </div>
+        <div class="eligibility rf-mt-4w">
+            <div class="heading-underlined">
+                <h2 class="small">Quelle est le cadre d'utilisation de l'aide ?</h2>
+            </div>
+            <p class="rf-pt-2w">
+                {{ aid.eligibility }}
+            </p>
+        </div>
+        <div class="conditions rf-mt-4w rf-mb-12w">
+            <div class="heading-underlined">
+                <h2 class="small">Quelles sont les contraintes à respecter ?</h2>
+            </div>
+            <p class="rf-pt-2w">
+                {{ aid.conditions }}
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('aid') }}
+{% endblock %}

@@ -5,7 +5,7 @@ App\Entity\Aid:
         type: <randomElement(["AAP", "Aide", "Fonds"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
         perimeter: <randomElement(["REGIONAL"])>
-        region: '@region_*'
+        regions: ['@region_*']
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -24,7 +24,7 @@ App\Entity\Aid:
         type: <randomElement(["AAP", "Aide", "Fonds"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
         perimeter: <randomElement(["REGIONAL"])>
-        region: '@region_*'
+        regions: ['@region_*']
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -43,7 +43,7 @@ App\Entity\Aid:
         type: <randomElement(["AAP", "Aide", "Fonds"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
         perimeter: <randomElement(["REGIONAL"])>
-        region: '@region_*'
+        regions: ['@region_*']
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -62,7 +62,7 @@ App\Entity\Aid:
         type: <randomElement(["AAP", "Aide", "Fonds"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
         perimeter: <randomElement(["REGIONAL"])>
-        region: '@region_11'
+        regions: ['@region_11']
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -81,7 +81,7 @@ App\Entity\Aid:
         type: 'Premiers Pas'
         fundingTypes: ["Premiers Pas"]
         perimeter: <randomElement(["REGIONAL"])>
-        region: '@region_11'
+        regions: ['@region_11']
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>

@@ -42,6 +42,7 @@ class SearchSecondStepFormType extends AbstractType
     {
         $resolver->setDefaults([
             'regions' => [],
+            'csrf_protection' => false
         ]);
 
         $resolver
