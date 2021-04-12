@@ -19,12 +19,12 @@ class SearchFormType extends AbstractType
                     'Trouver des actions faciles' => 'first-steps',
                 ],
                 'attr' => [
-                    'class' => 'rf-select'
+                    'class' => 'rf-select',
                 ],
                 'label' => 'Mon besoin',
                 'label_attr' => [
-                    'class' => 'rf-label h3 on-dark rf-mb-3w'
-                ]
+                    'class' => 'rf-label h3 on-dark rf-mb-3w',
+                ],
             ])
             ->add('region', ChoiceType::class, [
                 'choices' => $options['regions'],
@@ -33,29 +33,29 @@ class SearchFormType extends AbstractType
                 'placeholder' => 'Toute la France',
                 'label' => 'Ma région',
                 'attr' => [
-                    'class' => 'rf-select'
+                    'class' => 'rf-select',
                 ],
                 'label_attr' => [
-                    'class' => 'rf-label h3 on-dark rf-mb-3w'
-                ]
+                    'class' => 'rf-label h3 on-dark rf-mb-3w',
+                ],
             ])
             ->add('environmentalAction', ChoiceType::class, [
                 'choices' => $options['environmentalActions'],
                 'choice_value' => 'name',
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'rf-select'
+                    'class' => 'rf-select',
                 ],
                 'label' => 'Mon objectif',
                 'label_attr' => [
-                    'class' => 'rf-label h3 on-dark rf-mb-3w'
-                ]
+                    'class' => 'rf-label h3 on-dark rf-mb-3w',
+                ],
             ])
             ->add('regionalLimit', HiddenType::class, [
-                'empty_data' => 3
+                'empty_data' => 3,
             ])
             ->add('nationalLimit', HiddenType::class, [
-                'empty_data' => 3
+                'empty_data' => 3,
             ])
         ;
     }
@@ -66,7 +66,7 @@ class SearchFormType extends AbstractType
             'environmentalActions' => [],
             'businessActivityAreas' => [],
             'regions' => [],
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
 
         $resolver

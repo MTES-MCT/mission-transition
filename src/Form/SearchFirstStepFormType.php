@@ -32,7 +32,7 @@ class SearchFirstStepFormType extends AbstractType
     {
         $resolver->setDefaults([
             'environmentalActions' => [],
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
 
         $resolver

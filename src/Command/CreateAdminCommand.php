@@ -19,12 +19,11 @@ class CreateAdminCommand extends Command
     protected AdminRepository $adminRepository;
     protected EntityManagerInterface $em;
 
-
     public function __construct(
         UserPasswordEncoderInterface $encoder,
         AdminRepository $adminRepository,
         EntityManagerInterface $em
-    ){
+    ) {
         $this->encoder = $encoder;
         $this->adminRepository = $adminRepository;
         $this->em = $em;
@@ -47,9 +46,7 @@ class CreateAdminCommand extends Command
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int|null|void
+     * @return int|void|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -71,6 +68,7 @@ class CreateAdminCommand extends Command
         $this->em->persist($admin);
         $this->em->flush();
         $output->writeln('Admin successfully generated!');
+
         return 1;
     }
 }
