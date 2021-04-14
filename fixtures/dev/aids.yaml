@@ -4,8 +4,8 @@ App\Entity\Aid:
         name: <catchPhrase()>
         type: <randomElement(["AAP", "Aide", "Fonds", "Premiers Pas"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
-        perimeter: <randomElement(["REGIONAL"])>
-        region: '@region_*'
+        perimeter: "REGIONAL"
+        regions: ['@region_*']
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
@@ -23,7 +23,7 @@ App\Entity\Aid:
         name: <catchPhrase()>
         type: <randomElement(["AAP", "Aide", "Fonds", "Premiers Pas"])>
         fundingTypes: <randomElements(["Subvention", "Crédit d'impôt", "Accompagnement", "Avance remboursable", "Prêt", "Prime", "Prêt à taux zéro", "Suramortissement"])>
-        perimeter: <randomElement(["NATIONAL"])>
+        perimeter: "NATIONAL"
         goal: <text()>
         beneficiary: <text()>
         aidDetails: <text()>
