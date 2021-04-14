@@ -19,6 +19,14 @@
         'eligibility'
         'conditions';
 
+    .heading-underlined {
+        border-bottom: 1px solid $blue-navy;
+
+        > h2 {
+            color: $blue-navy;
+        }
+    }
+
     .goal {
         grid-area: goal;
     }
