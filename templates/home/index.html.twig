@@ -9,7 +9,7 @@
 
 {% block body %}
     <div class="homepage-background">
-        <div class="rf-container homepage">
+        <div class="rf-container rf-pb-9w homepage">
 
             <div class="main-title">
                 <div class="rf-row rf-mb-8w">
@@ -28,13 +28,15 @@
 
             <img class="illustration" src="{{ asset('build/img/homepage_how-to.svg') }}" alt="Illustration Mission Transition">
 
-            <div class="main-cta">
-                <h2 class="small">
-                    Découvrez les dispositifs de financement ou les ressources de <span class="highlighted">“Premiers pas”</span>
-                </h2>
-                <a href="{{ path('search_results') }}">
-                    <button class="rf-btn rf-btn--lg rf-m-3w">Je commence ma recherche</button>
-                </a>
+            <div class="main-cta rf-py-8w">
+                <div class="content">
+                    <h2 class="small">
+                        Découvrez les dispositifs de financement ou les ressources de <span class="highlighted">“Premiers pas”</span>
+                    </h2>
+                    <a href="{{ path('search_results') }}">
+                        <button class="rf-btn rf-btn--lg rf-m-3w">Je commence ma recherche</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
