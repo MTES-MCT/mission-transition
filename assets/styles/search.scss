@@ -17,10 +17,35 @@
     justify-items: center;
 
     .type {
+        .icon {
+            background-color: $blue-royal;
+            padding: 8px;
+            border-radius: 40px;
+            margin: auto;
+            width: min-content;
+
+            > img {
+                display: block;
+                margin: auto;
+            }
+        }
         grid-area: type;
     }
 
     .funder {
+        .icon {
+            border: 1px solid $white-mystic;
+            padding: 8px;
+            border-radius: 40px;
+            margin: auto;
+            width: min-content;
+
+            > img {
+                display: block;
+                margin: auto;
+            }
+        }
+
         grid-area: funder;
     }
 
