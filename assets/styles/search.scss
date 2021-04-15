@@ -14,9 +14,8 @@
         'date date';
     grid-gap: 2px;
     padding: 20px 20px;
-    grid-template-rows: 1fr auto;
     grid-template-columns: 1fr 1fr;
-    align-content: center;
+    align-content: space-evenly;
     justify-items: center;
 
     .type {
