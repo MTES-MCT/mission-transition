@@ -1,0 +1,23 @@
+@import '../colors';
+
+.tag {
+    display: block;
+    padding: 8px 16px;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(0, 0, 145, 0.1);
+    border-radius: 100px;
+    background-color: $white;
+    text-align: center;
+    color: $blue-navy;
+    font-size: 12px;
+    width: max-content;
+
+    &.selected,
+    &:hover {
+        background-color: $blue-navy;
+        color: $white;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}

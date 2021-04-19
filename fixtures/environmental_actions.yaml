@@ -1,21 +1,31 @@
 App\Entity\EnvironmentalAction:
     environmental_action_1:
         name: "Produire mon énergie solaire"
+        category: '@environmental_category_*'
     environmental_action_2:
         name: "Produire mon énergie géothermique"
+        category: '@environmental_category_*'
     environmental_action_3:
         name: "Produire mon énergie bois/biomasse"
+        category: '@environmental_category_*'
     environmental_action_4:
         name: "Maîtriser ma facture d'énergie"
+        category: '@environmental_category_*'
     environmental_action_5:
         name: "Récupérer de l'énergie (méthanisation)"
+        category: '@environmental_category_*'
     environmental_action_6:
         name: "Réduire ma production de déchets"
+        category: '@environmental_category_*'
     environmental_action_7:
         name: "Valoriser mes équipements"
+        category: '@environmental_category_*'
     environmental_action_8:
         name: "Investir dans les technologies vertes"
+        category: '@environmental_category_*'
     environmental_action_9:
         name: "Développer de nouveaux produits ou services durables"
+        category: '@environmental_category_*'
     environmental_action_10:
         name: "Acheter/louer dans le numérique responsable"
+        category: '@environmental_category_*'

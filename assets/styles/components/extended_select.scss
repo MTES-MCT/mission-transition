@@ -1,0 +1,30 @@
+@import './tags.scss';
+@import '../colors.scss';
+
+.extended-select {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-top: 20px;
+
+    .optgroup-wrapper {
+        border: 1px solid #e2e2e2;
+        padding: 1rem;
+
+        p {
+            padding-bottom: 1rem;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .extended-select {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 30px;
+        padding: 3rem 6rem;
+
+        .optgroup-wrapper {
+            padding: 1.5rem;
+            margin-bottom: 30px;
+        }
+    }
+}

@@ -1,0 +1,37 @@
+@import 'colors';
+@import 'typo';
+
+.your-project {
+    .title {
+        margin-right: auto;
+        margin-left: auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .content {
+        margin-right: auto;
+        margin-left: auto;
+        background-color: $white;
+        padding: 20px;
+
+        .submit-project {
+            text-align: right;
+        }
+    }
+
+    .content-header {
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .title {
+        max-width: 600px;
+    }
+
+    .content {
+        margin-top: -105px;
+        max-width: 65vw;
+    }
+}

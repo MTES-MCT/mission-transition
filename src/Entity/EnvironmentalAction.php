@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Util\EntityIdTrait;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\EnvironmentalActionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,6 +20,7 @@ class EnvironmentalAction
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("environmentalAction:read")
      */
     private string $name;
 
@@ -32,6 +34,12 @@ class EnvironmentalAction
      * @ORM\ManyToMany(targetEntity=Aid::class, mappedBy="environmentalActions")
      */
     private Collection $aids;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=EnvironmentalActionCategory::class, inversedBy="environmentalActions")
+     * @Groups("environmentalAction:read")
+     */
+    private EnvironmentalActionCategory $category;
 
     public function __toString()
     {
@@ -90,6 +98,18 @@ class EnvironmentalAction
         if ($this->aids->removeElement($aid)) {
             $aid->removeEnvironmentalAction($this);
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?EnvironmentalActionCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?EnvironmentalActionCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

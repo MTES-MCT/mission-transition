@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Aid;
+use App\Entity\EnvironmentalAction;
 use App\Form\SearchFirstStepFormType;
 use App\Form\SearchFormType;
 use App\Form\SearchSecondStepFormType;
@@ -27,12 +28,14 @@ class SearchController extends AbstractController
         RegionRepository $regionRepository,
         UrlGeneratorInterface $urlGenerator
     ) {
-        $environmentalActions = $actionRepository->findAll();
+        $environmentalActions = $actionRepository->findAllWithCategory();
+        $environmentalActions = $this->orderActionsByOptGroup($environmentalActions);
         $searchFormModel = new SearchFormModel();
 
         $form = $this->createForm(SearchFirstStepFormType::class, $searchFormModel, [
             'environmentalActions' => $environmentalActions,
             'method' => 'GET',
+            'action' => $urlGenerator->generate('search_results'),
         ]);
 
         $form->handleRequest($request);
@@ -47,12 +50,13 @@ class SearchController extends AbstractController
             ]);
 
             return $this->render('search/index_step2.html.twig', [
-                'form' => $form->createView(),
+                'form' => $form->createView()
             ]);
         }
 
         return $this->render('search/index_step1.html.twig', [
             'form' => $form->createView(),
+            'environmentalActions' => $environmentalActions
         ]);
     }
 
@@ -117,5 +121,16 @@ class SearchController extends AbstractController
             'nextRegionalLimit' => $regionalLimit + SearchFormModel::LIMIT_INCREASED_BY,
             'nextNationalLimit' => $nationalLimit + SearchFormModel::LIMIT_INCREASED_BY,
         ]);
+    }
+
+    private function orderActionsByOptGroup(array $environmentalActions) : array
+    {
+        $actionsByOptGroup = [];
+        /** @var EnvironmentalAction $action */
+        foreach ($environmentalActions as $action) {
+            $actionsByOptGroup[$action->getCategory()->getName()][] =  $action;
+        }
+
+        return $actionsByOptGroup;
     }
 }
