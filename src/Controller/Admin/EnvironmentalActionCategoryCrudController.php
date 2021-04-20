@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class EnvironmentalActionCategoryCrudController extends AbstractCrudController
@@ -38,6 +39,7 @@ class EnvironmentalActionCategoryCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name', 'Nom'),
+            AssociationField::new('environmentalActions', 'Objectifs'),
         ];
     }
 }
