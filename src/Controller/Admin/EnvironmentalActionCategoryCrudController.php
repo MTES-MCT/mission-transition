@@ -39,7 +39,8 @@ class EnvironmentalActionCategoryCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name', 'Nom'),
-            AssociationField::new('environmentalActions', 'Objectifs'),
+            AssociationField::new('environmentalActions', 'Objectifs')
+                ->setFormTypeOption('by_reference', false),
         ];
     }
 }

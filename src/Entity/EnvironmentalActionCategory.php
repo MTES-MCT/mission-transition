@@ -27,7 +27,7 @@ class EnvironmentalActionCategory
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=EnvironmentalAction::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=EnvironmentalAction::class, mappedBy="category", cascade={"persist"})
      */
     private Collection $environmentalActions;
 
