@@ -6,10 +6,10 @@
 
 .homepage {
     display: grid;
-    grid-template-columns: minmax(auto, 548px) min-content;
+    grid-template-columns: 2fr 1fr;
     grid-template-rows: auto auto;
-    grid-row-gap: 5rem;
-    padding-top: 7vh;
+    grid-row-gap: 2rem;
+    padding-top: 2vh;
     align-items: center;
 }
 
@@ -23,7 +23,7 @@
     }
 }
 .illustration {
-    max-width: 31vw;
+    max-width: 25vw;
     justify-self: flex-end;
 }
 
@@ -31,7 +31,7 @@
     width: 100%;
     margin: auto;
     background-color: $white;
-    padding: 4rem;
+    padding: 2rem;
     justify-self: center;
     grid-column: 1/3;
     filter: drop-shadow(0px 9px 11px rgba(2, 76, 187, 0.1));
