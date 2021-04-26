@@ -3,9 +3,10 @@ import '../styles/components/extended_select.scss';
 
 const ExtendedSelect = ({ optgroups, onSelect, selectedOption }) => {
     optgroups = Object.entries(optgroups);
-    const half = Math.ceil(optgroups.length / 2);
+    const half = Math.floor(optgroups.length / 2);
+    const otherHalf = optgroups.length - half;
     const leftGroup = optgroups.splice(0, half);
-    const rightGroup = optgroups.splice(-half);
+    const rightGroup = optgroups.splice(-otherHalf);
     const renderOptGroups = (group) => {
         return group.map(([optgroup, options], index) => {
             return (
