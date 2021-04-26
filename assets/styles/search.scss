@@ -1,6 +1,7 @@
 @import '_colors';
 @import '_typo';
 @import 'components/cards';
+@import "components/icons";
 
 .cta-search {
     position: relative;
@@ -18,7 +19,7 @@
     align-content: space-evenly;
     justify-items: center;
 
-    .type {
+    .aid-type {
         .icon {
             background-color: $blue-royal;
             padding: 8px;
@@ -34,7 +35,7 @@
         grid-area: type;
     }
 
-    .funder {
+    .funding-type {
         .icon {
             border: 1px solid $white-mystic;
             padding: 8px;

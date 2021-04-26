@@ -1,0 +1,19 @@
+@import "../colors";
+
+.mt-icon {
+  $self: &;
+  width: min-content;
+  margin: auto;
+  padding: 8px;
+  border: 1px solid $white-mystic;
+  border-radius: 40px;
+
+  > img {
+    display: block;
+    margin: auto;
+  }
+
+  #{$self}--blue & {
+    background-color: $blue-royal;
+  }
+}

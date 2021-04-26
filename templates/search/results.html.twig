@@ -46,6 +46,12 @@
                             <div class="card-aid">
                                 <div class="card-aid-main">
                                     <h3 class="small">{{ aid.name }}</h3>
+                                    <div class="funder">
+                                        <div class="icon">
+                                            <img src="{{ asset('build/img/wallet.svg') }}" alt="Type de dispositif">
+                                        </div>
+                                        <span class="subtitle">{{ aid.funder.name }}</span>
+                                    </div>
                                     <ul class="rf-tags-group">
                                         {% for action in aid.environmentalActions %}
                                             <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
@@ -53,13 +59,13 @@
                                     </ul>
                                 </div>
                                 <div class="card-aid-details">
-                                    <div class="type">
-                                        <div class="icon">
+                                    <div class="aid-type">
+                                        <div class="mt-icon--blue">
                                             <img src="{{ asset('build/img/finger_up.svg') }}" alt="Type de dispositif">
                                         </div>
                                         <span class="subtitle">{{ aid.type }}</span>
                                     </div>
-                                    <div class="funder">
+                                    <div class="funding-type">
                                         <div class="icon">
                                             <img src="{{ asset('build/img/wallet.svg') }}" alt="Type de dispositif">
                                         </div>
@@ -103,13 +109,13 @@
                                     </ul>
                                 </div>
                                 <div class="card-aid-details">
-                                    <div class="type">
+                                    <div class="aid-type">
                                         <div class="icon">
                                             <img src="{{ asset('build/img/finger_up.svg') }}" alt="Type de dispositif">
                                         </div>
                                         <span class="subtitle">{{ aid.type }}</span>
                                     </div>
-                                    <div class="funder">
+                                    <div class="funding-type">
                                         <div class="icon">
                                             <img src="{{ asset('build/img/wallet.svg') }}" alt="Type de dispositif">
                                         </div>
