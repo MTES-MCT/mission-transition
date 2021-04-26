@@ -6,7 +6,7 @@ const FirstStepProjectDefiner = ({ optgroups }) => {
     let environmentalActionSelect = document.querySelector('#search_form_environmentalAction');
     const onSelect = (option) => {
         if (option === selectedOption) {
-            setSelectedOption(null)
+            setSelectedOption(null);
         } else {
             setSelectedOption(option);
             environmentalActionSelect.value = option.name;

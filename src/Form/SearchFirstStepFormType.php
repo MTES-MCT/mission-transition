@@ -16,19 +16,13 @@ class SearchFirstStepFormType extends AbstractType
             ->add('aidType', ChoiceType::class, [
                 'choices' => [
                     'un financement' => 'funding',
-                    'des actions faciles' => 'first-steps',
+                    'des actions premier pas' => 'first-steps',
                 ],
                 'label' => 'Mon besoin',
                 'attr' => [
-                    'class' => 'rf-select'
-                ]
+                    'class' => 'rf-select',
+                ],
             ])
-//            ->add('environmentalAction', ChoiceType::class, [
-//                'choices' => $options['environmentalActions'],
-//                'choice_value' => 'name',
-//                'choice_label' => 'name',
-//                'label' => 'Vos objectifs de transition écologique'
-//            ])
             ->add('environmentalAction', HiddenType::class)
         ;
     }

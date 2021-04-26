@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use App\Entity\Util\EntityIdTrait;
-use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\EnvironmentalActionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EnvironmentalActionRepository::class)

@@ -50,13 +50,13 @@ class SearchController extends AbstractController
             ]);
 
             return $this->render('search/index_step2.html.twig', [
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]);
         }
 
         return $this->render('search/index_step1.html.twig', [
             'form' => $form->createView(),
-            'environmentalActions' => $environmentalActions
+            'environmentalActions' => $environmentalActions,
         ]);
     }
 
@@ -123,12 +123,12 @@ class SearchController extends AbstractController
         ]);
     }
 
-    private function orderActionsByOptGroup(array $environmentalActions) : array
+    private function orderActionsByOptGroup(array $environmentalActions): array
     {
         $actionsByOptGroup = [];
         /** @var EnvironmentalAction $action */
         foreach ($environmentalActions as $action) {
-            $actionsByOptGroup[$action->getCategory()->getName()][] =  $action;
+            $actionsByOptGroup[$action->getCategory()->getName()][] = $action;
         }
 
         return $actionsByOptGroup;

@@ -18,9 +18,11 @@
                         Vous cherchez des idées pour votre projet de transition ? Nous vous guidons pas à pas pour
                         trouver les ressources adaptées avec notre module de recherche.
                     </p>
-                    <button class="rf-btn rf-fi-checkbox-line rf-btn--icon-right rf-my-5w">
-                        DEFINISSEZ VOTRE PROJET
-                    </button>
+                    <a href="#formulaire">
+                        <button class="rf-btn rf-fi-arrow-down-line rf-btn--icon-right rf-my-5w">
+                            DEFINISSEZ VOTRE PROJET
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -35,11 +37,11 @@
                 </div>
             </div>
             {{ form_start(form) }}
-            <div class="rf-grid-row rf-px-md-12w rf-pt-6w rf-pt-md-12w">
-                <div class="rf-col-12 rf-col-md-6">
+            <div id="formulaire" class="rf-grid-row rf-px-md-12w rf-pt-6w rf-pt-md-12w">
+                <div class="rf-col-12 rf-col-md-3">
                     <h3 class="color-navy">{{ form_label(form.aidType) }}</h3>
                 </div>
-                <div class="rf-col-12 rf-col-md-6">
+                <div class="rf-col-12 rf-col-md-4">
                     {{ form_widget(form.aidType) }}
                 </div>
             </div>
@@ -50,12 +52,6 @@
             {{ form_end(form) }}
         </div>
     </div>
-{#    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
-{#        {{ form_widget(form) }}#}
-{#        <button class="rf-btn">#}
-{#            ALLER À L'ÉTAPE 2/2#}
-{#        </button>#}
-{#    {{ form_end(form) }}#}
 {% endblock %}
 
 {% block javascripts%}
