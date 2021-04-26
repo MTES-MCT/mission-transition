@@ -2,12 +2,59 @@
 
 {% block title %}Recherche de dispositif d'aide{% endblock %}
 
-{% block body %}
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_widget(form) }}
-        <button class="rf-btn">
-            ALLER À L'ÉTAPE 2/2
-        </button>
-    {{ form_end(form) }}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('your_project') }}
 {% endblock %}
 
+{% block body %}
+    <div class="rf-container-fluid your-project bg-light">
+        <div class="bg-dark rf-pb-md-12w">
+            <div class="rf-grid-row title">
+                <div class="rf-col">
+                    <img src="{{ asset('build/img/your_project.svg') }}">
+                    <h1 class="on-dark rf-pb-4v">Réaliser votre projet</h1>
+                    <p class="on-dark">
+                        Vous cherchez des idées pour votre projet de transition ? Nous vous guidons pas à pas pour
+                        trouver les ressources adaptées avec notre module de recherche.
+                    </p>
+                    <a href="#formulaire">
+                        <button class="rf-btn rf-fi-arrow-down-line rf-btn--icon-right rf-my-5w">
+                            DEFINISSEZ VOTRE PROJET
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="rf-grid-row rf-grid-row--center content-header">
+                <div class="rf-col rf-col-md-5 rf-pt-4v rf-pt-md-6w">
+                    <h3 class="highlighted">MODULE DE RECHERCHE</h3>
+                    <p>
+                        Je définis mon besoin pour trouver les bonnes ressources afin de lancer ou d’accélérer la transition
+                        écologique de mon entreprise
+                    </p>
+                </div>
+            </div>
+            {{ form_start(form) }}
+            <div id="formulaire" class="rf-grid-row rf-px-md-12w rf-pt-6w rf-pt-md-12w">
+                <div class="rf-col-12 rf-col-md-3">
+                    <h3 class="color-navy">{{ form_label(form.aidType) }}</h3>
+                </div>
+                <div class="rf-col-12 rf-col-md-4">
+                    {{ form_widget(form.aidType) }}
+                </div>
+            </div>
+            {{ form_row(form.environmentalAction) }}
+            <div {{ stimulus_controller('your-project', {
+                optgroups: environmentalActions|serialize('json', { groups: 'environmentalAction:read'})
+            }) }}></div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('your_project') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+App\Entity\EnvironmentalActionCategory:
+    environmental_category_1:
+        name: "Maîtrise d'impact"
+    environmental_category_2:
+        name: "Gestion énergetique"
+    environmental_category_3:
+        name: "Investissements"
+    environmental_category_4:
+        name: "Gestion des ressources"
+    environmental_category_5:
+        name: "Recherche & Développement"

@@ -18,4 +18,13 @@ class EnvironmentalActionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, EnvironmentalAction::class);
     }
+
+    public function findAllWithCategory()
+    {
+        return $this->createQueryBuilder('environmentalAction')
+            ->select('environmentalAction', 'category')
+            ->join('environmentalAction.category', 'category')
+            ->getQuery()->getResult()
+        ;
+    }
 }

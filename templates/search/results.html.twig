@@ -35,17 +35,17 @@
     {% if nbAids is not same as 0 %}
         <div class="bg-light">
             <div class="rf-container rf-pt-12w">
-                <p class="subtitle">{{ nbAids ~ (isFundingType ? ' dispositifs de financement' : ' actions faciles') ~ ' correspondent à votre recherche' }}</p>
+                <p class="subtitle">{{ nbAids ~ (isFundingType ? ' dispositifs de financement' : ' actions premier pas') ~ ' correspondent à votre recherche' }}</p>
                 {% if regionalAids is not empty %}
                     <hr>
                     <h3 class="rf-pt-3w">
-                        <span class="highlighted">{{ nbRegionalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> {{ region is not null ? "en #{region.name}" }}
+                        <span class="highlighted">{{ nbRegionalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions premier pas' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> {{ region is not null ? "en #{region.name}" }}
                     </h3>
                     <div class="card-aid-list rf-py-5w">
                         {% for aid in regionalAids %}
                             <div class="card-aid">
                                 <div class="card-aid-main">
-                                    <h2 class="small">{{ aid.name }}</h2>
+                                    <h3 class="small">{{ aid.name }}</h3>
                                     <ul class="rf-tags-group">
                                         {% for action in aid.environmentalActions %}
                                             <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
@@ -89,13 +89,13 @@
                 {% if nationalAids is not empty %}
                     <hr>
                     <h3 class="rf-pt-3w">
-                        <span class="highlighted">{{ nbNationalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> au niveau national
+                        <span class="highlighted">{{ nbNationalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions premier pas' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> au niveau national
                     </h3>
                     <div class="card-aid-list rf-py-5w">
                         {% for aid in nationalAids %}
                             <div class="card-aid">
                                 <div class="card-aid-main">
-                                    <h2 class="small">{{ aid.name }}</h2>
+                                    <h3 class="small">{{ aid.name }}</h3>
                                     <ul class="rf-tags-group">
                                         {% for action in aid.environmentalActions %}
                                             <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
