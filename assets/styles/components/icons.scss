@@ -1,19 +1,42 @@
 @import "../colors";
 
 .mt-icon {
-  $self: &;
+  height: 14px;
+  width: 14px;
+  display: block;
+
+  @at-root #{&}--building {
+    background: url('/build/icons/building.svg');
+  }
+
+  @at-root #{&}--tag {
+    background: url('/build/icons/tag.svg');
+  }
+
+  @at-root #{&}--euro {
+    background: url('/build/icons/euro.svg');
+  }
+}
+
+.mt-icon-circled {
+  display: block;
+  background: $white;
   width: min-content;
-  margin: auto;
   padding: 8px;
   border: 1px solid $white-mystic;
   border-radius: 40px;
 
-  > img {
-    display: block;
-    margin: auto;
+  @at-root #{&}--orange-bg {
+    border: none;
+    background: $orange-apricot;
   }
 
-  #{$self}--blue & {
-    background-color: $blue-royal;
+  @at-root #{&}--blue-bg {
+    border: none;
+    background: $blue-navy;
+  }
+
+  @at-root #{&}--inline {
+    display: inline-flex;
   }
 }
