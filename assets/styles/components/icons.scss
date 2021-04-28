@@ -1,42 +1,46 @@
-@import "../colors";
+@import '../colors';
 
 .mt-icon {
-  height: 14px;
-  width: 14px;
-  display: block;
+    height: 14px;
+    width: 14px;
+    display: block;
 
-  @at-root #{&}--building {
-    background: url('/build/icons/building.svg');
-  }
+    @at-root #{&}--building {
+        background: url('/build/icons/building.svg');
+    }
 
-  @at-root #{&}--tag {
-    background: url('/build/icons/tag.svg');
-  }
+    @at-root #{&}--tag {
+        background: url('/build/icons/tag.svg');
+    }
 
-  @at-root #{&}--euro {
-    background: url('/build/icons/euro.svg');
-  }
+    @at-root #{&}--euro {
+        background: url('/build/icons/euro.svg');
+    }
 }
 
 .mt-icon-circled {
-  display: block;
-  background: $white;
-  width: min-content;
-  padding: 8px;
-  border: 1px solid $white-mystic;
-  border-radius: 40px;
+    display: block;
+    background: $white;
+    width: min-content;
+    padding: 8px;
+    border: 1px solid $white-mystic;
+    border-radius: 40px;
 
-  @at-root #{&}--orange-bg {
-    border: none;
-    background: $orange-apricot;
-  }
+    @at-root #{&}--orange-bg {
+        border: none;
+        background: $orange-apricot;
+    }
 
-  @at-root #{&}--blue-bg {
-    border: none;
-    background: $blue-navy;
-  }
+    @at-root #{&}--blue-bg {
+        border: none;
+        background: $blue-navy;
+    }
 
-  @at-root #{&}--inline {
-    display: inline-flex;
-  }
+    @at-root #{&}--inline {
+        display: inline-flex;
+    }
+
+    @at-root #{&}--margin-auto {
+        margin: auto;
+    }
 }

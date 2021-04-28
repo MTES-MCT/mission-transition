@@ -1,11 +1,18 @@
 @import '_colors';
 @import '_typo';
 @import 'components/cards';
-@import "components/icons";
+@import 'components/icons';
+@import 'components/tags';
 
 .cta-search {
     position: relative;
     top: 1rem;
+}
+
+.card-aid-main {
+    .funder {
+        margin-top: 2rem;
+    }
 }
 
 .card-aid-details {
@@ -20,35 +27,10 @@
     justify-items: center;
 
     .aid-type {
-        .icon {
-            background-color: $blue-royal;
-            padding: 8px;
-            border-radius: 40px;
-            margin: auto;
-            width: min-content;
-
-            > img {
-                display: block;
-                margin: auto;
-            }
-        }
         grid-area: type;
     }
 
     .funding-type {
-        .icon {
-            border: 1px solid $white-mystic;
-            padding: 8px;
-            border-radius: 40px;
-            margin: auto;
-            width: min-content;
-
-            > img {
-                display: block;
-                margin: auto;
-            }
-        }
-
         grid-area: funder;
     }
 

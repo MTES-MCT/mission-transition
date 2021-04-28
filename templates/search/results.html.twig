@@ -35,15 +35,15 @@
     {% if nbAids is not same as 0 %}
         <div class="bg-light">
             <div class="rf-container rf-pt-12w">
-                <p class="subtitle">{{ nbAids ~ (isFundingType ? ' dispositifs de financement' : ' actions premier pas') ~ ' correspondent à votre recherche' }}</p>
+                <p class="subtitle">{{ nbAids ~ (isFundingType ? ' dispositifs de financement' : ' actions faciles') ~ ' correspondent à votre recherche' }}</p>
                 {% if regionalAids is not empty %}
                     <hr>
                     <h3 class="rf-pt-3w">
-                        <span class="highlighted">{{ nbRegionalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions premier pas' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> {{ region is not null ? "en #{region.name}" }}
+                        <span class="highlighted">{{ nbRegionalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> {{ region is not null ? "en #{region.name}" }}
                     </h3>
                     <div class="card-aid-list rf-py-5w">
                         {% for aid in regionalAids %}
-                            <div class="card-aid">
+                            <div class="card-aid" {% if loop.last %}id="last-regional-aid"{% endif %}>
                                 <div class="card-aid-main">
                                     <h3 class="small">{{ aid.name }}</h3>
                                     <div class="funder">
@@ -52,21 +52,21 @@
                                         </span>
                                         <span class="subtitle">{{ aid.funder.name }}</span>
                                     </div>
-                                    <ul class="rf-tags-group">
+                                    <ul class="rf-tags-group rf-mt-4w">
                                         {% for action in aid.environmentalActions %}
-                                            <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
+                                            <li><span class="rf-mb-3v mt-tag subtitle">{{ action }}</span></li>
                                         {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="card-aid-details">
                                     <div class="aid-type">
-                                        <span class="mt-icon-circled mt-icon-circled--blue-bg">
+                                        <span class="mt-icon-circled mt-icon-circled--blue-bg mt-icon-circled--margin-auto">
                                             <span class="mt-icon mt-icon--tag"></span>
                                         </span>
                                         <span class="subtitle">{{ aid.type }}</span>
                                     </div>
                                     <div class="funding-type">
-                                        <span class="mt-icon-circled mt-icon-circled--orange-bg">
+                                        <span class="mt-icon-circled mt-icon-circled--orange-bg mt-icon-circled--margin-auto">
                                             <span class="mt-icon mt-icon--euro"></span>
                                         </span>
                                         <span class="subtitle">{{ aid.funder.name }}</span>
@@ -83,7 +83,7 @@
                     </div>
                     {% if nbRegionalAids is not same as(regionalAids|length) %}
                         <div class="more-results">
-                            <a href="{{ app.request.requesturi ~ '&search_form[regionalLimit]=' ~ nextRegionalLimit }}">
+                            <a href="{{ app.request.requesturi ~ '&search_form[regionalLimit]=' ~ nextRegionalLimit ~ '#last-regional-aid' }}">
                                 <button class="rf-btn secondary">
                                     AFFICHER PLUS DE FICHES
                                 </button>
@@ -95,30 +95,36 @@
                 {% if nationalAids is not empty %}
                     <hr>
                     <h3 class="rf-pt-3w">
-                        <span class="highlighted">{{ nbNationalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions premier pas' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> au niveau national
+                        <span class="highlighted">{{ nbNationalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalAction }}"</span> au niveau national
                     </h3>
                     <div class="card-aid-list rf-py-5w">
                         {% for aid in nationalAids %}
-                            <div class="card-aid">
+                            <div class="card-aid" {% if loop.last %}id="last-national-aid"{% endif %}>
                                 <div class="card-aid-main">
                                     <h3 class="small">{{ aid.name }}</h3>
-                                    <ul class="rf-tags-group">
+                                    <div class="funder">
+                                        <span class="mt-icon-circled mt-icon-circled--inline">
+                                            <span class="mt-icon mt-icon--building"></span>
+                                        </span>
+                                        <span class="subtitle">{{ aid.funder.name }}</span>
+                                    </div>
+                                    <ul class="rf-tags-group rf-mt-4w">
                                         {% for action in aid.environmentalActions %}
-                                            <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
+                                            <li><span class="rf-mb-3v mt-tag subtitle">{{ action }}</span></li>
                                         {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="card-aid-details">
                                     <div class="aid-type">
-                                        <div class="icon">
-                                            <img src="{{ asset('build/img/finger_up.svg') }}" alt="Type de dispositif">
-                                        </div>
+                                        <span class="mt-icon-circled mt-icon-circled--blue-bg mt-icon-circled--margin-auto">
+                                            <span class="mt-icon mt-icon--tag"></span>
+                                        </span>
                                         <span class="subtitle">{{ aid.type }}</span>
                                     </div>
                                     <div class="funding-type">
-                                        <div class="icon">
-                                            <img src="{{ asset('build/img/wallet.svg') }}" alt="Type de dispositif">
-                                        </div>
+                                        <span class="mt-icon-circled mt-icon-circled--orange-bg mt-icon-circled--margin-auto">
+                                            <span class="mt-icon mt-icon--euro"></span>
+                                        </span>
                                         <span class="subtitle">{{ aid.funder.name }}</span>
                                     </div>
                                     {% if aid.applicationEndDate is not null %}
@@ -133,7 +139,7 @@
                     </div>
                     {% if nbNationalAids is not same as(nationalAids|length) %}
                         <div class="more-results">
-                            <a href="{{ app.request.requesturi ~ '&search_form[nationalLimit]=' ~ nextNationalLimit }}">
+                            <a href="{{ app.request.requesturi ~ '&search_form[nationalLimit]=' ~ nextNationalLimit ~ '#last-national-aid' }}">
                                 <button class="rf-btn secondary">
                                     AFFICHER PLUS DE FICHES
                                 </button>
