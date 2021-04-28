@@ -149,22 +149,9 @@
                 {% endif %}
             </div>
         </div>
-{#    {% else %}#}
-{#        <div class="bg-light">#}
-{#            <div class="rf-container rf-pt-12w">#}
-{#                <div class="rf-grid-row fr-grid-row--center">#}
-{#                    <div class="rf-col">#}
-{#                        <p>Définissez votre besoin et lancez la recherche !</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
     {% endif %}
-
-
-
-
 {% endblock %}
+
 {% block javascripts%}
     {{ parent() }}
     {{ encore_entry_script_tags('search') }}

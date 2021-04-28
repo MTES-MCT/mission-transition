@@ -8,6 +8,11 @@
     width: 100%;
 }
 
+.aid-header {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
 .aid-content {
     display: grid;
     grid-template-columns: auto;
@@ -52,6 +57,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+    .aid-header {
+        grid-template-columns: auto 607px;
+    }
+
     .aid-content {
         grid-template-columns: 20vw auto;
         grid-column-gap: 2.5rem;

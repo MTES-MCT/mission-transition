@@ -16,7 +16,6 @@ class SearchFirstStepFormType extends AbstractType
             ->add('aidType', ChoiceType::class, [
                 'choices' => [
                     'un financement' => 'funding',
-                    'des actions premier pas' => 'first-steps',
                 ],
                 'label' => 'Mon besoin',
                 'attr' => [

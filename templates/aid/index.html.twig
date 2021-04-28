@@ -10,8 +10,8 @@
 
 {% block body %}
     <div class="rf-container-fluid">
-        <div class="rf-grid-row">
-            <div class="rf-col-12 rf-col-md-7 rf-pt-9w rf-pt-md-12w bg-light">
+        <div class="rf-grid-row aid-header">
+            <div class="rf-pt-9w rf-pt-md-12w bg-light">
                 <div class="grid-row rf-mx-4w rf-mx-md-12w">
                     <div class="rf-col-12">
                         <div class="heading-underlined">
@@ -27,26 +27,16 @@
                     <div class="rf-col-12 rf-mt-4w rf-mb-md-12w">
                         <h2 class="small">{{ aid.name }}</h2>
                     </div>
-                    <div class="rf-col-12 rf-mt-4w">
+                    <div class="rf-col-12 rf-mt-4w rf-pb-4w">
                         <ul class="rf-tags-group">
                             {% for action in aid.environmentalActions %}
-                                <li><span class="rf-tag rf-tag--sm subtitle">{{ action }}</span></li>
+                                <li><span class="mt-tag subtitle">{{ action }}</span></li>
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="rf-col-12 rf-mt-4w rf-mb-6w">
-                        <span class="subtitle">CETTE ACTION FAIT PARTIE DE LA THÉMATIQUE
-                            {% for topic in aid.environmentalTopics %}
-                                {{ topic.name }}
-                                {% if loop.index is not same as(aid.environmentalTopics|length) %}
-                                    ,
-                                {% endif %}
-                            {% endfor %}
-                        </span>
-                    </div>
                 </div>
             </div>
-            <div class="rf-col-12 rf-col-md-5 rf-pt-9w rf-pt-md-12w bg-dark">
+            <div class="rf-pt-9w rf-pt-md-12w bg-dark">
                 <div class="grid-row rf-mx-4w rf-mx-md-12w">
                     <div class="rf-col-12">
                         <div class="heading-underlined on-dark">
@@ -56,13 +46,12 @@
                         </div>
                     </div>
                     <div class="rf-col-12 rf-my-4w">
-                        <h2 class="on-dark">{{ aid.funder.name }}</h2>
+                        <h3 class="on-dark">{{ aid.funder.name }}</h3>
                     </div>
-                    <hr class="on-dark">
                     {% if aid.funder.website is not null %}
                         <div class="rf-col-12 rf-my-4w">
                             <a href="{{ aid.fundingSourceUrl }}" target="_blank">
-                                <button class="rf-btn funder-website-link">ACCÉDER AU SITE DU FINANCEUR</button>
+                                <button class="rf-btn rf-btn--lg funder-website-link">POURSUIVRE MA DÉMARCHE</button>
                             </a>
                         </div>
                     {% endif %}
@@ -140,12 +129,12 @@
                 </div>
             </div>
             <a href="{{ aid.fundingSourceUrl }}" target="_blank">
-                <button class="rf-btn funder-website-link">ACCÉDER AU SITE DU FINANCEUR</button>
+                <button class="rf-btn rf-btn--lg funder-website-link">POURSUIVRE MA DÉMARCHE</button>
             </a>
         </div>
         <div class="goal">
             <div class="heading-underlined">
-                <h2 class="small">C'est quoi ?</h2>
+                <h3>C'est quoi ?</h3>
             </div>
             <p class="rf-pt-2w">
                 {{ aid.goal }}
@@ -153,7 +142,7 @@
         </div>
         <div class="details bg-light rf-p-4w rf-mt-4w">
             <div class="heading-underlined">
-                <h2 class="small">Détail du financement</h2>
+                <h3>Détail du financement</h3>
             </div>
             <p class="rf-pt-2w">
                 {{ aid.aidDetails }}
@@ -161,7 +150,7 @@
         </div>
         <div class="beneficiary rf-mt-4w">
             <div class="heading-underlined">
-                <h2 class="small">Pour quel bénéficiaire ?</h2>
+                <h3>Pour quel bénéficiaire ?</h3>
             </div>
             <p class="rf-pt-2w">
                 {{ aid.beneficiary }}
@@ -169,7 +158,7 @@
         </div>
         <div class="eligibility rf-mt-4w">
             <div class="heading-underlined">
-                <h2 class="small">Quelle est le cadre d'utilisation de l'aide ?</h2>
+                <h3>Quelle est le cadre d'utilisation de l'aide ?</h3>
             </div>
             <p class="rf-pt-2w">
                 {{ aid.eligibility }}
@@ -177,7 +166,7 @@
         </div>
         <div class="conditions rf-mt-4w rf-mb-12w">
             <div class="heading-underlined">
-                <h2 class="small">Quelles sont les contraintes à respecter ?</h2>
+                <h3>Quelles sont les contraintes à respecter ?</h3>
             </div>
             <p class="rf-pt-2w">
                 {{ aid.conditions }}
