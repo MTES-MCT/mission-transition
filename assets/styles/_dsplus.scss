@@ -12,6 +12,7 @@ a {
 .rf-btn {
     font-size: 14px;
     background-color: $blue-cobalt;
+    border-radius: 6px;
 }
 
 .rf-btn.secondary {
@@ -29,6 +30,10 @@ a {
 .rf-tag {
     background-color: $grey-athens;
     color: $grey-river-bed;
+}
+
+a[target='_blank' i]::after {
+    content: none;
 }
 
 @media only screen and (min-width: 768px) {

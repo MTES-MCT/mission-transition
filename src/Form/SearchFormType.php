@@ -16,7 +16,6 @@ class SearchFormType extends AbstractType
             ->add('aidType', ChoiceType::class, [
                 'choices' => [
                     'Trouver un financement' => 'funding',
-                    'Trouver des actions premier pas' => 'first-steps',
                 ],
                 'attr' => [
                     'class' => 'rf-select',
