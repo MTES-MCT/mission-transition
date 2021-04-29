@@ -12,6 +12,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="referrer" content="origin" />
 
+        <link rel="apple-touch-icon" href="{{ asset('build/icons/apple-touch-icon.png') }}"><!-- 180×180 -->
+        <link rel="icon" href="{{ asset('build/icons/favicon.svg') }}" type="image/svg+xml">
+        <link rel="shortcut icon" href="{{ asset('build/icons/favicon.ico') }}" type="image/x-icon"><!-- 32×32 -->
+        <link rel="manifest" href="{{ asset('build/icons/manifest.webmanifest') }}" crossorigin="use-credentials">
+
         {% block stylesheets encore_entry_link_tags('app') %}
         <link rel="canonical" href="{% block meta_canonical current_route ? url(current_route, current_route_params) : '' %}" />
 
