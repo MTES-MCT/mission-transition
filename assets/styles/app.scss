@@ -26,6 +26,10 @@ div.wrapper {
     grid-template-columns: 100%;
 }
 
+.mt-sm-logo {
+    max-width: 96px;
+}
+
 @media only screen and (min-width: 768px) {
     .on-mobile-only {
         display: none !important;
