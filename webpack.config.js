@@ -36,6 +36,11 @@ Encore
         from: './assets/icons',
         to: 'icons/[name].[ext]',
     })
+
+    .copyFiles({
+        from: './assets/static',
+        to: 'static/[name].[ext]',
+    })
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
     .enableReactPreset()

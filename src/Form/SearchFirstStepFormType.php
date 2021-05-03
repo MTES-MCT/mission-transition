@@ -19,7 +19,7 @@ class SearchFirstStepFormType extends AbstractType
                 ],
                 'label' => 'Mon besoin',
                 'attr' => [
-                    'class' => 'rf-select',
+                    'class' => 'fr-select',
                 ],
             ])
             ->add('environmentalAction', HiddenType::class)

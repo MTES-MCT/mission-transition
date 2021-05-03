@@ -15,13 +15,13 @@ const FirstStepProjectDefiner = ({ optgroups }) => {
     let isSelected = selectedOption !== null;
     return (
         <>
-            <div className="rf-grid-row rf-px-md-12w rf-pt-6w rf-pt-md-12w">
-                <div className="rf-col-12 rf-col-md-6">
+            <div className="fr-grid-row fr-px-md-12w fr-pt-6w fr-pt-md-12w">
+                <div className="fr-col-12 fr-col-md-6">
                     <h3 className="color-navy">Mon objectif</h3>
-                    <p className="subtitle rf-pb-1w">Sélectionnez 1 objectif dans la liste suivante</p>
+                    <p className="subtitle fr-pb-1w">Sélectionnez 1 objectif dans la liste suivante</p>
                 </div>
-                <div className="rf-col-12 rf-col-md-6 submit-project">
-                    <button type="submit" className="rf-btn" disabled={!isSelected}>
+                <div className="fr-col-12 fr-col-md-6 submit-project">
+                    <button type="submit" className="fr-btn" disabled={!isSelected}>
                         CONSULTER LES RÉSULTATS
                     </button>
                 </div>

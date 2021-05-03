@@ -900,10 +900,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@gouvfr/dsfr@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-0.6.0.tgz#0e4f5bc0d9d3269c06de3e2ebe631248e8d4663f"
-  integrity sha512-3S4rbTZu2ySlLICud67O90uH/6J4SJBiJN37sdHlfSRwC5OdHFf501q3bfXrOzcpqrOxoSGJHVMpnHwJQK6QUw==
+"@gouvfr/dsfr@^1.0.0-rc1.0":
+  version "1.0.0-rc1.0"
+  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.0.0-rc1.0.tgz#a7d0f8e047322f0b63371d9e35ffcfc29c6bb85d"
+  integrity sha512-mXfun0FzqeSgfyti6SsdPQHSpNsQBOJNkzZtvoN8KfaUGP3asupaMXe2CbRgrkV3ogqM0n/vToWjYjLzBwPxuQ==
 
 "@polka/url@^1.0.0-next.9":
   version "1.0.0-next.11"

@@ -9,11 +9,11 @@
 
 
 {% block body %}
-    <div class="rf-container-fluid">
-        <div class="rf-grid-row aid-header">
-            <div class="rf-pt-9w rf-pt-md-12w bg-light">
-                <div class="grid-row rf-mx-4w rf-mx-md-12w">
-                    <div class="rf-col-12">
+    <div class="fr-container-fluid">
+        <div class="fr-grid-row aid-header">
+            <div class="fr-pt-9w fr-pt-md-12w bg-light">
+                <div class="grid-row fr-mx-4w fr-mx-md-12w">
+                    <div class="fr-col-12">
                         <div class="heading-underlined">
                             <span class="subtitle">
                                 {% if aid.type is same as(constant('TYPE_FIRST_STEP', aid)) %}
@@ -24,11 +24,11 @@
                             </span>
                         </div>
                     </div>
-                    <div class="rf-col-12 rf-mt-4w rf-mb-md-12w">
+                    <div class="fr-col-12 fr-mt-4w fr-mb-md-12w">
                         <h2 class="small">{{ aid.name }}</h2>
                     </div>
-                    <div class="rf-col-12 rf-mt-4w rf-pb-4w">
-                        <ul class="rf-tags-group">
+                    <div class="fr-col-12 fr-mt-4w fr-pb-4w">
+                        <ul class="fr-tags-group">
                             {% for action in aid.environmentalActions %}
                                 <li><span class="mt-tag subtitle">{{ action }}</span></li>
                             {% endfor %}
@@ -36,22 +36,22 @@
                     </div>
                 </div>
             </div>
-            <div class="rf-pt-9w rf-pt-md-12w bg-dark">
-                <div class="grid-row rf-mx-4w rf-mx-md-12w">
-                    <div class="rf-col-12">
+            <div class="fr-pt-9w fr-pt-md-12w bg-dark">
+                <div class="grid-row fr-mx-4w fr-mx-md-12w">
+                    <div class="fr-col-12">
                         <div class="heading-underlined on-dark">
                             <span class="subtitle highlighted">
                                 Votre contact pour cette aide
                             </span>
                         </div>
                     </div>
-                    <div class="rf-col-12 rf-my-4w">
+                    <div class="fr-col-12 fr-my-4w">
                         <h3 class="on-dark">{{ aid.funder.name }}</h3>
                     </div>
                     {% if aid.funder.website is not null %}
-                        <div class="rf-col-12 rf-my-4w">
+                        <div class="fr-col-12 fr-my-4w">
                             <a href="{{ aid.fundingSourceUrl }}" target="_blank">
-                                <button class="rf-btn rf-btn--lg funder-website-link">POURSUIVRE MA DÉMARCHE</button>
+                                <button class="fr-btn fr-btn--lg funder-website-link">POURSUIVRE MA DÉMARCHE</button>
                             </a>
                         </div>
                     {% endif %}
@@ -60,28 +60,28 @@
         </div>
     </div>
 
-    <div class="rf-container-fluid rf-mx-4w rf-mx-md-12w">
-        <nav role="navigation" class="rf-breadcrumb" aria-label="vous êtes ici :">
-            <button class="rf-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-189">Voir le fil d’Ariane</button>
-            <div class="rf-collapse" id="breadcrumb-189">
-                <ol class="rf-breadcrumb__list">
+    <div class="fr-container-fluid fr-mx-4w fr-mx-md-12w">
+        <nav role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-189">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-189">
+                <ol class="fr-breadcrumb__list">
                     <li>
-                        <a class="rf-breadcrumb__link" href="{{ path('homepage') }}">Accueil</a>
+                        <a class="fr-breadcrumb__link" href="{{ path('homepage') }}">Accueil</a>
                     </li>
                     <li>
-                        <a class="rf-breadcrumb__link" href="{{ path('search_index') }}">Moteur de recherche</a>
+                        <a class="fr-breadcrumb__link" href="{{ path('search_index') }}">Moteur de recherche</a>
                     </li>
                     <li>
-                        <a class="rf-breadcrumb__link" aria-current="page">{{ aid.name }}</a>
+                        <a class="fr-breadcrumb__link" aria-current="page">{{ aid.name }}</a>
                     </li>
                 </ol>
             </div>
         </nav>
     </div>
 
-    <div class="rf-container-fluid rf-mx-4w rf-mx-md-12w aid-content">
+    <div class="fr-container-fluid fr-mx-4w fr-mx-md-12w aid-content">
         <div class="highlighted-info">
-            <div class="on-mobile-only heading-underlined rf-mt-4w">
+            <div class="on-mobile-only heading-underlined fr-mt-4w">
                 <h2 class="small">Les informations principales</h2>
             </div>
             <div class="card-focus">
@@ -129,46 +129,46 @@
                 </div>
             </div>
             <a href="{{ aid.fundingSourceUrl }}" target="_blank">
-                <button class="rf-btn rf-btn--lg funder-website-link">POURSUIVRE MA DÉMARCHE</button>
+                <button class="fr-btn fr-btn--lg funder-website-link">POURSUIVRE MA DÉMARCHE</button>
             </a>
         </div>
         <div class="goal">
             <div class="heading-underlined">
                 <h3>C'est quoi ?</h3>
             </div>
-            <p class="rf-pt-2w">
+            <p class="fr-pt-2w">
                 {{ aid.goal }}
             </p>
         </div>
-        <div class="details bg-light rf-p-4w rf-mt-4w">
+        <div class="details bg-light fr-p-4w fr-mt-4w">
             <div class="heading-underlined">
                 <h3>Détail du financement</h3>
             </div>
-            <p class="rf-pt-2w">
+            <p class="fr-pt-2w">
                 {{ aid.aidDetails }}
             </p>
         </div>
-        <div class="beneficiary rf-mt-4w">
+        <div class="beneficiary fr-mt-4w">
             <div class="heading-underlined">
                 <h3>Pour quel bénéficiaire ?</h3>
             </div>
-            <p class="rf-pt-2w">
+            <p class="fr-pt-2w">
                 {{ aid.beneficiary }}
             </p>
         </div>
-        <div class="eligibility rf-mt-4w">
+        <div class="eligibility fr-mt-4w">
             <div class="heading-underlined">
                 <h3>Quelle est le cadre d'utilisation de l'aide ?</h3>
             </div>
-            <p class="rf-pt-2w">
+            <p class="fr-pt-2w">
                 {{ aid.eligibility }}
             </p>
         </div>
-        <div class="conditions rf-mt-4w rf-mb-12w">
+        <div class="conditions fr-mt-4w fr-mb-12w">
             <div class="heading-underlined">
                 <h3>Quelles sont les contraintes à respecter ?</h3>
             </div>
-            <p class="rf-pt-2w">
+            <p class="fr-pt-2w">
                 {{ aid.conditions }}
             </p>
         </div>

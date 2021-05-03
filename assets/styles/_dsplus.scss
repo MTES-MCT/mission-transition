@@ -3,31 +3,31 @@ a {
 }
 
 /** Headings **/
-.rf-header__service-title,
-.rf-header__service-tagline {
+.fr-header__service-title,
+.fr-header__service-tagline {
     color: $blue-navy;
 }
 
 /** Buttons **/
-.rf-btn {
+.fr-btn {
     font-size: 14px;
     background-color: $blue-cobalt;
     border-radius: 6px;
 }
 
-.rf-btn.secondary {
+.fr-btn.secondary {
     background: #ffffff;
     box-shadow: 0 10px 20px rgba(2, 76, 187, 0.09);
     border-radius: 6px;
     color: $blue-navy;
 }
 
-.rf-btn.big {
+.fr-btn.big {
     padding: 16px;
 }
 
 /** Tags **/
-.rf-tag {
+.fr-tag {
     background-color: $grey-athens;
     color: $grey-river-bed;
 }
@@ -37,7 +37,7 @@ a[target='_blank' i]::after {
 }
 
 @media only screen and (min-width: 768px) {
-    .rf-btn {
+    .fr-btn {
         font-size: 18px;
     }
 }

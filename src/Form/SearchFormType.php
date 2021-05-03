@@ -18,11 +18,11 @@ class SearchFormType extends AbstractType
                     'Trouver un financement' => 'funding',
                 ],
                 'attr' => [
-                    'class' => 'rf-select',
+                    'class' => 'fr-select',
                 ],
                 'label' => 'Mon besoin',
                 'label_attr' => [
-                    'class' => 'rf-label h3 on-dark rf-mb-3w',
+                    'class' => 'fr-label h3 on-dark fr-mb-3w',
                 ],
             ])
             ->add('region', ChoiceType::class, [
@@ -32,10 +32,10 @@ class SearchFormType extends AbstractType
                 'placeholder' => 'Toute la France',
                 'label' => 'Ma région',
                 'attr' => [
-                    'class' => 'rf-select',
+                    'class' => 'fr-select',
                 ],
                 'label_attr' => [
-                    'class' => 'rf-label h3 on-dark rf-mb-3w',
+                    'class' => 'fr-label h3 on-dark fr-mb-3w',
                 ],
             ])
             ->add('environmentalAction', ChoiceType::class, [
@@ -43,11 +43,11 @@ class SearchFormType extends AbstractType
                 'choice_value' => 'name',
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'rf-select',
+                    'class' => 'fr-select',
                 ],
                 'label' => 'Mon objectif',
                 'label_attr' => [
-                    'class' => 'rf-label h3 on-dark rf-mb-3w',
+                    'class' => 'fr-label h3 on-dark fr-mb-3w',
                 ],
             ])
             ->add('regionalLimit', HiddenType::class, [

@@ -1,39 +1,51 @@
-<header role="banner" class="rf-header">
-    <div class="rf-container">
-        <div class="rf-header__body">
-            <div class="rf-header__brand rf-enlarge-link">
-                <div class="rf-header__logo">
-                    <p class="rf-logo">
-                        République<br>
-                        Française
-                    </p>
+<header role="banner" class="fr-header">
+    <div class="fr-header__body">
+        <div class="fr-container">
+            <div class="fr-header__body-row">
+                <div class="fr-header__brand fr-enlarge-link">
+                    <div class="fr-header__brand-top">
+                        <div class="fr-header__logo">
+                            <p class="fr-logo">
+                                République
+                                <br>Française
+                            </p>
+                        </div>
+                        <div class="fr-header__operator">
+                            <img src="{{ asset('build/img/logo.svg') }}" alt="Logo Mission Transition" style="width:3.5rem; height:auto;">
+                        </div>
+                        <div class="fr-header__navbar">
+                            <button class="fr-btn--search fr-btn" data-fr-opened="false" aria-controls="modal-866" title="Rechercher">
+                                Rechercher
+                            </button>
+                            <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-870" aria-haspopup="menu" title="Menu">
+                                Menu
+                            </button>
+                        </div>
+                    </div>
+                    <div class="fr-header__service">
+                        <a href="/" title="Accueil - Mission Transition">
+                            <p class="fr-header__service-title">Mission Transition</p>
+                        </a>
+                        <p class="fr-header__service-tagline">Ensemble, passons à l'action !</p>
+                    </div>
                 </div>
-                <div class="rf-header__operator">
-                    <img src="{{ asset('build/img/logo.svg') }}" alt="Logo Mission Transition" style="width:3.5rem; height:auto;">
-                </div>
-                <div class="rf-header__service">
-                    <a href="/" title="Retour à l’accueil">
-                        <p class="rf-header__service-title">Mission Transition</p>
-                    </a>
-                    <p class="rf-header__service-tagline">Ensemble, passons à l'action !</p>
-                </div>
-            </div>
-            <div class="rf-header__navbar">
-                <button class="rf-btn--menu rf-btn" data-rf-opened="false" aria-controls="header-navigation" aria-haspopup="menu" title="Ouvrir le menu">
-                    Ouvrir le menu
-                </button>
             </div>
         </div>
-        <nav class="rf-nav rf-modal" id="header-navigation" role="navigation" aria-label="Menu principal">
-            <button class="rf-link--close rf-link" aria-controls="header-navigation">Fermer</button>
-            <ul class="rf-nav__list">
-                <li class="rf-nav__item">
-                    <a class="rf-nav__link" href="{{ path('homepage') }}" target="_self">Accueil</a>
-                </li>
-                <li class="rf-nav__item">
-                    <a class="rf-nav__link" href="{{ path('search_index') }}" target="_self">Lancer votre recherche</a>
-                </li>
-            </ul>
-        </nav>
+    </div>
+    <div class="fr-header__menu fr-modal" id="modal-870" aria-labelledby="button-871">
+        <div class="fr-container">
+            <button class="fr-link--close fr-link" aria-controls="modal-870">Fermer</button>
+            <div class="fr-header__menu-links"></div>
+            <nav class="fr-nav" id="navigation-869" role="navigation" aria-label="Menu principal">
+                <ul class="fr-nav__list">
+                    <li class="fr-nav__item">
+                        <a class="fr-nav__link" href="{{ path('homepage') }}" target="_self">Accueil</a>
+                    </li>
+                    <li class="fr-nav__item">
+                        <a class="fr-nav__link" href="{{ path('search_index') }}" target="_self">Lancer votre recherche</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </header>
