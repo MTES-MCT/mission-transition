@@ -143,7 +143,6 @@ class ImportAids extends Command
                 $aid = new Aid();
             }
 
-
             $fundingSourceUrl = empty($row[self::COL_PRIMARY_URL]) ? $row[self::COL_SECONDARY_URL] : $row[self::COL_PRIMARY_URL];
             $aid
                 ->setName($row[self::COL_AID_NAME])
