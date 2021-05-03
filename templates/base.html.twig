@@ -2,7 +2,7 @@
 {% set current_route_params = app.request.attributes.get('_route_params') %}
 
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }} data-rf-reset">
+<html lang="{{ app.request.locale }} data-fr-reset">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,5 +33,6 @@
             {% include './_common/footer.html.twig' %}
         </div>
         {% block javascripts encore_entry_script_tags('app') %}
+        <script type="text/javascript" nomodule src="{{ asset('build/static/dsfr.nomodule.min.js') }}"></script>
     </body>
 </html>
