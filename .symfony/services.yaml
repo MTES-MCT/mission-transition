@@ -1,4 +1,4 @@
-db:
+database:
     type: postgresql:13
     disk: 3072 # 3 G
 
