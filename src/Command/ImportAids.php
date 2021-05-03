@@ -137,7 +137,13 @@ class ImportAids extends Command
                 $state = Aid::STATE_DRAFT;
             }
 
-            $aid = new Aid();
+            $aid = $this->aidRepository->findOneBy(['name' => $row[self::COL_AID_NAME]]);
+
+            if (null === $aid) {
+                $aid = new Aid();
+            }
+
+            $fundingSourceUrl = empty($row[self::COL_PRIMARY_URL]) ? $row[self::COL_SECONDARY_URL] : $row[self::COL_PRIMARY_URL];
             $aid
                 ->setName($row[self::COL_AID_NAME])
                 ->setAidAdvisor($aidAdvisor)
@@ -147,7 +153,7 @@ class ImportAids extends Command
                 ->setBeneficiary($row[self::COL_BENEFICIARY])
                 ->setConditions($row[self::COL_CONDITIONS])
                 ->setEligibility($row[self::COL_ELIGIBILITY])
-                ->setFundingSourceUrl($row[self::COL_PRIMARY_URL] ?? $row[self::COL_SECONDARY_URL])
+                ->setFundingSourceUrl($fundingSourceUrl)
                 ->setPerimeter($row[self::COL_PERIMETER])
                 ->setState($state)
                 ->setType($row[self::COL_TYPE])
