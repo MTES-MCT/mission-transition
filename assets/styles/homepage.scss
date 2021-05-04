@@ -6,7 +6,7 @@
 
 .homepage {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     grid-row-gap: 2rem;
     padding-top: 2vh;
@@ -23,8 +23,8 @@
     }
 }
 .illustration {
-    max-width: 25vw;
-    justify-self: flex-end;
+    max-width: 33vw;
+    justify-self: center;
 }
 
 .main-cta {
