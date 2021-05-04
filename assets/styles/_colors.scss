@@ -2,7 +2,8 @@ $blue-navy: #000091;
 $blue-cobalt: #024cbb;
 $blue-royal: #5d5fef;
 $blue-gradient-background: linear-gradient(238.24deg, #181b40 42.25%, #252a6b 106.2%);
-$orange-apricot: #f1906d;
+$orange-bold-light: #D14904;
+$orange-bold-dark: #ed7c52;
 $grey-river-bed: #444b59;
 $grey-athens: #f3f5f7;
 $white: #ffffff;
@@ -12,9 +13,17 @@ $white-alabaster: #fbfbfb;
 
 .bg-light {
     background-color: $white-lilac;
+
+    > .highlighted {
+        color: $orange-bold-light;
+    }
 }
 .bg-dark {
     background: $blue-gradient-background;
+
+    > .highlighted {
+        color: $orange-bold-dark;
+    }
 }
 
 .color-navy {
