@@ -43,3 +43,12 @@
     text-align: center;
     padding-bottom: 6rem;
 }
+
+.no-results {
+    text-align: center;
+
+    .text {
+        margin:auto;
+        max-width: 400px;
+    }
+}

@@ -153,6 +153,14 @@
                 {% endif %}
             </div>
         </div>
+    {% else %}
+        <div class="bg-light no-results fr-p-12w">
+            <img src="{{ asset('build/img/no_results.svg') }}" alt="Pas de résultat">
+            <div class="text fr-pt-3w">
+                <p class="fr-pb-3w">Notre base de données des aides n’est pas encore complète.</p>
+                <p><b>Relancez une recherche avec d’autres critères pour trouver des résultats.</b></p>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
 
