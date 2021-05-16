@@ -9,10 +9,6 @@ h4,
 p {
     color: $grey-river-bed;
     font-family: $main-font;
-
-    &.on-dark {
-        color: $white;
-    }
 }
 
 h1 {
@@ -69,6 +65,10 @@ p {
     }
 }
 
+.h1 {
+    @extend h1;
+}
+
 .h3 {
     @extend h3;
 }
@@ -83,6 +83,10 @@ p {
 
 .highlighted {
     color: $orange-bold-light;
+}
+
+.on-dark {
+    color: $white;
 }
 
 @media only screen and (min-width: 768px) {
