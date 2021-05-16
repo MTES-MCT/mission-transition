@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qui sommes-nous{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('who_are_we') }}
+{% endblock %}
+
+{% block body %}
+    <div class="who-are-we fr-container-fluid">
+        <div class="bg-dark intro">
+            <div class="logo-title">
+                <img class="logo" src="{{ asset('build/img/logo.svg') }}" alt="Mission Transition">
+                <div class="title h1 on-dark">Mission Transition</div>
+            </div>
+
+            <div class="fr-grid-row">
+                <div class="fr-col-12 fr-col-sm-8">
+                    <h2 class="on-dark fr-pt-6w">
+                        Faciliter la <span class="highlighted">transition écologique</span> et
+                        <span class="highlighted">énergétique</span> des entreprises.
+                    </h2>
+                </div>
+            </div>
+
+            <div class="project-intro">
+                <div class="fr-p-2w fr-p-md-5w">
+                    <h3 class="on-dark">Le projet</h3>
+                    <p class="big on-dark">
+                        Porté par le Commissariat Général au Développement Durable, sous la tutelle du Ministère de la
+                        Transition Écologique et du Ministère de l’Economie, des Finances et de la Relance,
+                        le projet “Mission Transition” nourrit un objectif fort : accompagner les PME et les ETI dans
+                        leur démarche de transition écologique et énergétique, et les aider à trouver les ressources
+                        pour passer à l’action.
+                    </p>
+                </div>
+                <div class="see-more">
+                    <span>
+                        <a href="#project-link" class="on-dark">En savoir plus</a>
+                        <span class="fr-fi-arrow-down-line on-dark" aria-hidden="true"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="fr-grid-row fr-mx-1w">
+            <div class="left-title fr-col-1"><span class="subtitle">mission</span></div>
+            <div id="project-link" class="fr-col-11 fr-offset-lg-1 fr-py-2w fr-py-md-9w">
+                <div class="fr-grid-row">
+                    <div class="illustration fr-col-12 fr-offset-lg-1 fr-col-lg-6">
+                        <img src="{{ asset('build/img/homepage_how-to.svg') }}" alt="Schéma Mission Transition">
+                    </div>
+                    <div class="fr-p-1w mt-ma fr-col-12 fr-col-lg-5">
+                        <h2 class="fr-mb-4w fr-mb-lg-8w">Répondre à l'urgence écologique et énergetique</h2>
+                        <p>
+                            Comment réduire son impact écologique quand on est une entreprise, mature ou en pleine croissance ?
+                            C’est le problème que partagent de nombreuses entreprises de petite et moyenne taille.<br>
+                            <br>
+                            La grande majorité d’entre elles sont conscientes de l’urgence climatique et écologique, et
+                            souhaitent contribuer à sa résolution.<br>
+                            <br>
+                            Cependant, parce que leur rôle dans cette transition est souvent peu identifié, mais aussi par
+                            manque de ressources et d’accompagnement, le passage à l’acte de transition peut s’avérer complexe
+                            pour ces structures. <br>
+                            D’autant que les aides mises à leur disposition sont présentées de manière éparse, donc difficilement trouvables.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fr-grid-row on-dark bg-blue-royal">
+            <div class="left-title fr-col-1"><span class="subtitle">ambition</span></div>
+            <div class="fr-col-11 fr-offset-lg-1 fr-py-2w fr-py-md-9w">
+                <div class="fr-grid-row">
+                    <div class="fr-px-1w fr-px-md-6w fr-col-12 fr-offset-lg-1 fr-col-lg-6">
+                        <h2 class="fr-mb-4w fr-mb-lg-8w on-dark">L'ambition de Mission Transition</h2>
+                        <p class="on-dark">
+                            Notre ambition est de faire grandir l’impact des futures politiques publiques de soutien à
+                            la transition écologique et énergétique, en fléchant les aides correspondant aux projets de
+                            transition des entreprises.
+                        </p>
+                    </div>
+                    <div class="fr-px-1w mt-ma fr-col-12 fr-col-lg-5 on-dark">
+                        <p class="on-dark">
+                            L’objectif<br>
+                            <br>
+                            Accompagner les entreprises à initier des actions de transition.<br>
+                            Informer sur les différents dispositifs de financement pour la transition écologique et énergétique, ainsi que les modalités de candidature.
+                        </p>
+                        <br>
+                        <br>
+                        <p class="on-dark">
+                            Notre mode d’action<br>
+                            <br>
+                            Faciliter la compréhension des actions que les entreprises peuvent réaliser en termes de transition écologique et énergétique.
+                            Donner accès aux solutions et aides correspondantes aux besoins des entreprises.<br>
+                            <br>
+                            Fournir les informations nécessaires pour comprendre la transition écologique et énergétique, notamment à travers des fiches thématiques
+                            Aider les entreprises à identifier les actions à mettre en place au sein de votre structure.<br>
+                            Aiguiller les dirigeants de PME-ETI *vers les bons interlocuteurs pour être accompagnés et financés lors de votre transition.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fr-grid-row">
+            <div class="left-title fr-col-1"><span class="subtitle">démarche</span></div>
+            <div class="fr-col-11 fr-offset-lg-1 fr-py-2w fr-py-md-9w">
+                <div class="fr-grid-row">
+                    <div class="fr-px-1w fr-px-md-6w fr-col-12 fr-offset-lg-1 fr-col-lg-6">
+                        <img class="fr-pb-2w" src="{{ asset('build/img/triangle_sphere.svg') }}">
+                        <h2 class="fr-mb-4w fr-mb-lg-8w">Une démarche collaborative</h2>
+                        <p>
+                            Mission Transition, c’est une plateforme de ressources et de conseils pour vous faciliter
+                            l’obtention d’aides relatives à votre transformation écologique.<br>
+                            <br>
+                            Nous travaillons main dans la main avec les régions, les financeurs et les conseillers des
+                            Chambres de Commerce et de l’Industrie pour mettre à disposition des entreprises une
+                            plateforme d’accompagnement autour des sujets de transition écologique et énergétique.<br>
+                            <br>
+                            Ces derniers collaborent avec nos partenaires dédiés à l’accompagnement et au financement
+                            des entreprises, tels que l’ADEME, la BPI, les CCI, ou encore Place des Entreprises.<br>
+                            <br>
+                        </p>
+                    </div>
+                    <div class="fr-px-1w mt-ma fr-col-12 fr-col-lg-5">
+                        <h3 class="fr-py-md-2w">
+                            Leur <span class="highlighted">mission</span> : vous aider à trouver le dispositif qui
+                            convient à votre projet.
+                        </h3>
+                        <p>
+                            A long terme, Mission Transition vise à approfondir son action afin de prendre en compte vos
+                            besoins spécifiques et de vous proposer des aides toujours plus adaptées.
+                            <br>
+                            <br>
+                            Aidez-nous à améliorer votre site : rejoignez nos bêta-testeurs !
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('who_are_we') }}
+{% endblock %}
