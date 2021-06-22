@@ -1,16 +1,22 @@
 @import '_colors';
+@import '_typo';
+@import 'components/cards';
 
 .homepage-background {
     background: $white-lilac;
 }
 
-.homepage {
+.homepage-intro {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: auto min-content;
     grid-row-gap: 2rem;
     padding-top: 2vh;
     align-items: center;
+}
+
+.homepage-content {
+    display: grid;
+    justify-content: center;
 }
 
 .main-title {
@@ -49,4 +55,13 @@
 
 .cta-cards {
     margin: auto;
+}
+
+#tag-filter-content {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(275px, 1fr));
+
+    > div {
+        margin-bottom: 32px;
+    }
 }

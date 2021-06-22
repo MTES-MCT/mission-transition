@@ -1,4 +1,5 @@
 @import '../colors';
+@import '../components/icons';
 
 .card-aid-list {
     max-width: 1200px;
@@ -46,5 +47,90 @@
 
     .content {
         align-self: flex-start;
+    }
+}
+
+.card-step {
+    display: grid;
+    grid-template-columns: 125px 1fr auto;
+    min-height: 135px;
+    background: linear-gradient(108deg, $orange 125px, #181b40 0%);
+    border-radius: 40px;
+
+    @at-root #{&}__number {
+        color: $white-lilac;
+        font-size: 56px;
+        margin-left: 40px;
+        align-self: center;
+    }
+
+    @at-root #{&}__content {
+        margin: 24px 30px;
+        p,h2,h3 {
+            color: $white-lilac;
+        }
+        h3 {
+            font-weight: 500;
+        }
+    }
+
+    @at-root #{&}__cta {
+        align-self: center;
+        justify-self: center;
+        margin: 40px 60px;
+    }
+}
+
+.card-package {
+    display: grid;
+    grid-template-rows: auto 50px;
+    width: 275px;
+    min-height: 357px;
+    background: $white;
+    border: 2px solid $blue-royal;
+    box-sizing: border-box;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    justify-items: center;
+
+    @at-root #{&}__content {
+        padding: 14px;
+        text-align: center;
+        h3 {
+            padding: 0 0 5px 0;
+            margin-bottom: 0;
+            text-align: center;
+            color: $blue-royal;
+        }
+    }
+
+    @at-root #{&}__content__funder {
+        margin-bottom: 15px;
+        span {
+            padding: 0 5px;
+        }
+    }
+
+    @at-root #{&}__content__tag {
+        margin-bottom: 15px;
+    }
+
+    @at-root #{&}__content__detail {
+        display: grid;
+        margin: 10px 0;
+        grid-template-columns: repeat( auto-fit, minmax(60px, 1fr));
+        justify-content: center;
+
+        p {
+            line-height: 14px;
+            font-size: 12px;
+        }
+    }
+
+    @at-root #{&}__cta {
+        display: block;
+        width: 100%;
+        border-radius: 0;
+        text-align: center;
+        background-color: $blue-royal;
     }
 }

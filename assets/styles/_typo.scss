@@ -20,7 +20,7 @@ h1 {
 }
 
 h2 {
-    font-size: 40px;
+    font-size: 32px;
     line-height: 110%;
     letter-spacing: -0.04em;
     font-style: normal;
@@ -36,7 +36,7 @@ h2 {
 }
 
 h3 {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 110%;
     letter-spacing: -0.04em;
     font-style: normal;
@@ -56,6 +56,7 @@ p {
     line-height: 160%;
 
     &.small {
+        font-size: 12px;
         letter-spacing: -0.02em;
     }
 
@@ -67,6 +68,10 @@ p {
 
 .h1 {
     @extend h1;
+}
+
+.h2 {
+    @extend h2;
 }
 
 .h3 {
@@ -85,19 +90,28 @@ p {
     color: $orange-bold-light;
 }
 
+.slight-highlight {
+    width: auto;
+    background-color: rgba(165, 166, 246, 0.4);
+    color: #444B59;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 700;
+}
+
 .on-dark {
     color: $white;
 }
 
 @media only screen and (min-width: 768px) {
     h1 {
-        font-size: 80px;
-        letter-spacing: -0.05em;
+        font-size: 64px;
+        letter-spacing: -0.04em;
     }
 
     h2 {
         font-size: 56px;
-        letter-spacing: -0.06em;
+        letter-spacing: -0.04em;
 
         &.small {
             font-weight: 300;
@@ -111,6 +125,7 @@ p {
     }
 
     h4 {
-        line-height: 25px;
+        font-size: 18px;
+        line-height: 22px;
     }
 }

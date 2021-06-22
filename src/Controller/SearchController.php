@@ -69,7 +69,8 @@ class SearchController extends AbstractController
         AidRepository $aidRepository,
         RegionRepository $regionRepository
     ): Response {
-        $environmentalActions = $actionRepository->findAll();
+        $environmentalActions = $actionRepository->findAllWithCategory();
+        $environmentalActions = $this->orderActionsByOptGroup($environmentalActions);
         $regions = $regionRepository->findAll();
         $searchFormModel = new SearchFormModel();
 
@@ -96,6 +97,7 @@ class SearchController extends AbstractController
                 Aid::PERIMETER_REGIONAL,
                 $regionalLimit
             );
+
 
             $nationalAids = $aidRepository->searchByCriteria(
                 $aidType,

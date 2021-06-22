@@ -45,16 +45,17 @@ class SearchFormType extends AbstractType
                 'attr' => [
                     'class' => 'fr-select',
                 ],
+                'placeholder' => 'Choisir un objectif',
                 'label' => 'Mon objectif',
                 'label_attr' => [
                     'class' => 'fr-label h3 on-dark fr-mb-3w',
                 ],
             ])
             ->add('regionalLimit', HiddenType::class, [
-                'empty_data' => 3,
+                'empty_data' => 6,
             ])
             ->add('nationalLimit', HiddenType::class, [
-                'empty_data' => 3,
+                'empty_data' => 6,
             ])
         ;
     }

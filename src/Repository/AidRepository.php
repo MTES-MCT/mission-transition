@@ -26,7 +26,7 @@ class AidRepository extends ServiceEntityRepository
         EnvironmentalAction $environmentalAction,
         Region $region = null,
         string $perimeter = Aid::PERIMETER_NATIONAL,
-        int $maxResults = 3
+        int $maxResults = 6
     ) {
         $qb = $this->createQueryBuilder('aid');
 

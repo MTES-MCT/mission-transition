@@ -15,8 +15,8 @@ class SearchFormModel
     protected string $aidType = self::TYPE_FUNDING;
     protected ?Region $region = null;
     protected EnvironmentalAction $environmentalAction;
-    protected int $regionalLimit = 3;
-    protected int $nationalLimit = 3;
+    protected int $regionalLimit = 6;
+    protected int $nationalLimit = 6;
 
     public static function getAidTypeFilters(string $aidType): array
     {

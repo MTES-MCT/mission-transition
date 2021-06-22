@@ -24,7 +24,7 @@
             </div>
             <div class="fr-grid-row fr-grid-row--center">
                 <div class="fr-offset-6">
-                    <button type="submit" class="fr-btn secondary cta-search">
+                    <button type="submit" class="fr-btn fr-btn--secondary cta-search">
                         AFFICHER LES RÉSULTATS
                     </button>
                 </div>
@@ -86,7 +86,7 @@
                     {% if nbRegionalAids is not same as(regionalAids|length) %}
                         <div class="more-results">
                             <a href="{{ app.request.requesturi ~ '&search_form[regionalLimit]=' ~ nextRegionalLimit ~ '#last-regional-aid' }}">
-                                <button class="fr-btn secondary">
+                                <button class="fr-btn fr-btn--secondary">
                                     AFFICHER PLUS DE FICHES
                                 </button>
                             </a>
@@ -144,7 +144,7 @@
                     {% if nbNationalAids is not same as(nationalAids|length) %}
                         <div class="more-results">
                             <a href="{{ app.request.requesturi ~ '&search_form[nationalLimit]=' ~ nextNationalLimit ~ '#last-national-aid' }}">
-                                <button class="fr-btn secondary">
+                                <button class="fr-btn fr-btn--secondary">
                                     AFFICHER PLUS DE FICHES
                                 </button>
                             </a>

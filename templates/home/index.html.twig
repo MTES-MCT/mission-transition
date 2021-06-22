@@ -9,32 +9,292 @@
 
 {% block body %}
     <div class="homepage-background">
-        <div class="fr-container fr-pb-9w homepage">
-
+        <div class="fr-container fr-pb-9w homepage-intro">
             <div class="main-title">
                 <div class="fr-row fr-mb-4w">
-                    <div class="col-12"><h1 class="title"><span class="highlighted">Mission :</span> transition écologique</h1></div>
+                    <div class="col-12"><h2 class="title"><span class="highlighted">Notre mission</span> <br>aider les PME/ETI dans leur transition écologique</h2></div>
                 </div>
                 <div class="fr-row">
                     <div class="col-12">
-                        <p class="introduction">
-                            L’objectif de neutralité carbone ne se fera pas sans un élan commun à toutes les entreprises.<br>
-                            <br>
-                            Et les gains ne manquent pas pour les entreprises : réduction des coûts, hausse de la compétitivité et de l’attractivité, anticipations de futures réglementations.
+                        <p class="big">
+                            Un service proposé par le Ministère de la Transition écologique<br>
+                            et le Ministère de l’Economie et des Finances.
                         </p>
+                        <a href="{{ path('information_who_are_we') }}" class="fr-btn fr-btn--secondary fr-mt-3w">
+                            En savoir plus
+                        </a>
                     </div>
                 </div>
             </div>
-
             <img class="illustration" src="{{ asset('build/img/homepage_how-to.svg') }}" alt="Illustration Mission Transition">
+        </div>
+        <div class="fr-container fr-pb-8w">
+            <div class="homepage-content">
+                <h2 class="small">3 modes de recherche à votre disposition</h2>
+            </div>
 
-            <div class="main-cta fr-py-5w">
-                <div class="content">
-                    <h2 class="small">
-                        Découvrez les dispositifs de financement ou les ressources de <span class="highlighted">“Premiers pas”</span>
+            <div class="card-step fr-mt-8w fr-mb-4w">
+                <div class="card-step__number">1</div>
+                <div class="card-step__content">
+                    <h2 class="small">Vous débutez ?
+                        <span class="h3">Notre sélection pour trouver facilement des financements et outils pour vos projets :</span>
                     </h2>
-                    <a href="{{ path('search_index') }}">
-                        <button class="fr-btn fr-btn--lg fr-m-3w">Je commence ma recherche</button>
+{#                    <div data-controller="tag-filter"></div>#}
+                </div>
+            </div>
+            <p class="first-step-description mt-text-align-center fr-mb-4w">Ci-dessous, tous les dispositifs de démarrage de votre transition écologique. </p>
+            <div id="tag-filter-content">
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Le Climatomètre</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de BPI France</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">outil de diagnostic</span></div>
+                        <p class="small">Un outil d’autodiagnostic en ligne pour mesurer l’impact de votre activité sur l’environnement.</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Éligiblité</span></div>
+                                <p class="small">Créer un compte<br> Bpifrance</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://evenements.bpifrance.fr/jour-e/content/climatometre" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Prêt économies d’énergie</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de l’ADEME</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">Prêt</span></div>
+                        <p class="small">Ce prêt finance les équipements éligibles aux Certificats d’Énergie (CEE).</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Montant</span></div>
+                                <p class="small">500 000 €</p>
+                            </div>
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Éligiblité</span></div>
+                                <p class="small">PME de plus de 3<br> ans d’expérience</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://les-aides.fr/aide/bZVlAH9GxfTeBGZeTUzZ4_Vm5mg71XvQIlrW/bpifrance/pret-eco-energie-pee.html" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Tremplin pour la transition écologique des PME</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de l’ADEME</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">subvention</span></div>
+                        <p class="small">Aides guichet pour financer vos projets de transition écologique.</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Montant</span></div>
+                                <p class="small">50k€ maximum</p>
+                            </div>
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Éligiblité</span></div>
+                                <p class="small">TPE/PME installées<br>
+                                    en France (sauf <br>auto-entrepreneurs)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://agirpourlatransition.ademe.fr/entreprises/dispositif-aide/tremplin-transition-ecologique-pme" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Diag Eco-Flux</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de BPI France</span></div>
+                        <div class="card-package__content__tag">
+                            <span class="mt-tag subtitle mt-ma">outil de diagnostic</span>
+                        </div>
+                        <p class="small">Accompagnement de 18 mois avec un expert pour analyser vos pratiques, définir un plan d’action, le mettre en place puis l’évaluer.</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Montant</span></div>
+                                <p class="small">Coût 2 à 3k€</p>
+                            </div>
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Éligiblité</span></div>
+                                <p class="small">Effectif par site de<br>
+                                    20 à 250 salariés</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://diagecoflux.bpifrance.fr/" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Prêt Vert</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de ADEME/BPI France</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">prêt</span></div>
+                        <p class="small">Ce prêt pour aide à financer la mise en œuvre un projet de transition écologique et énergétique sur plusieurs thématiques</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Montant</span></div>
+                                <p class="small">entre 10k à 1M€</p>
+                            </div>
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Éligiblité</span></div>
+                                <p class="small">Bénéficiaire Diag Ecoflux<br> ou aide Ademe<br>
+                                    (sous 3 ans)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://www.bpifrance.fr/Toutes-nos-solutions/Prets/Prets-thematiques/Pret-Vert-ADEME" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Actions en faveur de la transition écologique</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif ADEME</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">subvention</span></div>
+                        <p class="small">Aide au recrutement / renouvellement d’un poste de chargé de mission ou à la mise en place d’actions de communication et formation sur la transition écologique.</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Montant</span></div>
+                                <p class="small">Soumis à conditions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://agirpourlatransition.ademe.fr/entreprises/dispositif-aide/actions-faveur-transition-ecologique" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Prêt économies d’énergie</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif ADEME</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">prêt</span></div>
+                        <p class="small">Ce prêt finance les équipements éligibles aux Certificats d’Énergie (CEE).</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Montant</span></div>
+                                <p class="small">500 000  € maximum</p>
+                            </div>
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Éligiblité</span></div>
+                                <p class="small">PME (+ de 3ans<br> d’existence)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://les-aides.fr/aide/bZVlAH9GxfTeBGZeTUzZ4_Vm5mg71XvQIlrW/bpifrance/pret-eco-energie-pee.html" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Crédit d’impôt rénovation énergétique des locaux</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif du Ministère de la Transition écologique</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">credit d'impôt</span></div>
+                        <p class="small">Travaux d’amélioration d’efficacité énergétique des bâtiments. Cette aide fait partie du Plan de Relance.</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Éligiblité</span></div>
+                                <p class="small">TPE/PME soumises à l’impôt sur le<br> revenu ou sur les sociétés.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://www.aides-entreprises.fr/aide/9825?id_ter=1" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+                <div class="card-package">
+                    <div class="card-package__content">
+                        <h3>Aide à la réalisation de projets environnementaux</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif ADEME</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">subvention</span></div>
+                        <p class="small">Aide pour financer des études de diagnostic et Étude   d’accompagnement de projet de transition</p>
+                        <div class="card-package__content__detail">
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Montant</span></div>
+                                <p class="small">150 000 €<br> maximum</p>
+                            </div>
+                            <div>
+                                <span class="mt-icon-circled mt-icon-circled--inline">
+                                    <span class="mt-icon mt-icon--building"></span>
+                                </span>
+                                <div><span class="slight-highlight">Éligiblité</span></div>
+                                <p class="small">Moins de 250<br> salariés</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-package__cta fr-btn big" href="https://www.aides-entreprises.fr/aide/7473?id_ter=1" target="_blank">
+                        VOIR LE DISPOSITIF
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-step fr-my-8w">
+                <div class="card-step__number">2</div>
+                <div class="card-step__content">
+                    <h2 class="small">Vous avez un projet ?</h2>
+                    <h3>Consulter tous les dispositifs de financement associés à votre projet.</h3>
+                </div>
+                <div class="card-step__cta">
+                    <a href="{{ path('search_results') }}" class="fr-btn big fr-btn--secondary">
+                        Lancer ma recherche
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-step fr-mt-8w">
+                <div class="card-step__number">3</div>
+                <div class="card-step__content">
+                    <h2 class="small">Vous avez une question ?</h2>
+                    <h3>Grâce à notre module Place des Entreprises, posez votre question à un conseiller pour être rappelé sous 5 jours.</h3>
+                </div>
+                <div class="card-step__cta">
+                    <a href="#" class="fr-btn big fr-btn--secondary">
+                        Poser une question
                     </a>
                 </div>
             </div>
