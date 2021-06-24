@@ -15,4 +15,12 @@ class InformationController extends AbstractController
     {
         return $this->render('information/who_are_we.html.twig');
     }
+
+    /**
+     * @Route("/poser-une-question", name="information_contact_advisor")
+     */
+    public function contactAdvisor(): Response
+    {
+        return $this->render('information/contact_advisor.html.twig');
+    }
 }

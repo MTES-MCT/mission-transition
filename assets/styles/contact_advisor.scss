@@ -1,0 +1,37 @@
+@import 'colors';
+@import 'typo';
+
+.contact-advisor {
+    @at-root #{&}__header {
+        h1, h2 {
+          color: $blue-navy;
+        }
+        h2 span {
+          color: $orange-bold-dark;
+        }
+    }
+    @at-root #{&}__iframe {
+      width : 80%;
+      margin: auto;
+
+      > iframe {
+        min-height: 80vh;
+        width: 100%;
+        border: none;
+      }
+    }
+
+    @at-root #{&}__footer {
+        display: flex;
+        align-items:center;
+        justify-content: center;
+
+        h4 {
+            display: contents;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+}

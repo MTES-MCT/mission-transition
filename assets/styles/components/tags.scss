@@ -26,6 +26,11 @@
     padding: 8px 16px;
     border: 1px solid #d5dbef;
     border-radius: 6px;
+
+    @at-root #{&}--warning {
+        border: 1px solid $orange-bold-dark;
+        color: $orange-bold-dark;
+    }
 }
 
 .mt-filter {

@@ -27,6 +27,7 @@ Encore
     .addEntry('aid', './assets/aid.js')
     .addEntry('your_project', './assets/your_project.js')
     .addEntry('who_are_we', './assets/who_are_we.js')
+    .addEntry('contact_advisor', './assets/contact_advisor.js')
 
     //Copying assets
     .copyFiles({

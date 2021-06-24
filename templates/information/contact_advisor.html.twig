@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacter un conseiller{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('contact_advisor') }}
+{% endblock %}
+
+{% block body %}
+    <div class="contact-advisor fr-container-fluid bg-light">
+        <div class="contact-advisor__header mt-text-align-center fr-pt-12w">
+            <h1>Une question ?</h1>
+            <h2 class="small fr-pt-4w">Service public simple et rapide :<br>
+                vous êtes rappelé par <span>LE</span> conseiller qui peut vous aider.<br> Choisissez votre problématique.
+            </h2>
+            <div class="fr-pt-5w">
+                <span class="mt-tag mt-tag--warning subtitle">ACTUELLEMENT disponible en Ile de France et Hauts de France.</span>
+            </div>
+        </div>
+        <div class="contact-advisor__iframe fr-pt-8w mt-text-align-center">
+            <iframe id="pde"
+                    title="Place des Entreprises"
+                    src="https://place-des-entreprises.beta.gouv.fr/e/aide-entreprises/france-transition-ecologique">
+            </iframe>
+        </div>
+        <div class="contact-advisor__footer fr-py-5w">
+                <img src="{{ asset('build/img/logo_pde_no_text.svg') }}" alt="Place des Entreprises">
+                <h4>Ce service est proposé par Place des Entreprises</h4>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('contact_advisor') }}
+{% endblock %}

@@ -45,6 +45,9 @@
                         <a class="fr-nav__link {% if current_route is same as 'search_results'%} active {% endif %}" href="{{ path('search_results') }}" target="_self">Lancer votre recherche</a>
                     </li>
                     <li class="fr-nav__item">
+                        <a class="fr-nav__link {% if current_route is same as 'information_contact_advisor'%} active {% endif %}" href="{{ path('information_contact_advisor') }}" target="_self">Poser une question</a>
+                    </li>
+                    <li class="fr-nav__item">
                         <a class="fr-nav__link {% if current_route is same as 'information_who_are_we'%} active {% endif %}" href="{{ path('information_who_are_we') }}" target="_self">Qui sommes-nous ?</a>
                     </li>
                 </ul>
