@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@gouvfr/dsfr": "^1.0.0-rc1.0",
-        "downshift": "^6.1.0"
+        "downshift": "^6.1.0",
+        "isotope-layout": "^3.0.6"
     }
 }

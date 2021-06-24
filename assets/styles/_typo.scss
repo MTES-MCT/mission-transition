@@ -99,6 +99,11 @@ p {
     font-weight: 700;
 }
 
+.slight-highlight--multiple {
+    display: inline-block;
+    line-height: 13px;
+}
+
 .on-dark {
     color: $white;
 }

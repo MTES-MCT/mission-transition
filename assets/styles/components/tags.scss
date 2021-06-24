@@ -27,3 +27,14 @@
     border: 1px solid #d5dbef;
     border-radius: 6px;
 }
+
+.mt-filter {
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: transparent;
+    box-sizing: border-box;
+    border-radius: 20px;
+    color: $white;
+    font-size: 18px;
+    line-height: 21px;
+}

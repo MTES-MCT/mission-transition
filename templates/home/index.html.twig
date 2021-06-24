@@ -39,7 +39,14 @@
                     <h2 class="small">Vous débutez ?
                         <span class="h3">Notre sélection pour trouver facilement des financements et outils pour vos projets :</span>
                     </h2>
-{#                    <div data-controller="tag-filter"></div>#}
+                    <div>
+                        <button data-filter="*" class="mt-filter subtitle sort-package">Tout voir</button>
+                        <button data-filter=".bc" class="mt-filter subtitle sort-package">Bilan carbone</button>
+                        <button data-filter=".eco-conception" class="mt-filter subtitle sort-package">Eco-conception</button>
+                        <button data-filter=".mobilite" class="mt-filter subtitle sort-package">mobilité</button>
+                        <button data-filter=".economie-energie" class="mt-filter subtitle sort-package">Economie d'énergie</button>
+                        <button data-filter=".dechets" class="mt-filter subtitle sort-package">Gestion de déchets</button>
+                    </div>
                 </div>
             </div>
             <p class="first-step-description mt-text-align-center fr-mb-4w">Ci-dessous, tous les dispositifs de démarrage de votre transition écologique. </p>
@@ -64,7 +71,7 @@
                         VOIR LE DISPOSITIF
                     </a>
                 </div>
-                <div class="card-package">
+                <div class="economie-energie card-package">
                     <div class="card-package__content">
                         <h3>Prêt économies d’énergie</h3>
                         <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de l’ADEME</span></div>
@@ -91,7 +98,7 @@
                         VOIR LE DISPOSITIF
                     </a>
                 </div>
-                <div class="card-package">
+                <div class="bc eco-conception mobilite dechets economie-energie card-package">
                     <div class="card-package__content">
                         <h3>Tremplin pour la transition écologique des PME</h3>
                         <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de l’ADEME</span></div>
@@ -119,7 +126,7 @@
                         VOIR LE DISPOSITIF
                     </a>
                 </div>
-                <div class="card-package">
+                <div class="eco-conception mobilite dechets economie-energie card-package">
                     <div class="card-package__content">
                         <h3>Diag Eco-Flux</h3>
                         <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de BPI France</span></div>
@@ -149,7 +156,7 @@
                         VOIR LE DISPOSITIF
                     </a>
                 </div>
-                <div class="card-package">
+                <div class="mobilite dechets economie-energie card-package">
                     <div class="card-package__content">
                         <h3>Prêt Vert</h3>
                         <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif de ADEME/BPI France</span></div>
@@ -177,7 +184,7 @@
                         VOIR LE DISPOSITIF
                     </a>
                 </div>
-                <div class="card-package">
+                <div class="eco-conception mobilite dechets economie-energie card-package">
                     <div class="card-package__content">
                         <h3>Actions en faveur de la transition écologique</h3>
                         <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif ADEME</span></div>
@@ -197,26 +204,26 @@
                         VOIR LE DISPOSITIF
                     </a>
                 </div>
-                <div class="card-package">
+                <div class="mobilite dechets economie-energie card-package">
                     <div class="card-package__content">
-                        <h3>Prêt économies d’énergie</h3>
-                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif ADEME</span></div>
-                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">prêt</span></div>
-                        <p class="small">Ce prêt finance les équipements éligibles aux Certificats d’Énergie (CEE).</p>
+                        <h3>VTE vert</h3>
+                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif BPI France</span></div>
+                        <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">prime</span></div>
+                        <p class="small">Prime pour financer le recrutement d’un jeune qui effectuera une mission en lien avec la transition énergétique et écologique de l’entreprise.</p>
                         <div class="card-package__content__detail">
                             <div>
                                 <span class="mt-icon-circled mt-icon-circled--inline">
                                     <span class="mt-icon mt-icon--building"></span>
                                 </span>
                                 <div><span class="slight-highlight">Montant</span></div>
-                                <p class="small">500 000  € maximum</p>
+                                <p class="small">5000 €</p>
                             </div>
                             <div>
                                 <span class="mt-icon-circled mt-icon-circled--inline">
                                     <span class="mt-icon mt-icon--building"></span>
                                 </span>
                                 <div><span class="slight-highlight">Éligiblité</span></div>
-                                <p class="small">PME (+ de 3ans<br> d’existence)</p>
+                                <p class="small">Recrutement soumis<br> à conditions</p>
                             </div>
                         </div>
                     </div>
@@ -224,10 +231,12 @@
                         VOIR LE DISPOSITIF
                     </a>
                 </div>
-                <div class="card-package">
+                <div class="economie-energie card-package">
                     <div class="card-package__content">
                         <h3>Crédit d’impôt rénovation énergétique des locaux</h3>
-                        <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif du Ministère de la Transition écologique</span></div>
+                        <div class="card-package__content__funder">
+                            <span class="slight-highlight slight-highlight--multiple">Un dispositif du Ministère de la<br> Transition écologique</span>
+                        </div>
                         <div class="card-package__content__tag"><span class="mt-tag subtitle mt-ma">credit d'impôt</span></div>
                         <p class="small">Travaux d’amélioration d’efficacité énergétique des bâtiments. Cette aide fait partie du Plan de Relance.</p>
                         <div class="card-package__content__detail">
@@ -244,7 +253,7 @@
                         VOIR LE DISPOSITIF
                     </a>
                 </div>
-                <div class="card-package">
+                <div class="eco-conception mobilite dechets economie-energie card-package">
                     <div class="card-package__content">
                         <h3>Aide à la réalisation de projets environnementaux</h3>
                         <div class="card-package__content__funder"><span class="slight-highlight">Un dispositif ADEME</span></div>
