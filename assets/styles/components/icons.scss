@@ -4,17 +4,29 @@
     height: 14px;
     width: 14px;
     display: block;
+    background-color: $grey-river-bed;
 
     @at-root #{&}--building {
-        background: url('/build/icons/building.svg');
+        -webkit-mask-image: url('/build/icons/building.svg');
+        mask-image: url('/build/icons/building.svg');
     }
 
     @at-root #{&}--tag {
-        background: url('/build/icons/tag.svg');
+        -webkit-mask-image: url('/build/icons/tag.svg');
+        mask-image: url('/build/icons/tag.svg');
     }
 
     @at-root #{&}--euro {
-        background: url('/build/icons/euro.svg');
+        -webkit-mask-image: url('/build/icons/euro.svg');
+        mask-image: url('/build/icons/euro.svg');
+    }
+
+    @at-root #{&}--finger-up {
+        -webkit-mask-image: url('/build/icons/finger_up.svg');
+        mask-image: url('/build/icons/finger_up.svg');
+    }
+    @at-root #{&}--color-white {
+        background-color: $white;
     }
 }
 
