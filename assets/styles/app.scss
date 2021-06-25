@@ -38,6 +38,16 @@ div.wrapper {
     text-align: center;
 }
 
+.beta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    background-color: $orange;
+    color: $blue-navy;
+}
+
 @media only screen and (min-width: 768px) {
     .on-mobile-only {
         display: none !important;

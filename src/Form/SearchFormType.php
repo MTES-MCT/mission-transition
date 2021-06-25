@@ -24,6 +24,7 @@ class SearchFormType extends AbstractType
                 'label_attr' => [
                     'class' => 'fr-label h3 on-dark fr-mb-3w',
                 ],
+                'required' => true,
             ])
             ->add('region', ChoiceType::class, [
                 'choices' => $options['regions'],

@@ -43,3 +43,8 @@
     font-size: 18px;
     line-height: 21px;
 }
+
+.mt-filter:hover, .mt-filter.active {
+    background-color: $grey-athens;
+    color: $blue-navy;
+}

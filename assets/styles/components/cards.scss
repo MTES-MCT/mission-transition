@@ -127,10 +127,14 @@
     }
 
     @at-root #{&}__cta {
-        display: block;
+        padding: 0;
         width: 100%;
         border-radius: 0;
         text-align: center;
         background-color: $blue-royal;
+        align-content: center;
+        height: 100%;
+        display: flex;
+        justify-content: center;
     }
 }
