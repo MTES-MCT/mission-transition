@@ -146,6 +146,36 @@ class Aid
      */
     private Collection $regions;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private ?string $contactGuidelines;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $sourceUpdatedAt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $subventionRateUpperBound;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $subventionRateLowerBound;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $loanAmount;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $applicationStartDate;
+
     public function __construct()
     {
         $this->ulid = new Ulid();
@@ -467,6 +497,78 @@ class Aid
     public function removeRegion(Region $region): self
     {
         $this->regions->removeElement($region);
+
+        return $this;
+    }
+
+    public function getContactGuidelines(): ?string
+    {
+        return $this->contactGuidelines;
+    }
+
+    public function setContactGuidelines(?string $contactGuidelines): self
+    {
+        $this->contactGuidelines = $contactGuidelines;
+
+        return $this;
+    }
+
+    public function getSourceUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->sourceUpdatedAt;
+    }
+
+    public function setSourceUpdatedAt(?\DateTime $sourceUpdatedAt): self
+    {
+        $this->sourceUpdatedAt = $sourceUpdatedAt;
+
+        return $this;
+    }
+
+    public function getSubventionRateUpperBound(): ?int
+    {
+        return $this->subventionRateUpperBound;
+    }
+
+    public function setSubventionRateUpperBound(?int $subventionRateUpperBound): self
+    {
+        $this->subventionRateUpperBound = $subventionRateUpperBound;
+
+        return $this;
+    }
+
+    public function getSubventionRateLowerBound(): ?int
+    {
+        return $this->subventionRateLowerBound;
+    }
+
+    public function setSubventionRateLowerBound(?int $subventionRateLowerBound): self
+    {
+        $this->subventionRateLowerBound = $subventionRateLowerBound;
+
+        return $this;
+    }
+
+    public function getLoanAmount(): ?int
+    {
+        return $this->loanAmount;
+    }
+
+    public function setLoanAmount(?int $loanAmount): self
+    {
+        $this->loanAmount = $loanAmount;
+
+        return $this;
+    }
+
+    public function getApplicationStartDate(): ?\DateTimeInterface
+    {
+        return $this->applicationStartDate;
+    }
+
+    public function setApplicationStartDate(?\DateTimeInterface $applicationStartDate): self
+    {
+        $this->applicationStartDate = $applicationStartDate;
 
         return $this;
     }

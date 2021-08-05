@@ -18,4 +18,13 @@ class RegionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Region::class);
     }
+
+    public function findByName(string $regionName)
+    {
+        return $this->createQueryBuilder('region')
+            ->where('region.name = :regionName')->setParameter('regionName', $regionName)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

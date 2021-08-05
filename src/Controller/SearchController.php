@@ -10,6 +10,7 @@ use App\Form\SearchSecondStepFormType;
 use App\Model\SearchFormModel;
 use App\Repository\AidRepository;
 use App\Repository\EnvironmentalActionRepository;
+use App\Repository\EnvironmentalTopicRepository;
 use App\Repository\RegionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,15 +68,17 @@ class SearchController extends AbstractController
         Request $request,
         EnvironmentalActionRepository $actionRepository,
         AidRepository $aidRepository,
-        RegionRepository $regionRepository
+        RegionRepository $regionRepository,
+        EnvironmentalTopicRepository $environmentalTopicRepository
     ): Response {
         $environmentalActions = $actionRepository->findAllWithCategory();
         $environmentalActions = $this->orderActionsByOptGroup($environmentalActions);
-        $regions = $regionRepository->findAll();
+        $environmentalTopics = $environmentalTopicRepository->findBy([], ['name' => 'ASC']);
+        $regions = $regionRepository->findBy([], ['name' => 'ASC']);
         $searchFormModel = new SearchFormModel();
 
         $form = $this->createForm(SearchFormType::class, $searchFormModel, [
-            'environmentalActions' => $environmentalActions,
+            'environmentalTopics' => $environmentalTopics,
             'regions' => $regions,
             'method' => 'GET',
         ]);
@@ -84,7 +87,7 @@ class SearchController extends AbstractController
         $regionalLimit = 0;
         $nationalLimit = 0;
         if ($form->isSubmitted() && $form->isValid()) {
-            $environmentalAction = $searchFormModel->getEnvironmentalAction();
+            $environmentalTopic = $searchFormModel->getEnvironmentalTopic();
             $aidType = SearchFormModel::getAidTypeFilters($searchFormModel->getAidType());
             $region = $searchFormModel->getRegion();
             $nationalLimit = $searchFormModel->getNationalLimit();
@@ -92,22 +95,21 @@ class SearchController extends AbstractController
 
             $regionalAids = $aidRepository->searchByCriteria(
                 $aidType,
-                $environmentalAction,
+                $environmentalTopic,
                 $region,
                 Aid::PERIMETER_REGIONAL,
                 $regionalLimit
             );
 
-
             $nationalAids = $aidRepository->searchByCriteria(
                 $aidType,
-                $environmentalAction,
+                $environmentalTopic,
                 $region,
                 Aid::PERIMETER_NATIONAL,
                 $nationalLimit
             );
 
-            $counts = $aidRepository->countAids($aidType, $environmentalAction, $region);
+            $counts = $aidRepository->countAids($aidType, $environmentalTopic, $region);
         }
 
         return $this->render('search/results.html.twig', [
@@ -119,7 +121,7 @@ class SearchController extends AbstractController
             'nbRegionalAids' => $counts['regional'] ?? 0,
             'region' => $region ?? null,
             'isFundingType' => $searchFormModel->isFundingType(),
-            'environmentalAction' => $environmentalAction ?? null,
+            'environmentalTopic' => $environmentalTopic ?? null,
             'nextRegionalLimit' => $regionalLimit + SearchFormModel::LIMIT_INCREASED_BY,
             'nextNationalLimit' => $nationalLimit + SearchFormModel::LIMIT_INCREASED_BY,
         ]);

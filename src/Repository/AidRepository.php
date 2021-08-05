@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Aid;
 use App\Entity\EnvironmentalAction;
+use App\Entity\EnvironmentalTopic;
 use App\Entity\Region;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,20 +24,17 @@ class AidRepository extends ServiceEntityRepository
 
     public function searchByCriteria(
         array $aidTypes,
-        EnvironmentalAction $environmentalAction,
+        EnvironmentalTopic $environmentalTopic,
         Region $region = null,
         string $perimeter = Aid::PERIMETER_NATIONAL,
         int $maxResults = 6
     ) {
         $qb = $this->createQueryBuilder('aid');
 
+
         $qb
-            ->select('aid', 'environmentalActions', 'funder')
+            ->select('aid', 'environmentalTopics', 'funder')
             ->join('aid.funder', 'funder')
-            ->andWhere("aid.state = 'published'")
-            ->andWhere('aid.perimeter = :perimeter')
-            ->setParameter('perimeter', $perimeter)
-            ->andWhere($qb->expr()->in('aid.type', $aidTypes))
             ->setMaxResults($maxResults)
         ;
 
@@ -47,16 +45,16 @@ class AidRepository extends ServiceEntityRepository
         }
 
         $qb
-            ->join('aid.environmentalActions', 'environmentalActions')
-            ->andWhere('environmentalActions = :environmentalAction')->setParameter('environmentalAction', $environmentalAction);
+            ->join('aid.environmentalTopics', 'environmentalTopics')
+            ->andWhere('environmentalTopics = :environmentalTopic')->setParameter('environmentalTopic', $environmentalTopic);
 
         return $qb->getQuery()->getResult();
     }
 
     public function countAids(
-        array $aidTypes,
-        EnvironmentalAction $environmentalAction,
-        Region $region = null
+        array              $aidTypes,
+        EnvironmentalTopic $environmentalTopic,
+        Region             $region = null
     ) {
         $qb = $this->createQueryBuilder('aid');
 
@@ -66,7 +64,6 @@ class AidRepository extends ServiceEntityRepository
                 'SUM(CASE WHEN aid.perimeter = \'REGIONAL\' THEN 1 ELSE 0 END) AS regional',
                 'SUM(CASE WHEN aid.perimeter = \'NATIONAL\' THEN 1 ELSE 0 END) AS national'
             )
-            ->andWhere($qb->expr()->in('aid.type', $aidTypes))
             ->andWhere("aid.state = 'published'")
         ;
 
@@ -77,8 +74,8 @@ class AidRepository extends ServiceEntityRepository
         }
 
         $qb
-            ->join('aid.environmentalActions', 'environmentalActions')
-            ->andWhere('environmentalActions = :environmentalAction')->setParameter('environmentalAction', $environmentalAction);
+            ->join('aid.environmentalTopics', 'environmentalTopics')
+            ->andWhere('environmentalTopics = :environmentalTopic')->setParameter('environmentalTopic', $environmentalTopic);
 
         //TODO avoid selecting array index manually
         return $qb->getQuery()->getScalarResult()[0];

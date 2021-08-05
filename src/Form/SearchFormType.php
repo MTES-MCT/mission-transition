@@ -39,15 +39,15 @@ class SearchFormType extends AbstractType
                     'class' => 'fr-label h3 on-dark fr-mb-3w',
                 ],
             ])
-            ->add('environmentalAction', ChoiceType::class, [
-                'choices' => $options['environmentalActions'],
+            ->add('environmentalTopic', ChoiceType::class, [
+                'choices' => $options['environmentalTopics'],
                 'choice_value' => 'name',
                 'choice_label' => 'name',
                 'attr' => [
                     'class' => 'fr-select',
                 ],
-                'placeholder' => 'Choisir un objectif',
-                'label' => 'Mon objectif',
+                'placeholder' => 'Choisir une thématique',
+                'label' => 'Ma thématique',
                 'label_attr' => [
                     'class' => 'fr-label h3 on-dark fr-mb-3w',
                 ],
@@ -64,14 +64,14 @@ class SearchFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'environmentalActions' => [],
+            'environmentalTopics' => [],
             'businessActivityAreas' => [],
             'regions' => [],
             'csrf_protection' => false,
         ]);
 
         $resolver
-            ->setAllowedTypes('environmentalActions', 'array')
+            ->setAllowedTypes('environmentalTopics', 'array')
             ->setAllowedTypes('businessActivityAreas', 'array')
             ->setAllowedTypes('regions', 'array')
         ;
