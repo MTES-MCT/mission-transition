@@ -36,10 +36,6 @@
         {{ form_end(form) }}
     </div>
 
-    {{ dump(nbAids) }}
-    {{ dump(nbNationalAids) }}
-    {{ dump(nbRegionalAids) }}
-
     {% if nbAids is not same as 0 %}
         <div class="bg-light">
             <div class="fr-container fr-pt-12w">
@@ -53,6 +49,7 @@
                         {% for aid in regionalAids %}
                             <div class="card-aid" {% if loop.last %}id="last-regional-aid"{% endif %}>
                                 <div class="card-aid-main">
+                                    <h4 class="subtitle">{{ aid.type }}</h4>
                                     <h3 class="small">{{ aid.name }}</h3>
                                     <div class="funder">
                                         <span class="mt-icon-circled mt-icon-circled--inline">
@@ -60,30 +57,41 @@
                                         </span>
                                         <span class="subtitle">{{ aid.funder.name }}</span>
                                     </div>
+                                    {% if aid.applicationStartDate is not null and aid.applicationEndDate is not null %}
+                                        <div class="aid-dates">
+                                            <span class="mt-icon-circled mt-icon-circled--inline">
+                                                <span class="mt-icon mt-icon--time"></span>
+                                            </span>
+                                            <span class="subtitle">
+                                                dispostitif temporaire<br>
+                                                du {{ aid.applicationStartDate|format_date('short') }} au {{ aid.applicationEndDate|format_date('short') }}
+                                            </span>
+                                        </div>
+                                    {% endif %}
+                                    {% if aid.fundingTypes is not empty %}
+                                        <div class="aid-type fr-mb-2w">
+                                            <span class="mt-icon-circled mt-icon-circled--inline mt-icon-circled--blue-bg">
+                                                <span class="mt-icon mt-icon--euro mt-icon--color-white"></span>
+                                            </span>
+                                            <span class="subtitle color-navy">
+                                                {{ aid.fundingTypes|join(', ') }}<br>
+                                                {% if aid.subventionRateLowerBound %}
+                                                    min : {{ aid.subventionRateLowerBound }}%
+                                                {% endif %}
+                                                {% if aid.subventionRateLowerBound and aid.subventionRateUpperBound %}
+                                                    &nbsp;\&nbsp;
+                                                {% endif %}
+                                                {% if aid.subventionRateUpperBound %}
+                                                    max : {{ aid.subventionRateUpperBound }}%
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    {% endif %}
                                     <ul class="fr-tags-group fr-mt-4w">
                                         {% for topic in aid.environmentalTopics %}
                                             <li><span class="fr-mb-3v mt-tag subtitle">{{ topic }}</span></li>
                                         {% endfor %}
                                     </ul>
-                                </div>
-                                <div class="card-aid-details">
-                                    <div class="aid-type">
-                                        <span class="mt-icon-circled mt-icon-circled--blue-bg mt-icon-circled--margin-auto">
-                                            <span class="mt-icon mt-icon--tag mt-icon--color-white"></span>
-                                        </span>
-                                        <span class="subtitle">{{ aid.type }}</span>
-                                    </div>
-                                    <div class="funding-type">
-                                        <span class="mt-icon-circled mt-icon-circled--orange-bg mt-icon-circled--margin-auto">
-                                            <span class="mt-icon mt-icon--euro mt-icon--color-white"></span>
-                                        </span>
-                                        {% for fundingType in aid.fundingTypes %}
-                                            <div class="subtitle">{{ fundingType }}</div>
-                                        {% endfor %}
-                                    </div>
-                                    {% if aid.applicationEndDate is not null %}
-                                        <span class="date subtitle">{{ aid.applicationEndDate|date }}</span>
-                                    {% endif %}
                                 </div>
                                 <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
                                     <button class="fr-btn big card-aid-cta">VOIR LA FICHE</button>
@@ -111,37 +119,49 @@
                         {% for aid in nationalAids %}
                             <div class="card-aid" {% if loop.last %}id="last-national-aid"{% endif %}>
                                 <div class="card-aid-main">
+                                    <h4 class="subtitle">{{ aid.type }}</h4>
                                     <h3 class="small">{{ aid.name }}</h3>
                                     <div class="funder">
                                         <span class="mt-icon-circled mt-icon-circled--inline">
-                                            <span class="mt-icon mt-icon--building mt-icon--color-white"></span>
+                                            <span class="mt-icon mt-icon--building"></span>
                                         </span>
                                         <span class="subtitle">{{ aid.funder.name }}</span>
                                     </div>
+                                    {% if aid.applicationStartDate is not null and aid.applicationEndDate is not null %}
+                                        <div class="aid-dates">
+                                            <span class="mt-icon-circled mt-icon-circled--inline">
+                                                <span class="mt-icon mt-icon--time"></span>
+                                            </span>
+                                            <span class="subtitle">
+                                                dispostitif temporaire<br>
+                                                du {{ aid.applicationStartDate|format_date('short') }} au {{ aid.applicationEndDate|format_date('short') }}
+                                            </span>
+                                        </div>
+                                    {% endif %}
+                                    {% if aid.fundingTypes is not empty %}
+                                        <div class="aid-type fr-mb-2w">
+                                            <span class="mt-icon-circled mt-icon-circled--inline mt-icon-circled--blue-bg">
+                                                <span class="mt-icon mt-icon--euro mt-icon--color-white"></span>
+                                            </span>
+                                            <span class="subtitle color-navy">
+                                                {{ aid.fundingTypes|join(', ') }}<br>
+                                                {% if aid.subventionRateLowerBound %}
+                                                    min : {{ aid.subventionRateLowerBound }}%
+                                                {% endif %}
+                                                {% if aid.subventionRateLowerBound and aid.subventionRateUpperBound %}
+                                                    &nbsp;\&nbsp;
+                                                {% endif %}
+                                                {% if aid.subventionRateUpperBound %}
+                                                    max : {{ aid.subventionRateUpperBound }}%
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    {% endif %}
                                     <ul class="fr-tags-group fr-mt-4w">
                                         {% for topic in aid.environmentalTopics %}
                                             <li><span class="fr-mb-3v mt-tag subtitle">{{ topic }}</span></li>
                                         {% endfor %}
                                     </ul>
-                                </div>
-                                <div class="card-aid-details">
-                                    <div class="aid-type">
-                                        <span class="mt-icon-circled mt-icon-circled--blue-bg mt-icon-circled--margin-auto">
-                                            <span class="mt-icon mt-icon--tag mt-icon--color-white"></span>
-                                        </span>
-                                        <span class="subtitle">{{ aid.type }}</span>
-                                    </div>
-                                    <div class="funding-type">
-                                        <span class="mt-icon-circled mt-icon-circled--orange-bg mt-icon-circled--margin-auto">
-                                            <span class="mt-icon mt-icon--euro mt-icon--color-white"></span>
-                                        </span>
-                                        {% for fundingType in aid.fundingTypes %}
-                                            <div class="subtitle">{{ fundingType }}</div>
-                                        {% endfor %}
-                                    </div>
-                                    {% if aid.applicationEndDate is not null %}
-                                        <span class="date subtitle">{{ aid.applicationEndDate|date }}</span>
-                                    {% endif %}
                                 </div>
                                 <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
                                     <button class="fr-btn big card-aid-cta">VOIR LA FICHE</button>

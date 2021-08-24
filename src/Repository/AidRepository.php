@@ -35,6 +35,8 @@ class AidRepository extends ServiceEntityRepository
         $qb
             ->select('aid', 'environmentalTopics', 'funder')
             ->join('aid.funder', 'funder')
+            ->andWhere('aid.perimeter = :perimeter')
+            ->setParameter('perimeter', $perimeter)
             ->setMaxResults($maxResults)
         ;
 

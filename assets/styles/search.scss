@@ -13,29 +13,16 @@
     .funder {
         margin-top: 2rem;
     }
-}
 
-.card-aid-details {
-    display: grid;
-    grid-template-areas:
-        'type funder'
-        'date date';
-    grid-gap: 2px;
-    padding: 20px 20px;
-    grid-template-columns: 1fr 1fr;
-    align-content: space-evenly;
-    justify-items: center;
+    .aid-type, .aid-dates, .funder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    .aid-type {
-        grid-area: type;
-    }
-
-    .funding-type {
-        grid-area: funder;
-    }
-
-    .date {
-        grid-area: date;
+        .subtitle {
+            margin-right: auto;
+            padding: 10px;
+        }
     }
 }
 

@@ -27,11 +27,12 @@ class Aid
     public const STATE_PUBLISHED = 'published';
 
     public const TYPE_AAP = 'APP';
-    public const TYPE_AID = 'Aide';
+    public const TYPE_AID = 'Dispositif de financement';
     public const TYPE_COMPANY = 'Entreprise';
     public const TYPE_INVESTMENT_FUND = 'Fonds';
     public const TYPE_RECOVERY_PLAN = 'Plan de Relance';
     public const TYPE_FIRST_STEP = 'Premiers pas';
+    public const TYPE_ENGINEER = 'Aide en ingénierie';
 
     public const PERIMETER_NATIONAL = 'NATIONAL';
     public const PERIMETER_REGIONAL = 'REGIONAL';
@@ -175,6 +176,11 @@ class Aid
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $applicationStartDate;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectExamples;
 
     public function __construct()
     {
@@ -569,6 +575,18 @@ class Aid
     public function setApplicationStartDate(?\DateTimeInterface $applicationStartDate): self
     {
         $this->applicationStartDate = $applicationStartDate;
+
+        return $this;
+    }
+
+    public function getProjectExamples(): ?string
+    {
+        return $this->projectExamples;
+    }
+
+    public function setProjectExamples(?string $projectExamples): self
+    {
+        $this->projectExamples = $projectExamples;
 
         return $this;
     }

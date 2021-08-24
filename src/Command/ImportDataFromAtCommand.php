@@ -33,6 +33,8 @@ class ImportDataFromAtCommand extends Command
     private FunderRepository $funderRepository;
     private RegionRepository $regionRepository;
     private EnvironmentalTopicRepository $environmentalTopicRepository;
+    protected int $newlyAdded = 0;
+    protected int $newlyUpdated = 0;
 
     /**
      * @param HttpClientInterface $client
@@ -99,6 +101,10 @@ class ImportDataFromAtCommand extends Command
                         $aid = $this->createNewAid($aidFromAt);
                         $aid->addEnvironmentalTopic($environmentalTopic);
                         $this->em->persist($aid);
+                        $this->newlyAdded++;
+                    } else {
+                        $aid = $this->updateAid($aidFromAt, $aid);
+                        $this->newlyUpdated++;
                     }
                 }
                 $nextUrl = $response['next'];
@@ -106,12 +112,18 @@ class ImportDataFromAtCommand extends Command
             $this->em->flush();
         }
 
-        $io->success('Import from Aides-Territoires done');
+        $io->success(sprintf('Import from Aides-Territoires done with %s new Aids and %s updated', $this->newlyAdded, $this->newlyUpdated));
 
         return Command::SUCCESS;
     }
 
     protected function createNewAid($aidFromAt): Aid
+    {
+        $aid = new Aid();
+        return $this->updateAid($aidFromAt, $aid);
+    }
+
+    public function updateAid(array $aidFromAt, Aid $aid): Aid
     {
         if (isset($aidFromAt['financers'][0])) {
             $funder = $this->retrieveExistingeFunder($aidFromAt['financers'][0]);
@@ -124,7 +136,6 @@ class ImportDataFromAtCommand extends Command
             $funder = null;
         }
 
-        $aid = new Aid();
         $aid
             ->setSourceId(sprintf('at_%s', $aidFromAt['id']))
             ->setName($aidFromAt['name'])
@@ -133,6 +144,7 @@ class ImportDataFromAtCommand extends Command
             ->setFundingSourceUrl($aidFromAt['origin_url'])
             ->setAidDetails($aidFromAt['description'])
             ->setEligibility($aidFromAt['eligibility'])
+            ->setProjectExamples($aidFromAt['project_examples'])
             ->setFundingTypes($aidFromAt['aid_types'])
             ->setApplicationStartDate(new \DateTime($aidFromAt['start_date']))
             ->setApplicationEndDate(new \DateTime($aidFromAt['submission_deadline']))
@@ -221,31 +233,31 @@ class ImportDataFromAtCommand extends Command
     protected function getTypesMapping(array $fundingTypes): string
     {
         if (empty($fundingTypes)) {
-            return 'Aide financière';
+            return 'Dispositif de financement';
         }
 
         $mapping = [
-            'Subvention' => 'Aide financière',
-            'Prêt' => 'Aide financière',
-            'Avance récupérable' => 'Aide financière',
-            'Autre' => 'Aide financière',
+            'Subvention' => 'Dispositif de financement',
+            'Prêt' => 'Dispositif de financement',
+            'Avance récupérable' => 'Dispositif de financement',
+            'Autre' => 'Dispositif de financement',
             'Technique' => 'Aide en ingénierie',
             'Financière' => 'Aide en ingénierie',
-            'Juridique / administrative' => 'Aide en ingénierie',
+            'Juridique / administrative' => 'Dispositif de financement',
         ];
 
         if (isset($mapping[$fundingTypes[0]])) {
             return $mapping[$fundingTypes[0]];
         }
 
-        return 'Aide financière';
+        return 'Dispositif de financement';
     }
 
     protected function getPerimetersMapping($atRegion): string
     {
         $mapping = [
             'Europe' => 'Continent',
-            'Frence' => Aid::PERIMETER_NATIONAL
+            'France' => Aid::PERIMETER_NATIONAL
         ];
 
         if (isset($mapping[$atRegion])) {

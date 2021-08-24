@@ -25,6 +25,12 @@
         -webkit-mask-image: url('/build/icons/finger_up.svg');
         mask-image: url('/build/icons/finger_up.svg');
     }
+
+    @at-root #{&}--time {
+        -webkit-mask-image: url('/build/icons/time.svg');
+        mask-image: url('/build/icons/time.svg');
+    }
+
     @at-root #{&}--color-white {
         background-color: $white;
     }
