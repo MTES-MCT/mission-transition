@@ -21,6 +21,22 @@
         <link rel="canonical" href="{% block meta_canonical current_route ? url(current_route, current_route_params) : '' %}" />
 
         <title>{% block title %}{% block page_title '' %} | France Transition{% endblock %}</title>
+        <!-- Matomo -->
+        <script>
+            var _paq = window._paq = window._paq || [];
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u="https://stats.data.gouv.fr/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', '194']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <!-- End Matomo Code -->
+
     </head>
     <body class="{% block body_class '' %}">
         <div class="wrapper">

@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Entity\Aid;
 use App\Entity\EnvironmentalAction;
+use App\Entity\EnvironmentalTopic;
 use App\Entity\Region;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,11 +17,11 @@ class SearchFormModel
     protected string $aidType = self::TYPE_FUNDING;
     protected ?Region $region = null;
     /**
-     * @var EnvironmentalAction|null
+     * @var EnvironmentalTopic|null
      *
-     * @Assert\NotNull(message="Merci d'indiquer un objectif")
+     * @Assert\NotNull(message="Merci d'indiquer une thématique")
      */
-    protected ?EnvironmentalAction $environmentalAction = null;
+    protected ?EnvironmentalTopic $environmentalTopic = null;
     protected int $regionalLimit = 6;
     protected int $nationalLimit = 6;
 
@@ -65,14 +66,14 @@ class SearchFormModel
         return 0 === strcmp($this->aidType, SearchFormModel::TYPE_FUNDING);
     }
 
-    public function getEnvironmentalAction(): ?EnvironmentalAction
+    public function getEnvironmentalTopic(): ?EnvironmentalTopic
     {
-        return $this->environmentalAction;
+        return $this->environmentalTopic;
     }
 
-    public function setEnvironmentalAction(?EnvironmentalAction $environmentalAction): SearchFormModel
+    public function setEnvironmentalTopic(?EnvironmentalTopic $environmentalTopic): SearchFormModel
     {
-        $this->environmentalAction = $environmentalAction;
+        $this->environmentalTopic = $environmentalTopic;
 
         return $this;
     }

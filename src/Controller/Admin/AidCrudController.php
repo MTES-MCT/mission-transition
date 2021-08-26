@@ -44,25 +44,37 @@ class AidCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            DateTimeField::new('createdAt', 'Créé le')->hideOnForm(),
+            IdField::new('id', 'ID MTE')->onlyOnIndex(),
             ChoiceField::new('state', 'Status')
                 ->setChoices([
                     'Brouillon' => Aid::STATE_DRAFT,
                     'Publié' => Aid::STATE_PUBLISHED,
                 ]),
             IdField::new('uuid', 'UUID')->onlyOnDetail(),
-            TextField::new('sourceId', 'ID Source')->hideOnIndex(),
+            TextField::new('sourceId', 'ID Source')->hideOnForm(),
             TextField::new('name', 'Titre'),
             AssociationField::new('environmentalTopics', 'Thématiques')->autocomplete()->setTemplatePath('admin/aid/environmental_topics.html.twig'),
             AssociationField::new('environmentalActions', 'Actions associées')->setTemplatePath('admin/aid/environmental_actions.html.twig'),
             ChoiceField::new('type', 'Type')
                 ->setChoices([
                     'Appel à projet' => Aid::TYPE_AAP,
-                    'Aide' => Aid::TYPE_AID,
+                    'Dispositif de Financement' => Aid::TYPE_AID,
                     'Fonds d\'investissement' => Aid::TYPE_INVESTMENT_FUND,
                     'Entreprise' => Aid::TYPE_COMPANY,
                     'Plan de Relance' => Aid::TYPE_RECOVERY_PLAN,
                     'Premier pas' => Aid::TYPE_FIRST_STEP,
+                    'Aide en ingénierie' => Aid::TYPE_ENGINEER
+                ]),
+            ChoiceField::new('fundingTypes', 'Type')
+                ->set
+                ->setChoices([
+                    'Appel à projet' => Aid::TYPE_AAP,
+                    'Dispositif de Financement' => Aid::TYPE_AID,
+                    'Fonds d\'investissement' => Aid::TYPE_INVESTMENT_FUND,
+                    'Entreprise' => Aid::TYPE_COMPANY,
+                    'Plan de Relance' => Aid::TYPE_RECOVERY_PLAN,
+                    'Premier pas' => Aid::TYPE_FIRST_STEP,
+                    'Aide en ingénierie' => Aid::TYPE_ENGINEER
                 ]),
             TextField::new('perimeter', 'Périmètre')->hideOnIndex(),
             TextField::new('region.name', 'Région')->hideOnIndex(),
