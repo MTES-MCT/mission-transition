@@ -182,6 +182,11 @@ class Aid
      */
     private $projectExamples;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $directAccess = false;
+
     public function __construct()
     {
         $this->ulid = new Ulid();
@@ -587,6 +592,18 @@ class Aid
     public function setProjectExamples(?string $projectExamples): self
     {
         $this->projectExamples = $projectExamples;
+
+        return $this;
+    }
+
+    public function getDirectAccess(): ?bool
+    {
+        return $this->directAccess;
+    }
+
+    public function setDirectAccess(bool $directAccess): self
+    {
+        $this->directAccess = $directAccess;
 
         return $this;
     }

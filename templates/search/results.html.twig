@@ -94,9 +94,15 @@
                                         {% endfor %}
                                     </ul>
                                 </div>
-                                <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
-                                    <button class="fr-btn big card-aid-cta">VOIR LA FICHE</button>
-                                </a>
+                                {% if aid.directAccess %}
+                                    <a href="{{ aid.fundingSourceUrl }}">
+                                        <button class="fr-btn big card-aid-cta">VOIR LE DISPOSITIF</button>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                        <button class="fr-btn big card-aid-cta">VOIR LA FICHE</button>
+                                    </a>
+                                {% endif %}
                             </div>
                         {% endfor %}
                     </div>
