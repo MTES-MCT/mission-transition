@@ -31,7 +31,7 @@ class SearchFormType extends AbstractType
                 'choice_value' => 'id',
                 'choice_label' => 'name',
                 'placeholder' => 'Toute la France',
-                'label' => 'Ma région',
+                'label' => 'Ma localisation',
                 'attr' => [
                     'class' => 'fr-select',
                 ],

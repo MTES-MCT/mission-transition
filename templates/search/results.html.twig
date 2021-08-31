@@ -44,7 +44,7 @@
                 {% if regionalAids is not empty %}
                     <hr>
                     <h3 class="fr-pt-3w">
-                        <span class="highlighted">{{ nbRegionalAids }}</span> {{ isFundingType ? ' dispositifs de financement' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalTopic }}"</span> {{ region is not null ? "en #{region.name}" }}
+                        <span class="highlighted">{{ nbRegionalAids }}</span> {{ isFundingType ? ' aides locales' : 'actions faciles' }} pour <span class="highlighted">"{{ environmentalTopic }}"</span> {{ region is not null ? "en #{region.name}" }}
                     </h3>
                     <div class="card-aid-list fr-py-5w">
                         {% for aid in regionalAids %}
@@ -199,7 +199,7 @@
             </div>
         {% else %}
             <div class="bg-light no-results fr-p-12w">
-                <img src="{{ asset('build/img/search_default.svg') }}">
+                <img class="mt-w100" src="{{ asset('build/img/search_default.svg') }}">
                 <div class="text fr-pt-3w">
                     <p class="fr-pb-3w">Veuillez sélectionner un objectif dans les filtres
                         afin d’avoir des résultats de recherche.
