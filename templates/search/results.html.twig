@@ -9,6 +9,8 @@
 
 {% block body %}
 
+    <div id="aid-search-engine" data-environmental-topics="{{ environmentalTopics|json_encode|raw }}"></div>
+
     <div class="fr-container-fluid bg-dark">
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             <div class="fr-grid-row">

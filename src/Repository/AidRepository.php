@@ -31,11 +31,11 @@ class AidRepository extends ServiceEntityRepository
     ) {
         $qb = $this->createQueryBuilder('aid');
 
-
         $qb
             ->select('aid', 'environmentalTopics', 'funder')
             ->join('aid.funder', 'funder')
             ->andWhere('aid.perimeter = :perimeter')
+            ->andWhere("aid.state = 'published'")
             ->setParameter('perimeter', $perimeter)
             ->setMaxResults($maxResults)
         ;

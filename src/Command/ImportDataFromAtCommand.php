@@ -156,12 +156,12 @@ class ImportDataFromAtCommand extends Command
             ->setFundingTypes($aidFromAt['aid_types'])
             ->setType($this->getTypesMapping($aidFromAt['aid_types']))
             ->setPerimeter($this->getPerimetersMapping($aidFromAt['perimeter']))
-            ->setState(Aid::STATE_PUBLISHED)
+            ->setState(Aid::STATE_DRAFT)
         ;
 
         $regionNames = explode(', ', $aidFromAt['perimeter']);
         foreach($regionNames as $regionName) {
-            $region = $this->retrieveExistingeRegion($regionName);
+            $region = $this->retrieveExistingRegion($regionName);
             if ($region === null) {
                 $region = $this->createRegion($regionName);
                 $this->em->persist($region);
@@ -174,7 +174,7 @@ class ImportDataFromAtCommand extends Command
         return $aid;
     }
 
-    protected function retrieveExistingeRegion(string $regionName) : ?Region
+    protected function retrieveExistingRegion(string $regionName) : ?Region
     {
         return $this->regionRepository->findOneBy([
             'name' => $regionName
@@ -214,11 +214,15 @@ class ImportDataFromAtCommand extends Command
         return [
             '&categories=economie-circulaire' => 'Économie circulaire',
             '&categories=circuits-courts-filieres' => 'Économie circulaire',
-            '&categories=assainissement' => 'Conservation et restauration des écosystèmes',
             '&categories=economie-denergie' => 'Efficacité énergétique',
             '&categories=recyclage-valorisation' => 'Économie circulaire',
             '&categories=empreinte-carbone' => 'Conservation et restauration des écosystèmes',
+            '&categories=assainissement' => 'Conservation et restauration des écosystèmes',
             '&categories=reseaux-de-chaleur' => 'Production et distribution d\'énergie',
+            '&categories=limiter-les-deplacements-subis' => 'Limiter les déplacements',
+            '&categories=mobilite-partagee' => 'Mobilité partagée',
+            '&categories=mobilite-pour-tous' => 'Mobilité pour tous',
+            '&categories=amenagement-de-lespace-public-et-modes-actifs' => 'Production et distribution d\'énergie',
             '&categories=transition-energetique' => 'Production et distribution d\'énergie',
             '&categories=biodiversite' => 'Conservation et restauration des écosystèmes',
             '&categories=forets' => 'Conservation et restauration des écosystèmes',
