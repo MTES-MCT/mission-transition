@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EnvironmentalTopicRepository::class)
@@ -19,6 +20,7 @@ class EnvironmentalTopic
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list"})
      */
     private string $name;
 
@@ -33,6 +35,11 @@ class EnvironmentalTopic
      */
     private Collection $aids;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=EnvironmentalTopicCategory::class, mappedBy="environmentalTopics")
+     */
+    private Collection $environmentalTopicCategories;
+
     public function __toString()
     {
         return $this->name;
@@ -41,6 +48,7 @@ class EnvironmentalTopic
     public function __construct()
     {
         $this->aids = new ArrayCollection();
+        $this->environmentalTopicCategories = new ArrayCollection();
     }
 
     public function getName(): string
@@ -89,6 +97,33 @@ class EnvironmentalTopic
     {
         if ($this->aids->removeElement($aid)) {
             $aid->removeEnvironmentalTopic($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EnvironmentalTopicCategory[]
+     */
+    public function getEnvironmentalTopicCategories(): Collection
+    {
+        return $this->environmentalTopicCategories;
+    }
+
+    public function addEnvironmentalTopicCategory(EnvironmentalTopicCategory $environmentalTopicCategory): self
+    {
+        if (!$this->environmentalTopicCategories->contains($environmentalTopicCategory)) {
+            $this->environmentalTopicCategories[] = $environmentalTopicCategory;
+            $environmentalTopicCategory->addEnvironmentalTopic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnvironmentalTopicCategory(EnvironmentalTopicCategory $environmentalTopicCategory): self
+    {
+        if ($this->environmentalTopicCategories->removeElement($environmentalTopicCategory)) {
+            $environmentalTopicCategory->removeEnvironmentalTopic($this);
         }
 
         return $this;
