@@ -9,35 +9,35 @@
 
 {% block body %}
 
-    <div id="aid-search-engine" data-environmental-topics="{{ environmentalTopics|json_encode|raw }}"></div>
+    <div id="aid-search-engine"></div>
 
-    <div class="fr-container-fluid bg-dark">
-        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-            <div class="fr-grid-row">
-                <div class="fr-col fr-mx-9w fr-my-7w">
-                    {{ form_label(form.environmentalTopic) }}
-                    {{ form_widget(form.environmentalTopic) }}
-                    <div class="environmental-action-error">
-                        {{ form_errors(form.environmentalTopic) }}
-                    </div>
-                    <div id="topics-helper"></div>
-                </div>
-                <div class="fr-col fr-mx-9w fr-my-7w">
-                    {{ form_row(form.aidType) }}
-                </div>
-                <div class="fr-col fr-mx-9w fr-my-7w">
-                    {{ form_row(form.region) }}
-                </div>
-            </div>
-            <div class="fr-grid-row fr-grid-row--center">
-                <div class="fr-offset-6">
-                    <button type="submit" class="fr-btn fr-btn--secondary cta-search">
-                        AFFICHER LES RÉSULTATS
-                    </button>
-                </div>
-            </div>
-        {{ form_end(form) }}
-    </div>
+{#    <div class="fr-container-fluid bg-dark">#}
+{#        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+{#            <div class="fr-grid-row">#}
+{#                <div class="fr-col fr-mx-9w fr-my-7w">#}
+{#                    {{ form_label(form.environmentalTopic) }}#}
+{#                    {{ form_widget(form.environmentalTopic) }}#}
+{#                    <div class="environmental-action-error">#}
+{#                        {{ form_errors(form.environmentalTopic) }}#}
+{#                    </div>#}
+{#                    <div id="topics-helper"></div>#}
+{#                </div>#}
+{#                <div class="fr-col fr-mx-9w fr-my-7w">#}
+{#                    {{ form_row(form.aidType) }}#}
+{#                </div>#}
+{#                <div class="fr-col fr-mx-9w fr-my-7w">#}
+{#                    {{ form_row(form.region) }}#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="fr-grid-row fr-grid-row--center">#}
+{#                <div class="fr-offset-6">#}
+{#                    <button type="submit" class="fr-btn fr-btn--secondary cta-search">#}
+{#                        AFFICHER LES RÉSULTATS#}
+{#                    </button>#}
+{#                </div>#}
+{#            </div>#}
+{#        {{ form_end(form) }}#}
+{#    </div>#}
 
     {% if nbAids is not same as 0 %}
         <div class="bg-light">
@@ -200,14 +200,14 @@
                 </div>
             </div>
         {% else %}
-            <div class="bg-light no-results fr-p-12w">
-                <img class="mt-w100" src="{{ asset('build/img/search_default.svg') }}">
-                <div class="text fr-pt-3w">
-                    <p class="fr-pb-3w">Veuillez sélectionner un objectif dans les filtres
-                        afin d’avoir des résultats de recherche.
-                    </p>
-                </div>
-            </div>
+{#            <div class="bg-light no-results fr-p-12w">#}
+{#                <img class="mt-w100" src="{{ asset('build/img/search_default.svg') }}">#}
+{#                <div class="text fr-pt-3w">#}
+{#                    <p class="fr-pb-3w">Veuillez sélectionner un objectif dans les filtres#}
+{#                        afin d’avoir des résultats de recherche.#}
+{#                    </p>#}
+{#                </div>#}
+{#            </div>#}
         {% endif %}
     {% endif %}
 {% endblock %}

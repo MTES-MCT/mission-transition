@@ -156,7 +156,6 @@ class ImportAids extends Command
                 ->setFundingSourceUrl($fundingSourceUrl)
                 ->setPerimeter($row[self::COL_PERIMETER])
                 ->setState($state)
-                ->setType($row[self::COL_TYPE])
                 ->setFundingTypes(explode(', ', $row[self::COL_FUNDING_TYPES]));
 
             if (!empty($row[self::COL_APPLICATION_END_DATE])) {

@@ -2,24 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\RegionRepository;
+use App\Entity\Util\EntityIdTrait;
+use App\Repository\AidTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass=RegionRepository::class)
+ * @ORM\Entity(repositoryClass=AidTypeRepository::class)
  */
-class Region
+class AidType
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * @Groups({"list"})
-     */
-    private $id;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -28,18 +24,19 @@ class Region
     private string $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Aid::class, mappedBy="regions")
+     * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private string $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Aid::class, mappedBy="type")
      */
     private $aids;
 
     public function __construct()
     {
         $this->aids = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 
     public function getId(): ?int
@@ -59,6 +56,18 @@ class Region
         return $this;
     }
 
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Aid[]
      */
@@ -71,7 +80,7 @@ class Region
     {
         if (!$this->aids->contains($aid)) {
             $this->aids[] = $aid;
-            $aid->addRegion($this);
+            $aid->addType($this);
         }
 
         return $this;
@@ -80,7 +89,7 @@ class Region
     public function removeAid(Aid $aid): self
     {
         if ($this->aids->removeElement($aid)) {
-            $aid->removeRegion($this);
+            $aid->removeType($this);
         }
 
         return $this;

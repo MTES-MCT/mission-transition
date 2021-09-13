@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\AidTypeRepository;
 use App\Repository\EnvironmentalTopicRepository;
+use App\Repository\RegionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +26,40 @@ class ApiController extends AbstractController
     {
         $data = $serializer->serialize(
             $environmentalTopicRepository->findBy([], ['name' => 'ASC']),
+            'json',
+            ['groups' => 'list']
+        );
+
+        return JsonResponse::fromJsonString($data);
+    }
+
+    /**
+     * @Route("/aid-types", name="api_aidTypes")
+     */
+    public function aidTypes(
+        SerializerInterface $serializer,
+        AidTypeRepository $aidTypeRepository
+    ): Response
+    {
+        $data = $serializer->serialize(
+            $aidTypeRepository->findBy([], ['name' => 'ASC']),
+            'json',
+            ['groups' => 'list']
+        );
+
+        return JsonResponse::fromJsonString($data);
+    }
+
+    /**
+     * @Route("/regions", name="api_regions")
+     */
+    public function regions(
+        SerializerInterface $serializer,
+        RegionRepository $regionRepository
+    ): Response
+    {
+        $data = $serializer->serialize(
+            $regionRepository->findBy([], ['name' => 'ASC']),
             'json',
             ['groups' => 'list']
         );

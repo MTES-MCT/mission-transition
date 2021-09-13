@@ -3,10 +3,12 @@
 namespace App\Command;
 
 use App\Entity\Aid;
+use App\Entity\AidType;
 use App\Entity\EnvironmentalTopic;
 use App\Entity\Funder;
 use App\Entity\Region;
 use App\Repository\AidRepository;
+use App\Repository\AidTypeRepository;
 use App\Repository\EnvironmentalTopicRepository;
 use App\Repository\FunderRepository;
 use App\Repository\RegionRepository;
@@ -32,6 +34,7 @@ class ImportDataFromAtCommand extends Command
     private AidRepository $aidRepository;
     private FunderRepository $funderRepository;
     private RegionRepository $regionRepository;
+    private AidTypeRepository $aidTypeRepository;
     private EnvironmentalTopicRepository $environmentalTopicRepository;
     protected int $newlyAdded = 0;
     protected int $newlyUpdated = 0;
@@ -46,6 +49,7 @@ class ImportDataFromAtCommand extends Command
         AidRepository $aidRepository,
         FunderRepository $funderRepository,
         RegionRepository $regionRepository,
+        AidTypeRepository $aidTypeRepository,
         EnvironmentalTopicRepository $environmentalTopicRepository
     ){
         $this->client = $client;
@@ -53,6 +57,7 @@ class ImportDataFromAtCommand extends Command
         $this->aidRepository = $aidRepository;
         $this->funderRepository = $funderRepository;
         $this->regionRepository = $regionRepository;
+        $this->aidTypeRepository = $aidTypeRepository;
         $this->environmentalTopicRepository = $environmentalTopicRepository;
         parent::__construct();
     }
@@ -154,21 +159,31 @@ class ImportDataFromAtCommand extends Command
             ->setSubventionRateLowerBound($aidFromAt['subvention_rate_lower_bound'])
             ->setSubventionRateUpperBound($aidFromAt['subvention_rate_upper_bound'])
             ->setFundingTypes($aidFromAt['aid_types'])
-            ->setType($this->getTypesMapping($aidFromAt['aid_types']))
             ->setPerimeter($this->getPerimetersMapping($aidFromAt['perimeter']))
             ->setState(Aid::STATE_DRAFT)
         ;
 
         $regionNames = explode(', ', $aidFromAt['perimeter']);
         foreach($regionNames as $regionName) {
-            $region = $this->retrieveExistingRegion($regionName);
-            if ($region === null) {
-                $region = $this->createRegion($regionName);
-                $this->em->persist($region);
+            $aidType = $this->retrieveExistingRegion($regionName);
+            if ($aidType === null) {
+                $aidType = $this->createRegion($regionName);
+                $this->em->persist($aidType);
                 $this->em->flush();
             }
 
-            $aid->addRegion($region);
+            $aid->addRegion($aidType);
+        }
+
+        foreach($aidFromAt['aid_types'] as $aidTypeName) {
+            $aidType = $this->retrieveExistingAidType($aidTypeName);
+            if ($aidType === null) {
+                $aidType = $this->createAidType($aidTypeName);
+                $this->em->persist($aidType);
+                $this->em->flush();
+            }
+
+            $aid->addType($aidType);
         }
 
         return $aid;
@@ -178,6 +193,23 @@ class ImportDataFromAtCommand extends Command
     {
         return $this->regionRepository->findOneBy([
             'name' => $regionName
+        ]);
+    }
+
+    protected function createAidType(string $aidTypeName): AidType
+    {
+        $aidType = new AidType();
+        $aidType
+            ->setName($aidTypeName)
+        ;
+
+        return $aidType;
+    }
+
+    protected function retrieveExistingAidType(string $aidTypeName) : ?AidType
+    {
+        return $this->aidTypeRepository->findOneBy([
+            'name' => $aidTypeName
         ]);
     }
 

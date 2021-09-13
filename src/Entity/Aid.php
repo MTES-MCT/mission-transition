@@ -138,11 +138,6 @@ class Aid
     private ?array $fundingTypes = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $type;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Region::class, inversedBy="aids")
      */
     private Collection $regions;
@@ -187,6 +182,11 @@ class Aid
      */
     private $directAccess = false;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=AidType::class, inversedBy="aids")
+     */
+    private $type;
+
     public function __construct()
     {
         $this->ulid = new Ulid();
@@ -195,6 +195,7 @@ class Aid
         $this->businessActivityAreas = new ArrayCollection();
         $this->state = self::STATE_DRAFT;
         $this->regions = new ArrayCollection();
+        $this->type = new ArrayCollection();
     }
 
     public function getUlid(): Ulid
@@ -476,18 +477,6 @@ class Aid
         return $this;
     }
 
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Region[]
      */
@@ -604,6 +593,30 @@ class Aid
     public function setDirectAccess(bool $directAccess): self
     {
         $this->directAccess = $directAccess;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AidType[]
+     */
+    public function getType(): Collection
+    {
+        return $this->type;
+    }
+
+    public function addType(AidType $type): self
+    {
+        if (!$this->type->contains($type)) {
+            $this->type[] = $type;
+        }
+
+        return $this;
+    }
+
+    public function removeType(AidType $type): self
+    {
+        $this->type->removeElement($type);
 
         return $this;
     }
