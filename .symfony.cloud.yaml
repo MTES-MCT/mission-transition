@@ -3,7 +3,7 @@ name: app
 type: php:7.4
 
 relationships:
-    database: "db:postgresql"
+    database: "database:postgresql"
     rabbitmq: "amqp:rabbitmq"
     redis: "redis:redis"
 
