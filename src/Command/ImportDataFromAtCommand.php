@@ -3,10 +3,12 @@
 namespace App\Command;
 
 use App\Entity\Aid;
+use App\Entity\AidType;
 use App\Entity\EnvironmentalTopic;
 use App\Entity\Funder;
 use App\Entity\Region;
 use App\Repository\AidRepository;
+use App\Repository\AidTypeRepository;
 use App\Repository\EnvironmentalTopicRepository;
 use App\Repository\FunderRepository;
 use App\Repository\RegionRepository;
@@ -32,6 +34,7 @@ class ImportDataFromAtCommand extends Command
     private AidRepository $aidRepository;
     private FunderRepository $funderRepository;
     private RegionRepository $regionRepository;
+    private AidTypeRepository $aidTypeRepository;
     private EnvironmentalTopicRepository $environmentalTopicRepository;
     protected int $newlyAdded = 0;
     protected int $newlyUpdated = 0;
@@ -46,6 +49,7 @@ class ImportDataFromAtCommand extends Command
         AidRepository $aidRepository,
         FunderRepository $funderRepository,
         RegionRepository $regionRepository,
+        AidTypeRepository $aidTypeRepository,
         EnvironmentalTopicRepository $environmentalTopicRepository
     ){
         $this->client = $client;
@@ -53,6 +57,7 @@ class ImportDataFromAtCommand extends Command
         $this->aidRepository = $aidRepository;
         $this->funderRepository = $funderRepository;
         $this->regionRepository = $regionRepository;
+        $this->aidTypeRepository = $aidTypeRepository;
         $this->environmentalTopicRepository = $environmentalTopicRepository;
         parent::__construct();
     }
@@ -74,13 +79,13 @@ class ImportDataFromAtCommand extends Command
         $categories = $this->getEnvironmentalTopicsMapping();
 
         foreach ($categories as $key => $category) {
-            $environmentalTopic = $this->environmentalTopicRepository->findOneBy(['name' => $category]);
-            if (null === $environmentalTopic) {
-                $environmentalTopic = new EnvironmentalTopic();
-                $environmentalTopic->setName($category);
-                $this->em->persist($environmentalTopic);
-                $this->em->flush();
-            }
+//            $environmentalTopic = $this->environmentalTopicRepository->findOneBy(['name' => $category]);
+//            if (null === $environmentalTopic) {
+//                $environmentalTopic = new EnvironmentalTopic();
+//                $environmentalTopic->setName($category);
+//                $this->em->persist($environmentalTopic);
+//                $this->em->flush();
+//            }
             $nextUrl = self::BASE_API_URL . $key;
             $io->info($category);
             while ($nextUrl !== null) {
@@ -99,7 +104,7 @@ class ImportDataFromAtCommand extends Command
                     // New Aid
                     if (null === $aid) {
                         $aid = $this->createNewAid($aidFromAt);
-                        $aid->addEnvironmentalTopic($environmentalTopic);
+//                        $aid->addEnvironmentalTopic($environmentalTopic);
                         $this->em->persist($aid);
                         $this->newlyAdded++;
                     } else {
@@ -154,30 +159,57 @@ class ImportDataFromAtCommand extends Command
             ->setSubventionRateLowerBound($aidFromAt['subvention_rate_lower_bound'])
             ->setSubventionRateUpperBound($aidFromAt['subvention_rate_upper_bound'])
             ->setFundingTypes($aidFromAt['aid_types'])
-            ->setType($this->getTypesMapping($aidFromAt['aid_types']))
-            ->setPerimeter($this->getPerimetersMapping($aidFromAt['perimeter']))
-            ->setState(Aid::STATE_PUBLISHED)
+//            ->setPerimeter($this->getPerimetersMapping($aidFromAt['perimeter']))
+            ->setState(Aid::STATE_DRAFT)
         ;
 
-        $regionNames = explode(', ', $aidFromAt['perimeter']);
-        foreach($regionNames as $regionName) {
-            $region = $this->retrieveExistingeRegion($regionName);
-            if ($region === null) {
-                $region = $this->createRegion($regionName);
-                $this->em->persist($region);
+//        $regionNames = explode(', ', $aidFromAt['perimeter']);
+//        foreach($regionNames as $regionName) {
+//            $aidType = $this->retrieveExistingRegion($regionName);
+//            if ($aidType === null) {
+//                $aidType = $this->createRegion($regionName);
+//                $this->em->persist($aidType);
+//                $this->em->flush();
+//            }
+//
+//            $aid->addRegion($aidType);
+//        }
+
+        foreach($aidFromAt['aid_types'] as $aidTypeName) {
+            $aidType = $this->retrieveExistingAidType($this->getTypesMapping($aidTypeName));
+            if ($aidType === null) {
+                $aidType = $this->createAidType($this->getTypesMapping($aidTypeName));
+                $this->em->persist($aidType);
                 $this->em->flush();
             }
 
-            $aid->addRegion($region);
+            $aid->addType($aidType);
         }
 
         return $aid;
     }
 
-    protected function retrieveExistingeRegion(string $regionName) : ?Region
+    protected function retrieveExistingRegion(string $regionName) : ?Region
     {
         return $this->regionRepository->findOneBy([
             'name' => $regionName
+        ]);
+    }
+
+    protected function createAidType(string $aidTypeName): AidType
+    {
+        $aidType = new AidType();
+        $aidType
+            ->setName($aidTypeName)
+        ;
+
+        return $aidType;
+    }
+
+    protected function retrieveExistingAidType(string $aidTypeName) : ?AidType
+    {
+        return $this->aidTypeRepository->findOneBy([
+            'name' => $aidTypeName
         ]);
     }
 
@@ -214,11 +246,15 @@ class ImportDataFromAtCommand extends Command
         return [
             '&categories=economie-circulaire' => 'Économie circulaire',
             '&categories=circuits-courts-filieres' => 'Économie circulaire',
-            '&categories=assainissement' => 'Conservation et restauration des écosystèmes',
             '&categories=economie-denergie' => 'Efficacité énergétique',
             '&categories=recyclage-valorisation' => 'Économie circulaire',
             '&categories=empreinte-carbone' => 'Conservation et restauration des écosystèmes',
+            '&categories=assainissement' => 'Conservation et restauration des écosystèmes',
             '&categories=reseaux-de-chaleur' => 'Production et distribution d\'énergie',
+            '&categories=limiter-les-deplacements-subis' => 'Limiter les déplacements',
+            '&categories=mobilite-partagee' => 'Mobilité partagée',
+            '&categories=mobilite-pour-tous' => 'Mobilité pour tous',
+            '&categories=amenagement-de-lespace-public-et-modes-actifs' => 'Production et distribution d\'énergie',
             '&categories=transition-energetique' => 'Production et distribution d\'énergie',
             '&categories=biodiversite' => 'Conservation et restauration des écosystèmes',
             '&categories=forets' => 'Conservation et restauration des écosystèmes',
@@ -230,24 +266,24 @@ class ImportDataFromAtCommand extends Command
         ];
     }
 
-    protected function getTypesMapping(array $fundingTypes): string
+    protected function getTypesMapping(string $aidTypeName): string
     {
-        if (empty($fundingTypes)) {
-            return 'Dispositif de financement';
+        if (!$aidTypeName) {
+            return 'Aide financière';
         }
 
         $mapping = [
-            'Subvention' => 'Dispositif de financement',
-            'Prêt' => 'Dispositif de financement',
-            'Avance récupérable' => 'Dispositif de financement',
-            'Autre' => 'Dispositif de financement',
+            'Subvention' => 'Aide financière',
+            'Prêt' => 'Aide financière',
+            'Avance récupérable' => 'Aide financière',
+            'Autre' => 'Aide financière',
             'Technique' => 'Aide en ingénierie',
             'Financière' => 'Aide en ingénierie',
-            'Juridique / administrative' => 'Dispositif de financement',
+            'Juridique / administrative' => 'Aide en ingénierie',
         ];
 
-        if (isset($mapping[$fundingTypes[0]])) {
-            return $mapping[$fundingTypes[0]];
+        if (isset($mapping[$aidTypeName])) {
+            return $mapping[$aidTypeName];
         }
 
         return 'Dispositif de financement';

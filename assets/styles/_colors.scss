@@ -19,6 +19,15 @@ $white-alabaster: #fbfbfb;
         color: $orange-bold-light;
     }
 }
+
+.bg-lighter {
+    background-color: $white-alabaster;
+
+    > .highlighted {
+        color: $orange-bold-light;
+    }
+}
+
 .bg-dark {
     background: $blue-gradient-background;
 

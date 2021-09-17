@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Util\EntityIdTrait;
 use App\Repository\FunderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=FunderRepository::class)
@@ -16,6 +17,7 @@ class Funder
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list"})
      */
     private string $name;
 

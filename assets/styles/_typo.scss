@@ -90,6 +90,15 @@ p {
     color: $orange-bold-light;
 }
 
+.highlighted--dark {
+    color: $grey-river-bed;
+    font-family: $main-font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 140%;
+}
+
 .slight-highlight {
     width: auto;
     background-color: rgba(165, 166, 246, 0.4);
