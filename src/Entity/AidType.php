@@ -30,13 +30,18 @@ class AidType
     private string $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Aid::class, mappedBy="type")
+     * @ORM\ManyToMany(targetEntity=Aid::class, mappedBy="types")
      */
     private $aids;
 
     public function __construct()
     {
         $this->aids = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

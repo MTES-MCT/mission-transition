@@ -7,9 +7,13 @@ use App\Entity\AidAdvisor;
 use App\Entity\BusinessActivityArea;
 use App\Entity\EnvironmentalAction;
 use App\Entity\EnvironmentalTopic;
+use App\Entity\EnvironmentalTopicCategory;
 use App\Entity\Funder;
 use App\Entity\Region;
 use App\Repository\AidRepository;
+use App\Repository\EnvironmentalTopicCategoryRepository;
+use App\Repository\EnvironmentalTopicRepository;
+use App\Repository\RegionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -19,44 +23,31 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class ImportAids extends Command
 {
-    public const COL_SECONDARY_URL = 1;
-    public const COL_PRIMARY_URL = 2;
-    public const COL_TYPE = 3;
-    public const COL_AID_NAME = 4;
-    public const COL_PERIMETER = 5;
-    public const COL_REGION = 6;
-    public const COL_FUNDER_NAME = 7;
-    public const COL_ADVISOR_DESCRIPTION = 8;
-    public const COL_ADVISOR_NAME = 9;
-    public const COL_ADVISOR_URL = 10;
-    public const COL_ADVISOR_ADDRESS = 11;
-    public const COL_ADVISOR_EMAIL = 12;
-    public const COL_ADVISOR_PHONE = 13;
-    public const COL_ADVISOR_FAX = 14;
-    public const COL_GOAL = 15;
-    public const COL_BENEFICIARY = 16;
-    public const COL_AID_DETAILS = 17;
-    public const COL_ELIGIBILITY = 18;
-    public const COL_CONDITIONS = 19;
-    public const COL_FUNDING_TYPES = 20;
-    public const COL_APPLICATION_END_DATE = 21;
-    public const COL_BUSINESS_ACTIVITY_AREA = 22;
-    public const COL_TOPIC_1 = 23;
-    public const COL_TOPIC_2 = 24;
-    public const COL_ACTION_1 = 25;
-    public const COL_ACTION_2 = 26;
+    public const COL_SOURCE_ID = 0;
+    public const COL_REGION = 1;
+    public const COL_TOPICS = 2;
+    public const COL_FOCUS = 3;
 
     protected static $defaultName = 'app:import-aids-data';
 
     protected $aidRepository;
+    protected $environmentalTopicCategoryRepository;
+    protected $environmentalTopicRepository;
+    protected $regionRepository;
 
     protected $em;
 
     public function __construct(
-        AidRepository $userRepository,
+        AidRepository          $aidRepository,
+        EnvironmentalTopicCategoryRepository $environmentalTopicCategoryRepository,
+        EnvironmentalTopicRepository $environmentalTopicRepository,
+        RegionRepository $regionRepository,
         EntityManagerInterface $em
     ) {
-        $this->aidRepository = $userRepository;
+        $this->aidRepository = $aidRepository;
+        $this->environmentalTopicRepository = $environmentalTopicRepository;
+        $this->environmentalTopicCategoryRepository = $environmentalTopicCategoryRepository;
+        $this->regionRepository = $regionRepository;
         $this->em = $em;
 
         parent::__construct();
@@ -89,154 +80,72 @@ class ImportAids extends Command
 
         $file = fopen($fileName, 'r');
         $count = 0;
-        $aidAdvisors = [];
-        $funders = [];
-        $businessActivityAreas = [];
-        $environmentalActions = [];
-        $environmentalTopics = [];
-        $regions = [];
 
         // skip first line
         fgetcsv($file, 0, ',');
-        while ($row = fgetcsv($file, 0, ',')) {
+        while ($row = fgetcsv($file, 0, "\t")) {
             $output->write('.');
-            $aidAdvisor = null;
-            $funder = null;
             $state = Aid::STATE_PUBLISHED;
 
             // Clean values
             $row = array_map(fn (string $value) => trim($value), $row);
-
-            // Creating the aidAdvisor
-            if (array_key_exists($row[self::COL_ADVISOR_DESCRIPTION], $aidAdvisors)) {
-                $aidAdvisor = $aidAdvisors[$row[self::COL_ADVISOR_DESCRIPTION]];
-            } elseif (!empty($row[self::COL_ADVISOR_DESCRIPTION])) {
-                $aidAdvisor = new AidAdvisor();
-                $aidAdvisor
-                    ->setName($row[self::COL_ADVISOR_NAME])
-                    ->setDescription($row[self::COL_ADVISOR_DESCRIPTION])
-                    ->setEmail($row[self::COL_ADVISOR_EMAIL])
-                    ->setPhoneNumber($row[self::COL_ADVISOR_PHONE])
-                    ->setWebsite($row[self::COL_ADVISOR_URL])
-                    ->setAddress($row[self::COL_ADVISOR_ADDRESS]);
-                $aidAdvisors[$row[self::COL_ADVISOR_DESCRIPTION]] = $aidAdvisor;
-                $this->em->persist($aidAdvisor);
-            }
-
-            // Creating the funder
-            if (array_key_exists($row[self::COL_FUNDER_NAME], $funders)) {
-                $funder = $funders[$row[self::COL_FUNDER_NAME]];
-            } elseif (!empty($row[self::COL_FUNDER_NAME])) {
-                $funder = new Funder();
-                $funder
-                    ->setName($row[self::COL_FUNDER_NAME])
-                    ->setWebsite($row[self::COL_ADVISOR_URL]);
-                $funders[$row[self::COL_FUNDER_NAME]] = $funder;
-                $this->em->persist($funder);
-            } else {
-                $state = Aid::STATE_DRAFT;
-            }
-
-            $aid = $this->aidRepository->findOneBy(['name' => $row[self::COL_AID_NAME]]);
-
+            $aid = $this->aidRepository->findOneBy(['sourceId' => $row[self::COL_SOURCE_ID]]);
             if (null === $aid) {
-                $aid = new Aid();
+                continue;
             }
 
-            $fundingSourceUrl = empty($row[self::COL_PRIMARY_URL]) ? $row[self::COL_SECONDARY_URL] : $row[self::COL_PRIMARY_URL];
-            $aid
-                ->setName($row[self::COL_AID_NAME])
-                ->setAidAdvisor($aidAdvisor)
-                ->setFunder($funder)
-                ->setAidDetails($row[self::COL_AID_DETAILS])
-                ->setGoal($row[self::COL_GOAL])
-                ->setBeneficiary($row[self::COL_BENEFICIARY])
-                ->setConditions($row[self::COL_CONDITIONS])
-                ->setEligibility($row[self::COL_ELIGIBILITY])
-                ->setFundingSourceUrl($fundingSourceUrl)
-                ->setPerimeter($row[self::COL_PERIMETER])
-                ->setState($state)
-                ->setFundingTypes(explode(', ', $row[self::COL_FUNDING_TYPES]));
+            $topicsGroup = explode(';', $row[self::COL_TOPICS]);
+            foreach($topicsGroup as $group) {
+                $categoryAndTopic = explode('-', $group);
+                if (empty($categoryAndTopic[0]) || empty($categoryAndTopic[1])) {
+                    continue;
+                }
+                $topicCategory = trim($categoryAndTopic[0]);
+                $topic = trim($categoryAndTopic[1]);
 
-            if (!empty($row[self::COL_APPLICATION_END_DATE])) {
-                $aid->setApplicationEndDate(\DateTime::createFromFormat('m/d/Y', $row[self::COL_APPLICATION_END_DATE]));
+                $environmentalTopicCategory = $this->environmentalTopicCategoryRepository->findOneBy([
+                    'name' => $topicCategory
+                ]);
+
+                if (null === $environmentalTopicCategory) {
+                    $environmentalTopicCategory = new EnvironmentalTopicCategory();
+                    $environmentalTopicCategory->setName($topicCategory);
+                    $this->em->persist($environmentalTopicCategory);
+                    $this->em->flush();
+                }
+
+                $environmentalTopic = $this->environmentalTopicRepository->findOneBy([
+                    'name' => $topic
+                ]);
+
+                if (null === $environmentalTopic) {
+                    $environmentalTopic = new EnvironmentalTopic();
+                    $environmentalTopic->setName($topic);
+                }
+
+                $environmentalTopic->addAid($aid);
+                $environmentalTopic->addEnvironmentalTopicCategory($environmentalTopicCategory);
+                $this->em->persist($environmentalTopic);
+                $this->em->flush();
             }
 
-            if (array_key_exists($row[self::COL_ACTION_1], $environmentalActions)) {
-                $aid->addEnvironmentalAction($environmentalActions[$row[self::COL_ACTION_1]]);
-            } elseif (!empty($row[self::COL_ACTION_1])) {
-                $action1 = new EnvironmentalAction();
-                $action1
-                    ->setName($row[self::COL_ACTION_1])
-                    ->addAid($aid);
-                $environmentalActions[$row[self::COL_ACTION_1]] = $action1;
-                $this->em->persist($action1);
-            } else {
-                $aid->setState(Aid::STATE_DRAFT);
-            }
-
-            if (array_key_exists($row[self::COL_ACTION_2], $environmentalActions)) {
-                $aid->addEnvironmentalAction($environmentalActions[$row[self::COL_ACTION_2]]);
-            } elseif (!empty($row[self::COL_ACTION_2])) {
-                $action2 = new EnvironmentalAction();
-                $action2
-                    ->setName($row[self::COL_ACTION_2])
-                    ->addAid($aid);
-                $environmentalActions[$row[self::COL_ACTION_2]] = $action2;
-                $this->em->persist($action2);
-            }
-
-            if (array_key_exists($row[self::COL_TOPIC_1], $environmentalTopics)) {
-                $aid->addEnvironmentalTopic($environmentalTopics[$row[self::COL_TOPIC_1]]);
-            } elseif (!empty($row[self::COL_TOPIC_1])) {
-                $topic1 = new EnvironmentalTopic();
-                $topic1
-                    ->setName($row[self::COL_TOPIC_1])
-                    ->addAid($aid);
-                $environmentalTopics[$row[self::COL_TOPIC_1]] = $topic1;
-                $this->em->persist($topic1);
-            } else {
-                $aid->setState(Aid::STATE_DRAFT);
-            }
-
-            if (array_key_exists($row[self::COL_TOPIC_2], $environmentalTopics)) {
-                $aid->addEnvironmentalTopic($environmentalTopics[$row[self::COL_TOPIC_2]]);
-            } elseif (!empty($row[self::COL_TOPIC_2])) {
-                $topic2 = new EnvironmentalTopic();
-                $topic2
-                    ->setName($row[self::COL_TOPIC_2])
-                    ->addAid($aid);
-                $environmentalTopics[$row[self::COL_TOPIC_2]] = $topic2;
-                $this->em->persist($topic2);
-            }
-
-            if (array_key_exists($row[self::COL_BUSINESS_ACTIVITY_AREA], $businessActivityAreas)) {
-                $aid->addBusinessActivityArea($businessActivityAreas[$row[self::COL_BUSINESS_ACTIVITY_AREA]]);
-            } elseif (!empty($row[self::COL_BUSINESS_ACTIVITY_AREA])) {
-                $area = new BusinessActivityArea();
-                $area->setName($row[self::COL_BUSINESS_ACTIVITY_AREA]);
-                $aid->addBusinessActivityArea($area);
-                $businessActivityAreas[self::COL_BUSINESS_ACTIVITY_AREA] = $area;
-                $this->em->persist($area);
-            }
-
-            if (0 === strcmp($row[self::COL_PERIMETER], 'NATIONAL') && empty($row[self::COL_REGION])) {
-                $aid->setState(Aid::STATE_DRAFT);
-            }
-            $tempRegions = explode(',', $row[self::COL_REGION]);
+            $tempRegions = explode(';', $row[self::COL_REGION]);
             foreach ($tempRegions as $tempRegionName) {
                 $tempRegionName = trim($tempRegionName);
-                if (array_key_exists($tempRegionName, $regions)) {
-                    $aid->addRegion($regions[$tempRegionName]);
-                } elseif (!empty($tempRegionName)) {
+                $region = $this->regionRepository->findOneBy(['name' => $tempRegionName]);
+
+                if ($region === null) {
                     $region = new Region();
                     $region->setName($tempRegionName);
-                    $aid->addRegion($region);
-                    $regions[$tempRegionName] = $region;
                     $this->em->persist($region);
+                    $this->em->flush();
                 }
+
+                $aid->setPerimeter(($tempRegionName === 'France' || $tempRegionName === 'Europe') ? Aid::PERIMETER_NATIONAL : Aid::PERIMETER_REGIONAL);
+                $aid->addRegion($region);
             }
 
+            $aid->setState(Aid::STATE_PUBLISHED);
             $this->em->persist($aid);
             $this->em->flush();
 

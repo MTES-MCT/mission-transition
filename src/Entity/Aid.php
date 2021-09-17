@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\Ulid;
 
 /**
@@ -48,51 +49,61 @@ class Aid
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list"})
      */
     private string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list"})
      */
     private ?string $perimeter;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
      */
     private ?string $goal;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
      */
     private ?string $beneficiary;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
      */
     private ?string $aidDetails;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
      */
     private ?string $eligibility;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
      */
     private ?string $conditions;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
      */
     private ?string $fundingSourceUrl;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list"})
      */
     private ?\DateTimeInterface $applicationEndDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list"})
      */
     private ?string $applicationUrl;
 
@@ -104,6 +115,7 @@ class Aid
     /**
      * @ORM\Column(type="string", length=255)
      * @Gedmo\Slug(fields={"name"})
+     * @Groups({"list"})
      */
     private string $slug;
 
@@ -119,11 +131,13 @@ class Aid
 
     /**
      * @ORM\ManyToMany(targetEntity=EnvironmentalTopic::class, inversedBy="aids")
+     * @Groups({"list"})
      */
     private Collection $environmentalTopics;
 
     /**
      * @ORM\ManyToOne(targetEntity=Funder::class)
+     * @Groups({"list"})
      */
     private ?Funder $funder;
 
@@ -134,16 +148,19 @@ class Aid
 
     /**
      * @ORM\Column(type="array", nullable=true)
+     * @Groups({"list"})
      */
     private ?array $fundingTypes = [];
 
     /**
      * @ORM\ManyToMany(targetEntity=Region::class, inversedBy="aids")
+     * @Groups({"list"})
      */
     private Collection $regions;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
      */
     private ?string $contactGuidelines;
 
@@ -154,38 +171,45 @@ class Aid
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list"})
      */
     private ?int $subventionRateUpperBound;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list"})
      */
     private ?int $subventionRateLowerBound;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list"})
      */
     private ?int $loanAmount;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list"})
      */
     private ?\DateTimeInterface $applicationStartDate;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
      */
     private $projectExamples;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"list"})
      */
     private $directAccess = false;
 
     /**
      * @ORM\ManyToMany(targetEntity=AidType::class, inversedBy="aids")
+     * @Groups({"list"})
      */
-    private $type;
+    private $types;
 
     public function __construct()
     {
@@ -195,7 +219,7 @@ class Aid
         $this->businessActivityAreas = new ArrayCollection();
         $this->state = self::STATE_DRAFT;
         $this->regions = new ArrayCollection();
-        $this->type = new ArrayCollection();
+        $this->types = new ArrayCollection();
     }
 
     public function getUlid(): Ulid
@@ -600,15 +624,15 @@ class Aid
     /**
      * @return Collection|AidType[]
      */
-    public function getType(): Collection
+    public function getTypes(): Collection
     {
-        return $this->type;
+        return $this->types;
     }
 
     public function addType(AidType $type): self
     {
-        if (!$this->type->contains($type)) {
-            $this->type[] = $type;
+        if (!$this->types->contains($type)) {
+            $this->types[] = $type;
         }
 
         return $this;
@@ -616,7 +640,7 @@ class Aid
 
     public function removeType(AidType $type): self
     {
-        $this->type->removeElement($type);
+        $this->types->removeElement($type);
 
         return $this;
     }

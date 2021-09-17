@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Util\EntityIdTrait;
 use App\Repository\RegionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,13 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Region
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * @Groups({"list"})
-     */
-    private $id;
+    use EntityIdTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -40,11 +35,6 @@ class Region
     public function __toString()
     {
         return $this->name;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getName(): ?string

@@ -19,6 +19,17 @@ class EnvironmentalTopicCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, EnvironmentalTopicCategory::class);
     }
 
+
+    public function findAllWithTopics()
+    {
+        return $this->createQueryBuilder('etc')
+            ->select('etc', 'et')
+            ->leftJoin('etc.environmentalTopics', 'et')
+            ->orderBy('etc.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return EnvironmentalTopicCategory[] Returns an array of EnvironmentalTopicCategory objects
     //  */

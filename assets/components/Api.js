@@ -1,6 +1,6 @@
 import React from 'react'
 
-const fetchEnvrtonmentalTopics = () => {
+const fetchEnvironmentalTopicCategories = () => {
     return fetch('/api/environmental-topics')
       .then(response => response.json())
 };
@@ -15,9 +15,23 @@ const fetchRegions = () => {
         .then(response => response.json())
 };
 
-const fetchAids = () => {
-    return fetch('/api/aids')
+const fetchAids = (environmentalTopics, aidTypes, regions) => {
+    let environmentalTopicsQueryString = '&topics[]=' + environmentalTopics.value;
+
+    let aidTypesQueryString = '';
+    if (aidTypes !== null) {
+        aidTypes.forEach(option => {
+            aidTypesQueryString += '&aidTypes[]=' + option.value
+        })
+    }
+
+    let regionsQueryString = (regions !== null && regions.value !== undefined) ? '&regions[]=' + regions.value : '';
+
+    let url = `/api/aids?${environmentalTopicsQueryString}${aidTypesQueryString}${regionsQueryString}`;
+    console.log(url);
+
+    return fetch(url)
       .then(response => response.json())
 };
 
-export {fetchEnvrtonmentalTopics, fetchAidTypes, fetchRegions}
+export {fetchEnvironmentalTopicCategories, fetchAidTypes, fetchRegions, fetchAids}

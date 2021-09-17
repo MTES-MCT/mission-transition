@@ -16,11 +16,7 @@
                     <div class="fr-col-12">
                         <div class="heading-underlined">
                             <span class="subtitle">
-                                {% if aid.type is same as(constant('TYPE_FIRST_STEP', aid)) %}
-                                    Action premier pas
-                                {% else %}
-                                    Dispositif de financement
-                                {% endif %}
+                                {{ aid.types|join(', ') }}
                             </span>
                         </div>
                     </div>
@@ -93,12 +89,12 @@
                     </div>
                 </div>
             {% endif %}
-            {% if aid.type %}
+            {% if aid.types is not empty %}
                 <div class="card-focus">
                     <img src="{{ asset('build/img/double_switch.svg') }}" alt="icon switch">
                     <div class="content">
-                        <span class="subtitle highlighted">Type de dispositif</span>
-                        <p class="on-dark">{{ aid.type }}</p>
+                        <span class="subtitle highlighted">Type(s) de dispositif</span>
+                        <p class="on-dark">{{ aid.types|join(' ,') }}</p>
                     </div>
                 </div>
             {% endif %}

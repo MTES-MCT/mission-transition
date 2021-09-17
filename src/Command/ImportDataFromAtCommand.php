@@ -79,13 +79,13 @@ class ImportDataFromAtCommand extends Command
         $categories = $this->getEnvironmentalTopicsMapping();
 
         foreach ($categories as $key => $category) {
-            $environmentalTopic = $this->environmentalTopicRepository->findOneBy(['name' => $category]);
-            if (null === $environmentalTopic) {
-                $environmentalTopic = new EnvironmentalTopic();
-                $environmentalTopic->setName($category);
-                $this->em->persist($environmentalTopic);
-                $this->em->flush();
-            }
+//            $environmentalTopic = $this->environmentalTopicRepository->findOneBy(['name' => $category]);
+//            if (null === $environmentalTopic) {
+//                $environmentalTopic = new EnvironmentalTopic();
+//                $environmentalTopic->setName($category);
+//                $this->em->persist($environmentalTopic);
+//                $this->em->flush();
+//            }
             $nextUrl = self::BASE_API_URL . $key;
             $io->info($category);
             while ($nextUrl !== null) {
@@ -104,7 +104,7 @@ class ImportDataFromAtCommand extends Command
                     // New Aid
                     if (null === $aid) {
                         $aid = $this->createNewAid($aidFromAt);
-                        $aid->addEnvironmentalTopic($environmentalTopic);
+//                        $aid->addEnvironmentalTopic($environmentalTopic);
                         $this->em->persist($aid);
                         $this->newlyAdded++;
                     } else {
@@ -159,26 +159,26 @@ class ImportDataFromAtCommand extends Command
             ->setSubventionRateLowerBound($aidFromAt['subvention_rate_lower_bound'])
             ->setSubventionRateUpperBound($aidFromAt['subvention_rate_upper_bound'])
             ->setFundingTypes($aidFromAt['aid_types'])
-            ->setPerimeter($this->getPerimetersMapping($aidFromAt['perimeter']))
+//            ->setPerimeter($this->getPerimetersMapping($aidFromAt['perimeter']))
             ->setState(Aid::STATE_DRAFT)
         ;
 
-        $regionNames = explode(', ', $aidFromAt['perimeter']);
-        foreach($regionNames as $regionName) {
-            $aidType = $this->retrieveExistingRegion($regionName);
-            if ($aidType === null) {
-                $aidType = $this->createRegion($regionName);
-                $this->em->persist($aidType);
-                $this->em->flush();
-            }
-
-            $aid->addRegion($aidType);
-        }
+//        $regionNames = explode(', ', $aidFromAt['perimeter']);
+//        foreach($regionNames as $regionName) {
+//            $aidType = $this->retrieveExistingRegion($regionName);
+//            if ($aidType === null) {
+//                $aidType = $this->createRegion($regionName);
+//                $this->em->persist($aidType);
+//                $this->em->flush();
+//            }
+//
+//            $aid->addRegion($aidType);
+//        }
 
         foreach($aidFromAt['aid_types'] as $aidTypeName) {
-            $aidType = $this->retrieveExistingAidType($aidTypeName);
+            $aidType = $this->retrieveExistingAidType($this->getTypesMapping($aidTypeName));
             if ($aidType === null) {
-                $aidType = $this->createAidType($aidTypeName);
+                $aidType = $this->createAidType($this->getTypesMapping($aidTypeName));
                 $this->em->persist($aidType);
                 $this->em->flush();
             }
@@ -266,24 +266,24 @@ class ImportDataFromAtCommand extends Command
         ];
     }
 
-    protected function getTypesMapping(array $fundingTypes): string
+    protected function getTypesMapping(string $aidTypeName): string
     {
-        if (empty($fundingTypes)) {
-            return 'Dispositif de financement';
+        if (!$aidTypeName) {
+            return 'Aide financière';
         }
 
         $mapping = [
-            'Subvention' => 'Dispositif de financement',
-            'Prêt' => 'Dispositif de financement',
-            'Avance récupérable' => 'Dispositif de financement',
-            'Autre' => 'Dispositif de financement',
+            'Subvention' => 'Aide financière',
+            'Prêt' => 'Aide financière',
+            'Avance récupérable' => 'Aide financière',
+            'Autre' => 'Aide financière',
             'Technique' => 'Aide en ingénierie',
             'Financière' => 'Aide en ingénierie',
-            'Juridique / administrative' => 'Dispositif de financement',
+            'Juridique / administrative' => 'Aide en ingénierie',
         ];
 
-        if (isset($mapping[$fundingTypes[0]])) {
-            return $mapping[$fundingTypes[0]];
+        if (isset($mapping[$aidTypeName])) {
+            return $mapping[$aidTypeName];
         }
 
         return 'Dispositif de financement';

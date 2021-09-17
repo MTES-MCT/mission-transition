@@ -7,7 +7,9 @@ use App\Entity\EnvironmentalAction;
 use App\Entity\EnvironmentalTopic;
 use App\Entity\Region;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Aid|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,31 +26,29 @@ class AidRepository extends ServiceEntityRepository
 
     public function searchByCriteria(
         array $aidTypes,
-        EnvironmentalTopic $environmentalTopic,
-        Region $region = null,
-        string $perimeter = Aid::PERIMETER_NATIONAL,
-        int $maxResults = 6
+        array $environmentalCategory,
+        array $regions = null
     ) {
         $qb = $this->createQueryBuilder('aid');
 
         $qb
-            ->select('aid', 'environmentalTopics', 'funder')
+            ->select('aid', 'environmentalTopics', 'environmentalTopicCategories', 'funder')
             ->join('aid.funder', 'funder')
-            ->andWhere('aid.perimeter = :perimeter')
-            ->andWhere("aid.state = 'published'")
-            ->setParameter('perimeter', $perimeter)
-            ->setMaxResults($maxResults)
+            ->andWhere("aid.state = :state")->setParameter('state', Aid::STATE_PUBLISHED)
         ;
 
-        if (null !== $region) {
+        if (null !== $regions) {
             $qb
                 ->join('aid.regions', 'regions')
-                ->andWhere('regions = :region')->setParameter('region', $region);
+                ->andWhere('regions IN (:regions)')->setParameter('regions', $regions);
         }
 
         $qb
-            ->join('aid.environmentalTopics', 'environmentalTopics')
-            ->andWhere('environmentalTopics = :environmentalTopic')->setParameter('environmentalTopic', $environmentalTopic);
+        ->join('aid.environmentalTopics', 'environmentalTopics')
+        ->join('environmentalTopics.environmentalTopicCategories', 'environmentalTopicCategories')
+        ->andWhere('environmentalTopicCategories = :category')->setParameter('category', $environmentalCategory)
+        ->join('aid.types', 'types')
+        ->andWhere('types IN (:types)')->setParameter('types', $aidTypes);
 
         return $qb->getQuery()->getResult();
     }
