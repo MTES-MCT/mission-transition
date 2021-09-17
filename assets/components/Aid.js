@@ -32,6 +32,8 @@ const Aid = ({aid, last = false}) => {
         if (!aid.applicationStartDate && !aid.applicationEndDate) {
             return;
         }
+        const applicationStartDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium'}).format(new Date(aid.applicationStartDate))
+        const applicationEndDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium'}).format(new Date(aid.applicationEndDate))
 
         return (
             <div className="aid-dates">
@@ -40,7 +42,7 @@ const Aid = ({aid, last = false}) => {
                 </span>
                 <span className="subtitle">
                     dispostitif temporaire<br/>
-                    du { aid.applicationStartDate } au {aid.applicationEndDate}
+                    du { applicationStartDate } au {applicationEndDate}
                 </span>
             </div>
         )
@@ -62,7 +64,7 @@ const Aid = ({aid, last = false}) => {
                 {getLowerAndUpperBound()}
 
                 <ul className="fr-tags-group fr-mt-4w">
-                    {aid.environmentalTopics.map(topic => <li><span className="fr-mb-3v mt-tag subtitle">{ topic.name }</span></li>)}
+                    {aid.environmentalTopics.map((topic, index) => <li key={index}><span className="fr-mb-3v mt-tag subtitle">{ topic.name }</span></li>)}
                 </ul>
             </div>
             { aid.directAccess && (

@@ -2,11 +2,10 @@
 @import '../components/icons';
 
 .card-aid-list {
-    max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-gap: 2rem;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
 }
 
 .card-aid {
@@ -136,5 +135,15 @@
         height: 100%;
         display: flex;
         justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .card-aid-list {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-gap: 2rem;
+        grid-template-columns: repeat(3, 1fr);
     }
 }

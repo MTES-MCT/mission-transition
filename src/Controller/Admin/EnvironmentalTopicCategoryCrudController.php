@@ -6,6 +6,7 @@ use App\Entity\EnvironmentalTopic;
 use App\Entity\EnvironmentalTopicCategory;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class EnvironmentalTopicCategoryCrudController extends AbstractCrudController
@@ -21,7 +22,7 @@ class EnvironmentalTopicCategoryCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Catégorie de thématiques')
             ->setEntityLabelInPlural('Catégories de thématique')
             ->setPageTitle('index', 'Gestion des %entity_label_plural%')
-            ->setPageTitle('edit', fn (EnvironmentalTopic $topic) => sprintf('Edition de la catégorie <b>%s</b>', $topic->getName()))
+            ->setPageTitle('edit', fn (EnvironmentalTopicCategory $topic) => sprintf('Edition de la catégorie <b>%s</b>', $topic->getName()))
             ;
     }
 
@@ -29,6 +30,7 @@ class EnvironmentalTopicCategoryCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name', 'Nom'),
+            TextareaField::new('description', 'Description'),
         ];
     }
 }

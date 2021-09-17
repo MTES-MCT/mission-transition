@@ -33,6 +33,12 @@ class EnvironmentalTopicCategory
      */
     private Collection $environmentalTopics;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"list"})
+     */
+    private ?string $description;
+
     public function __construct()
     {
         $this->environmentalTopics = new ArrayCollection();
@@ -75,6 +81,18 @@ class EnvironmentalTopicCategory
     public function removeEnvironmentalTopic(EnvironmentalTopic $environmentalTopic): self
     {
         $this->environmentalTopics->removeElement($environmentalTopic);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

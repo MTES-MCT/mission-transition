@@ -5,17 +5,18 @@ import AidList from './AidList'
 import {fetchAids} from "./Api";
 
 const AidSearchEngine = () => {
-    const [environmentalTopicCategory, setEnvironmentalTopicCategory] = useState([]);
+    const [environmentalTopicCategory, setEnvironmentalTopicCategory] = useState(null);
     const [environmentalTopics, setEnvironmentalTopics] = useState([]);
     const [environmentalTopicSelected, setEnvironmentalTopicSelected] = useState(null);
     const [aidTypes, setAidTypes] = useState([]);
-    const [regions, setRegions] = useState([]);
+    const [region, setRegion] = useState(null);
     const [aids, setAids] = useState([]);
     const [filteredAids, setFilteredAids] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
     const [hasTopicError, setHasTopicError] = useState(false);
     const [hasTypeError, setHasTypeError] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const [lastSearchHistory, setLastSearchHistory] = useState({})
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,16 +24,22 @@ const AidSearchEngine = () => {
         setHasTypeError(aidTypes.length === 0);
 
         if (environmentalTopicCategory.length !== 0 && aidTypes.length !== 0) {
-            fetchAids(environmentalTopicCategory, aidTypes, regions, environmentalTopicSelected, searchValue)
+            fetchAids(environmentalTopicCategory, aidTypes, region, environmentalTopicSelected, searchValue)
                 .then(data => {
                     setAids(data);
                     setFilteredAids(data);
                 })
             setIsSearching(true);
+            setLastSearchHistory({
+                topic: environmentalTopicSelected,
+                category: environmentalTopicCategory,
+                aidTypes: aidTypes,
+                region: region
+            })
         }
     };
 
-
+console.log(environmentalTopicCategory);
     return (
         <>
             <AidSearchEngineFilters
@@ -42,7 +49,7 @@ const AidSearchEngine = () => {
                 environmentalTopics={environmentalTopics}
                 setEnvironmentalTopics={setEnvironmentalTopics}
                 setAidTypes={setAidTypes}
-                setRegions={setRegions}
+                setRegions={setRegion}
                 handleSubmit={handleSubmit}
                 isSearching={isSearching}
                 hasTopicError={hasTopicError}
@@ -75,14 +82,15 @@ const AidSearchEngine = () => {
             {isSearching && filteredAids.length && (
                 <div className="bg-light">
                     <div className="fr-container fr-pt-7w">
-                        <p className="subtitle">{filteredAids.length} dispositif(s) correspondent à votre recherche</p>
+                        {/*<p className="subtitle">{filteredAids.length} dispositif(s) correspondent à votre recherche</p>*/}
                         <AidList
                             aids={filteredAids.filter(aid => aid.perimeter === 'REGIONAL')}
-                            perimeterName={'région'}
+                            lastSearchHistory={lastSearchHistory}
                         />
                         <AidList
                             aids={filteredAids.filter(aid => aid.perimeter === 'NATIONAL')}
-                            perimeterName={'France'}
+                            perimeterName={'au niveau national'}
+                            lastSearchHistory={lastSearchHistory}
                         />
                     </div>
                 </div>
