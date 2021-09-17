@@ -26,8 +26,11 @@ class AidRepository extends ServiceEntityRepository
 
     public function searchByCriteria(
         array $aidTypes,
-        array $environmentalCategory,
-        array $regions = null
+        string $environmentalCategory,
+        string $environmentalTopic = null,
+        string $region = null,
+        string $searchText = null
+
     ) {
         $qb = $this->createQueryBuilder('aid');
 
@@ -37,18 +40,29 @@ class AidRepository extends ServiceEntityRepository
             ->andWhere("aid.state = :state")->setParameter('state', Aid::STATE_PUBLISHED)
         ;
 
-        if (null !== $regions) {
+        if (null !== $region) {
             $qb
                 ->join('aid.regions', 'regions')
-                ->andWhere('regions IN (:regions)')->setParameter('regions', $regions);
+                ->andWhere('regions IN (:regions)')->setParameter('regions', $region);
         }
 
         $qb
-        ->join('aid.environmentalTopics', 'environmentalTopics')
-        ->join('environmentalTopics.environmentalTopicCategories', 'environmentalTopicCategories')
-        ->andWhere('environmentalTopicCategories = :category')->setParameter('category', $environmentalCategory)
-        ->join('aid.types', 'types')
-        ->andWhere('types IN (:types)')->setParameter('types', $aidTypes);
+            ->join('aid.environmentalTopics', 'environmentalTopics')
+            ->join('environmentalTopics.environmentalTopicCategories', 'environmentalTopicCategories')
+            ->andWhere('environmentalTopicCategories = :category')->setParameter('category', $environmentalCategory)
+            ->join('aid.types', 'types')
+            ->andWhere('types IN (:types)')->setParameter('types', $aidTypes);
+
+        if (null !== $environmentalTopic) {
+            $qb
+                ->andWhere('environmentalTopics = :topic')->setParameter('topic', $environmentalTopic);
+        }
+
+        if (null !== $searchText) {
+            $qb
+                ->andWhere("LOWER(aid.name) LIKE :text OR LOWER(aid.goal) LIKE :text OR LOWER(aid.aidDetails) LIKE :text OR LOWER(aid.contactGuidelines) LIKE :text")->setParameter('text', '%'.strtolower($searchText).'%')
+            ;
+        }
 
         return $qb->getQuery()->getResult();
     }

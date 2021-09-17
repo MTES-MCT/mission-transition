@@ -80,15 +80,23 @@ class ApiController extends AbstractController
     ): Response
     {
         $query = $request->query;
-        $environmentalTopics = (array) $query->get('topics', []);
+        $environmentalCategory = $query->get('category');
+        $environmentalTopic = $query->get('topic');
         $aidTypes = (array)  $query->get('aidTypes', []);
-        $regions = $query->get('regions', null);
+        $region = $query->get('region');
+        $searchText = $query->get('search');
+
+        if ($environmentalCategory === null) {
+            return new JsonResponse([], Response::HTTP_BAD_REQUEST);
+        }
 
         $data = $serializer->serialize(
             $aidRepository->searchByCriteria(
                 $aidTypes,
-                $environmentalTopics,
-                $regions
+                $environmentalCategory,
+                $environmentalTopic,
+                $region,
+                $searchText
             ),
             'json',
             ['groups' => 'list']

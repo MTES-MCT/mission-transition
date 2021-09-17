@@ -10,6 +10,8 @@ const AidSearchEngineFilters = (
         setAids,
         setFilteredAids,
         environmentalTopics,
+        environmentalTopicSelected,
+        setEnvironmentalTopicSelected,
         setEnvironmentalTopics,
         setEnvironmentalTopicCategory,
         setAidTypes,
@@ -17,23 +19,26 @@ const AidSearchEngineFilters = (
         handleSubmit,
         isSearching,
         hasTopicError,
-        hasTypeError
+        hasTypeError,
+        searchValue,
+        setSearchValue
     }) => {
 
     const [loading, setLoading] = useState(false);
-    const [selectedEnvironmentalTopicValue, setSelectedEnvironmentalTopicValue] = useState({label: "Pas de sous-thématique", value: 0})
+    // const [selectedEnvironmentalTopicValue, setSelectedEnvironmentalTopicValue] = useState({label: "Pas de sous-thématique", value: 0})
 
     //EnvironmentalTopicCategory
     const fetchEnvironmentalTopicCategoriesData = (inputValue) => {
         return fetchEnvironmentalTopicCategories().then(result => {
             setLoading(false);
-            result = result.map(category => ({label: category.name, value: category.id}));
+            result = result.map(category => ({label: category.name, value: category.id, environmentalTopics: category.environmentalTopics}));
             return result.filter(topic => topic.label.toLowerCase().includes(inputValue.toLowerCase()));
         });
     };
 
     const handleEnvironmentalTopicCategoriesChange = (newValue) => {
         setEnvironmentalTopicCategory(newValue)
+        setEnvironmentalTopics(newValue.environmentalTopics.map(topic => ({label: topic.name, value: topic.id})))
         return newValue
     }
 
@@ -49,32 +54,16 @@ const AidSearchEngineFilters = (
     }
 
     const handleEnvironmentalTopicsChange = (newValue) => {
-        setSelectedEnvironmentalTopicValue(newValue);
-
-        if (newValue.value === 0) {
-            setFilteredAids(aids)
-            return newValue;
-        }
-        let filteredAids = [];
-        aids.forEach(aid => {
-            aid.environmentalTopics.forEach(topic => {
-                if (topic.id === newValue.value) {
-                    filteredAids.push(aid);
-                }
-            })
-        })
-        setFilteredAids(filteredAids)
-
+        setEnvironmentalTopicSelected(newValue)
         return newValue
     }
 
     const EnvironmentalTopicsSelect = props => {
         return (
           <Select
-            options={getEnvironmentalTopicsOptions()}
-            value={selectedEnvironmentalTopicValue}
+            options={environmentalTopics}
+            isClearable
             placeholder={loading ? "Chargement" : "Choisir une sous-thématique..."}
-            isDisabled={!isSearching}
             cacheOptions
             styles={{ container: (base) => ({ ...base, zIndex: 350 }) }}
             onChange={handleEnvironmentalTopicsChange}
@@ -143,7 +132,7 @@ const AidSearchEngineFilters = (
         return (
             <AsyncSelect
                 loadOptions={fetchRegionsData}
-                placeholder={loading ? "Chargement" : "Choisir un type de dispositif..."}
+                placeholder={loading ? "Chargement" : "Choisir une région..."}
                 isDisabled={loading}
                 defaultOptions
                 isClearable
@@ -154,10 +143,10 @@ const AidSearchEngineFilters = (
         );
     };
 
-    const handlePreSubmit = (e) => {
-        handleSubmit(e)
-        handleEnvironmentalTopicsChange({label: "Pas de sous-thématique", value: 0})
+    const onSearchChange = e => {
+        setSearchValue(e.target.value)
     }
+
     return (
         <div className="fr-container-fluid bg-dark">
             <div className="fr-grid-row fr-mx-9w fr-py-3w">
@@ -191,16 +180,13 @@ const AidSearchEngineFilters = (
                 <div className="fr-col fr-mx-4w fr-mt-4w">
                     <div className="fr-search-bar" id="header-search" role="search">
                         <label className="fr-label" htmlFor="search-784-input">Recherche</label>
-                        <input disabled={!isSearching} className="fr-input" placeholder="Rechercher" type="search" id="search-784-input" name="search-784-input" />
-                        <button className="fr-btn" title="Rechercher">
-                            Rechercher
-                        </button>
+                        <input value={searchValue} onChange={onSearchChange} className="fr-input" placeholder="Rechercher" type="search" id="search-784-input" name="search-784-input" />
                     </div>
                 </div>
             </div>
             <div className="fr-grid-row fr-grid-row--center">
                 <div className="fr-offset-6">
-                    <button onClick={handlePreSubmit} className="fr-btn fr-btn--secondary cta-search">
+                    <button onClick={handleSubmit} className="fr-btn fr-btn--secondary cta-search">
                         AFFICHER LES RÉSULTATS
                     </button>
                 </div>

@@ -7,6 +7,7 @@ import {fetchAids} from "./Api";
 const AidSearchEngine = () => {
     const [environmentalTopicCategory, setEnvironmentalTopicCategory] = useState([]);
     const [environmentalTopics, setEnvironmentalTopics] = useState([]);
+    const [environmentalTopicSelected, setEnvironmentalTopicSelected] = useState(null);
     const [aidTypes, setAidTypes] = useState([]);
     const [regions, setRegions] = useState([]);
     const [aids, setAids] = useState([]);
@@ -14,6 +15,7 @@ const AidSearchEngine = () => {
     const [isSearching, setIsSearching] = useState(false);
     const [hasTopicError, setHasTopicError] = useState(false);
     const [hasTypeError, setHasTypeError] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,7 +23,7 @@ const AidSearchEngine = () => {
         setHasTypeError(aidTypes.length === 0);
 
         if (environmentalTopicCategory.length !== 0 && aidTypes.length !== 0) {
-            fetchAids(environmentalTopicCategory, aidTypes, regions)
+            fetchAids(environmentalTopicCategory, aidTypes, regions, environmentalTopicSelected, searchValue)
                 .then(data => {
                     setAids(data);
                     setFilteredAids(data);
@@ -46,6 +48,10 @@ const AidSearchEngine = () => {
                 hasTopicError={hasTopicError}
                 hasTypeError={hasTypeError}
                 setEnvironmentalTopicCategory={setEnvironmentalTopicCategory}
+                setEnvironmentalTopicSelected={setEnvironmentalTopicSelected}
+                environmentalTopicSelected={environmentalTopicSelected}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
             />
             {!isSearching && (
                 <div className="bg-light no-results fr-p-12w">

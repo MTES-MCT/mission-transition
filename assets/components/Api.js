@@ -15,8 +15,13 @@ const fetchRegions = () => {
         .then(response => response.json())
 };
 
-const fetchAids = (environmentalTopics, aidTypes, regions) => {
-    let environmentalTopicsQueryString = '&topics[]=' + environmentalTopics.value;
+const fetchAids = (environmentalCategory, aidTypes, region, environmentalTopicSelected, searchValue) => {
+    let environmentalCategoryQueryString = '&category=' + environmentalCategory.value;
+
+    let environmentalTopicQueryString = '';
+    if (environmentalTopicSelected !== null && environmentalTopicSelected.value !== 0) {
+        environmentalTopicQueryString = '&topic=' + environmentalTopicSelected.value;
+    }
 
     let aidTypesQueryString = '';
     if (aidTypes !== null) {
@@ -25,9 +30,10 @@ const fetchAids = (environmentalTopics, aidTypes, regions) => {
         })
     }
 
-    let regionsQueryString = (regions !== null && regions.value !== undefined) ? '&regions[]=' + regions.value : '';
+    let regionsQueryString = (region !== null && region.value !== undefined) ? '&region=' + region.value : '';
+    let searchQueryString = (region !== '') ? '&search=' + searchValue : '';
 
-    let url = `/api/aids?${environmentalTopicsQueryString}${aidTypesQueryString}${regionsQueryString}`;
+    let url = `/api/aids?${environmentalCategoryQueryString}${aidTypesQueryString}${regionsQueryString}${environmentalTopicQueryString}${searchQueryString}`;
     console.log(url);
 
     return fetch(url)
