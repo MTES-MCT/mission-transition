@@ -3,16 +3,17 @@
 namespace App\Entity;
 
 use App\Entity\Util\EntityIdTrait;
-use App\Repository\RegionRepository;
+use App\Repository\AidTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass=RegionRepository::class)
+ * @ORM\Entity(repositoryClass=AidTypeRepository::class)
  */
-class Region
+class AidType
 {
     use EntityIdTrait;
 
@@ -23,7 +24,13 @@ class Region
     private string $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Aid::class, mappedBy="regions")
+     * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private string $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Aid::class, mappedBy="types")
      */
     private $aids;
 
@@ -37,6 +44,11 @@ class Region
         return $this->name;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -45,6 +57,18 @@ class Region
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -61,7 +85,7 @@ class Region
     {
         if (!$this->aids->contains($aid)) {
             $this->aids[] = $aid;
-            $aid->addRegion($this);
+            $aid->addType($this);
         }
 
         return $this;
@@ -70,7 +94,7 @@ class Region
     public function removeAid(Aid $aid): self
     {
         if ($this->aids->removeElement($aid)) {
-            $aid->removeRegion($this);
+            $aid->removeType($this);
         }
 
         return $this;

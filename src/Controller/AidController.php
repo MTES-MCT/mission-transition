@@ -17,7 +17,7 @@ class AidController extends AbstractController
     {
         $aid = $aidRepository->findOneBy([
             'slug' => $slug,
-            'state' => Aid::STATE_PUBLISHED,
+//            'state' => Aid::STATE_PUBLISHED,
         ]);
         if (null === $aid) {
             return $this->redirectToRoute('search_results');

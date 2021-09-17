@@ -7,6 +7,7 @@ use App\Entity\AidAdvisor;
 use App\Entity\EnvironmentalAction;
 use App\Entity\EnvironmentalActionCategory;
 use App\Entity\EnvironmentalTopic;
+use App\Entity\EnvironmentalTopicCategory;
 use App\Entity\Funder;
 use App\Entity\Region;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -35,6 +36,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Accueil', 'fa fa-home');
         yield MenuItem::section('Gestion des aides', 'fa fa-credit-card');
         yield MenuItem::linkToCrud('Dispositifs d\'aide', 'fa fa-user', Aid::class);
+        yield MenuItem::linkToCrud('Catégories de thématiques', 'fa fa-user', EnvironmentalTopicCategory::class);
         yield MenuItem::linkToCrud('Thématiques', 'fa fa-user', EnvironmentalTopic::class);
         yield MenuItem::linkToCrud('Régions', 'fa fa-user', Region::class);
         yield MenuItem::linkToCrud('Objectifs Entreprises', 'fa fa-user', EnvironmentalAction::class);

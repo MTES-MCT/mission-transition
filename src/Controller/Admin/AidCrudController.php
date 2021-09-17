@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -50,39 +51,21 @@ class AidCrudController extends AbstractCrudController
                     'Brouillon' => Aid::STATE_DRAFT,
                     'Publié' => Aid::STATE_PUBLISHED,
                 ]),
+            BooleanField::new('directAccess')->setLabel('Fiche sans détails'),
             IdField::new('uuid', 'UUID')->onlyOnDetail(),
             TextField::new('sourceId', 'ID Source')->hideOnForm(),
             TextField::new('name', 'Titre'),
-            AssociationField::new('environmentalTopics', 'Thématiques')->autocomplete()->setTemplatePath('admin/aid/environmental_topics.html.twig'),
-            AssociationField::new('environmentalActions', 'Actions associées')->setTemplatePath('admin/aid/environmental_actions.html.twig'),
-            ChoiceField::new('type', 'Type')
-                ->setChoices([
-                    'Appel à projet' => Aid::TYPE_AAP,
-                    'Dispositif de Financement' => Aid::TYPE_AID,
-                    'Fonds d\'investissement' => Aid::TYPE_INVESTMENT_FUND,
-                    'Entreprise' => Aid::TYPE_COMPANY,
-                    'Plan de Relance' => Aid::TYPE_RECOVERY_PLAN,
-                    'Premier pas' => Aid::TYPE_FIRST_STEP,
-                    'Aide en ingénierie' => Aid::TYPE_ENGINEER
-                ]),
-            ChoiceField::new('fundingTypes', 'Type')
-                ->set
-                ->setChoices([
-                    'Appel à projet' => Aid::TYPE_AAP,
-                    'Dispositif de Financement' => Aid::TYPE_AID,
-                    'Fonds d\'investissement' => Aid::TYPE_INVESTMENT_FUND,
-                    'Entreprise' => Aid::TYPE_COMPANY,
-                    'Plan de Relance' => Aid::TYPE_RECOVERY_PLAN,
-                    'Premier pas' => Aid::TYPE_FIRST_STEP,
-                    'Aide en ingénierie' => Aid::TYPE_ENGINEER
-                ]),
+            AssociationField::new('environmentalTopics', 'Thématiques')->setTemplatePath('admin/aid/environmental_topics.html.twig'),
+//            AssociationField::new('environmentalActions', 'Actions associées')->setTemplatePath('admin/aid/environmental_actions.html.twig'),
+            AssociationField::new('types', 'Types')->setTemplatePath('admin/aid/environmental_topics.html.twig'),
             TextField::new('perimeter', 'Périmètre')->hideOnIndex(),
-            TextField::new('region.name', 'Région')->hideOnIndex(),
+            AssociationField::new('regions', 'Régions')->autocomplete()->setTemplatePath('admin/aid/environmental_topics.html.twig'),
             TextareaField::new('goal', 'C\'est quoi ?')->hideOnIndex(),
             TextareaField::new('beneficiary', 'Les bénéficiaires')->hideOnIndex(),
             TextareaField::new('aidDetails', 'Accompagnement')->hideOnIndex(),
             TextareaField::new('eligibility', 'Éligibilités')->hideOnIndex(),
             TextareaField::new('conditions', 'Conditions')->hideOnIndex(),
+            TextareaField::new('contactGuidelines', 'Contact')->hideOnIndex(),
             UrlField::new('fundingSourceUrl', 'Site Financeur')->hideOnIndex(),
             DateField::new('applicationEndDate', 'Date de cloture')->hideOnIndex(),
             UrlField::new('applicationUrl', 'URL du formulaire de candidature')->hideOnIndex(),
