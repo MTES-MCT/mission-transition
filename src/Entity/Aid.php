@@ -211,6 +211,11 @@ class Aid
      */
     private $types;
 
+    /**
+     * @ORM\OneToMany(targetEntity=AidFeedback::class, mappedBy="aid")
+     */
+    private $feedbacks;
+
     public function __construct()
     {
         $this->ulid = new Ulid();
@@ -220,6 +225,7 @@ class Aid
         $this->state = self::STATE_DRAFT;
         $this->regions = new ArrayCollection();
         $this->types = new ArrayCollection();
+        $this->feedbacks = new ArrayCollection();
     }
 
     public function getUlid(): Ulid
@@ -641,6 +647,36 @@ class Aid
     public function removeType(AidType $type): self
     {
         $this->types->removeElement($type);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AidFeedback[]
+     */
+    public function getFeedbacks(): Collection
+    {
+        return $this->feedbacks;
+    }
+
+    public function addFeedback(AidFeedback $feedback): self
+    {
+        if (!$this->feedbacks->contains($feedback)) {
+            $this->feedbacks[] = $feedback;
+            $feedback->setAid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(AidFeedback $feedback): self
+    {
+        if ($this->feedbacks->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getAid() === $this) {
+                $feedback->setAid(null);
+            }
+        }
 
         return $this;
     }
