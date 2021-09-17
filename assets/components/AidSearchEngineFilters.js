@@ -19,7 +19,6 @@ const AidSearchEngineFilters = (
         handleSubmit,
         isSearching,
         hasTopicError,
-        hasTypeError,
         searchValue,
         setSearchValue,
     }) => {
@@ -45,17 +44,6 @@ const AidSearchEngineFilters = (
         return newValue
     }
 
-    const getEnvironmentalTopicsOptions = () => {
-        let options = [{label: "Pas de sous-thématique", value: 0}];
-        aids.forEach(aid => aid.environmentalTopics.map(topic => options.push({label: topic.name, value: topic.id})))
-        options = options.filter((option, index, self) =>
-            index === self.findIndex((t) => (
-                t.label === option.label && t.value === option.value
-            ))
-        )
-        return options;
-    }
-
     const handleEnvironmentalTopicsChange = (newValue) => {
         setEnvironmentalTopicSelected(newValue)
         return newValue
@@ -66,6 +54,7 @@ const AidSearchEngineFilters = (
           <Select
             options={environmentalTopics}
             isClearable
+            isDisabled={environmentalTopics.length === 0}
             placeholder={loading ? "Chargement" : "Choisir une sous-thématique..."}
             cacheOptions
             styles={{ container: (base) => ({ ...base, zIndex: 350 }) }}
@@ -154,28 +143,27 @@ const AidSearchEngineFilters = (
         <div className="fr-container-fluid bg-dark">
             <div className="fr-grid-row fr-px-4w fr-px-md-9w">
                 <div className="fr-col-12 fr-col-md-4 fr-px-md-3w fr-mt-3w">
-                    <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_environmentalTopic">Ma thématique</label>
+                    <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_environmentalTopic">Thématique</label>
                     {EnvironmentalTopicCategoriesSelect()}
                     {hasTopicError && <div className="environmental-action-error">Merci de choisir une thématique</div>}
                     {categoryDescription && <p className="fr-pt-1w on-dark small">{categoryDescription}</p>}
                 </div>
                 <div className="fr-col-12 fr-col-md-4 fr-px-md-3w fr-mt-3w">
                     <div>
-                        <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_aidType">Mon besoin</label>
+                        <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_aidType">Besoin</label>
                         {AidTypesSelect()}
-                        {hasTypeError && <div className="environmental-action-error">Merci de choisir un type de dispositif</div>}
                     </div>
                 </div>
                 <div className="fr-col-12 fr-col-md-4 fr-px-md-3w fr-mt-3w">
                     <div>
-                        <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_region">Ma localisation</label>
+                        <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_region">Localisation</label>
                         {RegionsSelect()}
                     </div>
                 </div>
             </div>
             <div className="fr-grid-row fr-px-4w fr-px-md-9w">
                 <div className="fr-col-12 fr-col-md-4 fr-px-md-3w fr-mt-3w">
-                    <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_aidType">Ma sous-thématique</label>
+                    <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_aidType">Sous-thématique</label>
                     {EnvironmentalTopicsSelect()}
                 </div>
                 <div className="fr-col-12 fr-col-md-4 fr-px-md-3w fr-mt-3w">

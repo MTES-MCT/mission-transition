@@ -50,8 +50,13 @@ class AidRepository extends ServiceEntityRepository
             ->join('aid.environmentalTopics', 'environmentalTopics')
             ->join('environmentalTopics.environmentalTopicCategories', 'environmentalTopicCategories')
             ->andWhere('environmentalTopicCategories = :category')->setParameter('category', $environmentalCategory)
-            ->join('aid.types', 'types')
-            ->andWhere('types IN (:types)')->setParameter('types', $aidTypes);
+        ;
+
+        if (!empty($aidTypes)) {
+            $qb
+                ->join('aid.types', 'types')
+                ->andWhere('types IN (:types)')->setParameter('types', $aidTypes);
+        }
 
         if (null !== $environmentalTopic) {
             $qb
