@@ -24,7 +24,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ImportDataFromAtCommand extends Command
 {
-    const BASE_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/?version=1.3&targeted_audiences=private_sector';
+    const BASE_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/?version=1.4&targeted_audiences=private_sector';
 
     protected static $defaultName = 'app:import-data-from-at';
     protected static $defaultDescription = 'Importing data from AT';
