@@ -96,7 +96,7 @@ class ImportAids extends Command
 
             $topicsGroup = explode(';', $row[self::COL_TOPICS]);
             foreach($topicsGroup as $group) {
-                $categoryAndTopic = explode('-', $group);
+                $categoryAndTopic = explode(' - ', $group);
                 if (empty($categoryAndTopic[0]) || empty($categoryAndTopic[1])) {
                     continue;
                 }
