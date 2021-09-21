@@ -19,7 +19,6 @@ class EnvironmentalTopicCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, EnvironmentalTopicCategory::class);
     }
 
-
     public function findAllWithTopics()
     {
         return $this->createQueryBuilder('etc')
@@ -30,6 +29,7 @@ class EnvironmentalTopicCategoryRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
     // /**
     //  * @return EnvironmentalTopicCategory[] Returns an array of EnvironmentalTopicCategory objects
     //  */

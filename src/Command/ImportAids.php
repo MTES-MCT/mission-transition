@@ -3,12 +3,8 @@
 namespace App\Command;
 
 use App\Entity\Aid;
-use App\Entity\AidAdvisor;
-use App\Entity\BusinessActivityArea;
-use App\Entity\EnvironmentalAction;
 use App\Entity\EnvironmentalTopic;
 use App\Entity\EnvironmentalTopicCategory;
-use App\Entity\Funder;
 use App\Entity\Region;
 use App\Repository\AidRepository;
 use App\Repository\EnvironmentalTopicCategoryRepository;
@@ -38,7 +34,7 @@ class ImportAids extends Command
     protected $em;
 
     public function __construct(
-        AidRepository          $aidRepository,
+        AidRepository $aidRepository,
         EnvironmentalTopicCategoryRepository $environmentalTopicCategoryRepository,
         EnvironmentalTopicRepository $environmentalTopicRepository,
         RegionRepository $regionRepository,
@@ -95,7 +91,7 @@ class ImportAids extends Command
             }
 
             $topicsGroup = explode(';', $row[self::COL_TOPICS]);
-            foreach($topicsGroup as $group) {
+            foreach ($topicsGroup as $group) {
                 $categoryAndTopic = explode(' - ', $group);
                 if (empty($categoryAndTopic[0]) || empty($categoryAndTopic[1])) {
                     continue;
@@ -104,7 +100,7 @@ class ImportAids extends Command
                 $topic = trim($categoryAndTopic[1]);
 
                 $environmentalTopicCategory = $this->environmentalTopicCategoryRepository->findOneBy([
-                    'name' => $topicCategory
+                    'name' => $topicCategory,
                 ]);
 
                 if (null === $environmentalTopicCategory) {
@@ -115,7 +111,7 @@ class ImportAids extends Command
                 }
 
                 $environmentalTopic = $this->environmentalTopicRepository->findOneBy([
-                    'name' => $topic
+                    'name' => $topic,
                 ]);
 
                 if (null === $environmentalTopic) {
@@ -134,14 +130,14 @@ class ImportAids extends Command
                 $tempRegionName = trim($tempRegionName);
                 $region = $this->regionRepository->findOneBy(['name' => $tempRegionName]);
 
-                if ($region === null) {
+                if (null === $region) {
                     $region = new Region();
                     $region->setName($tempRegionName);
                     $this->em->persist($region);
                     $this->em->flush();
                 }
 
-                $aid->setPerimeter(($tempRegionName === 'France' || $tempRegionName === 'Europe') ? Aid::PERIMETER_NATIONAL : Aid::PERIMETER_REGIONAL);
+                $aid->setPerimeter(('France' === $tempRegionName || 'Europe' === $tempRegionName) ? Aid::PERIMETER_NATIONAL : Aid::PERIMETER_REGIONAL);
                 $aid->addRegion($region);
             }
 

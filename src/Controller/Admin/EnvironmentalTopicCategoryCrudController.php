@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\EnvironmentalTopic;
 use App\Entity\EnvironmentalTopicCategory;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;

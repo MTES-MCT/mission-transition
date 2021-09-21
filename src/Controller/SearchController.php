@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class SearchController extends AbstractController
@@ -133,7 +132,7 @@ class SearchController extends AbstractController
             'environmentalTopic' => $environmentalTopic ?? null,
             'nextRegionalLimit' => $regionalLimit + SearchFormModel::LIMIT_INCREASED_BY,
             'nextNationalLimit' => $nationalLimit + SearchFormModel::LIMIT_INCREASED_BY,
-            'environmentalTopics' => $environmentalTopics
+            'environmentalTopics' => $environmentalTopics,
         ]);
     }
 
