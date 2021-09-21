@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use App\Entity\Aid;
-use App\Entity\EnvironmentalAction;
 use App\Entity\EnvironmentalTopic;
 use App\Entity\Region;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,8 +16,6 @@ class SearchFormModel
     protected string $aidType = self::TYPE_FUNDING;
     protected ?Region $region = null;
     /**
-     * @var EnvironmentalTopic|null
-     *
      * @Assert\NotNull(message="Merci d'indiquer une thématique")
      */
     protected ?EnvironmentalTopic $environmentalTopic = null;

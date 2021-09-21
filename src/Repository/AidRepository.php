@@ -3,13 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Aid;
-use App\Entity\EnvironmentalAction;
 use App\Entity\EnvironmentalTopic;
 use App\Entity\Region;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
-use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Aid|null find($id, $lockMode = null, $lockVersion = null)
@@ -30,14 +27,13 @@ class AidRepository extends ServiceEntityRepository
         ?string $environmentalTopic = null,
         ?string $region = null,
         ?string $searchText = null
-
     ) {
         $qb = $this->createQueryBuilder('aid');
 
         $qb
             ->select('aid', 'environmentalTopics', 'environmentalTopicCategories', 'funder')
             ->join('aid.funder', 'funder')
-            ->andWhere("aid.state = :state")->setParameter('state', Aid::STATE_PUBLISHED)
+            ->andWhere('aid.state = :state')->setParameter('state', Aid::STATE_PUBLISHED)
             ->andWhere('aid.applicationEndDate >= :today')->setParameter('today', new \DateTime())
         ;
 
@@ -69,7 +65,7 @@ class AidRepository extends ServiceEntityRepository
 
         if (null !== $searchText) {
             $qb
-                ->andWhere("LOWER(aid.name) LIKE :text OR LOWER(aid.goal) LIKE :text OR LOWER(aid.aidDetails) LIKE :text OR LOWER(aid.contactGuidelines) LIKE :text")->setParameter('text', '%'.strtolower($searchText).'%')
+                ->andWhere('LOWER(aid.name) LIKE :text OR LOWER(aid.goal) LIKE :text OR LOWER(aid.aidDetails) LIKE :text OR LOWER(aid.contactGuidelines) LIKE :text')->setParameter('text', '%'.strtolower($searchText).'%')
             ;
         }
 
@@ -77,9 +73,9 @@ class AidRepository extends ServiceEntityRepository
     }
 
     public function countAids(
-        array              $aidTypes,
+        array $aidTypes,
         EnvironmentalTopic $environmentalTopic,
-        Region             $region = null
+        Region $region = null
     ) {
         $qb = $this->createQueryBuilder('aid');
 

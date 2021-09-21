@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Repository\AidRepository;
 use App\Repository\AidTypeRepository;
 use App\Repository\EnvironmentalTopicCategoryRepository;
-use App\Repository\EnvironmentalTopicRepository;
 use App\Repository\RegionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,8 +24,7 @@ class ApiController extends AbstractController
     public function environmentalTopics(
         SerializerInterface $serializer,
         EnvironmentalTopicCategoryRepository $environmentalTopicCategoryRepository
-    ): Response
-    {
+    ): Response {
         $data = $serializer->serialize(
             $environmentalTopicCategoryRepository->findAllWithTopics(),
             'json',
@@ -42,8 +40,7 @@ class ApiController extends AbstractController
     public function aidTypes(
         SerializerInterface $serializer,
         AidTypeRepository $aidTypeRepository
-    ): Response
-    {
+    ): Response {
         $data = $serializer->serialize(
             $aidTypeRepository->findBy([], ['name' => 'ASC']),
             'json',
@@ -59,8 +56,7 @@ class ApiController extends AbstractController
     public function regions(
         SerializerInterface $serializer,
         RegionRepository $regionRepository
-    ): Response
-    {
+    ): Response {
         $data = $serializer->serialize(
             $regionRepository->findBy([], ['name' => 'ASC']),
             'json',
@@ -77,16 +73,15 @@ class ApiController extends AbstractController
         Request $request,
         SerializerInterface $serializer,
         AidRepository $aidRepository
-    ): Response
-    {
+    ): Response {
         $query = $request->query;
         $environmentalCategory = $query->get('category');
         $environmentalTopic = $query->get('topic');
-        $aidTypes = (array)  $query->get('aidTypes', []);
+        $aidTypes = (array) $query->get('aidTypes', []);
         $region = $query->get('region');
         $searchText = $query->get('search');
 
-        if ($environmentalCategory === null && empty($searchText)) {
+        if (null === $environmentalCategory && empty($searchText)) {
             return new JsonResponse([], Response::HTTP_BAD_REQUEST);
         }
 

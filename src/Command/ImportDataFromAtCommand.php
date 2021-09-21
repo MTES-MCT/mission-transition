@@ -14,12 +14,9 @@ use App\Repository\FunderRepository;
 use App\Repository\RegionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ImportDataFromAtCommand extends Command
@@ -39,19 +36,15 @@ class ImportDataFromAtCommand extends Command
     protected int $newlyAdded = 0;
     protected int $newlyUpdated = 0;
 
-    /**
-     * @param HttpClientInterface $client
-     * @param EntityManagerInterface $em
-     */
     public function __construct(
-        HttpClientInterface  $client,
+        HttpClientInterface $client,
         EntityManagerInterface $em,
         AidRepository $aidRepository,
         FunderRepository $funderRepository,
         RegionRepository $regionRepository,
         AidTypeRepository $aidTypeRepository,
         EnvironmentalTopicRepository $environmentalTopicRepository
-    ){
+    ) {
         $this->client = $client;
         $this->em = $em;
         $this->aidRepository = $aidRepository;
@@ -86,9 +79,9 @@ class ImportDataFromAtCommand extends Command
 //                $this->em->persist($environmentalTopic);
 //                $this->em->flush();
 //            }
-            $nextUrl = self::BASE_API_URL . $key;
+            $nextUrl = self::BASE_API_URL.$key;
             $io->info($category);
-            while ($nextUrl !== null) {
+            while (null !== $nextUrl) {
                 $response = $this->client->request(
                     'GET',
                     $nextUrl
@@ -98,7 +91,7 @@ class ImportDataFromAtCommand extends Command
 
                 foreach ($results as $aidFromAt) {
                     $aid = $this->aidRepository->findOneBy([
-                        'sourceId' => sprintf('at_%s', $aidFromAt['id'])
+                        'sourceId' => sprintf('at_%s', $aidFromAt['id']),
                     ]);
 
                     // New Aid
@@ -106,10 +99,10 @@ class ImportDataFromAtCommand extends Command
                         $aid = $this->createNewAid($aidFromAt);
 //                        $aid->addEnvironmentalTopic($environmentalTopic);
                         $this->em->persist($aid);
-                        $this->newlyAdded++;
+                        ++$this->newlyAdded;
                     } else {
                         $aid = $this->updateAid($aidFromAt, $aid);
-                        $this->newlyUpdated++;
+                        ++$this->newlyUpdated;
                     }
                 }
                 $nextUrl = $response['next'];
@@ -125,6 +118,7 @@ class ImportDataFromAtCommand extends Command
     protected function createNewAid($aidFromAt): Aid
     {
         $aid = new Aid();
+
         return $this->updateAid($aidFromAt, $aid);
     }
 
@@ -132,7 +126,7 @@ class ImportDataFromAtCommand extends Command
     {
         if (isset($aidFromAt['financers'][0])) {
             $funder = $this->retrieveExistingeFunder($aidFromAt['financers'][0]);
-            if ($funder === null) {
+            if (null === $funder) {
                 $funder = $this->createFunder($aidFromAt['financers'][0], $aidFromAt['origin_url']);
                 $this->em->persist($funder);
                 $this->em->flush();
@@ -175,9 +169,9 @@ class ImportDataFromAtCommand extends Command
 //            $aid->addRegion($aidType);
 //        }
 
-        foreach($aidFromAt['aid_types'] as $aidTypeName) {
+        foreach ($aidFromAt['aid_types'] as $aidTypeName) {
             $aidType = $this->retrieveExistingAidType($this->getTypesMapping($aidTypeName));
-            if ($aidType === null) {
+            if (null === $aidType) {
                 $aidType = $this->createAidType($this->getTypesMapping($aidTypeName));
                 $this->em->persist($aidType);
                 $this->em->flush();
@@ -189,10 +183,10 @@ class ImportDataFromAtCommand extends Command
         return $aid;
     }
 
-    protected function retrieveExistingRegion(string $regionName) : ?Region
+    protected function retrieveExistingRegion(string $regionName): ?Region
     {
         return $this->regionRepository->findOneBy([
-            'name' => $regionName
+            'name' => $regionName,
         ]);
     }
 
@@ -206,10 +200,10 @@ class ImportDataFromAtCommand extends Command
         return $aidType;
     }
 
-    protected function retrieveExistingAidType(string $aidTypeName) : ?AidType
+    protected function retrieveExistingAidType(string $aidTypeName): ?AidType
     {
         return $this->aidTypeRepository->findOneBy([
-            'name' => $aidTypeName
+            'name' => $aidTypeName,
         ]);
     }
 
@@ -223,10 +217,10 @@ class ImportDataFromAtCommand extends Command
         return $region;
     }
 
-    protected function retrieveExistingeFunder(string $funderName) : ?Funder
+    protected function retrieveExistingeFunder(string $funderName): ?Funder
     {
         return $this->funderRepository->findOneBy([
-            'name' => $funderName
+            'name' => $funderName,
         ]);
     }
 
@@ -293,7 +287,7 @@ class ImportDataFromAtCommand extends Command
     {
         $mapping = [
             'Europe' => 'Continent',
-            'France' => Aid::PERIMETER_NATIONAL
+            'France' => Aid::PERIMETER_NATIONAL,
         ];
 
         if (isset($mapping[$atRegion])) {
