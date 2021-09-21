@@ -21,11 +21,22 @@ const AidSearchEngineFilters = (
         hasTopicError,
         searchValue,
         setSearchValue,
+        hasSearchError
     }) => {
 
     const [loading, setLoading] = useState(false);
     const [categoryDescription, setCategoryDescription] = useState(null);
     // const [selectedEnvironmentalTopicValue, setSelectedEnvironmentalTopicValue] = useState({label: "Pas de sous-thématique", value: 0})
+
+    const customStyles = {
+        control: (provided, state) => {
+            const opacity = state.isDisabled ? 0.4 : 1;
+
+            return { ...provided, opacity };
+        },
+
+        container: (base) => ({ ...base, zIndex: 350 })
+    }
 
     //EnvironmentalTopicCategory
     const fetchEnvironmentalTopicCategoriesData = (inputValue) => {
@@ -37,9 +48,9 @@ const AidSearchEngineFilters = (
     };
 
     const handleEnvironmentalTopicCategoriesChange = (newValue) => {
-        console.log(newValue)
         setEnvironmentalTopicCategory(newValue)
         setCategoryDescription(newValue.description);
+        setEnvironmentalTopicSelected(null)
         setEnvironmentalTopics(newValue.environmentalTopics.map(topic => ({label: topic.name, value: topic.id})))
         return newValue
     }
@@ -57,8 +68,9 @@ const AidSearchEngineFilters = (
             isDisabled={environmentalTopics.length === 0}
             placeholder={loading ? "Chargement" : "Choisir une sous-thématique..."}
             cacheOptions
-            styles={{ container: (base) => ({ ...base, zIndex: 350 }) }}
+            styles={customStyles}
             onChange={handleEnvironmentalTopicsChange}
+            value={environmentalTopicSelected}
           />
         );
     };
@@ -145,7 +157,7 @@ const AidSearchEngineFilters = (
                 <div className="fr-col-12 fr-col-md-4 fr-px-md-3w fr-mt-3w">
                     <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search_form_environmentalTopic">Thématique</label>
                     {EnvironmentalTopicCategoriesSelect()}
-                    {hasTopicError && <div className="environmental-action-error">Merci de choisir une thématique</div>}
+                    {hasTopicError && <div className="environmental-action-error">Merci de choisir une thématique...</div>}
                     {categoryDescription && <p className="fr-pt-1w on-dark small">{categoryDescription}</p>}
                 </div>
                 <div className="fr-col-12 fr-col-md-4 fr-px-md-3w fr-mt-3w">
@@ -170,10 +182,11 @@ const AidSearchEngineFilters = (
 
                 </div>
                 <div className="fr-col-12 fr-col-md-4 fr-px-md-3w fr-mt-3w">
-                    <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search-784-input">Recherche textuelle</label>
+                    <label className="fr-label h3 on-dark fr-mb-3w required" htmlFor="search-784-input">Recherche par mots-clés</label>
                     <div className="fr-search-bar" id="header-search" role="search">
-                         <input value={searchValue} onChange={onSearchChange} className="fr-input" placeholder="Titre, sujet, mot clé etc." type="search" id="search-784-input" name="search-784-input" />
+                            <input value={searchValue} onChange={onSearchChange} className="fr-input" placeholder="Titre, sujet, mot clé etc." type="search" id="search-784-input" name="search-784-input" />
                     </div>
+                    {hasSearchError && <div className="environmental-action-error">...ou d'indiquer un mot-clé</div>}
                 </div>
             </div>
             <div className="fr-grid-row fr-grid-row--center">

@@ -64,7 +64,7 @@ const Aid = ({aid, last = false}) => {
                 {getLowerAndUpperBound()}
 
                 <ul className="fr-tags-group fr-mt-4w">
-                    {aid.environmentalTopics.map((topic, index) => <li key={index}><span className="fr-mb-3v mt-tag subtitle">{ topic.name }</span></li>)}
+                    {aid.fundingTypes.map((type, index) => <li key={index}><span className="fr-mb-3v mt-tag subtitle">{ type }</span></li>)}
                 </ul>
             </div>
             { aid.directAccess && (

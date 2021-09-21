@@ -24,7 +24,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ImportDataFromAtCommand extends Command
 {
-    const BASE_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/?version=1.4&targeted_audiences=private_sector';
+    const BASE_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/?targeted_audiences=private_sector&call_for_projects_only=true';
 
     protected static $defaultName = 'app:import-data-from-at';
     protected static $defaultDescription = 'Importing data from AT';
@@ -277,16 +277,16 @@ class ImportDataFromAtCommand extends Command
             'Prêt' => 'Aide financière',
             'Avance récupérable' => 'Aide financière',
             'Autre' => 'Aide financière',
-            'Technique' => 'Aide en ingénierie',
-            'Financière' => 'Aide en ingénierie',
-            'Juridique / administrative' => 'Aide en ingénierie',
+            'Ingénierie technique' => 'Aide en ingénierie',
+            'Ingénierie financière' => 'Aide en ingénierie',
+            'Ingénierie Juridique / administrative' => 'Aide en ingénierie',
         ];
 
         if (isset($mapping[$aidTypeName])) {
             return $mapping[$aidTypeName];
         }
 
-        return 'Dispositif de financement';
+        return 'Aide financière';
     }
 
     protected function getPerimetersMapping($atRegion): string

@@ -14,14 +14,16 @@ const AidSearchEngine = () => {
     const [filteredAids, setFilteredAids] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
     const [hasTopicError, setHasTopicError] = useState(false);
+    const [hasSearchError, setHasSearchError] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [lastSearchHistory, setLastSearchHistory] = useState({})
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setHasTopicError(environmentalTopicCategory === null);
+        setHasTopicError(environmentalTopicCategory === null && searchValue === '');
+        setHasSearchError(searchValue === '' && environmentalTopicCategory === null);
 
-        if (environmentalTopicCategory.length !== 0) {
+        if (environmentalTopicCategory !== null || searchValue !== '') {
             fetchAids(environmentalTopicCategory, aidTypes, region, environmentalTopicSelected, searchValue)
                 .then(data => {
                     setAids(data);
@@ -55,6 +57,7 @@ const AidSearchEngine = () => {
                 environmentalTopicSelected={environmentalTopicSelected}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
+                hasSearchError={hasSearchError}
             />
             {!isSearching && (
                 <div className="bg-light no-results fr-p-12w">
@@ -69,15 +72,28 @@ const AidSearchEngine = () => {
             {isSearching && filteredAids.length && (
                 <div className="bg-light">
                     <div className="fr-container fr-pt-7w">
-                        <AidList
-                            aids={filteredAids.filter(aid => aid.perimeter === 'REGIONAL')}
-                            lastSearchHistory={lastSearchHistory}
-                        />
-                        <AidList
-                            aids={filteredAids.filter(aid => aid.perimeter === 'NATIONAL')}
-                            perimeterName={'au niveau national'}
-                            lastSearchHistory={lastSearchHistory}
-                        />
+                        {region && <>
+                            <AidList
+                                aids={filteredAids.filter(aid => aid.perimeter === 'REGIONAL')}
+                                lastSearchHistory={lastSearchHistory}
+                            />
+                            <AidList
+                                aids={filteredAids.filter(aid => aid.perimeter === 'NATIONAL')}
+                                perimeterName={'au niveau national'}
+                                lastSearchHistory={lastSearchHistory}
+                            />
+                        </>}
+                        {!region && <>
+                            <AidList
+                                aids={filteredAids.filter(aid => aid.perimeter === 'NATIONAL')}
+                                perimeterName={'au niveau national'}
+                                lastSearchHistory={lastSearchHistory}
+                            />
+                            <AidList
+                                aids={filteredAids.filter(aid => aid.perimeter === 'REGIONAL')}
+                                lastSearchHistory={lastSearchHistory}
+                            />
+                        </>}
                     </div>
                 </div>
             )}
