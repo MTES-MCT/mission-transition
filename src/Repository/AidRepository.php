@@ -26,10 +26,10 @@ class AidRepository extends ServiceEntityRepository
 
     public function searchByCriteria(
         array $aidTypes,
-        string $environmentalCategory,
-        string $environmentalTopic = null,
-        string $region = null,
-        string $searchText = null
+        ?string $environmentalCategory = null,
+        ?string $environmentalTopic = null,
+        ?string $region = null,
+        ?string $searchText = null
 
     ) {
         $qb = $this->createQueryBuilder('aid');
@@ -38,6 +38,7 @@ class AidRepository extends ServiceEntityRepository
             ->select('aid', 'environmentalTopics', 'environmentalTopicCategories', 'funder')
             ->join('aid.funder', 'funder')
             ->andWhere("aid.state = :state")->setParameter('state', Aid::STATE_PUBLISHED)
+            ->andWhere('aid.applicationEndDate >= :today')->setParameter('today', new \DateTime())
         ;
 
         if (null !== $region) {
@@ -49,8 +50,11 @@ class AidRepository extends ServiceEntityRepository
         $qb
             ->join('aid.environmentalTopics', 'environmentalTopics')
             ->join('environmentalTopics.environmentalTopicCategories', 'environmentalTopicCategories')
-            ->andWhere('environmentalTopicCategories = :category')->setParameter('category', $environmentalCategory)
         ;
+
+        if (null !== $environmentalCategory) {
+            $qb->andWhere('environmentalTopicCategories = :category')->setParameter('category', $environmentalCategory);
+        }
 
         if (!empty($aidTypes)) {
             $qb

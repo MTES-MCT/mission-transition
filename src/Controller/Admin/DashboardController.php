@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Aid;
 use App\Entity\AidAdvisor;
+use App\Entity\AidType;
 use App\Entity\EnvironmentalAction;
 use App\Entity\EnvironmentalActionCategory;
 use App\Entity\EnvironmentalTopic;
@@ -36,6 +37,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Accueil', 'fa fa-home');
         yield MenuItem::section('Gestion des aides', 'fa fa-credit-card');
         yield MenuItem::linkToCrud('Dispositifs d\'aide', 'fa fa-user', Aid::class);
+        yield MenuItem::linkToCrud('Types d\'aide', 'fa fa-user', AidType::class);
         yield MenuItem::linkToCrud('Catégories de thématiques', 'fa fa-user', EnvironmentalTopicCategory::class);
         yield MenuItem::linkToCrud('Thématiques', 'fa fa-user', EnvironmentalTopic::class);
         yield MenuItem::linkToCrud('Régions', 'fa fa-user', Region::class);

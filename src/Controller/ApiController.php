@@ -86,7 +86,7 @@ class ApiController extends AbstractController
         $region = $query->get('region');
         $searchText = $query->get('search');
 
-        if ($environmentalCategory === null) {
+        if ($environmentalCategory === null && empty($searchText)) {
             return new JsonResponse([], Response::HTTP_BAD_REQUEST);
         }
 

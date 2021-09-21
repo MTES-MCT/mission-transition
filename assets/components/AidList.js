@@ -3,8 +3,6 @@ import Aid from "./Aid";
 
 const AidList = ({aids, perimeterName, lastSearchHistory}) => {
 
-    console.log(lastSearchHistory)
-
     if (aids.length === 0) {
         return (<></>);
     }
