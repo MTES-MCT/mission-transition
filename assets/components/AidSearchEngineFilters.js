@@ -48,6 +48,13 @@ const AidSearchEngineFilters = (
     };
 
     const handleEnvironmentalTopicCategoriesChange = (newValue) => {
+
+        if (newValue === null) {
+            setEnvironmentalTopicCategory(newValue)
+            setEnvironmentalTopicSelected(null)
+            return '';
+        }
+
         setEnvironmentalTopicCategory(newValue)
         setCategoryDescription(newValue.description);
         setEnvironmentalTopicSelected(null)
@@ -82,6 +89,7 @@ const AidSearchEngineFilters = (
                 placeholder={loading ? "Chargement" : "Choisir une thématique..."}
                 isDisabled={loading}
                 defaultOptions
+                isClearable
                 cacheOptions
                 styles={{ container: (base) => ({ ...base, zIndex: 500 }) }}
                 onChange={handleEnvironmentalTopicCategoriesChange}

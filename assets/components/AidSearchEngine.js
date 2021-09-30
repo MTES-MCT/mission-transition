@@ -72,18 +72,7 @@ const AidSearchEngine = () => {
             {isSearching && filteredAids.length && (
                 <div className="bg-light">
                     <div className="fr-container fr-pt-7w">
-                        {region && <>
-                            <AidList
-                                aids={filteredAids.filter(aid => aid.perimeter === 'REGIONAL')}
-                                lastSearchHistory={lastSearchHistory}
-                            />
-                            <AidList
-                                aids={filteredAids.filter(aid => aid.perimeter === 'NATIONAL')}
-                                perimeterName={'au niveau national'}
-                                lastSearchHistory={lastSearchHistory}
-                            />
-                        </>}
-                        {!region && <>
+                        <>
                             <AidList
                                 aids={filteredAids.filter(aid => aid.perimeter === 'NATIONAL')}
                                 perimeterName={'au niveau national'}
@@ -91,9 +80,10 @@ const AidSearchEngine = () => {
                             />
                             <AidList
                                 aids={filteredAids.filter(aid => aid.perimeter === 'REGIONAL')}
+                                perimeterName={'au niveau régional'}
                                 lastSearchHistory={lastSearchHistory}
                             />
-                        </>}
+                        </>
                     </div>
                 </div>
             )}
