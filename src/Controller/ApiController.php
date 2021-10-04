@@ -78,7 +78,7 @@ class ApiController extends AbstractController
         $environmentalCategory = $query->get('category');
         $environmentalTopic = $query->get('topic');
         $aidTypes = (array) $query->get('aidTypes', []);
-        $region = $query->get('region');
+        $region = (int)$query->get('region');
         $searchText = $query->get('search');
 
         if (null === $environmentalCategory && empty($searchText)) {
