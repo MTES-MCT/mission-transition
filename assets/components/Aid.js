@@ -48,6 +48,49 @@ const Aid = ({aid, last = false}) => {
         )
     }
 
+
+    const getRegions = () => {
+        const getSeparator = (index) => {
+            if (aid.regions.length === 1 || index === (aid.regions.length - 1)) {
+                return ''
+            }
+
+            return ', '
+        }
+
+        return (
+            <div className="aid-regions">
+                <span className="mt-icon-circled mt-icon-circled--inline">
+                    <span className="mt-icon mt-icon--finger-up"/>
+                </span>
+                <span className="subtitle">
+                    {aid.regions.map((region, index) => <span>{ region.name + getSeparator(index) }</span>)}
+                </span>
+            </div>
+        )
+    }
+
+    const getTypes = () => {
+        const getSeparator = (index) => {
+            if (aid.fundingTypes.length === 1 || index === (aid.fundingTypes.length - 1)) {
+                return ''
+            }
+
+            return ', '
+        }
+
+        return (
+            <div className="aid-type">
+                <span className="mt-icon-circled mt-icon-circled--inline">
+                    <span className="mt-icon mt-icon--euro"/>
+                </span>
+                <span className="subtitle">
+                    {aid.fundingTypes.map((type, index) => <span>{ type + getSeparator(index) }</span>)}
+                </span>
+            </div>
+        )
+    }
+
     return (
         <div className="card-aid" id={last ? "last-regional-aid" : ""}>
             <div className="card-aid-main">
@@ -63,12 +106,9 @@ const Aid = ({aid, last = false}) => {
 
                 {getLowerAndUpperBound()}
 
-                <ul className="fr-tags-group fr-mt-4w">
-                    {aid.fundingTypes.map((type, index) => <li key={index}><span className="fr-mb-3v mt-tag subtitle">{ type }</span></li>)}<br/>
-                </ul>
-                <ul className="fr-tags-group fr-mt-4w">
-                    {aid.regions.map((region, index) => <li key={index}><span className="fr-mb-3v mt-tag subtitle">{ region.name }</span></li>)}
-                </ul>
+                {getRegions()}
+
+                {getTypes()}
             </div>
             { aid.directAccess && (
                 <a target="_blank" href={aid.fundingSourceUrl}>

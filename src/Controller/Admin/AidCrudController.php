@@ -50,10 +50,12 @@ class AidCrudController extends AbstractCrudController
                     'Brouillon' => Aid::STATE_DRAFT,
                     'Publié' => Aid::STATE_PUBLISHED,
                 ]),
-            BooleanField::new('directAccess')->setLabel('Fiche sans détails'),
+            BooleanField::new('directAccess')->setLabel('Fiche sans détails')->hideOnIndex(),
+            DateField::new('createdAt', 'Ajouté le'),
             IdField::new('uuid', 'UUID')->onlyOnDetail(),
             TextField::new('sourceId', 'ID Source')->hideOnForm(),
             TextField::new('name', 'Titre'),
+            TextField::new('slug', 'Slug')->hideOnIndex(),
             AssociationField::new('environmentalTopics', 'Thématiques')->setTemplatePath('admin/aid/environmental_topics.html.twig'),
 //            AssociationField::new('environmentalActions', 'Actions associées')->setTemplatePath('admin/aid/environmental_actions.html.twig'),
             AssociationField::new('types', 'Types')->setTemplatePath('admin/aid/environmental_topics.html.twig'),
@@ -66,7 +68,7 @@ class AidCrudController extends AbstractCrudController
             TextareaField::new('conditions', 'Conditions')->hideOnIndex(),
             TextareaField::new('contactGuidelines', 'Contact')->hideOnIndex(),
             UrlField::new('fundingSourceUrl', 'Site Financeur')->hideOnIndex(),
-            DateField::new('applicationEndDate', 'Date de cloture')->hideOnIndex(),
+            DateField::new('applicationEndDate', 'Date de cloture'),
             UrlField::new('applicationUrl', 'URL du formulaire de candidature')->hideOnIndex(),
         ];
     }

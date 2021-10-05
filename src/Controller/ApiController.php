@@ -85,14 +85,25 @@ class ApiController extends AbstractController
             return new JsonResponse([], Response::HTTP_BAD_REQUEST);
         }
 
+        $regionalAids = $aidRepository->searchByCriteria(
+            $aidTypes,
+            $environmentalCategory,
+            $environmentalTopic,
+            $region,
+            $searchText
+        );
+
+        $nationalAids = $aidRepository->searchByCriteria(
+            $aidTypes,
+            $environmentalCategory,
+            $environmentalTopic,
+            null,
+            $searchText,
+            'NATIONAL'
+        );
+
         $data = $serializer->serialize(
-            $aidRepository->searchByCriteria(
-                $aidTypes,
-                $environmentalCategory,
-                $environmentalTopic,
-                $region,
-                $searchText
-            ),
+            array_merge($nationalAids, $regionalAids),
             'json',
             ['groups' => 'list']
         );
