@@ -40,7 +40,7 @@ class AidRepository extends ServiceEntityRepository
         if (null !== $region) {
             $qb
                 ->join('aid.regions', 'regions')
-                ->andWhere('regions IN (:regions) OR aid.perimeter = \'NATIONAL\'')->setParameter('regions', $region);
+                ->andWhere('regions.id IN (:regions)')->setParameter('regions', [$region]);
         }
 
         $qb
