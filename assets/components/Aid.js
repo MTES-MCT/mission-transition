@@ -41,7 +41,7 @@ const Aid = ({aid, last = false}) => {
                     <span className="mt-icon mt-icon--time"/>
                 </span>
                 <span className="subtitle">
-                    dispostitif temporaire<br/>
+                    dispositif temporaire<br/>
                     du { applicationStartDate } au {applicationEndDate}
                 </span>
             </div>
