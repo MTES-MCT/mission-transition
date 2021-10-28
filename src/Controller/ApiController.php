@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Aid;
 use App\Repository\AidRepository;
 use App\Repository\AidTypeRepository;
 use App\Repository\EnvironmentalTopicCategoryRepository;
@@ -84,6 +85,54 @@ class ApiController extends AbstractController
         if (null === $environmentalCategory && empty($searchText)) {
             return new JsonResponse([], Response::HTTP_BAD_REQUEST);
         }
+
+        $regionalAids = $aidRepository->searchByCriteria(
+            $aidTypes,
+            $environmentalCategory,
+            $environmentalTopic,
+            $region,
+            $searchText,
+            'REGIONAL',
+            Aid::STATE_PUBLISHED
+        );
+
+        $nationalAids = $aidRepository->searchByCriteria(
+            $aidTypes,
+            $environmentalCategory,
+            $environmentalTopic,
+            null,
+            $searchText,
+            'NATIONAL',
+            Aid::STATE_PUBLISHED
+        );
+
+        $data = $serializer->serialize(
+            array_merge($nationalAids, $regionalAids),
+            'json',
+            ['groups' => 'list']
+        );
+
+        return JsonResponse::fromJsonString($data);
+    }
+
+    /**
+     * @Route("/temp/aids", name="api_temp_aids")
+     */
+    public function aidsTemp(
+        Request $request,
+        SerializerInterface $serializer,
+        AidRepository $aidRepository
+    ): Response {
+        $query = $request->query;
+        $environmentalCategory = $query->get('category');
+        $environmentalTopic = $query->get('topic');
+        $aidTypes = (array) $query->get('aidTypes', []);
+        $region = $query->get('region');
+        $searchText = $query->get('search');
+
+//        if (null === $environmentalCategory && empty($searchText)) {
+//            return new JsonResponse([], Response::HTTP_BAD_REQUEST);
+//        }
 
         $regionalAids = $aidRepository->searchByCriteria(
             $aidTypes,
