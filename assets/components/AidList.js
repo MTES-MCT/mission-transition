@@ -8,22 +8,26 @@ const AidList = ({aids, perimeterName, lastSearchHistory}) => {
     }
 
     return (
-        <>
-            <h3 className="fr-pt-3w">
-                <span className="highlighted--dark subtitle">{ aids.length } résultats {perimeterName ?? perimeterName} pour </span>
-            </h3>
-            <ul className="fr-tags-group">
-                {lastSearchHistory.category && <li className={'fr-pr-1w'}><span className="mt-tag subtitle">{lastSearchHistory.category.label}</span></li>}
-                {lastSearchHistory.topic && <li className={'fr-pr-1w'}><span className="mt-tag subtitle">{lastSearchHistory.topic.label}</span></li>}
-                {lastSearchHistory.aidTypes.map(type => <li className={'fr-pr-1w'}><span className="mt-tag subtitle">{type.label}</span></li>)}
-                {lastSearchHistory.aidTypes.length === 0 && <><li className={'fr-pr-1w'}><span className="mt-tag subtitle">Aide en ingénierie</span></li><li className={'fr-pr-1w'}><span className="mt-tag subtitle">Aide financière</span></li></>}
-                {lastSearchHistory.region && <li className={'fr-pr-1w'}><span className="mt-tag subtitle">{perimeterName === 'au niveau national' ? 'NATIONAL' : lastSearchHistory.region.label}</span></li>}
-            </ul>
+        <div className="fr-grid-row">
+            <div className="fr-col-12 fr-col-sm-4">
+                <h3>
+                    <span className="fr-text--lead">{ aids.length } résultats {perimeterName ?? perimeterName} pour </span>
+                </h3>
+            </div>
+            <div className="fr-col-12 fr-col-sm-6">
+                <ul className="fr-tags-group">
+                    {lastSearchHistory.category && <li className={'fr-pr-1w'}><span className="mt-tag subtitle">{lastSearchHistory.category.name}</span></li>}
+                    {lastSearchHistory.aidTypes.map(type => <li className={'fr-pr-1w'}><span className="mt-tag subtitle">{type.label}</span></li>)}
+                    {lastSearchHistory.aidTypes.length === 0 && <><li className={'fr-pr-1w'}><span className="mt-tag subtitle">Aide en ingénierie</span></li><li className={'fr-pr-1w'}><span className="mt-tag subtitle">Aide financière</span></li></>}
+                    {lastSearchHistory.region && <li className={'fr-pr-1w'}><span className="mt-tag subtitle">{perimeterName === 'au niveau national' ? 'NATIONAL' : lastSearchHistory.region.name}</span></li>}
+                </ul>
+            </div>
+
             <hr/>
             <div className="card-aid-list fr-py-5w">
                 {aids.map((aid, i) => <Aid aid={aid} last={i === (aids.length + 1)}/>)}
             </div>
-        </>
+        </div>
     )
 }
 

@@ -8,10 +8,11 @@
 
 .homepage-intro {
     display: grid;
-    grid-template-columns: auto min-content;
-    grid-row-gap: 2rem;
+    grid-template-rows: auto auto;
     padding-top: 2vh;
     align-items: center;
+    justify-content: center;
+    max-width: 932px;
 }
 
 .homepage-content {
@@ -20,48 +21,96 @@
 }
 
 .main-title {
-    .title {
+    h2,h5 {
         color: $blue-navy;
     }
+}
 
-    .introduction {
-        max-width: 454px;
+.funders {
+
+    .fr-grid-row {
+        justify-content: center;
+    }
+
+    span {
+        font-weight: bold;
+    }
+
+    .funders_logo_1 {
+        display: grid;
+        grid-template-columns: repeat(6, auto);
+        width: 100%;
+        overflow-x:scroll;
+        white-space:nowrap;
+
+        img {
+            display:inline-block;
+        }
+    }
+    .funders_logo_2 {
+        display: grid;
+        grid-template-columns: repeat(7, auto);
+        width: 100%;
+        overflow-x:scroll;
+        white-space:nowrap;
+
+        img {
+            display:inline-block;
+        }
     }
 }
-.illustration {
-    max-width: 33vw;
-    justify-self: center;
+
+.search-engine-extension {
+    background-color: $white;
+
+    .selected {
+        box-shadow: inset 0 0 0 1px var(--border-default-grey),inset 0 -.25rem 0 0 var(--border-plain-blue-france);
+    }
 }
 
 .main-cta {
-    width: 100%;
-    margin: auto;
-    background-color: $white;
-    padding: 2rem;
-    justify-self: center;
-    grid-column: 1/3;
-    filter: drop-shadow(0px 9px 11px rgba(2, 76, 187, 0.1));
+    background-color: $blue-france;
 
-    .content {
-        max-width: 816px;
-        text-align: center;
+    .main-cta_content {
+        display: grid;
+        grid-gap: 1.5rem;
         margin: auto;
-    }
-
-    h2 {
-        color: $blue-navy;
+        justify-content: center;
     }
 }
 
-.cta-cards {
-    margin: auto;
+@media only screen and (max-width: 768px) {
+    .category-choices {
+        display: flex;
+        overflow-x: scroll;
+        flex-flow: row;
+
+        > div {
+            display:inline-block;
+            min-width: 230px;
+            margin-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    }
 }
 
-#tag-filter-content {
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(275px, 1fr));
+@media only screen and (min-width: 768px) {
+    .funders_logo_1 {
+        justify-content: space-evenly;
+    }
 
-    > div {
-        margin-bottom: 32px;
+    .funders_logo_2 {
+        justify-content: space-evenly;
+    }
+
+    .main-cta_content {
+        grid-template-columns: repeat(3, minmax(200px, 372px));
+    }
+
+    .category-choices {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 250px));
+        grid-gap: 1.5rem;
+        justify-content: center;
     }
 }
