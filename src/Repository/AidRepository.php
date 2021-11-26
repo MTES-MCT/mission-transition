@@ -26,16 +26,23 @@ class AidRepository extends ServiceEntityRepository
         ?string $environmentalCategory = null,
         ?string $environmentalTopic = null,
         ?string $region = null,
-        ?string $searchText = null
+        ?string $searchText = null,
+        ?string $perimeter = 'REGIONAL',
+        ?string $state = null
     ) {
         $qb = $this->createQueryBuilder('aid');
 
         $qb
             ->select('aid', 'environmentalTopics', 'environmentalTopicCategories', 'funder')
             ->join('aid.funder', 'funder')
-            ->andWhere('aid.state = :state')->setParameter('state', Aid::STATE_PUBLISHED)
-            ->andWhere('aid.applicationEndDate >= :today')->setParameter('today', new \DateTime())
+            ->andWhere('aid.applicationEndDate IS NULL OR aid.applicationEndDate >= :today')->setParameter('today', new \DateTime())
+            ->andWhere('aid.perimeter = :perimeter')->setParameter('perimeter', $perimeter)
         ;
+
+        if (null !== $state) {
+            $qb
+                ->andWhere('aid.state = :state')->setParameter('state', $state);
+        }
 
         if (null !== $region) {
             $qb

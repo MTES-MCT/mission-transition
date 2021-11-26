@@ -55,9 +55,8 @@ mounts:
 hooks:
     build: |
         set -x -e
-
+        export NODE_VERSION=14
         curl -fs https://get.symfony.com/cloud/configurator | (>&2 bash)
-
         (>&2 symfony-build)
 
     deploy: |

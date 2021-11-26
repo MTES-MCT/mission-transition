@@ -21,7 +21,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ImportDataFromAtCommand extends Command
 {
-    const BASE_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/?targeted_audiences=private_sector&call_for_projects_only=true';
+    const BASE_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/?targeted_audiences=private_sector';
 
     protected static $defaultName = 'app:import-data-from-at';
     protected static $defaultDescription = 'Importing data from AT';
@@ -72,13 +72,6 @@ class ImportDataFromAtCommand extends Command
         $categories = $this->getEnvironmentalTopicsMapping();
 
         foreach ($categories as $key => $category) {
-//            $environmentalTopic = $this->environmentalTopicRepository->findOneBy(['name' => $category]);
-//            if (null === $environmentalTopic) {
-//                $environmentalTopic = new EnvironmentalTopic();
-//                $environmentalTopic->setName($category);
-//                $this->em->persist($environmentalTopic);
-//                $this->em->flush();
-//            }
             $nextUrl = self::BASE_API_URL.$key;
             $io->info($category);
             while (null !== $nextUrl) {
@@ -97,7 +90,6 @@ class ImportDataFromAtCommand extends Command
                     // New Aid
                     if (null === $aid) {
                         $aid = $this->createNewAid($aidFromAt);
-//                        $aid->addEnvironmentalTopic($environmentalTopic);
                         $this->em->persist($aid);
                         ++$this->newlyAdded;
                     } else {
@@ -118,7 +110,7 @@ class ImportDataFromAtCommand extends Command
     protected function createNewAid($aidFromAt): Aid
     {
         $aid = new Aid();
-
+        $aid->setState(Aid::STATE_DRAFT);
         return $this->updateAid($aidFromAt, $aid);
     }
 
@@ -146,28 +138,14 @@ class ImportDataFromAtCommand extends Command
             ->setProjectExamples($aidFromAt['project_examples'])
             ->setFundingTypes($aidFromAt['aid_types'])
             ->setApplicationStartDate(new \DateTime($aidFromAt['start_date']))
-            ->setApplicationEndDate(new \DateTime($aidFromAt['submission_deadline']))
+            ->setApplicationEndDate(isset($aidFromAt['submission_deadline']) ? new \DateTime($aidFromAt['submission_deadline']) : null)
             ->setSourceUpdatedAt(new \DateTime($aidFromAt['date_updated']))
             ->setContactGuidelines($aidFromAt['contact'])
             ->setLoanAmount($aidFromAt['loan_amount'])
             ->setSubventionRateLowerBound($aidFromAt['subvention_rate_lower_bound'])
             ->setSubventionRateUpperBound($aidFromAt['subvention_rate_upper_bound'])
             ->setFundingTypes($aidFromAt['aid_types'])
-//            ->setPerimeter($this->getPerimetersMapping($aidFromAt['perimeter']))
-            ->setState(Aid::STATE_DRAFT)
         ;
-
-//        $regionNames = explode(', ', $aidFromAt['perimeter']);
-//        foreach($regionNames as $regionName) {
-//            $aidType = $this->retrieveExistingRegion($regionName);
-//            if ($aidType === null) {
-//                $aidType = $this->createRegion($regionName);
-//                $this->em->persist($aidType);
-//                $this->em->flush();
-//            }
-//
-//            $aid->addRegion($aidType);
-//        }
 
         foreach ($aidFromAt['aid_types'] as $aidTypeName) {
             $aidType = $this->retrieveExistingAidType($this->getTypesMapping($aidTypeName));
