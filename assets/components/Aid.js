@@ -32,7 +32,22 @@ const Aid = ({aid, last = false}) => {
         if (!aid.applicationStartDate && !aid.applicationEndDate) {
             return;
         }
+
+
         const applicationStartDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium'}).format(new Date(aid.applicationStartDate))
+        if (!applicationEndDate) {
+            return (
+                <div className="aid-dates">
+                <span className="mt-icon-circled mt-icon-circled--inline">
+                    <span className="mt-icon mt-icon--time"/>
+                </span>
+                    <span className="subtitle">
+                    dispositif temporaire<br/>
+                    à partir du { applicationStartDate }
+                </span>
+                </div>
+            )
+        }
         const applicationEndDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium'}).format(new Date(aid.applicationEndDate))
 
         return (
