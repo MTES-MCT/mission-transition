@@ -43,7 +43,7 @@ const Aid = ({aid, last = false}) => {
                 </span>
                     <span className="subtitle">
                     dispositif temporaire<br/>
-                    à partir du { applicationStartDate }
+                    disponible depuis le { applicationStartDate }
                 </span>
                 </div>
             )
