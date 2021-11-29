@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "9d5e3d5977dff620b81f706110df2e46",
-=======
-    "content-hash": "99f1a6c364feaec997c3f8e51a1a1611",
->>>>>>> v4
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10226,10 +10222,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2021-09-17T08:55:39+00:00"
-=======
-            "time": "2021-07-27T04:28:16+00:00"
         },
         {
             "name": "theofidry/alice-data-fixtures",
@@ -10321,7 +10314,6 @@
                 }
             ],
             "time": "2021-01-25T10:07:17+00:00"
->>>>>>> v4
         }
     ],
     "aliases": [],
