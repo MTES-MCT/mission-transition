@@ -1,0 +1,38 @@
+App\Entity\EnvironmentalTopicCategory:
+    env_topic_cat_1:
+        name: "Production & distribution d'énergie"
+        description: "Exemples de projets : Développement des énergies renouvelables, récupération de chaleurs, biomasse, diagnostic sur le marché hydrogène, étude de faisabilité (énergie renouvelable)"
+    env_topic_cat_2:
+        name: "Gestion des bâtiments"
+        description: "Exemples de projets : Construction/rénovation de bâtiments énergétiquement exemplaires, bilan énergétique des bâtiments, amélioration de la qualité de l’air. "
+    env_topic_cat_3:
+        name: "Mobilité des employés"
+        description: "Exemples de projets : Aide à l’acquisition de véhicules propres, soutien à la conversion d’un véhicule thermique vers un véhicule propre, soutien au covoiturage, investissement pour les PME/ETI du secteur ferroviaire. "
+    env_topic_cat_4:
+        name: "Evolution des procédés industriels"
+        description: "Exemples de projets : Efficacité énergétique des procédés industriels, audit énergétique pour l’industrie, réduction des pollutions industrielles, décarbonation des outils industriels. "
+    env_topic_cat_5:
+        name: "Innovation produits & services"
+        description: "Exemples de projets : Eco-conception, accompagnement aux levées de fonds, financement des investissements, démarche d’innovation, passer à une phase d’industrialisation, innovation sociale, crédit d’impôt recherche French Tech. "
+    env_topic_cat_6:
+        name: "Gestion des déchets"
+        description: "Exemples de projets : Aide à l’investissement d’équipements de recyclage, économie circulaire, aide à l’investissement pour le réemploi de déchets, financement de diagnostic à la réparation / substitution d’emballage. "
+    env_topic_cat_7:
+        name: "Ressources humaines"
+        description: "Exemples de projets : Aide au recrutement sur le thème environnement (VTE Vert), sensibilisation, formation, structuration de démarche RSE "
+    env_topic_cat_8:
+        name: "Secteur Agriculture & Zones rurales"
+        description: "Exemples de projets : Accompagnement créateurs d’activités en milieu rural, soutien à l’innovation agricole, investissement en agroéquipements, soutien aux circuits courts / alimentation durable, réduction de produits phytosanitaires"
+    env_topic_cat_9:
+        name: "Secteur Ville durable"
+        description: "Exemples de projets : Formation architecture/urbanisme/environnement, digitalisation des commerces de proximité, soutien des entreprises locales, aide à la création de TPE "
+    env_topic_cat_10:
+        name: "Secteur Bois"
+        description: "Exemples de projets : Soutien au plateforme de stockage, soutien à l’investissement de la filière bois, atténuation du changement climatique sur la forêt "
+    env_topic_cat_11:
+        name: "Secteur Agriculture & Zones rurales"
+        description: "Exemples de projets : Acquisition foncière, études aux travaux d’aménagement, réhabilitation de réserve d’eau, sensibilisation, aide à l’interdiction de l’épandage des boues (agriculture), restauration écologique des milieux humides"
+    env_topic_cat_12:
+        name: "Secteur Infrastructure & Déchèterie"
+        description: "Exemples de projets : Soutien à l’innovation logistique, modernisation des déchèteries, adaptation des structures routières/ferroviaires "
+

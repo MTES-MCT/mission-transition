@@ -151,16 +151,6 @@
             </a>
         </div>
         <div>
-            {% if aid.goal is not empty %}
-                <div class="goal fr-mb-4w">
-                    <div class="heading-underlined">
-                        <h3>C'est quoi ?</h3>
-                    </div>
-                    <p class="fr-pt-2w">
-                        {{ aid.goal }}
-                    </p>
-                </div>
-            {% endif %}
             {% if aid.aidDetails is not empty %}
                 <div class="details bg-light fr-p-4w fr-mb-4w">
                     <div class="heading-underlined">
@@ -168,16 +158,6 @@
                     </div>
                     <p class="fr-pt-2w">
                         {{ aid.aidDetails|raw }}
-                    </p>
-                </div>
-            {% endif %}
-            {% if aid.beneficiary is not empty %}
-                <div class="beneficiary fr-mb-4w">
-                    <div class="heading-underlined">
-                        <h3>Pour quel bénéficiaire ?</h3>
-                    </div>
-                    <p class="fr-pt-2w">
-                        {{ aid.beneficiary|raw }}
                     </p>
                 </div>
             {% endif %}
@@ -198,16 +178,6 @@
                     </div>
                     <p class="fr-pt-2w">
                         {{ aid.projectExamples|raw }}
-                    </p>
-                </div>
-            {% endif %}
-            {% if aid.conditions is not empty %}
-                <div class="conditions fr-mb-4w">
-                    <div class="heading-underlined">
-                        <h3>Quelles sont les contraintes à respecter ?</h3>
-                    </div>
-                    <p class="fr-pt-2w">
-                        {{ aid.conditions|raw }}
                     </p>
                 </div>
             {% endif %}

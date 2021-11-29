@@ -72,7 +72,7 @@ class AidRepository extends ServiceEntityRepository
 
         if (null !== $searchText) {
             $qb
-                ->andWhere('LOWER(aid.name) LIKE :text OR LOWER(aid.goal) LIKE :text OR LOWER(aid.aidDetails) LIKE :text OR LOWER(aid.contactGuidelines) LIKE :text')->setParameter('text', '%'.strtolower($searchText).'%')
+                ->andWhere('LOWER(aid.name) LIKE :text OR LOWER(aid.aidDetails) LIKE :text OR LOWER(aid.contactGuidelines) LIKE :text')->setParameter('text', '%'.strtolower($searchText).'%')
             ;
         }
 

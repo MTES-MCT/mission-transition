@@ -1,17 +1,121 @@
 App\Entity\EnvironmentalTopic:
     environmental_topic_1:
-        name: "Immobilier durable"
+        name: "Recherche, Développement & Innovation"
+        environmentalTopicCategories: ['@env_topic_cat_*']
     environmental_topic_2:
-        name: "Production et distribution d'énergie"
+        name: "Réduction de la consommation d'énergie"
+        environmentalTopicCategories: ['@env_topic_cat_*']
     environmental_topic_3:
-        name: "Efficacité énergétique"
+        name: "Bilan énergétique & Rénovation"
+        environmentalTopicCategories: ['@env_topic_cat_*']
     environmental_topic_4:
-        name: "Économie circulaire "
+        name: "Réduction du gaspillage"
+        environmentalTopicCategories: ['@env_topic_cat_*']
     environmental_topic_5:
-        name: "Mobilité durable"
+        name: "Tri, recyclage, réemploi & réparation"
+        environmentalTopicCategories: ['@env_topic_cat_*']
     environmental_topic_6:
-        name: "Conservation et restauration des écosystèmes"
+        name: "Performance environnementale de l'alimentation"
+        environmentalTopicCategories: ['@env_topic_cat_*']
     environmental_topic_7:
-        name: "Innovation durable"
+        name: "Adapation au changement climatique"
+        environmentalTopicCategories: ['@env_topic_cat_*']
     environmental_topic_8:
-        name: "Process et matériels"
+        name: "Infrastructures de transport & logistique"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_9:
+        name: "Aménagement d'ouvrages & Equipements"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_10:
+        name: "Digitalisation des commerces & artisans"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_11:
+        name: "Formation & Accompagnement"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_12:
+        name: "Formation & animation des acteurs locaux"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_13:
+        name: "Développement du ferroviaire"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_14:
+        name: "Développement du covoiturage & autopartage"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_15:
+        name: "Sensibilisation sur les consommations"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_16:
+        name: "Aide au développement de la filière"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_17:
+        name: "Formation & animation des acteurs locaux Secteur Eau & écosystèmes"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_18:
+        name: "Réduction des Pesticides"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_19:
+        name: "Acquisition foncière"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_20:
+        name: "Aide aux investissements & financements"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_21:
+        name: "Réduction de l'empreinte carbone"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_22:
+        name: "Restauration d'infrastructures"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_23:
+        name: "Réseaux de chaleur & Récupération de chaleur"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_24:
+        name: "Stockage de l'énergie"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_25:
+        name: "Amélioration de la qualité de l'air"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_26:
+        name: "Traitement & valorisation des biodéchets"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_27:
+        name: "Gestion de l'eau"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_28:
+        name: "Acquisition & extension des locaux"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_29:
+        name: "Développer le réseau de distribution d'énergie"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_30:
+        name: "Energies Renouvelables"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_31:
+        name: "Réhabilitation logements & sites industriels"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_32:
+        name: "Réduction des pesticides & pollutions"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_33:
+        name: "Biodiversité & Bien-être animal"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_34:
+        name: "Animation & développement économique et social"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_35:
+        name: "Développement de filières recyclage"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_36:
+        name: "Restauration écologique & adapation au changement climatique"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_37:
+        name: "Sensibilisation & Formation"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_38:
+        name: "Agriculture urbaine"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_39:
+        name: "Logistique de proximité"
+        environmentalTopicCategories: ['@env_topic_cat_*']
+    environmental_topic_40:
+        name: "Aide au recrutement"
+        environmentalTopicCategories: ['@env_topic_cat_*']

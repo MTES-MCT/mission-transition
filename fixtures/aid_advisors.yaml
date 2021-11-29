@@ -1,6 +1,0 @@
-App\Entity\AidAdvisor:
-    aid_advisor_{0..10}:
-        name: <name()>
-        website: <url()>
-        email: <email()>
-        phoneNumber: <phoneNumber()>

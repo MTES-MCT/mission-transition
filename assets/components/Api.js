@@ -17,13 +17,13 @@ const fetchRegions = () => {
 
 const fetchAids = (environmentalCategory, aidTypes, region, environmentalTopicSelected, searchValue) => {
     let environmentalCategoryQueryString = '';
-    if (environmentalCategory !== null) {
-        environmentalCategoryQueryString = '&category=' + environmentalCategory.value;
+    if (environmentalCategory !== "") {
+        environmentalCategoryQueryString = '&category=' + environmentalCategory;
     }
 
     let environmentalTopicQueryString = '';
-    if (environmentalTopicSelected !== null && environmentalTopicSelected.value !== 0) {
-        environmentalTopicQueryString = '&topic=' + environmentalTopicSelected.value;
+    if (environmentalTopicSelected !== null && environmentalTopicSelected !== 0) {
+        environmentalTopicQueryString = '&topic=' + environmentalTopicSelected;
     }
 
     let aidTypesQueryString = '';
@@ -33,8 +33,8 @@ const fetchAids = (environmentalCategory, aidTypes, region, environmentalTopicSe
         })
     }
 
-    let regionsQueryString = (region !== null && region.value !== undefined) ? '&region=' + region.value : '';
-    let searchQueryString = (region !== '') ? '&search=' + searchValue : '';
+    let regionsQueryString = (region !== "" && region !== undefined) ? '&region=' + region : '';
+    let searchQueryString = (searchValue !== '') ? '&search=' + searchValue : '';
 
     let url = `/api/aids?${environmentalCategoryQueryString}${aidTypesQueryString}${regionsQueryString}${environmentalTopicQueryString}${searchQueryString}`;
     return fetch(url)
