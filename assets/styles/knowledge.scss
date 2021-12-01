@@ -1,0 +1,56 @@
+@import 'colors';
+@import 'typo';
+@import 'components/icons';
+@import "components/number_highlighted";
+
+.knowledge {
+    .fr-tabs__panel {
+        padding: 0;
+    }
+
+    .funders {
+        justify-content: center;
+
+        span {
+            font-weight: bold;
+        }
+
+        .funders_logo_1 {
+
+            img {
+                margin: .5rem;
+            }
+        }
+        .funders_logo_2 {
+
+            img {
+                margin: .5rem;
+            }
+        }
+    }
+
+    .funder-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: .5rem;
+
+        img {
+            width:100%;
+            max-width: 300px;
+        }
+    }
+
+    #funders-filter-content {
+        //height: 1140px !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .funder-content {
+        grid-gap: 4rem;
+    }
+
+    #funders-filter-content {
+        //height: 476px !important;
+    }
+}
