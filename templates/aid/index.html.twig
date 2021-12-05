@@ -9,49 +9,13 @@
 
 
 {% block body %}
-    <div class="fr-container-fluid">
-        <div class="fr-grid-row aid-header">
-            <div class="fr-pt-9w fr-pt-md-12w bg-light">
-                <div class="grid-row fr-mx-4w fr-mx-md-12w">
-                    <div class="fr-col-12">
-                        <div class="heading-underlined">
-                            <span class="subtitle">
-                                {{ aid.types|join(', ') }}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="fr-col-12 fr-mt-4w fr-mb-md-12w">
-                        <h2 class="small">{{ aid.name }}</h2>
-                    </div>
-                    <div class="fr-col-12 fr-mt-4w fr-pb-4w">
-                        <ul class="fr-tags-group">
-                            {% for action in aid.environmentalTopics %}
-                                <li><span class="mt-tag subtitle">{{ action }}</span></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
+    <div class="fr-container-fluid bg-blue-france-700">
+        <div class="fr-container fr-py-sm-6w fr-py-3w">
+            <div class="fr-grid-row">
+                <h1 class="fr-h3 on-dark">{{ aid.name }}</h1>
             </div>
-            <div class="fr-pt-9w fr-pt-md-12w bg-dark">
-                <div class="grid-row fr-mx-4w fr-mx-md-12w">
-                    <div class="fr-col-12">
-                        <div class="heading-underlined on-dark">
-                            <span class="subtitle highlighted">
-                                Votre contact pour cette aide
-                            </span>
-                        </div>
-                    </div>
-                    <div class="fr-col-12 fr-my-4w">
-                        <h3 class="on-dark">{{ aid.funder.name }}</h3>
-                    </div>
-                    {% if aid.funder.website is not null %}
-                        <div class="fr-col-12 fr-my-4w">
-                            <a href="{{ aid.fundingSourceUrl }}" target="_blank">
-                                <button class="fr-btn fr-btn--lg funder-website-link">POURSUIVRE MA DÉMARCHE</button>
-                            </a>
-                        </div>
-                    {% endif %}
-                </div>
+            <div class="fr-grid-row">
+                <p class="on-dark">En lien avec : <b>{{ aid.types|join(' | ') }}</b></p>
             </div>
         </div>
     </div>
@@ -81,29 +45,38 @@
                 <h2 class="small">Les informations principales</h2>
             </div>
             {% if aid.funder is not empty and aid.funder.name is not empty %}
-                <div class="card-focus">
-                    <img src="{{ asset('build/img/buildings.svg') }}" alt="icon batîment">
-                    <div class="content">
-                        <span class="subtitle highlighted">Porteur du dispositif</span>
-                        <p class="on-dark">{{ aid.funder.name }}</p>
+                <div class="fr-tile fr-enlarge-link bg-beige">
+                    <div class="fr-tile__body">
+                        <h4 class="fr-tile__title">
+                            <a class="fr-tile__link" href>Porteur du dispositif</a>
+                        </h4>
+                        <p class="fr-tile__desc">{{ aid.funder.name }}</p>
+                    </div>
+                    <div class="fr-tile__img">
+                        <img src="{{ asset('build/img/buildings.svg') }}" class="fr-responsive-img" alt="">
                     </div>
                 </div>
             {% endif %}
             {% if aid.types is not empty %}
-                <div class="card-focus">
-                    <img src="{{ asset('build/img/double_switch.svg') }}" alt="icon switch">
-                    <div class="content">
-                        <span class="subtitle highlighted">Type(s) de dispositif</span>
-                        <p class="on-dark">{{ aid.types|join(' ,') }}</p>
+                <div class="fr-tile fr-enlarge-link bg-beige">
+                    <div class="fr-tile__body">
+                        <h4 class="fr-tile__title">
+                            <a class="fr-tile__link" href>Type(s) de dispositif</a>
+                        </h4>
+                        <p class="fr-tile__desc">{{ aid.types|join(' | ') }}</p>
+                    </div>
+                    <div class="fr-tile__img">
+                        <img src="{{ asset('build/img/double_switch.svg') }}" class="fr-responsive-img" alt="">
                     </div>
                 </div>
             {% endif %}
             {% if aid.fundingTypes is not empty %}
-                <div class="card-focus">
-                    <img src="{{ asset('build/img/papers.svg') }}" alt="icon papiers">
-                    <div class="content">
-                        <span class="subtitle highlighted">Type de financement</span>
-                        <p class="on-dark">
+                <div class="fr-tile fr-enlarge-link bg-beige">
+                    <div class="fr-tile__body">
+                        <h4 class="fr-tile__title">
+                            <a class="fr-tile__link" href>Type de financement</a>
+                        </h4>
+                        <p class="fr-tile__desc">
                             {% for fundingType in aid.fundingTypes %}
                                 {% if loop.index is same as 0 %}
                                     ,
@@ -112,30 +85,46 @@
                             {% endfor %}
                         </p>
                     </div>
-                </div>
-            {% endif %}
-            {% if aid.applicationEndDate is not null %}
-                <div class="card-focus">
-                    <img src="{{ asset('build/img/hourglass.svg') }}" alt="icon sablier">
-                    <div class="content">
-                        <span class="subtitle highlighted">Date de clôture</span>
-                        <p class="on-dark">{{ aid.applicationEndDate|format_datetime(locale='fr') }}</p>
+                    <div class="fr-tile__img">
+                        <img src="{{ asset('build/img/papers.svg') }}" class="fr-responsive-img" alt="">
                     </div>
                 </div>
             {% endif %}
-            <div class="card-focus">
-                <img src="{{ asset('build/img/map_france.svg') }}" alt="icon carte de la France">
-                <div class="content">
-                    <span class="subtitle highlighted">Echelle</span>
-                    <p class="on-dark">{{ aid.perimeter }}</p>
+            {% if aid.applicationEndDate is not null %}
+                <div class="fr-tile fr-enlarge-link bg-beige">
+                    <div class="fr-tile__body">
+                        <h4 class="fr-tile__title">
+                            <a class="fr-tile__link" href>Date de clôture</a>
+                        </h4>
+                        <p class="fr-tile__desc">
+                            {{ aid.applicationEndDate|format_datetime(locale='fr') }}
+                        </p>
+                    </div>
+                    <div class="fr-tile__img">
+                        <img src="{{ asset('build/img/hourglass.svg') }}" class="fr-responsive-img" alt="">
+                    </div>
+                </div>
+            {% endif %}
+            <div class="fr-tile fr-enlarge-link bg-beige">
+                <div class="fr-tile__body">
+                    <h4 class="fr-tile__title">
+                        <a class="fr-tile__link" href>Echelle</a>
+                    </h4>
+                    <p class="fr-tile__desc">
+                        {{ aid.perimeter }}
+                    </p>
+                </div>
+                <div class="fr-tile__img">
+                    <img src="{{ asset('build/img/map_france.svg') }}" class="fr-responsive-img" alt="">
                 </div>
             </div>
             {% if aid.regions is not empty and aid.perimeter is same as "REGIONAL" %}
-                <div class="card-focus">
-                    <img src="{{ asset('build/img/papers.svg') }}" alt="icon papiers">
-                    <div class="content">
-                        <span class="subtitle highlighted">Régions concernées</span>
-                        <p class="on-dark">
+                <div class="fr-tile fr-enlarge-link bg-beige">
+                    <div class="fr-tile__body">
+                        <h4 class="fr-tile__title">
+                            <a class="fr-tile__link" href>Régions concernées</a>
+                        </h4>
+                        <p class="fr-tile__desc">
                             {% for region in aid.regions %}
                                 {% if loop.index is same as 0 %}
                                     ,
@@ -144,63 +133,75 @@
                             {% endfor %}
                         </p>
                     </div>
+                    <div class="fr-tile__img">
+                        <img src="{{ asset('build/img/papers.svg') }}" class="fr-responsive-img" alt="">
+                    </div>
                 </div>
             {% endif %}
-            <a href="{{ aid.fundingSourceUrl }}" target="_blank">
-                <button class="fr-btn fr-btn--lg funder-website-link">POURSUIVRE MA DÉMARCHE</button>
-            </a>
         </div>
         <div>
+            <h6 class="color-navy">Présentation générale</h6>
             {% if aid.aidDetails is not empty %}
-                <div class="details bg-light fr-p-4w fr-mb-4w">
-                    <div class="heading-underlined">
-                        <h3>Détail du financement</h3>
-                    </div>
-                    <p class="fr-pt-2w">
-                        {{ aid.aidDetails|raw }}
-                    </p>
-                </div>
-            {% endif %}
-            {% if aid.eligibility is not empty %}
-                <div class="eligibility fr-mb-4w">
-                    <div class="heading-underlined">
-                        <h3>Quelle est le cadre d'utilisation de l'aide ?</h3>
-                    </div>
-                    <p class="fr-pt-2w">
-                        {{ aid.eligibility|raw }}
-                    </p>
+                <div class="details fr-mb-4w">
+                    <section class="fr-accordion">
+                        <h3 class="fr-accordion__title">
+                            <button class="fr-accordion__btn color-navy" aria-expanded="true" aria-controls="accordion-81">C'est quoi ?</button>
+                        </h3>
+                        <div class="fr-collapse" id="accordion-81">
+                            {{ aid.aidDetails|raw }}
+                        </div>
+                    </section>
                 </div>
             {% endif %}
             {% if aid.projectExamples is not empty %}
                 <div class="project-examples fr-mb-4w">
-                    <div class="heading-underlined">
-                        <h3>Exemples de projets réalisables</h3>
-                    </div>
-                    <p class="fr-pt-2w">
-                        {{ aid.projectExamples|raw }}
-                    </p>
+                    <section class="fr-accordion">
+                        <h3 class="fr-accordion__title">
+                            <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-83">Exemples de projets réalisables</button>
+                        </h3>
+                        <div class="fr-collapse" id="accordion-83">
+                            {{ aid.projectExamples|raw }}
+                        </div>
+                    </section>
                 </div>
             {% endif %}
-            {% if aid.contactGuidelines is not empty %}
-                <div class="conditions fr-mb-4w">
-                    <div class="heading-underlined">
-                        <h3>Qui contacter ?</h3>
-                    </div>
-                    <p class="fr-pt-2w">
-                        {{ aid.contactGuidelines|raw }}
-                    </p>
+            <h6 class="color-navy">Critères d'éligibilité</h6>
+            {% if aid.eligibility is not empty %}
+                <div class="eligibility fr-mb-4w">
+                    <section class="fr-accordion">
+                        <h3 class="fr-accordion__title">
+                            <button class="fr-accordion__btn color-navy" aria-expanded="true" aria-controls="accordion-82">Quel est le cadre d’utilisation de l’aide ?</button>
+                        </h3>
+                        <div class="fr-collapse" id="accordion-82">
+                            {{ aid.eligibility|raw }}
+                        </div>
+                    </section>
                 </div>
+            {% endif %}
+            <h6 class="color-navy">Pour aller plus loin</h6>
+            {% if aid.contactGuidelines is not empty %}
+                <section class="fr-accordion">
+                    <h3 class="fr-accordion__title">
+                        <button class="fr-accordion__btn color-navy" aria-expanded="false" aria-controls="accordion-84">Qui contacter ?</button>
+                    </h3>
+                    <div class="fr-collapse" id="accordion-84">
+                        {{ aid.contactGuidelines|raw }}
+                    </div>
+                </section>
+                {% if aid.fundingSourceUrl is not null %}
+                    <section class="fr-accordion">
+                        <h3 class="fr-accordion__title">
+                            <button class="fr-accordion__btn color-navy" aria-expanded="false" aria-controls="accordion-85">Continuer vers le descriptif complet</button>
+                        </h3>
+                        <div class="fr-collapse" id="accordion-85">
+                            Lien vers le descriptif complet : <a title={{ aid.name ~ " - ouvre une nouvelle fenêtre"}} href="{{ aid.fundingSourceUrl }}" target="_blank" rel="noopener">{{ aid.name }}</a>
+                        </div>
+                    </section>
+                {% endif %}
             {% endif %}
             <div class="fr-mb-12w"></div>
         </div>
     </div>
-{#    <div class="fr-container-fluid bg-light mt-text-align-center fr-p-9w">#}
-{#        <div class="fr-grid-row">#}
-{#            <div class="fr-col">#}
-{#                <h3>Votre avis nous intéresse !</h3>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
 {% endblock %}
 
 {% block javascripts%}

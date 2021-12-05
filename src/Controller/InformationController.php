@@ -25,10 +25,20 @@ class InformationController extends AbstractController
     }
 
     /**
-     * @Route("/comprendre-transition-ecologique", name="information_tee_knowledge")
+     * @Route("/comprendre", name="information_tee_knowledge")
      */
     public function learning(): Response
     {
         return $this->render('information/knowledge_main.html.twig');
+    }
+
+    /**
+     * @Route("/comprendre/gestion-energetique", name="information_knowledge_energie")
+     */
+    public function energie(): Response
+    {
+
+
+        return $this->render('information/knowledge_subject/energie.html.twig');
     }
 }

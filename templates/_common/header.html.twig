@@ -35,26 +35,25 @@
             </div>
         </div>
     </div>
-    <div class="fr-header__menu fr-modal" id="modal-870" aria-labelledby="button-871">
+    <nav class="fr-nav" id="navigation-773" role="navigation" aria-label="Menu principal">
         <div class="fr-container">
-            <button class="fr-link--close fr-link" aria-controls="modal-870">Fermer</button>
-            <div class="fr-header__menu-links"></div>
-            <nav class="fr-nav" id="navigation-869" role="navigation" aria-label="Menu principal">
-                <ul class="fr-nav__list">
-                    <li class="fr-nav__item">
-                        <a class="fr-nav__link {% if current_route is same as 'homepage'%} active {% endif %}" href="{{ path('homepage') }}" target="_self">Accueil</a>
-                    </li>
-                    <li class="fr-nav__item">
-                        <a class="fr-nav__link {% if current_route is same as 'search_results'%} active {% endif %}" href="{{ path('search_results') }}" target="_self">Lancer votre recherche</a>
-                    </li>
-                    <li class="fr-nav__item">
-                        <a class="fr-nav__link {% if current_route is same as 'information_contact_advisor'%} active {% endif %}" href="{{ path('information_contact_advisor') }}" target="_self">Poser une question</a>
-                    </li>
-                    <li class="fr-nav__item">
-                        <a class="fr-nav__link {% if current_route is same as 'information_who_are_we'%} active {% endif %}" href="{{ path('information_who_are_we') }}" target="_self">Qui sommes-nous ?</a>
-                    </li>
-                </ul>
-            </nav>
+            <ul class="fr-nav__list">
+                <li class="fr-nav__item">
+                    <a class="fr-nav__link" {% if current_route is same as 'homepage'%} aria-current="page" {% endif %} href="{{ path('homepage') }}" target="_self">Accueil</a>
+                </li>
+                <li class="fr-nav__item">
+                    <a class="fr-nav__link" {% if current_route is same as 'information_tee_knowledge'%} aria-current="page" {% endif %} href="{{ path('information_tee_knowledge') }}" target="_self">Comprendre</a>
+                </li>
+                <li class="fr-nav__item">
+                    <a class="fr-nav__link" {% if current_route is same as 'search_results'%} aria-current="page" {% endif %} href="{{ path('search_results') }}" target="_self">Lancer votre recherche</a>
+                </li>
+                <li class="fr-nav__item">
+                    <a class="fr-nav__link" {% if current_route is same as 'information_contact_advisor'%} aria-current="page" {% endif %} href="{{ path('information_contact_advisor') }}" target="_self">Poser une question</a>
+                </li>
+                <li class="fr-nav__item">
+                    <a class="fr-nav__link" {% if current_route is same as 'information_who_are_we'%} aria-current="page" {% endif %} href="{{ path('information_who_are_we') }}" target="_self">Qui sommes-nous ?</a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
 </header>

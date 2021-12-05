@@ -5,6 +5,7 @@ $blue-royal: #5d5fef;
 $blue-ecume: #DEE5FD;
 $blue-ecume-975: #F4F6FE;
 $blue-default-france: #6A6AF4;
+$blue-france-700: #00006D;
 $blue-gradient-background: linear-gradient(238.24deg, #181b40 42.25%, #252a6b 106.2%);
 $green-menthe: #009081;
 $orange: #FFA07D;
@@ -16,6 +17,7 @@ $white: #ffffff;
 $white-lilac: #f6f8fc;
 $white-mystic: #dde5ea;
 $white-alabaster: #fbfbfb;
+$beige: #f9f8f6;
 
 .bg-light {
     background-color: $white-lilac;
@@ -41,6 +43,10 @@ $white-alabaster: #fbfbfb;
     }
 }
 
+.bg-beige {
+    background-color: $beige;
+}
+
 .bg-blue-royal {
     background: $blue-royal;
 }
@@ -53,12 +59,20 @@ $white-alabaster: #fbfbfb;
     background: $blue-ecume;
 }
 
+.bg-blue-france-700 {
+    background: $blue-france-700;
+}
+
 .bg-green-menthe {
     background: $green-menthe;
 }
 
 .bg-blue-ecume-975 {
     background: $blue-ecume-975;
+}
+
+.bg-blue-navy {
+    background: $blue-navy;
 }
 
 .color-navy {

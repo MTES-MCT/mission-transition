@@ -8,6 +8,22 @@
 
 	@at-root #{&}__right {
 	}
+
+	&.number-highlighted__alt {
+		display: grid;
+		grid-template-rows: auto auto;
+		.number-highlighted__left {
+			height: 100%;
+
+			p {
+				max-width: 670px;
+				margin: auto;
+			}
+		}
+		.number-highlighted__right {
+			height: 100%;
+		}
+	}
 }
 
 @media only screen and (min-width: 768px) {
@@ -20,6 +36,22 @@
 		}
 
 		@at-root #{&}__right {
+		}
+
+		&.number-highlighted__alt {
+			display: grid;
+			grid-template-columns: auto 35vw;
+			.number-highlighted__left {
+				height: 100%;
+
+				p {
+					max-width: 670px;
+					margin: auto;
+				}
+			}
+			.number-highlighted__right {
+				height: 100%;
+			}
 		}
 	}
 }

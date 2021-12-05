@@ -40,17 +40,57 @@
         }
     }
 
-    #funders-filter-content {
-        //height: 1140px !important;
+    .intro {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            "image title"
+            "description description"
+        ;
+        grid-gap: .5rem;
+
+        .intro__image {
+            grid-area: image;
+            align-self: center;
+            justify-self: center;
+            width: 100px;
+        }
+        .intro__title {
+            grid-area: title;
+        }
+        .intro__description {
+            grid-area: description;
+        }
     }
 }
 
 @media only screen and (min-width: 768px) {
-    .funder-content {
-        grid-gap: 4rem;
-    }
+    .knowledge {
+        .funder-content {
+            grid-gap: 4rem;
+        }
 
-    #funders-filter-content {
-        //height: 476px !important;
+        .intro {
+            display: grid;
+            grid-template-columns: 425px 655px;
+            grid-template-areas:
+            "image title"
+            "image description"
+        ;
+
+            .intro__image {
+                grid-area: image;
+                align-self: center;
+                justify-self: center;
+                width: 250px;
+            }
+
+            .intro__title {
+                grid-area: title;
+            }
+            .intro__description {
+                grid-area: description;
+            }
+        }
     }
 }

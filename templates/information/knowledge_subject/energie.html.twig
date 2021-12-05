@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comprendre Gestion énergetique{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('knowledge') }}
+{% endblock %}
+
+{% block body %}
+    <div class="knowledge fr-container-fluid">
+        <nav role="navigation" class="fr-breadcrumb fr-ml-2w" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-1">
+                <ol class="fr-breadcrumb__list">
+                    <li>
+                        <a class="fr-breadcrumb__link" href="/">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" href="{{ path('information_tee_knowledge') }}">Comprendre</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" aria-current="page">Gestion énergetique</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        <div class="fr-container">
+            <div class="fr-grid-row intro">
+                <img class="intro__image" src="{{ asset('build/img/gestion_energetique.svg') }}" alt="">
+                <h1 class="fr-display-xs intro__title color-navy">Gestion énergetique</h1>
+                <div class="intro__description">
+                    <p>
+                        En tant qu’entreprise, <b>optimiser vos consommations énergétiques permet autant de réduire les coûts liés que d’être plus écologiques.</b>
+                    </p>
+                    <p>
+                        <br/>Identifiez les postes les plus énergivores et établissez un plan d’action pour réduire votre consommation et changer de fournisseur pour opter pour les énergies renouvelables.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid fr-pt-5w">
+            <div class="number-highlighted number-highlighted__alt">
+                <div class="number-highlighted__left bg-blue-navy fr-py-2w fr-px-sm-12w fr-px-2w on-dark">
+                    <div class="fr-grid-row fr-p-sm-5w fr-p-3v">
+                        <div class="fr-col-12 mt-text-align-center">
+                            <h3 class="on-dark fr-display-lg">- 10 à 25% par an </h3>
+                            <p class="fr-text--lg fr-pt-sm-5w fr-pt-3v">
+                                <b>Ce sont les bénéfices sur votre facture énergétique que vous pouvez obtenir en réalisant des actions d’optimisations énergétiques.</b><br/>
+                                (Source:  Ademe)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="number-highlighted__right bg-blue-default-france fr-p-3w mt-text-align-center">
+                    <p class="color-white fr-display-lg">
+                        36%
+                    </p>
+                    <p class="fr-text--lg color-white">
+                        <b>de la consommation de combustibles de l’industrie est rejetée sans être réutilisée alors qu’elle pourrait l’être.</b><br/>
+                        (Source:  Ademe)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid bg-beige">
+            <div class="fr-container fr-p-sm-6w fr-p-3w">
+                <ul class="fr-accordions-group">
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-89">Intitulé accordéon</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-89">
+                                <!-- données de test -->
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-90">Intitulé accordéon</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-90">
+                                <!-- données de test -->
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-91">Intitulé accordéon</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-91">
+                                <!-- données de test -->
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('knowledge') }}
+{% endblock %}
