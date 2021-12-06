@@ -37,8 +37,22 @@ class InformationController extends AbstractController
      */
     public function energie(): Response
     {
-
-
         return $this->render('information/knowledge_subject/energie.html.twig');
+    }
+
+    /**
+     * @Route("/comprendre/batiment-durable", name="information_knowledge_batiment")
+     */
+    public function batiment(): Response
+    {
+        return $this->render('information/knowledge_subject/batiment.html.twig');
+    }
+
+    /**
+     * @Route("/comprendre/mobilite-durable", name="information_knowledge_mobilite")
+     */
+    public function mobilite(): Response
+    {
+        return $this->render('information/knowledge_subject/mobilite.html.twig');
     }
 }

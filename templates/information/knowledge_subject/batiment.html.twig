@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comprendre le bâtiment durable{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('knowledge') }}
+{% endblock %}
+
+{% block body %}
+    <div class="knowledge fr-container-fluid">
+        <nav role="navigation" class="fr-breadcrumb fr-ml-2w" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-1">
+                <ol class="fr-breadcrumb__list">
+                    <li>
+                        <a class="fr-breadcrumb__link" href="/">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" href="{{ path('information_tee_knowledge') }}">Comprendre</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" aria-current="page">Bâtiment durable</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        <div class="fr-container">
+            <div class="fr-grid-row intro">
+                <img class="intro__image" src="{{ asset('build/img/batiment_durable.svg') }}" alt="">
+                <h1 class="fr-display-xs intro__title color-navy">Bâtiment durable</h1>
+                <div class="intro__description">
+                    <p>
+                        Des locaux qui produisent plus d'énergie qu'ils n'en consomment : tel est le défi du bâtiment durable, que de nombreux acteurs tentent de relever.</b>
+                    </p>
+                    <p>
+                        <br/>Nous vous fournissons les informations essentielles pour <b>vous aider à rénover ou construire vos bâtiments d’entreprise dans le respect de l’environnement.</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid fr-pt-5w">
+            <div class="number-highlighted number-highlighted__alt">
+                <div class="number-highlighted__left bg-blue-navy fr-py-2w fr-px-sm-12w fr-px-2w on-dark">
+                    <div class="fr-grid-row fr-p-sm-5w fr-p-3v">
+                        <div class="fr-col-12 mt-text-align-center">
+                            <h3 class="on-dark fr-display-lg">36%</h3>
+                            <p class="fr-text--lg fr-pt-sm-5w fr-pt-3v">
+                                <b>des émissions de CO2 de l’UE viennent des bâtiments commerciaux et résidentiels</b><br/>
+                                (Source:  <a title="Document Early Metrics - ouvre une nouvelle fenêtre" href="https://earlymetrics.com/wp-content/uploads/2020/10/Green-Buildings-Infographic-FR-Early-Metrics-2020.pdf" target="_blank" rel="noopener">Early Metrics</a>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="number-highlighted__right bg-blue-default-france fr-p-3w mt-text-align-center">
+                    <p class="fr-text--lg color-white">
+                        En privilégiant les maisons “passives”, dotées d’une meilleure isolation thermique, les constructeurs permettent d’économiser jusqu’à <b>90%</b> de l’énergie émise*<br/>
+                        (Source:  <a title="La RE 2020 (ou RT 2020) - ouvre une nouvelle fenêtre" href="http://www.rt-2020.com/" target="_blank" rel="noopener">Réglementation Thermique (RT) 2020</a>)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid bg-beige">
+            <div class="fr-container fr-p-sm-6w fr-p-3w">
+                <ul class="fr-accordions-group">
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-89">Quelques documents utiles sur le bâtiment durable</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-89">
+                                <a title="CCI - Chambre de commerce et d'industrie - ouvre une nouvelle fenêtre" href="https://www.cci.fr/c/document_library/get_file?uuid=34ef39f8-656f-4cb5-b51e-abce904229a3&groupId=11000" target="_blank" rel="noopener">Guide de l’énergie de la CCI</a>
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-90">Quelques sites utiles sur le bâtiment durable</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-90">
+                                <p><a title="EnVol - Le label des PME qui s'engagent pour l'environnement - ouvre une nouvelle fenêtre" href="https://www.envol-entreprise.fr/" target="_blank" rel="noopener">EnVol, le label des PME écoresponsables</a></p>
+                                <p class="fr-pt-3v"><a title="Fédération Française du Bâtiment - ouvre une nouvelle fenêtre" href="https://www.engie.ch/fr/solutions/energy-services/gestion-de-lenergie/" target="_blank" rel="noopener">OREBAT, l’outil d’aide à la rénovation énergétique</a></p>
+                                <p class="fr-pt-3v"><a title="plateforme OPERAT  - ouvre une nouvelle fenêtre" href="https://operat.ademe.fr/#/public" target="_blank" rel="noopener">OPERAT, l’observatoire de l’Ademe sur l’impact énergétique des bâtiments</a></p>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('knowledge') }}
+{% endblock %}

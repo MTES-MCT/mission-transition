@@ -108,7 +108,7 @@
                                         <button class="fr-btn big card-aid-cta">VOIR LE DISPOSITIF</button>
                                     </a>
                                 {% else %}
-                                    <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                    <a href="{{ path('aid_view', {'slug': aid.slug}) }}" target="_blank">
                                         <button class="fr-btn big card-aid-cta">VOIR LA FICHE</button>
                                     </a>
                                 {% endif %}
@@ -179,7 +179,7 @@
                                         {% endfor %}
                                     </ul>
                                 </div>
-                                <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                <a href="{{ path('aid_view', {'slug': aid.slug}) }}" target="_blank">
                                     <button class="fr-btn big card-aid-cta">VOIR LA FICHE</button>
                                 </a>
                             </div>
