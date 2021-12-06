@@ -52,6 +52,10 @@ div.wrapper {
     color: $blue-navy;
 }
 
+.cma-logo {
+    background-color: red !important;
+}
+
 @media only screen and (min-width: 768px) {
     .on-mobile-only {
         display: none !important;
