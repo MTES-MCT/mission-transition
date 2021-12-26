@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comprendre la gestion énergetique{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('knowledge') }}
+{% endblock %}
+
+{% block body %}
+    <div class="knowledge fr-container-fluid">
+        <nav role="navigation" class="fr-breadcrumb fr-ml-2w" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-1">
+                <ol class="fr-breadcrumb__list">
+                    <li>
+                        <a class="fr-breadcrumb__link" href="/">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" href="{{ path('information_tee_knowledge') }}">Comprendre</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" aria-current="page">Gestion énergetique</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        <div class="fr-container">
+            <div class="fr-grid-row intro">
+                <img class="intro__image" src="{{ asset('build/img/gestion_energetique.svg') }}" alt="">
+                <h1 class="fr-display-xs intro__title color-navy">Gestion énergetique</h1>
+                <div class="intro__description">
+                    <p>
+                        En tant qu’entreprise, <b>optimiser vos consommations énergétiques permet autant de réduire les coûts liés que d’être plus écologiques.</b>
+                    </p>
+                    <p>
+                        <br/>Identifiez les postes les plus énergivores et établissez un plan d’action pour réduire votre consommation et changer de fournisseur pour opter pour les énergies renouvelables.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid fr-pt-5w">
+            <div class="number-highlighted number-highlighted__alt">
+                <div class="number-highlighted__left bg-blue-navy fr-py-2w fr-px-sm-12w fr-px-2w on-dark">
+                    <div class="fr-grid-row fr-p-sm-5w fr-p-3v">
+                        <div class="fr-col-12 mt-text-align-center">
+                            <h3 class="on-dark fr-display-lg">- 10 à 25% par an </h3>
+                            <p class="fr-text--lg fr-pt-sm-5w fr-pt-3v">
+                                <b>Ce sont les bénéfices sur votre facture énergétique que vous pouvez obtenir en réalisant des actions d’optimisations énergétiques.</b><br/>
+                                (Source:  <a title="Source Ademe - ouvre une nouvelle fenêtre" href="https://fr.calameo.com/read/0045994994a573a11faa0?page=3" target="_blank" rel="noopener">Ademe</a>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="number-highlighted__right bg-blue-default-france fr-p-3w mt-text-align-center">
+                    <p class="color-white fr-display-lg">
+                        36%
+                    </p>
+                    <p class="fr-text--lg color-white">
+                        <b>de la consommation de combustibles de l’industrie est rejetée sans être réutilisée alors qu’elle pourrait l’être.</b><br/>
+                        (Source:  <a title="Source Ademe - ouvre une nouvelle fenêtre" href="https://fr.calameo.com/read/0045994994a573a11faa0?page=3" target="_blank" rel="noopener">Ademe</a>)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid bg-beige">
+            <div class="fr-container fr-p-sm-6w fr-p-3w">
+                <ul class="fr-accordions-group">
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-89">Quelques documents utiles sur la gestion énergétique</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-89">
+                                <a title="Fiche pratique - ouvre une nouvelle fenêtre" href="https://www.ecologie.gouv.fr/sites/default/files/CDDEP%20-%20Fiches%20pratiques%20-%20Pour%20la%20r%C3%A9duction%20des%20%C3%A9missions%20de%20gaz%20%C3%A0%20effet%20de%20serre.pdf" target="_blank" rel="noopener">La fiche pratique sur les certificats d’économie d’énergie du ministère de l’écologie pour réduire les émissions de gaz à effet de serre</a>
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-90">Quelques sites utiles sur la gestion énergétique</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-90">
+                                <p><a title="Gestion Energetique | Energies France - ouvre une nouvelle fenêtre" href="https://www.energiesfrance.fr/nos-services/gestion-energetique/" target="_blank" rel="noopener">En savoir plus sur la gestion de son énergie via energiefrance</a></p>
+                                <p class="fr-pt-3v"><a title="Gestion de l'énergie pour l'industrie et les entreprises | ENGIE - ouvre une nouvelle fenêtre" href="https://www.engie.ch/fr/solutions/energy-services/gestion-de-lenergie/" target="_blank" rel="noopener">En savoir plus sur la gestion de son énergie via Engie</a></p>
+                                <p class="fr-pt-3v"><a title="PME et ETI : quels outils pour une transition énergétique bénéfique à l’environnement et à l’entreprise ? - ouvre une nouvelle fenêtre" href="https://www.labanquepostale.fr/entreprises/actualite/pme-eti-outils-transition-energetique.html" target="_blank" rel="noopener">En savoir plus sur les outils pour sa transition énergétique avec la banque postale</a></p>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('knowledge') }}
+{% endblock %}

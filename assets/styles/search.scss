@@ -43,3 +43,7 @@
 .environmental-action-error {
     color: $orange-bold-dark;
 }
+
+.selected {
+    border: 1px solid var(--border-plain-blue-france);
+}

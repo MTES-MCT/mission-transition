@@ -3,79 +3,27 @@
 namespace App\Controller;
 
 use App\Entity\Aid;
-use App\Entity\EnvironmentalAction;
-use App\Form\SearchFirstStepFormType;
 use App\Form\SearchFormType;
-use App\Form\SearchSecondStepFormType;
 use App\Model\SearchFormModel;
 use App\Repository\AidRepository;
-use App\Repository\EnvironmentalActionRepository;
 use App\Repository\EnvironmentalTopicRepository;
 use App\Repository\RegionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class SearchController extends AbstractController
 {
-    /**
-     * @Route("/recherche", name="search_index")
-     */
-    public function index(
-        Request $request,
-        EnvironmentalActionRepository $actionRepository,
-        RegionRepository $regionRepository,
-        UrlGeneratorInterface $urlGenerator
-    ) {
-        $environmentalActions = $actionRepository->findAllWithCategory();
-        $environmentalActions = $this->orderActionsByOptGroup($environmentalActions);
-        $searchFormModel = new SearchFormModel();
-
-        $form = $this->createForm(SearchFirstStepFormType::class, $searchFormModel, [
-            'environmentalActions' => $environmentalActions,
-            'method' => 'GET',
-            'action' => $urlGenerator->generate('search_results'),
-        ]);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $regions = $regionRepository->findAll();
-
-            $form = $this->createForm(SearchSecondStepFormType::class, $searchFormModel, [
-                'regions' => $regions,
-                'method' => 'GET',
-                'action' => $urlGenerator->generate('search_results'),
-            ]);
-
-            return $this->render('search/index_step2.html.twig', [
-                'form' => $form->createView(),
-            ]);
-        }
-
-        return $this->render('search/index_step1.html.twig', [
-            'form' => $form->createView(),
-            'environmentalActions' => $environmentalActions,
-        ]);
-    }
-
     /**
      * @Route("/recherche/resultats", name="search_results")
      */
     public function results(
         Request $request,
-        EnvironmentalActionRepository $actionRepository,
         AidRepository $aidRepository,
         RegionRepository $regionRepository,
-        EnvironmentalTopicRepository $environmentalTopicRepository,
-        SerializerInterface $serializer
+        EnvironmentalTopicRepository $environmentalTopicRepository
     ): Response {
-        $environmentalActions = $actionRepository->findAllWithCategory();
-        $environmentalActions = $this->orderActionsByOptGroup($environmentalActions);
         $environmentalTopics = $environmentalTopicRepository->findBy([], ['name' => 'ASC']);
         $regions = $regionRepository->findBy([], ['name' => 'ASC']);
         $searchFormModel = new SearchFormModel();
@@ -115,11 +63,6 @@ class SearchController extends AbstractController
             $counts = $aidRepository->countAids($aidType, $environmentalTopic, $region);
         }
 
-//        $environmentalTopics = $serializer->serialize($environmentalTopics, 'json', [
-//            'groups' => 'list',
-//            JsonEncode::OPTIONS => JSON_UNESCAPED_UNICODE
-//        ]);
-
         return $this->render('search/results.html.twig', [
             'form' => $form->createView(),
             'nationalAids' => $nationalAids ?? [],
@@ -134,16 +77,5 @@ class SearchController extends AbstractController
             'nextNationalLimit' => $nationalLimit + SearchFormModel::LIMIT_INCREASED_BY,
             'environmentalTopics' => $environmentalTopics,
         ]);
-    }
-
-    private function orderActionsByOptGroup(array $environmentalActions): array
-    {
-        $actionsByOptGroup = [];
-        /** @var EnvironmentalAction $action */
-        foreach ($environmentalActions as $action) {
-            $actionsByOptGroup[$action->getCategory()->getName()][] = $action;
-        }
-
-        return $actionsByOptGroup;
     }
 }

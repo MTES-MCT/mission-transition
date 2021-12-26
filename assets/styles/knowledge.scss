@@ -1,0 +1,96 @@
+@import 'colors';
+@import 'typo';
+@import 'components/icons';
+@import "components/number_highlighted";
+
+.knowledge {
+    .fr-tabs__panel {
+        padding: 0;
+    }
+
+    .funders {
+        justify-content: center;
+
+        span {
+            font-weight: bold;
+        }
+
+        .funders_logo_1 {
+
+            img {
+                margin: .5rem;
+            }
+        }
+        .funders_logo_2 {
+
+            img {
+                margin: .5rem;
+            }
+        }
+    }
+
+    .funder-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: .5rem;
+
+        img {
+            width:100%;
+            max-width: 300px;
+        }
+    }
+
+    .intro {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            "image title"
+            "description description"
+        ;
+        grid-gap: .5rem;
+
+        .intro__image {
+            grid-area: image;
+            align-self: center;
+            justify-self: center;
+            width: 100px;
+        }
+        .intro__title {
+            grid-area: title;
+        }
+        .intro__description {
+            grid-area: description;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .knowledge {
+        .funder-content {
+            grid-gap: 4rem;
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: 425px 655px;
+            grid-template-areas:
+            "image title"
+            "image description"
+        ;
+
+            .intro__image {
+                grid-area: image;
+                align-self: center;
+                justify-self: center;
+                width: 250px;
+            }
+
+            .intro__title {
+                grid-area: title;
+            }
+            .intro__description {
+                grid-area: description;
+            }
+        }
+    }
+}

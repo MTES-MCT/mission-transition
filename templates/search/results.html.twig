@@ -9,6 +9,13 @@
 
 {% block body %}
 
+    <div class="fr-container">
+        <div class="fr-grid-row fr-py-6w">
+            <div class="fr-col-12">
+               <h5>Vous êtes une entreprise à la recherche d’aide pour réaliser votre projet écologique, lancez une recherche :</h5>
+            </div>
+        </div>
+    </div>
     <div id="aid-search-engine"></div>
 
 {#    <div class="fr-container-fluid bg-dark">#}
@@ -101,7 +108,7 @@
                                         <button class="fr-btn big card-aid-cta">VOIR LE DISPOSITIF</button>
                                     </a>
                                 {% else %}
-                                    <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                    <a href="{{ path('aid_view', {'slug': aid.slug}) }}" target="_blank">
                                         <button class="fr-btn big card-aid-cta">VOIR LA FICHE</button>
                                     </a>
                                 {% endif %}
@@ -172,7 +179,7 @@
                                         {% endfor %}
                                     </ul>
                                 </div>
-                                <a href="{{ path('aid_view', {'slug': aid.slug}) }}">
+                                <a href="{{ path('aid_view', {'slug': aid.slug}) }}" target="_blank">
                                     <button class="fr-btn big card-aid-cta">VOIR LA FICHE</button>
                                 </a>
                             </div>

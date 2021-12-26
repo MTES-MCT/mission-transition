@@ -63,18 +63,6 @@ class Aid
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"list"})
      */
-    private ?string $goal;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups({"list"})
-     */
-    private ?string $beneficiary;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups({"list"})
-     */
     private ?string $aidDetails;
 
     /**
@@ -82,12 +70,6 @@ class Aid
      * @Groups({"list"})
      */
     private ?string $eligibility;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups({"list"})
-     */
-    private ?string $conditions;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -118,16 +100,6 @@ class Aid
      * @Groups({"list"})
      */
     private string $slug;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=EnvironmentalAction::class, inversedBy="aids")
-     */
-    private Collection $environmentalActions;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=AidAdvisor::class)
-     */
-    private ?AidAdvisor $aidAdvisor;
 
     /**
      * @ORM\ManyToMany(targetEntity=EnvironmentalTopic::class, inversedBy="aids")
@@ -219,7 +191,6 @@ class Aid
     public function __construct()
     {
         $this->ulid = new Ulid();
-        $this->environmentalActions = new ArrayCollection();
         $this->environmentalTopics = new ArrayCollection();
         $this->businessActivityAreas = new ArrayCollection();
         $this->state = self::STATE_DRAFT;
@@ -274,30 +245,6 @@ class Aid
         return strcmp($this->perimeter, 'NATIONAL');
     }
 
-    public function getGoal(): ?string
-    {
-        return $this->goal;
-    }
-
-    public function setGoal(?string $goal): self
-    {
-        $this->goal = $goal;
-
-        return $this;
-    }
-
-    public function getBeneficiary(): ?string
-    {
-        return $this->beneficiary;
-    }
-
-    public function setBeneficiary(?string $beneficiary): self
-    {
-        $this->beneficiary = $beneficiary;
-
-        return $this;
-    }
-
     public function getAidDetails(): ?string
     {
         return $this->aidDetails;
@@ -318,18 +265,6 @@ class Aid
     public function setEligibility(?string $eligibility): self
     {
         $this->eligibility = $eligibility;
-
-        return $this;
-    }
-
-    public function getConditions(): ?string
-    {
-        return $this->conditions;
-    }
-
-    public function setConditions(?string $conditions): self
-    {
-        $this->conditions = $conditions;
 
         return $this;
     }
@@ -390,47 +325,6 @@ class Aid
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|EnvironmentalAction[]
-     */
-    public function getEnvironmentalActions(): Collection
-    {
-        return $this->environmentalActions;
-    }
-
-    public function addEnvironmentalAction(EnvironmentalAction $environmentalAction): self
-    {
-        if (!$this->environmentalActions->contains($environmentalAction)) {
-            $this->environmentalActions[] = $environmentalAction;
-        }
-
-        return $this;
-    }
-
-    public function removeEnvironmentalAction(EnvironmentalAction $environmentalAction): self
-    {
-        $this->environmentalActions->removeElement($environmentalAction);
-
-        return $this;
-    }
-
-    public function hasEnvironmentalAction(EnvironmentalAction $environmentalAction): bool
-    {
-        return $this->environmentalActions->contains($environmentalAction);
-    }
-
-    public function getAidAdvisor(): ?AidAdvisor
-    {
-        return $this->aidAdvisor;
-    }
-
-    public function setAidAdvisor(?AidAdvisor $aidAdvisor): self
-    {
-        $this->aidAdvisor = $aidAdvisor;
 
         return $this;
     }

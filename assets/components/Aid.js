@@ -107,10 +107,11 @@ const Aid = ({aid, last = false}) => {
     }
 
     return (
-        <div className="card-aid" id={last ? "last-regional-aid" : ""}>
-            <div className="card-aid-main">
-                <h4 className="subtitle">{aid.types.map(type => type.name).join(', ') }</h4>
-                <h3 className="small">{ aid.name }</h3>
+        <div className="fr-card fr-enlarge-link" id={last ? "last-regional-aid" : ""}>
+            <div className="fr-card__body">
+                <h4 className="fr-card__title">
+                    <a href={aid.directAccess ? aid.fundingSourceUrl : "/dispositif/" + aid.slug} className="fr-card__link">{ aid.name }</a>
+                </h4>
                 <div className="funder">
                     <span className="mt-icon-circled mt-icon-circled--inline">
                         <span className="mt-icon mt-icon--building"/>
@@ -118,24 +119,10 @@ const Aid = ({aid, last = false}) => {
                     <span className="subtitle">{ aid.funder.name }</span>
                 </div>
                 {getApplicationDates()}
-
                 {getLowerAndUpperBound()}
-
-                {getRegions()}
-
                 {getTypes()}
+                {getRegions()}
             </div>
-            { aid.directAccess && (
-                <a target="_blank" href={aid.fundingSourceUrl}>
-                    <button className="fr-btn big card-aid-cta">VOIR LE DISPOSITIF</button>
-                </a>
-            )}
-
-            { !aid.directAccess && (
-                <a target="_blank" href={"/dispositif/" + aid.slug}>
-                    <button className="fr-btn big card-aid-cta">VOIR LA FICHE</button>
-                </a>
-            )}
         </div>
     )
 }

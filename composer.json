@@ -46,6 +46,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "symfony/browser-kit": "5.3.*",
         "symfony/css-selector": "5.3.*",
+        "hautelook/alice-bundle": "^2.9",
         "symfony/maker-bundle": "^1.26",
         "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "5.3.*",

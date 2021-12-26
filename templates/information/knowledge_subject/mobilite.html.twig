@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comprendre la mobilité durable{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('knowledge') }}
+{% endblock %}
+
+{% block body %}
+    <div class="knowledge fr-container-fluid">
+        <nav role="navigation" class="fr-breadcrumb fr-ml-2w" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-1">
+                <ol class="fr-breadcrumb__list">
+                    <li>
+                        <a class="fr-breadcrumb__link" href="/">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" href="{{ path('information_tee_knowledge') }}">Comprendre</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" aria-current="page">Mobilité durable</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        <div class="fr-container">
+            <div class="fr-grid-row intro">
+                <img class="intro__image" src="{{ asset('build/img/mobilite_durable.svg') }}" alt="">
+                <h1 class="fr-display-xs intro__title color-navy">Mobilité Durable : se déplacer sans polluer</h1>
+                <div class="intro__description">
+                        La mobilité durable consiste à penser des <b>modes de déplacement plus respectueux de l’environnement et des individus, tout en diminuant l’impact écologique des moyens de transports actuels.</b>
+                    </p>
+                    <p>
+                        <br/>Nous vous fournissons les informations essentielles à votre transition vers la mobilité durable !
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid fr-pt-5w">
+            <div class="number-highlighted number-highlighted__alt">
+                <div class="number-highlighted__left bg-blue-navy fr-py-2w fr-px-sm-12w fr-px-2w on-dark">
+                    <div class="fr-grid-row fr-p-sm-5w fr-p-3v">
+                        <div class="fr-col-12 mt-text-align-center">
+                            <p class="fr-text--lg fr-pt-sm-5w fr-pt-3v">
+                                Le transport assurant la liaison entre les différents maillons de la supply chain représente <b>21 %</b> des émissions de gaz à effet de serre, dont <b>45 %</b> sont imputables au transport routier de marchandises.*<br/>
+                                (Source:  <a title="Les quatre leviers de la logistique durable - ouvre une nouvelle fenêtre" href="https://www.faq-logistique.com/SCM-Quatre-Leviers-Logistique-Durable.htm" target="_blank" rel="noopener">FAQ Logistique</a>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="number-highlighted__right bg-blue-default-france fr-p-3w mt-text-align-center">
+                    <p class="fr-text--lg color-white">
+                        Alors que 85% des travailleurs utilisent, seuls, leur voiture pour se rendre au travail, <b>90 %</b> d’entre eux considèrent la mobilité durable comme indispensable*<br/>
+                        (Source:  <a title="Baromètre de la mobilité durable - Sondages publiés - ouvre une nouvelle fenêtre" href="https://www.opinion-way.com/fr/sondage-d-opinion/sondages-publies/opinion-societe/environnement-et-developpement-durable/barometre-de-la-mobilite-durable.html" target="_blank" rel="noopener">Opinion Way</a>)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid bg-beige">
+            <div class="fr-container fr-p-sm-6w fr-p-3w">
+                <ul class="fr-accordions-group">
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-89">Quelques documents utiles sur la mobilité durable</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-89">
+                                <a title="CDDEP - Fiches pratiques - Pour la réduction des émissions de gaz à effet de serre.pdf - ouvre une nouvelle fenêtre" href="https://www.ecologie.gouv.fr/sites/default/files/CDDEP%20-%20Fiches%20pratiques%20-%20Pour%20la%20r%C3%A9duction%20des%20%C3%A9missions%20de%20gaz%20%C3%A0%20effet%20de%20serre.pdf" target="_blank" rel="noopener">La fiche pratique sur les déplacements professionnels du ministère de l’écologie pour réduire les émissions de gaz à effet de serre</a>
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-90">Quelques sites utiles sur la mobilité durable</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-90">
+                                <p><a title="Forfait mobilité durable - qu'est-ce que c'est ? - ouvre une nouvelle fenêtre" href="https://www.worklife.io/titres-mobilite/forfait-mobilite-durable" target="_blank" rel="noopener">Cet article de Worklife sur la mobilité durable</a></p>
+                                <p class="fr-pt-3v"><a title="La mobilité douce : qu'est-ce que c'est ? – SMOVENGO - ouvre une nouvelle fenêtre" href="https://www.smovengo.fr/2020/09/04/mobilite-douce-definition/" target="_blank" rel="noopener">Cet article de Smovengo sur la mobilité douce</a></p>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('knowledge') }}
+{% endblock %}

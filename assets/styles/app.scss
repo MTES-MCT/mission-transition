@@ -9,15 +9,15 @@ body {
     margin: 0;
 }
 
-hr {
-    border: 0;
-    border-bottom: 1px solid #cecece;
-
-    &.on-dark {
-        border: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.23);
-    }
-}
+//hr {
+//    border: 0;
+//    border-bottom: 1px solid #cecece;
+//
+//    &.on-dark {
+//        border: 0;
+//        border-top: 1px solid rgba(255, 255, 255, 0.23);
+//    }
+//}
 
 div.wrapper {
     min-height: 100%;
@@ -40,6 +40,10 @@ div.wrapper {
 
 .mt-text-align-center {
     text-align: center;
+}
+
+.mandatory {
+    color: red;
 }
 
 .beta {

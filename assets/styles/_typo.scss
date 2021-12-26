@@ -7,25 +7,10 @@ h2,
 h3,
 h4,
 p {
-    color: $grey-river-bed;
     font-family: $main-font;
 }
 
-h1 {
-    font-size: 48px;
-    line-height: 100%;
-    letter-spacing: -0.04em;
-    font-style: normal;
-    font-weight: normal;
-}
-
 h2 {
-    font-size: 32px;
-    line-height: 110%;
-    letter-spacing: -0.04em;
-    font-style: normal;
-    font-weight: normal;
-
     &.small {
         font-size: 24px;
         line-height: 120%;
@@ -35,25 +20,8 @@ h2 {
     }
 }
 
-h3 {
-    font-size: 20px;
-    line-height: 110%;
-    letter-spacing: -0.04em;
-    font-style: normal;
-    font-weight: normal;
-}
-
-h4 {
-    font-size: 21px;
-    line-height: 29px;
-    font-style: normal;
-    font-weight: normal;
-}
-
 p {
     margin: 0;
-    font-size: 14px;
-    line-height: 160%;
 
     &.small {
         font-size: 12px;
@@ -64,18 +32,6 @@ p {
         font-size: 18px;
         line-height: 150%;
     }
-}
-
-.h1 {
-    @extend h1;
-}
-
-.h2 {
-    @extend h2;
-}
-
-.h3 {
-    @extend h3;
 }
 
 .subtitle {
@@ -117,29 +73,21 @@ p {
     color: $white;
 }
 
+.key-figure {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 140px;
+    line-height: 120%;
+    letter-spacing: -0.03em;
+}
+
 @media only screen and (min-width: 768px) {
-    h1 {
-        font-size: 64px;
-        letter-spacing: -0.04em;
-    }
 
     h2 {
-        font-size: 56px;
-        letter-spacing: -0.04em;
-
         &.small {
             font-weight: 300;
             font-size: 32px;
             letter-spacing: -0.02em;
         }
-    }
-
-    h3 {
-        font-weight: 500;
-    }
-
-    h4 {
-        font-size: 18px;
-        line-height: 22px;
     }
 }
