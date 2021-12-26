@@ -79,7 +79,7 @@ App\Entity\EnvironmentalTopic:
         environmentalTopicCategories: ['@env_topic_cat_*']
     environmental_topic_27:
         name: "Gestion de l'eau"
-        environmentalTopicCategories: ['@env_topic_cat_*']
+        environmentalTopicCategories: ['@env_topic_cat_10']
     environmental_topic_28:
         name: "Acquisition & extension des locaux"
         environmentalTopicCategories: ['@env_topic_cat_*']

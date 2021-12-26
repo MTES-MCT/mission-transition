@@ -30,7 +30,7 @@ App\Entity\EnvironmentalTopicCategory:
         name: "Secteur Bois"
         description: "Exemples de projets : Soutien au plateforme de stockage, soutien à l’investissement de la filière bois, atténuation du changement climatique sur la forêt "
     env_topic_cat_11:
-        name: "Secteur Agriculture & Zones rurales"
+        name: "Secteur Eau & écosystèmes"
         description: "Exemples de projets : Acquisition foncière, études aux travaux d’aménagement, réhabilitation de réserve d’eau, sensibilisation, aide à l’interdiction de l’épandage des boues (agriculture), restauration écologique des milieux humides"
     env_topic_cat_12:
         name: "Secteur Infrastructure & Déchèterie"
