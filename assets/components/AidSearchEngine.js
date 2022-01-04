@@ -73,9 +73,7 @@ const AidSearchEngine = () => {
                 <div className="bg-light no-results fr-p-12w">
                     <img alt="lancez-vous" className="mt-w100" src="/build/img/search_default.svg" />
                     <div className="text fr-pt-3w">
-                        <p className="fr-pb-3w">Veuillez sélectionner un objectif dans les filtres
-                            afin d’avoir des résultats de recherche.
-                        </p>
+                        <p className="fr-pb-3w">Veuillez renseigner les informations/champs de recherche afin d’obtenir des résultats.</p>
                     </div>
                 </div>
             )}

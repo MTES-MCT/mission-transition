@@ -9,6 +9,7 @@ const AidSearchEngineExtension = () => {
     const [environmentalSectors, setEnvironmentalSectors] = useState([]);
     const [showCategories, setShowCategories] = useState(true);
     const [showSectors, setShowSectors] = useState(false);
+    const [categoryQueryParamName, setCategoryQueryParamName] = useState('topic');
 
     const fetchRegionsData = () => {
         return fetchRegions().then(result => {
@@ -35,6 +36,11 @@ const AidSearchEngineExtension = () => {
 
     const onCategoryClick = (event) => {
         event.preventDefault();
+        if (showSectors) {
+            setCategoryQueryParamName('sector')
+        } else {
+            setCategoryQueryParamName('topic')
+        }
         setSelectedEnvironmentalTopicCategory(parseInt(event.target.dataset.category))
     }
 
@@ -76,7 +82,7 @@ const AidSearchEngineExtension = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        window.location = `/recherche/resultats?topic=${selectedEnvironmentalTopicCategory}&region=${selectedRegion}`;
+        window.location = `/recherche/resultats?${categoryQueryParamName}=${selectedEnvironmentalTopicCategory}&region=${selectedRegion}`;
     }
 
     const searchEnabled = selectedRegion !== "" && selectedEnvironmentalTopicCategory !== null;

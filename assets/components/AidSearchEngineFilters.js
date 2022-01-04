@@ -37,7 +37,6 @@ const AidSearchEngineFilters = (
         }
         if (params.has('sector')) {
             setSelectedEnvironmentalTopicSector(parseInt(params.get('sector')))
-            // setEnvironmentalTopics(environmentalTopicSectors.find(sector => sector.id === params.get('sector')).environmentalTopics);
         }
         if (params.has('topic')) {
             setSelectedEnvironmentalTopicCategory(parseInt(params.get('topic')))
@@ -45,7 +44,13 @@ const AidSearchEngineFilters = (
     }, [])
 
     useEffect(() => {
-        if (environmentalTopics.length === 0 && selectedEnvironmentalTopicCategory !== "" && environmentalTopicCategories.length > 0) {
+        if (environmentalTopics.length > 0) {
+            return;
+        }
+        if (params.has('sector') && environmentalTopicSectors.length > 0) {
+            setEnvironmentalTopics(environmentalTopicSectors.find(category => category.id === parseInt(params.get('sector'))).environmentalTopics);
+        }
+        if (params.has('topic') && environmentalTopicCategories.length > 0) {
             setEnvironmentalTopics(environmentalTopicCategories.find(category => category.id === parseInt(params.get('topic'))).environmentalTopics);
         }
     })
@@ -79,7 +84,7 @@ const AidSearchEngineFilters = (
         return environmentalTopics.map(topic => {
             const isSelected = selectedEnvironmentalTopic === topic.id;
             return (
-                <div className="fr-col-2 fr-mr-2w">
+                <div className="fr-col-2 fr-mr-2w fr-mb-2w">
                     <div key={topic.id} className={`fr-tile fr-enlarge-link ${isSelected ? 'selected':''}`}>
                         <div className="fr-tile__body">
                             <h4 className="fr-tile__title">
@@ -205,7 +210,7 @@ const AidSearchEngineFilters = (
                         </div>
                         {getTopics()}
                     </div>}
-                    <div className="fr-grid-row fr-grid-row--right">
+                    <div className="fr-grid-row fr-grid-row--right fr-pt-5w">
                         <button disabled={isSubmitButtonDisabled} onClick={handleSubmit} className="fr-btn fr-fi-arrow-right-line fr-btn--icon-right fr-btn--secondary">
                             Lancer ma recherche
                         </button>

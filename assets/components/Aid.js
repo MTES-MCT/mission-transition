@@ -8,7 +8,7 @@ const Aid = ({aid, last = false}) => {
         }
 
         return (
-            <div className="aid-type fr-mb-2w">
+            <div className="aid-type fr-mb-1w">
                         <span
                             className="mt-icon-circled mt-icon-circled--inline mt-icon-circled--blue-bg">
                             <span className="mt-icon mt-icon--euro mt-icon--color-white"/>
@@ -37,13 +37,12 @@ const Aid = ({aid, last = false}) => {
         const applicationStartDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium'}).format(new Date(aid.applicationStartDate))
         if (!applicationEndDate) {
             return (
-                <div className="aid-dates">
+                <div className="aid-dates fr-mb-1w">
                 <span className="mt-icon-circled mt-icon-circled--inline">
                     <span className="mt-icon mt-icon--time"/>
                 </span>
                     <span className="subtitle">
-                    dispositif temporaire<br/>
-                    disponible depuis le { applicationStartDate }
+                    Dispositif temporaire, disponible depuis le { applicationStartDate }
                 </span>
                 </div>
             )
@@ -51,13 +50,12 @@ const Aid = ({aid, last = false}) => {
         const applicationEndDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium'}).format(new Date(aid.applicationEndDate))
 
         return (
-            <div className="aid-dates">
+            <div className="aid-dates fr-mb-1w">
                 <span className="mt-icon-circled mt-icon-circled--inline">
                     <span className="mt-icon mt-icon--time"/>
                 </span>
                 <span className="subtitle">
-                    dispositif temporaire<br/>
-                    du { applicationStartDate } au {applicationEndDate}
+                    Dispositif temporaire, du { applicationStartDate } au {applicationEndDate}
                 </span>
             </div>
         )
@@ -74,7 +72,7 @@ const Aid = ({aid, last = false}) => {
         }
 
         return (
-            <div className="aid-regions">
+            <div className="aid-regions fr-mb-1w">
                 <span className="mt-icon-circled mt-icon-circled--inline">
                     <span className="mt-icon mt-icon--finger-up"/>
                 </span>
@@ -95,7 +93,7 @@ const Aid = ({aid, last = false}) => {
         }
 
         return (
-            <div className="aid-type">
+            <div className="aid-type fr-mb-1w">
                 <span className="mt-icon-circled mt-icon-circled--inline">
                     <span className="mt-icon mt-icon--euro"/>
                 </span>
@@ -107,12 +105,12 @@ const Aid = ({aid, last = false}) => {
     }
 
     return (
-        <div className="fr-card fr-enlarge-link" id={last ? "last-regional-aid" : ""}>
+        <div className="fr-card fr-enlarge-link bg-beige" id={last ? "last-regional-aid" : ""}>
             <div className="fr-card__body">
                 <h4 className="fr-card__title">
                     <a href={aid.directAccess ? aid.fundingSourceUrl : "/dispositif/" + aid.slug} className="fr-card__link">{ aid.name }</a>
                 </h4>
-                <div className="funder">
+                <div className="funder fr-mb-1w">
                     <span className="mt-icon-circled mt-icon-circled--inline">
                         <span className="mt-icon mt-icon--building"/>
                     </span>
