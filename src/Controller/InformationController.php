@@ -9,6 +9,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class InformationController extends AbstractController
 {
     /**
+     * @Route("/recherche-iframe", name="search_iframe")
+     */
+    public function searchIframe(): Response
+    {
+        return $this->render('search/iframe.html.twig');
+    }
+
+    /**
      * @Route("/qui-sommes-nous", name="information_who_are_we")
      */
     public function whoAreWe(): Response
