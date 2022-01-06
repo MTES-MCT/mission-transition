@@ -108,7 +108,7 @@ const Aid = ({aid, last = false}) => {
         <div className="fr-card fr-enlarge-link bg-beige" id={last ? "last-regional-aid" : ""}>
             <div className="fr-card__body">
                 <h4 className="fr-card__title">
-                    <a href={aid.directAccess ? aid.fundingSourceUrl : "/dispositif/" + aid.slug} className="fr-card__link">{ aid.name }</a>
+                    <a target="_blank" href={aid.directAccess ? aid.fundingSourceUrl : "/dispositif/" + aid.slug} className="fr-card__link">{ aid.name }</a>
                 </h4>
                 <div className="funder fr-mb-1w">
                     <span className="mt-icon-circled mt-icon-circled--inline">
