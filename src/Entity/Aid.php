@@ -44,6 +44,7 @@ class Aid
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list"})
      */
     private ?string $sourceId;
 
