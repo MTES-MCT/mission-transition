@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comprendre l'achat et la logistique durable{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('knowledge') }}
+{% endblock %}
+
+{% block body %}
+    <div class="knowledge fr-container-fluid">
+        <nav role="navigation" class="fr-breadcrumb fr-ml-2w" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-1">
+                <ol class="fr-breadcrumb__list">
+                    <li>
+                        <a class="fr-breadcrumb__link" href="/">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" href="{{ path('information_tee_knowledge') }}">Comprendre</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" aria-current="page">Achat et logistique durable</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        <div class="fr-container">
+            <div class="fr-grid-row intro">
+                <img class="intro__image" src="{{ asset('build/img/achat_et_logistique.svg') }}" alt="">
+                <h1 class="fr-display-xs intro__title color-navy">Achat et logistique durable</h1>
+                <div class="intro__description">
+                    <p>
+                        La logistique est, pour beaucoup d’entreprises, une part majeure des activités opérationnelles. L’organisation liée recouvre tout un parcours opérationnel, de l’achat des matières premières à leur livraison au client final, en passant par leur transformation ou leur mise en valeur. Chacune de ces actions a un fort impact en termes de pollution. <b>Repenser son organisation est donc clé pour relever les défis du développement durable.</b> Nous vous fournissons les informations essentielles pour vous aider à gérer vos achats et vos process logistiques, dans le respect de l’environnement.
+                    </p>
+                    <p>
+                        <br/>S’engager pour une logistique et des achats durables exige de repenser son organisation et ses mécanismes. L’objectif est de <b>prendre en compte les critères environnementaux pour réduire tout type de pollution (atmosphérique, sonore, lumineuse…) ou encore équilibrer sa production négative par des actions positives pour l’environnement.</b> En vous engageant dans cette transition, votre enjeu sera de trouver le bon équilibre entre gestion logistique, compétitivité et respect de l’environnement.
+                    </p>
+                    <p>
+                        <br/>La démarche écologique dans la <b>gestion des processus logistiques et décisions d’achats</b> peut comprendre plusieurs actions : <br/>
+                    </p>
+                    <br/>
+                    <ul>
+                        <li>L’éco logistique, avec l’utilisation de matières premières écologiques ou recyclables.</li>
+                        <li>S’associer à des fournisseurs durables.</li>
+                        <li>L’utilisation d’énergies propres lors de la production.</li>
+                        <li>L'utilisation d’emballages durables ou recyclables.</li>
+                        <li>Une distribution mutualisée, collaborative</li>
+                        <li>Des transports respectueux de l’environnement </li>
+                        <li>Logistique écologique sur points de vente</li>
+                        <li>Le recyclage des marchandises en fin de vie</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid fr-pt-5w">
+            <div class="number-highlighted number-highlighted__alt">
+                <div class="number-highlighted__left bg-blue-navy fr-py-2w fr-px-sm-12w fr-px-2w on-dark">
+                    <div class="fr-grid-row fr-p-sm-5w fr-p-3v">
+                        <div class="fr-col-12 mt-text-align-center">
+                            <p class="fr-text--lg fr-pt-sm-5w fr-pt-3v">
+                                Les achats des entités publiques (et privées chargées d’une mission de service public) représentent <b>10 % du PIB</b> et ont donc un impact indéniable sur le climat, par les émissions de gaz à effet de serre (GES) qu’ils génèrent.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="number-highlighted__right bg-blue-default-france fr-p-3w mt-text-align-center">
+                    <p class="fr-text--lg color-white">
+                        Le supply chain peut permettre de réduire les coûts de transport de plus de 30 % par palette, les coûts de manutention de 20 % par palette, les délais de 40 % et les <b>émissions de CO2 de 25 %</b> tout en améliorant le taux de service en linéaire. Ceci n’inclut pas les économies d’énergie provenant de l’utilisation d’infrastructures plus efficientes telles que les bâtiments HQE et les véhicules moins énergivores.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid bg-beige">
+            <div class="fr-container fr-p-sm-6w fr-p-3w">
+                <ul class="fr-accordions-group">
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-90">Quelques documents utiles sur les achats et la logistique durable</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-90">
+                                <p>
+                                    <a title="CDDEP - Fiches pratiques - ouvre une nouvelle fenêtre" href="https://www.ecologie.gouv.fr/sites/default/files/CDDEP%20-%20Fiches%20pratiques%20-%20Pour%20la%20r%C3%A9duction%20des%20%C3%A9missions%20de%20gaz%20%C3%A0%20effet%20de%20serre.pdf" target="_blank" rel="noopener">CDDEP - Fiches pratiques</a><br>
+                                    <a title="Les quatre leviers de la logistique durable - ouvre une nouvelle fenêtre" href="https://www.faq-logistique.com/SCM-Quatre-Leviers-Logistique-Durable.htm" target="_blank" rel="noopener">Cette publication sur les 4 leviers de la logistique durable dans la revue française de gestion industrielle</a>
+                                </p>
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-91">Quelques sites utiles sur les achats et la logistique durable</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-91">
+                                <p>
+                                    <a title="Logistique durable : comment suivre les émissions de CO2 - ouvre une nouvelle fenêtre" href="https://www.blog.shippypro.com/fr/logistique-durable/" target="_blank" rel="noopener">Cette page sur la logistique durable sur le site de ShippyPro</a><br>
+                                    <a title="La Charte Relations fournisseurs et achats responsables - ouvre une nouvelle fenêtre" href="https://www.economie.gouv.fr/mediateur-des-entreprises/charte-relations-fournisseurs-responsables" target="_blank" rel="noopener">La charte Relations Fournisseurs responsables</a>
+                                </p>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('knowledge') }}
+{% endblock %}

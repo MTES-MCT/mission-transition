@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comprendre l'économie circulaire{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('knowledge') }}
+{% endblock %}
+
+{% block body %}
+    <div class="knowledge fr-container-fluid">
+        <nav role="navigation" class="fr-breadcrumb fr-ml-2w" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-1">
+                <ol class="fr-breadcrumb__list">
+                    <li>
+                        <a class="fr-breadcrumb__link" href="/">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" href="{{ path('information_tee_knowledge') }}">Comprendre</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" aria-current="page">Innovation durable</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        <div class="fr-container">
+            <div class="fr-grid-row intro">
+                <img class="intro__image" src="{{ asset('build/img/innovations_durables.svg') }}" alt="">
+                <h1 class="fr-display-xs intro__title color-navy">Innovation durable</h1>
+                <div class="intro__description">
+                    <p>
+                        Innover durablement, c’est appliquer aux activités de l’entreprise les principes du développement durable, dans la droite lignée de la RSE. Il s’agit, lorsque l’entreprise crée de nouveaux usages ou de nouvelles manières de produire, de <b>limiter l’impact environnemental, social et économique de ces opérations.</b> Nous vous fournissons les informations essentielles à votre transition vers l’innovation durable !
+                    </p>
+                    <p>
+                        <br/>A l’heure où la compétitivité d’une entreprise se mesure à sa rapidité d’innovation, il devient <b>essentiel de prendre en compte l’empreinte laissée par l’entreprise sur le long terme. L’innovation durable permet de répondre à cette double exigence, en mettant la technologie et les moyens de production au service de l’environnement.</b>
+                    </p>
+                    <p>
+                        <br/>L’innovation durable concerne tous les domaines d’activité : pour développer une démarche allant dans ce sens, <b>vous pouvez faire évoluer les usages au sein de votre entreprise, proposer des offres écologiques en tant que fournisseur ou encourager une nouvelle manière de travailler.</b> Plusieurs pistes s’ouvrent à vous :<br/>
+                    </p>
+                    <br/>
+                    <ul>
+                        <li>L’autoconsommation mise sur <b>l’utilisation de sources de production plus durables</b>, comme l’énergie solaire ou le gaz naturel : des fournisseurs d’énergie proposent ainsi sur les énergies propres et renouvelables.</li>
+                        <li>L’évaluation des risques écologiques d’une innovation avant sa mise sur le marché permet de <b>limiter les risques de catastrophes industrielles.</b></li>
+                        <li>L’écoconception des équipements et des logiciels, pour mettre la technologie au service de l’environnement.</li>
+                        <li>La sobriété numérique, qui consiste à <b>freiner la surproduction et la surconsommation des outils numériques</b> en entreprise, est une piste pouvant aboutir à de nouvelles pratiques de travail.</li>
+                        <li>La gestion et le recyclage des équipements électriques en fin de vie, afin de réduire ses déchets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid fr-pt-5w">
+            <div class="number-highlighted number-highlighted__alt">
+                <div class="number-highlighted__left bg-blue-navy fr-py-2w fr-px-sm-12w fr-px-2w on-dark">
+                    <div class="fr-grid-row fr-p-sm-5w fr-p-3v">
+                        <div class="fr-col-12 mt-text-align-center">
+                            <p class="fr-text--lg fr-pt-sm-5w fr-pt-3v">
+                                <b>93%</b> des dirigeants de petites et moyennes entreprises pensent que l’innovation durable est un enjeu de pérennité.<br>
+                                (Source:  <a title="Innovation + développement durable = nouveaux business models - ouvre une nouvelle fenêtre" href="http://www.comite21.org/docs/actualites-adherents/2013/entreprises/etude-innovation-durable-weave-air-escp-180613.pdf" target="_blank" rel="noopener">Innovation + développement durable = nouveaux business models</a>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="number-highlighted__right bg-blue-default-france fr-p-3w mt-text-align-center">
+                    <p class="fr-text--lg color-white">
+                        Il faut 80 fois plus d’énergie pour produire un gramme de smartphone que pour un gramme de voiture <br/>
+                        (Source:  <a title="Rapport de l'étude - Empreinte environnementale du numérique mondial - ouvre une nouvelle fenêtre" href="https://www.greenit.fr/wp-content/uploads/2019/10/2019-10-GREENIT-etude_EENM-rapport-accessible.VF_.pdf" target="_blank" rel="noopener">Rapport de l'étude - Empreinte environnementale du numérique mondial</a>)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid bg-beige">
+            <div class="fr-container fr-p-sm-6w fr-p-3w">
+                <ul class="fr-accordions-group">
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-90">Quelques documents utiles sur l’innovation durable</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-90">
+                                <p>
+                                    Quelques documents utiles sur l’innovation durable<br>
+                                    <a title="Le label Innovation Durable des Hauts-de-France - ouvre une nouvelle fenêtre" href="https://www.hautsdefrance-id.fr/lancement-du-label-innovation-durable/" target="_blank" rel="noopener">Le label Innovation Durable des Hauts-de-France</a><br>
+                                    <a title="Le forum Sustainable Paris - ouvre une nouvelle fenêtre" href="https://sustainable.paris/?__hstc=222317444.b832f574055472c38406415bcd97dec8.1616439013033.1616439013033.1616439013033.1&__hssc=222317444.2.1616439013034&__hsfp=2076998696" target="_blank" rel="noopener">Le forum Sustainable Paris</a>
+                                    <a title="Le baromètre de l’innovation durable en infographie - ouvre une nouvelle fenêtre" href="https://www.businessimmo.com/etudes/51880/le-barometre-de-l-innovation-durable" target="_blank" rel="noopener">Le baromètre de l’innovation durable en infographie</a>
+                                </p>
+                                <p class="fr-pt-3w">
+                                    Quelques sites utiles sur l’innovation durable<br>
+                                    <a title="Les avantages de l'autoconsommation photovoltaïque pour les entreprises - ouvre une nouvelle fenêtre" href="https://www.avise.org/articles/economie-circulaire-de-quoi-parle-t-on" target="_blank" rel="noopener">Les avantages de l’autoconsommation en entreprise</a><br>
+                                    <a title="La sobriété numérique - ouvre une nouvelle fenêtre" href="https://www.geres.eu/s-informer/decryptages/la-sobriete-numerique-en-entreprise-eclairages-et-bonnes-pratiques/" target="_blank" rel="noopener">La sobriété numérique</a><br>
+                                    <a title="Sobriété numérique pour les acteurs du numérique - ouvre une nouvelle fenêtre" href="https://www.sofrecom.com/fr/publications/sobriete-numerique" target="_blank" rel="noopener">Sobriété numérique pour les acteurs du numérique</a>
+                                </p>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('knowledge') }}
+{% endblock %}

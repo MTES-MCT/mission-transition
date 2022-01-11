@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comprendre l'économie circulaire{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('knowledge') }}
+{% endblock %}
+
+{% block body %}
+    <div class="knowledge fr-container-fluid">
+        <nav role="navigation" class="fr-breadcrumb fr-ml-2w" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-1">
+                <ol class="fr-breadcrumb__list">
+                    <li>
+                        <a class="fr-breadcrumb__link" href="/">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" href="{{ path('information_tee_knowledge') }}">Comprendre</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" aria-current="page">Économie circulaire</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        <div class="fr-container">
+            <div class="fr-grid-row intro">
+                <img class="intro__image" src="{{ asset('build/img/economie_circulaire.svg') }}" alt="">
+                <h1 class="fr-display-xs intro__title color-navy">L’économie circulaire</h1>
+                <div class="intro__description">
+                    <p>
+                        Utiliser plus efficacement les ressources tout en respectant l’environnement tout au long du cycle de production : c’est le pari de l’économie circulaire. Dès à présent, <b>engageons-nous ensemble pour un modèle économique durable !</b>
+                    </p>
+                    <p>
+                        <br/>Malgré sa productivité, le modèle économique classique épuise les ressources et augmente les émissions de gaz à effet de serre. En limitant notre impact sur l’environnement, <b>l’économie circulaire permet de répondre aux exigences de production tout en diminuant la surutilisation des ressources.</b> Elle fonctionne en deux étapes : l’éco-conception et la gestion des déchets.
+                    </p>
+                    <p>
+                        <br/><b><i>L’écoconception : produire autrement</i></b>
+                        <br/>L'écoconception consiste à agir directement sur le cycle de vie des produits. Applicable à tous les biens de consommation, elle permet de résoudre une équation commune à toutes les entreprises engagées pour l'environnement : <b>réduire l'usage de l'énergie et des matières, réduire la pollution, tout en augmentant le chiffre d'affaires.</b> Elle est une stratégie gagnante pour une transition écologique et économique réussie :<br/>
+                    </p>
+                    <br/>
+                    <ul>
+                        <li>En privilégiant la récupération de matériaux utilisés, afin de minimiser l’impact environnemental et social des ressources </li>
+                        <li>En utilisant un mode de fabrication et des matériaux qui facilitent le recyclage, comme le bois issu des sciures de bois, le plastique recyclé ou encore l’électroménager issu du recyclage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid fr-pt-5w">
+            <div class="number-highlighted number-highlighted__alt">
+                <div class="number-highlighted__left bg-blue-navy fr-py-2w fr-px-sm-12w fr-px-2w on-dark">
+                    <div class="fr-grid-row fr-p-sm-5w fr-p-3v">
+                        <div class="fr-col-12 mt-text-align-center">
+                            <p class="fr-text--lg fr-pt-sm-5w fr-pt-3v">
+                                <b>13%</b> des entreprises françaises sont passées à un système d’écoconception de leurs produits. Nous voulons aider celles qui y pensent, mais ne passent pas à l’action faute de moyens, à trouver les dispositifs qui leur correspondent.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="number-highlighted__right bg-blue-default-france fr-p-3w mt-text-align-center">
+                    <p class="fr-text--lg color-white">
+                        Chaque année, nous produisons, en tant que ménages, plus de <b>31 millions de tonnes de déchets</b>.
+                        Les entreprises produisent dix fois plus de déchets que les ménages, soit <b>315 millions de tonnes</b>.
+                        (Source:  <a title="Déchets édition 2015 - ouvre une nouvelle fenêtre" href="https://www.ademe.fr/sites/default/files/assets/documents/chiffres-cles-dechets-201507_8500.pdf" target="_blank" rel="noopener">Déchets édition 2015</a>)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid bg-beige">
+            <div class="fr-container fr-p-sm-6w fr-p-3w">
+                <ul class="fr-accordions-group">
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-89">Trouver mon dispositif pour passer à un système d’écoconception</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-89">
+                                <h3>La gestion des déchets : récupérer, valoriser, renouveler</h3>
+                                <p>
+                                    La gestion des déchets, en économie circulaire, répond à une question que toute entreprise doit se poser : <b>comment produire tout en évitant le gaspillage ?</b>
+                                    La réponse se trouve dans la gestion durable des déchets. C’est le principe de la valorisation énergétique : transformer les déchets permet aux entreprises de préserver les ressources naturelles tout en remplissant leurs objectifs de production.
+                                </p>
+                                <ul>
+                                    <li>En diminuant la consommation d’énergie générant des émissions de carbone.</li>
+                                    <li>En réutilisant des déchets sous forme d’énergie ou de matières premières.</li>
+                                    <li>Certaines villes se sont d’ailleurs engagées à atteindre cet objectif : en remplaçant par exemple le chauffage au fioul par du chauffage généré par l’incinération des déchets, on peut réduire de près de la moitié les émissions de carbone.</li>
+                                </ul>
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-90">En savoir plus sur la gestion des déchets</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-90">
+                                <p>
+                                    Quelques documents utiles sur l’économie circulaire<br>
+                                    <a title="Panorama de la deuxième vie des produits en France - ouvre une nouvelle fenêtre" href="https://www.avise.org/ressources/panorama-de-la-deuxieme-vie-des-produits-en-france" target="_blank" rel="noopener">Panorama de la deuxième vie des objets en France</a><br>
+                                    <a title="Economie circulaire : notions - ouvre une nouvelle fenêtre" href="https://www.avise.org/ressources/economie-circulaire-notions" target="_blank" rel="noopener">Economie circulaire : notions</a>
+                                </p>
+                                <p class="fr-pt-3w">
+                                    Quelques sites utiles sur l’économie circulaire<br>
+                                    <a title="Economie circulaire : de quoi parle-t-on ? - ouvre une nouvelle fenêtre" href="https://www.avise.org/articles/economie-circulaire-de-quoi-parle-t-on" target="_blank" rel="noopener">Economie circulaire : de quoi parle-t-on ?</a><br>
+                                    <a title="L’institut de l’économie circulaire - ouvre une nouvelle fenêtre" href="https://institut-economie-circulaire.fr/economie-circulaire/" target="_blank" rel="noopener">L’institut de l’économie circulaire</a><br>
+                                    <a title="Texte de loi relatif à l’économie circulaire - ouvre une nouvelle fenêtre" href="https://www.legifrance.gouv.fr/dossierlegislatif/JORFDOLE000038746653/" target="_blank" rel="noopener">Texte de loi relatif à l’économie circulaire</a>
+                                </p>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('knowledge') }}
+{% endblock %}

@@ -63,4 +63,28 @@ class InformationController extends AbstractController
     {
         return $this->render('information/knowledge_subject/mobilite.html.twig');
     }
+
+    /**
+     * @Route("/comprendre/economie-circulaire", name="information_economie-circulaire")
+     */
+    public function economieCirculaire(): Response
+    {
+        return $this->render('information/knowledge_subject/economie_circulaire.html.twig');
+    }
+
+    /**
+     * @Route("/comprendre/innovations-durables", name="information_innovations_durables")
+     */
+    public function innovation(): Response
+    {
+        return $this->render('information/knowledge_subject/innovations_durables.html.twig');
+    }
+
+    /**
+     * @Route("/comprendre/achat-logistique", name="information_achat")
+     */
+    public function achat(): Response
+    {
+        return $this->render('information/knowledge_subject/achat_logistique.html.twig');
+    }
 }
