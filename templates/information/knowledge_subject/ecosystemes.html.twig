@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comprendre la mobilité durable{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('knowledge') }}
+{% endblock %}
+
+{% block body %}
+    <div class="knowledge fr-container-fluid">
+        <nav role="navigation" class="fr-breadcrumb fr-ml-2w" aria-label="vous êtes ici :">
+            <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
+            <div class="fr-collapse" id="breadcrumb-1">
+                <ol class="fr-breadcrumb__list">
+                    <li>
+                        <a class="fr-breadcrumb__link" href="/">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" href="{{ path('information_tee_knowledge') }}">Comprendre</a>
+                    </li>
+                    <li>
+                        <a class="fr-breadcrumb__link" aria-current="page">Écosystèmes</a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        <div class="fr-container">
+            <div class="fr-grid-row intro">
+                <img class="intro__image" src="{{ asset('build/img/mobilite_durable.svg') }}" alt="">
+                <h1 class="fr-display-xs intro__title color-navy">Conservation et restauration des écosystèmes</h1>
+                <div class="intro__description">
+                    <p>
+                        Si la biodiversité offre une multitude de services aux entreprises, son équilibre reste toutefois très fragile. <b> On considère que 60% des services rendus par la nature sont d’ores et déjà dégradés ou utilisés de façon non durable.</b> C’est pour cette raison que la conservation et la restauration environnementales sont un sujet clé pour les entreprises aujourd’hui. Nous vous fournissons les informations essentielles pour vous aider à conserver et restaurer les écosystèmes !
+                    </p>
+                    <p>
+                        <br/>Milieux marins, d’eau douce, forêts et espaces urbains. Tous les environnements sont menacés par la perte de la biodiversité. A l’heure où cette dernière s’accélère, <b>il devient nécessaire aux entreprises d’effectuer leur transition vers des pratiques plus respectueuses des écosystèmes.</b>
+                    </p>
+                    <p>
+                        <br/>Développer des projets de conservation et restauration des écosystèmes à petite, moyenne et grande échelle est essentiel pour <b>construire, ensemble, une économie durable et inclusive.</b>
+                    </p>
+                    <p>
+                        <br/> A titre d’exemple, vous pouvez : <br>
+                    </p>
+                    <ul>
+                        <li>Protéger la diversité de la faune et la flore proche de votre entreprise</li>
+                        <li>Restaurer les zones dégradées par l’activité humaine</li>
+                        <li>Protéger et restaurer des forêts menacées par la déforestation impliquée par votre activité</li>
+                        <li>Financer des projets d’agriculture responsables</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid fr-pt-5w">
+            <div class="number-highlighted number-highlighted__alt">
+                <div class="number-highlighted__left bg-blue-navy fr-py-2w fr-px-sm-12w fr-px-2w on-dark">
+                    <div class="fr-grid-row fr-p-sm-5w fr-p-3v">
+                        <div class="fr-col-12 mt-text-align-center">
+                            <p class="fr-text--lg fr-pt-sm-5w fr-pt-3v">
+                                <b>13 à 15 millions d’hectares</b> : c’est la surface forestière impactée par certaines activités industrielles. Dans les forêts tropicales, cet impact touche 50% des espèces animales et végétales terrestres.*<br/>
+                                (Source:  <a title="Préservation et restauration de la biodiversité - Fondation GoodPlanet - ouvre une nouvelle fenêtre" href="https://www.goodplanet.org/fr/projet/preservation-restauration-de-biodiversite/" target="_blank" rel="noopener">Fondation GoodPlanet</a>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="number-highlighted__right bg-blue-default-france fr-p-3w mt-text-align-center">
+                    <p class="fr-text--lg color-white">
+                        <b>85%</b> des récifs coralliens sont directement menacés par les activités humaines, notamment par la pollution chimique de l’eau. Certaines entreprises et industries, en effectuant leur transition, peuvent réduire cet impact.*<br/>
+                        (Source:  <a title="La disparition des coraux menace des millions de personnes - Futura Sciences - ouvre une nouvelle fenêtre" href="https://www.futura-sciences.com/planete/actualites/oceanographie-disparition-coraux-menace-millions-personnes-39967/" target="_blank" rel="noopener">Futura Sciences</a>)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="fr-container-fluid bg-beige">
+            <div class="fr-container fr-p-sm-6w fr-p-3w">
+                <ul class="fr-accordions-group">
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-89">Quelques documents utiles sur la conservation et la restauration des écosystèmes</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-89">
+                                <a title="La gestion des déchets chimiques - ouvre une nouvelle fenêtre" href="https://www.gims13.com/images/ressources-documentaires/Presanse_plaquette-gestion-des-dechets-chimiques.pdf" target="_blank" rel="noopener">La plaquette de Présance sur la gestion des déchets chimiques</a>
+                            </div>
+                        </section>
+                    </li>
+                    <li>
+                        <section class="fr-accordion">
+                            <h3 class="fr-accordion__title">
+                                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-90">Quelques sites utiles sur la conservation et la restauration des écosystèmes</button>
+                            </h3>
+                            <div class="fr-collapse" id="accordion-90">
+                                <p><a title="Comprendre les enjeux de la reforestation - ouvre une nouvelle fenêtre" href="https://www.notre-planete.info/actualites/2368-deforestation_reforestation" target="_blank" rel="noopener">Le site notreplanete.info</a></p>
+                                <p class="fr-pt-3v"><a title="Lutter contre la deforestation sur le site de WWF - ouvre une nouvelle fenêtre" href="https://www.wwf.fr/champs-daction/foret/approvisionnement-responsable/deforestation" target="_blank" rel="noopener">Lutter contre la deforestation sur le site de WWF</a></p>
+                                <p class="fr-pt-3v"><a title="Giec : la gestion durable des forêts, un levier essentiel pour lutter contre le changement climatique - ouvre une nouvelle fenêtre" href="https://www.onf.fr/+/480::rapport-du-giec-quel-role-de-la-foret-face-au-rechauffement-climatique.html" target="_blank" rel="noopener">La gestion durable des forêts sur le site du GIEC</a></p>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('knowledge') }}
+{% endblock %}

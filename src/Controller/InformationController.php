@@ -87,4 +87,12 @@ class InformationController extends AbstractController
     {
         return $this->render('information/knowledge_subject/achat_logistique.html.twig');
     }
+
+    /**
+     * @Route("/comprendre/ecosystemes", name="information_ecosystemes")
+     */
+    public function ecosystemes(): Response
+    {
+        return $this->render('information/knowledge_subject/ecosystemes.html.twig');
+    }
 }
