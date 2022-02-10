@@ -21,6 +21,7 @@
         <link rel="canonical" href="{% block meta_canonical current_route ? url(current_route, current_route_params) : '' %}" />
 
         <title>{% block title %}{% block page_title '' %} | France Transition{% endblock %}</title>
+        <script src="{{ asset('build/static/tarteaucitron/tarteaucitron.js') }}"></script>
         <!-- Matomo -->
         <script>
             var _paq = window._paq = window._paq || [];
@@ -45,6 +46,7 @@
             g.async=true; g.src='https://stats.data.gouv.fr/js/container_IuoUBWtl.js'; s.parentNode.insertBefore(g,s);
         </script>
         <!-- End Matomo Tag Manager -->
+        <script type="text/javascript">tarteaucitron.user.hotjarId = 2607198;tarteaucitron.user.HotjarSv = 6;</script>
 
     </head>
     <body class="{% block body_class '' %}">
@@ -59,5 +61,8 @@
         </div>
         {% block javascripts encore_entry_script_tags('app') %}
         <script type="text/javascript" nomodule src="{{ asset('build/static/dsfr.nomodule.min.js') }}"></script>
+        <script type="text/javascript">
+            (tarteaucitron.job = tarteaucitron.job || []).push('hotjar');
+        </script>
     </body>
 </html>

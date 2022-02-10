@@ -40,10 +40,10 @@ Encore
         to: 'icons/[name].[ext]',
     })
 
-    .copyFiles({
-        from: './assets/static',
-        to: 'static/[name].[ext]',
-    })
+  .copyFiles({
+      from: './assets/static',
+      to: 'static/[path][name].[ext]',
+  })
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
     .enableReactPreset()
