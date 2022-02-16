@@ -1,6 +1,6 @@
 <header role="banner" class="fr-header">
     <div class="beta">
-        <p class="subtitle mt-text-align-center">Le site Mission Transition est actuellement en version beta.</p>
+        <p class="subtitle mt-text-align-center">Le site Mission Transition Ecologique est actuellement en version beta.</p>
     </div>
     <div class="fr-header__body">
         <div class="fr-container">
@@ -14,7 +14,7 @@
                             </p>
                         </div>
                         <div class="fr-header__operator">
-                            <img src="{{ asset('build/img/logo.svg') }}" alt="Logo Mission Transition" style="width:3.5rem; height:auto;">
+                            <img src="{{ asset('build/img/logo.svg') }}" alt="Logo Mission Transition Ecologique" style="width:3.5rem; height:auto;">
                         </div>
                         <div class="fr-header__navbar">
                             <button class="fr-btn--search fr-btn" data-fr-opened="false" aria-controls="modal-866" title="Rechercher">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="fr-header__service">
-                        <a href="/" title="Accueil - Mission Transition">
+                        <a href="/" title="Accueil - Mission Transition Ecologique">
                             <p class="fr-header__service-title">Mission Transition Écologique</p>
                         </a>
                         <p class="fr-header__service-tagline">Ensemble, passons à l'action !</p>
@@ -42,13 +42,29 @@
                     <a class="fr-nav__link" {% if current_route is same as 'homepage'%} aria-current="page" {% endif %} href="{{ path('homepage') }}" target="_self">Accueil</a>
                 </li>
                 <li class="fr-nav__item">
-                    <a class="fr-nav__link" {% if current_route is same as 'information_tee_knowledge'%} aria-current="page" {% endif %} href="{{ path('information_tee_knowledge') }}" target="_self">Comprendre</a>
+                    <button class="fr-nav__btn" aria-expanded="false" aria-controls="menu-774">Comprendre</button>
+                    <div class="fr-collapse fr-menu" id="menu-774">
+                        <ul class="fr-menu__list">
+                            <li>
+                                <a class="fr-nav__link" href="{{ path('information_tee_knowledge') }}" target="_self"
+                                        {% if current_route is same as 'information_tee_knowledge' and (section is not defined or section != 'aides-publiques') %} aria-current="page" {% endif %}>
+                                    la transition écologique
+                                </a>
+                            </li>
+                            <li>
+                                <a class="fr-nav__link" href="{{ path('information_tee_knowledge', {'section': 'aides-publiques'}) }}" target="_self"
+                                        {% if current_route is same as 'information_tee_knowledge' and (section is defined and section is same as 'aides-publiques') %} aria-current="page" {% endif %}>
+                                    les aides publiques
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="fr-nav__item">
                     <a class="fr-nav__link" {% if current_route is same as 'search_results'%} aria-current="page" {% endif %} href="{{ path('search_results') }}" target="_self">Lancer votre recherche</a>
                 </li>
                 <li class="fr-nav__item">
-                    <a class="fr-nav__link" {% if current_route is same as 'information_contact_advisor'%} aria-current="page" {% endif %} href="{{ path('information_contact_advisor') }}" target="_self">Poser une question</a>
+                    <a class="fr-nav__link" {% if current_route is same as 'information_contact_advisor'%} aria-current="page" {% endif %} href="{{ path('information_contact_advisor') }}" target="_self">Echanger avec un conseiller</a>
                 </li>
                 <li class="fr-nav__item">
                     <a class="fr-nav__link" {% if current_route is same as 'information_who_are_we'%} aria-current="page" {% endif %} href="{{ path('information_who_are_we') }}" target="_self">Qui sommes-nous ?</a>

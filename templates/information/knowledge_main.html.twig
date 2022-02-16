@@ -34,16 +34,16 @@
                     <div class="fr-tabs">
                         <ul class="fr-tabs__list" role="tablist" aria-label="Compréhension de la Transition Écologique">
                             <li role="presentation">
-                                <button id="tabpanel-404" class="fr-tabs__tab fr-fi-checkbox-line fr-tabs__tab--icon-left" tabindex="0" role="tab" aria-selected="true" aria-controls="tabpanel-404-panel">La transition écologique</button>
+                                <button id="tabpanel-404" class="fr-tabs__tab fr-fi-checkbox-line fr-tabs__tab--icon-left" tabindex="0" role="tab" aria-selected="{{  section is same as 'aides-publiques' ? 'false' : 'true' }}" aria-controls="tabpanel-404-panel">La transition écologique</button>
                             </li>
                             <li role="presentation">
-                                <button id="tabpanel-405" class="fr-tabs__tab fr-fi-checkbox-line fr-tabs__tab--icon-left" tabindex="-1" role="tab" aria-selected="false" aria-controls="tabpanel-405-panel">Les aides publiques</button>
+                                <button id="tabpanel-405" class="fr-tabs__tab fr-fi-checkbox-line fr-tabs__tab--icon-left" tabindex="-1" role="tab" aria-selected="{{ section == 'aides-publiques' ? 'true' : 'false' }}" aria-controls="tabpanel-405-panel">Les aides publiques</button>
                             </li>
                         </ul>
-                        <div id="tabpanel-404-panel" class="fr-tabs__panel fr-tabs__panel--selected" role="tabpanel" aria-labelledby="tabpanel-404" tabindex="0">
+                        <div id="tabpanel-404-panel" class="fr-tabs__panel {{ section is same as 'aides-publiques' ? '' : 'fr-tabs__panel--selected' }}" role="tabpanel" aria-labelledby="tabpanel-404" tabindex="0">
                             {% include 'information/_knowledge_tee.html.twig' %}
                         </div>
-                        <div id="tabpanel-405-panel" class="fr-tabs__panel" role="tabpanel" aria-labelledby="tabpanel-405" tabindex="0">
+                        <div id="tabpanel-405-panel" class="fr-tabs__panel {{ section is same as 'aides-publiques' ? 'fr-tabs__panel--selected' : '' }}" role="tabpanel" aria-labelledby="tabpanel-405" tabindex="0">
                             {% include 'information/_knowledge_aid.html.twig' %}
                         </div>
                     </div>

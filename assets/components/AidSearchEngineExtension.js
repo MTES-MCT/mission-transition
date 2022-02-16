@@ -36,12 +36,16 @@ const AidSearchEngineExtension = () => {
 
     const onCategoryClick = (event) => {
         event.preventDefault();
+        let paramName = 'topic';
         if (showSectors) {
+            paramName = 'sector';
             setCategoryQueryParamName('sector')
         } else {
+            paramName = 'topic';
             setCategoryQueryParamName('topic')
         }
         setSelectedEnvironmentalTopicCategory(parseInt(event.target.dataset.category))
+        window.location = `/recherche/resultats?${paramName}=${parseInt(event.target.dataset.category)}&region=${selectedRegion}`;
     }
 
     const getCategories = (categories) => {
@@ -88,7 +92,7 @@ const AidSearchEngineExtension = () => {
     const searchEnabled = selectedRegion !== "" && selectedEnvironmentalTopicCategory !== null;
 
     return (
-        <div className="fr-container fr-pt-6w search-engine-extension">
+        <div className="fr-container fr-pt-6w fr-pb-4w search-engine-extension">
             <div className="fr-grid-row select-region">
                 <div className="col-8 col-sm-3">
                     <label className="fr-label fr-text--lead" htmlFor="select-region">
@@ -102,36 +106,33 @@ const AidSearchEngineExtension = () => {
                     </select>
                 </div>
             </div>
-            <div className="fr-grid-row">
-                <div className="fr-form-group">
-                    <fieldset className="fr-fieldset fr-fieldset--inline">
-                        <legend className="fr-fieldset__legend fr-text--regular" id='radio-inline-legend'>
-                            Recherchez des dispositifs avec une thématique de projet <span>ou</span> le secteur de votre enteprise<span className="mandatory">*</span>
-                        </legend>
-                        <div className="fr-fieldset__content">
-                            <div className="fr-radio-group">
-                                <input type="radio" id="radio-inline-1" name="radio-inline" checked={showCategories} onChange={onShowCategoriesChange}/>
+            {selectedRegion && <>
+                <div className="fr-grid-row">
+                    <div className="fr-form-group">
+                        <fieldset className="fr-fieldset fr-fieldset--inline">
+                            <legend className="fr-fieldset__legend fr-text--regular" id='radio-inline-legend'>
+                                Recherchez des dispositifs avec une thématique de projet <span>ou</span> le secteur de votre enteprise<span className="mandatory">*</span>
+                            </legend>
+                            <div className="fr-fieldset__content">
+                                <div className="fr-radio-group">
+                                    <input type="radio" id="radio-inline-1" name="radio-inline" checked={showCategories} onChange={onShowCategoriesChange}/>
                                     <label className="fr-label" htmlFor="radio-inline-1">Thématique de projet écologique
                                     </label>
-                            </div>
-                            <div className="fr-radio-group">
-                                <input type="radio" id="radio-inline-2" name="radio-inline" checked={showSectors} onChange={onShowSectorsChange}/>
+                                </div>
+                                <div className="fr-radio-group">
+                                    <input type="radio" id="radio-inline-2" name="radio-inline" checked={showSectors} onChange={onShowSectorsChange}/>
                                     <label className="fr-label" htmlFor="radio-inline-2">Secteur d'entreprise
                                     </label>
+                                </div>
                             </div>
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                    </div>
                 </div>
-            </div>
-            <div className="fr-grid-row category-choices">
-                {showCategories && getCategories(environmentalCategories)}
-                {showSectors && getCategories(environmentalSectors)}
-            </div>
-            <div className="fr-grid-row fr-py-7w">
-                <button disabled={!searchEnabled} onClick={handleSubmit} className="fr-btn fr-btn--lg">
-                    Lancer ma recherche
-                </button>
-            </div>
+                <div className="fr-grid-row category-choices">
+                    {showCategories && getCategories(environmentalCategories)}
+                    {showSectors && getCategories(environmentalSectors)}
+                </div>
+            </>}
         </div>
     )
 }

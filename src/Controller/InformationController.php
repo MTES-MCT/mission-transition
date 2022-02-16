@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -35,9 +36,13 @@ class InformationController extends AbstractController
     /**
      * @Route("/comprendre", name="information_tee_knowledge")
      */
-    public function learning(): Response
+    public function learning(Request $request): Response
     {
-        return $this->render('information/knowledge_main.html.twig');
+        $section = $request->get('section');
+
+        return $this->render('information/knowledge_main.html.twig', [
+            'section' => $section
+        ]);
     }
 
     /**

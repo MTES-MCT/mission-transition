@@ -21,6 +21,21 @@ class AidRepository extends ServiceEntityRepository
         parent::__construct($registry, Aid::class);
     }
 
+    public function getAidsArray()
+    {
+        $qb = $this->createQueryBuilder('aid');
+
+        $qb
+            ->select('aid', 'environmentalTopics', 'environmentalTopicCategories', 'funder')
+            ->join('aid.funder', 'funder')
+            ->andWhere('aid.applicationEndDate IS NULL OR aid.applicationEndDate >= :today')->setParameter('today', new \DateTime())
+            ->join('aid.environmentalTopics', 'environmentalTopics')
+            ->join('environmentalTopics.environmentalTopicCategories', 'environmentalTopicCategories')
+        ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
     public function searchByCriteria(
         array $aidTypes,
         ?string $environmentalCategory = null,
