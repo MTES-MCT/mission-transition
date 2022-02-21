@@ -37,7 +37,7 @@ const Aid = ({ aid, last = false }) => {
                     <span className="mt-icon-circled mt-icon-circled--inline">
                         <span className="mt-icon mt-icon--time" />
                     </span>
-                    <span className="subtitle">Dispositif temporaire, disponible depuis le {applicationStartDate}</span>
+                    <span className="subtitle">Disponible depuis le {applicationStartDate}</span>
                 </div>
             );
         }
@@ -48,7 +48,7 @@ const Aid = ({ aid, last = false }) => {
                     <span className="mt-icon mt-icon--time" />
                 </span>
                 <span className="subtitle">
-                    Dispositif temporaire, du {applicationStartDate} au {applicationEndDate}
+                    Disponible du {applicationStartDate} au {applicationEndDate}
                 </span>
             </div>
         );
