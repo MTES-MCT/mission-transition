@@ -31,22 +31,25 @@ class ExportAidsCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
+        $outputBuffer = fopen("export_aids.csv", 'w');
         $aids = $this->aidRepository->getAidsArray();
-
-        /** @var Aid $aid */
+        array_unshift($aids, array_keys(reset($aids)));
         foreach ($aids as $aid) {
+            if (!isset($aid['fundingTypes'])) {
+                continue;
+            }
             $aid['fundingTypes'] = implode(' , ', $aid['fundingTypes']);
             $aid['funder'] = implode(' | ', $aid['funder']);
-//            foreach($aid['environmentalTopics'] as $environmentalTopic) {
-//                $categories
-//                foreach($environmentalTopic['environmentalTopicCategories'] as $environmentalTopicCategory) {
-//
-//                }
-//                $environmentalTopic['environmentalTopicCategories'] = implode(' , ', $environmentalTopic['environmentalTopicCategories']);
-//            }
-            $aid['environmentalTopics'] = implode(' | ', $aid['environmentalTopics']);
-            dd($aid);
+            $aid['environmentalTopics'] = implode(' | ', array_map(function($topic) {return $topic['name'];}, $aid['environmentalTopics']));
+            $aid['applicationEndDate'] = $aid['applicationEndDate'] !== null ? $aid['applicationEndDate']->format(\DateTime::ATOM) : null;
+            $aid['applicationStartDate'] = $aid['applicationStartDate'] !== null ? $aid['applicationStartDate']->format(\DateTime::ATOM) : null;
+            $aid['createdAt'] = $aid['createdAt'] !== null ? $aid['createdAt']->format(\DateTime::ATOM) : null;
+            $aid['updatedAt'] = $aid['updatedAt'] !== null ? $aid['updatedAt']->format(\DateTime::ATOM) : null;
+            $aid['deletedAt'] = $aid['deletedAt'] !== null ? $aid['deletedAt']->format(\DateTime::ATOM) : null;
+            $aid['sourceUpdatedAt'] = $aid['sourceUpdatedAt'] !== null ? $aid['sourceUpdatedAt']->format(\DateTime::ATOM) : null;
+            fputcsv($outputBuffer, $aid);
         }
+        fclose($outputBuffer);
 
         $io->success('Export completes.');
 
