@@ -24,14 +24,24 @@ const Aid = ({ aid, last = false }) => {
         if (!aid.applicationStartDate && !aid.applicationEndDate) {
             return;
         }
-        const applicationStartDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' }).format(
-            new Date(aid.applicationStartDate)
-        );
         const applicationEndDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' }).format(
             new Date(aid.applicationEndDate)
         );
+        const applicationStartDate = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' }).format(
+            new Date(aid.applicationStartDate)
+        );
+        if (!aid.applicationStartDate && aid.applicationEndDate != null) {
+            return (
+                <div className="aid-dates fr-mb-1w">
+                    <span className="mt-icon-circled mt-icon-circled--inline">
+                        <span className="mt-icon mt-icon--time" />
+                    </span>
+                    <span className="subtitle">Disponible jusqu'au {applicationEndDate}</span>
+                </div>
+            );
+        }
 
-        if (!applicationEndDate) {
+        if (aid.applicationStartDate != null && !aid.applicationEndDate) {
             return (
                 <div className="aid-dates fr-mb-1w">
                     <span className="mt-icon-circled mt-icon-circled--inline">
