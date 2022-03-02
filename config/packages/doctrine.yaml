@@ -1,7 +1,7 @@
 doctrine:
     dbal:
         driver: 'pdo_pgsql'
-        url: '%env(resolve:DATABASE_URL)%'
+        url: 'postgres://main:main@127.0.0.1:30002/main'
         server_version: '13'
     orm:
         auto_generate_proxy_classes: true

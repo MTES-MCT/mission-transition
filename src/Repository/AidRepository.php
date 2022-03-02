@@ -29,8 +29,8 @@ class AidRepository extends ServiceEntityRepository
             ->select('aid', 'environmentalTopics', 'environmentalTopicCategories', 'funder')
             ->join('aid.funder', 'funder')
             ->andWhere('aid.applicationEndDate IS NULL OR aid.applicationEndDate >= :today')->setParameter('today', new \DateTime())
-            ->join('aid.environmentalTopics', 'environmentalTopics')
-            ->join('environmentalTopics.environmentalTopicCategories', 'environmentalTopicCategories')
+            ->leftjoin('aid.environmentalTopics', 'environmentalTopics')
+            ->leftjoin('environmentalTopics.environmentalTopicCategories', 'environmentalTopicCategories')
         ;
 
         return $qb->getQuery()->getArrayResult();
