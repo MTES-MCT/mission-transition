@@ -36,6 +36,16 @@ const AidSearchEngine = () => {
                     setAids(data);
                     setFilteredAids(data);
                 })
+            if (searchValue !== '') {
+                _paq.push(['trackSiteSearch',
+                    // Search keyword searched for
+                    searchValue,
+                    // Search category selected in your search engine. If you do not need this, set to false
+                    false,
+                    // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
+                    aids.length
+                ]);
+            }
             setIsSearching(true);
             setLastSearchHistory({
                 category: environmentalTopicSectors.concat(environmentalTopicCategories).find(category => category.id === categoryToBeFound),
