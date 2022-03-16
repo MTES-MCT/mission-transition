@@ -24,7 +24,6 @@
         "symfony/framework-bundle": "5.3.*",
         "symfony/http-client": "5.3.*",
         "symfony/mailer": "5.3.*",
-        "symfony/messenger": "5.3.*",
         "symfony/monolog-bundle": "^3.6",
         "symfony/proxy-manager-bridge": "5.3.*",
         "symfony/security-bundle": "5.3.*",
@@ -58,7 +57,11 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
     },
     "autoload": {
         "psr-4": {

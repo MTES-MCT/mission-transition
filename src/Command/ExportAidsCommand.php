@@ -36,7 +36,7 @@ class ExportAidsCommand extends Command
                 fputcsv($outputBuffer, $aid, ',');
                 continue;
             }
-            $aid['fundingTypes'] = "\"" . implode(',', $aid['fundingTypes']) . "\"";
+            $aid['fundingTypes'] = count($aid['fundingTypes']) > 0 ? "\"" . implode(',', $aid['fundingTypes']) . "\"" : null;
             $aid['funder'] = $aid['funder']['name'];
 
             foreach ($aid['environmentalTopics'] as $environmentalTopic) {
