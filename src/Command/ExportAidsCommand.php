@@ -36,16 +36,23 @@ class ExportAidsCommand extends Command
                 fputcsv($outputBuffer, $aid, ',');
                 continue;
             }
-            $aid['fundingTypes'] = implode(';', $aid['fundingTypes']);
-            $aid['funder'] = implode(';', $aid['funder']);
+            $aid['fundingTypes'] = "\"" . implode(',', $aid['fundingTypes']) . "\"";
+            $aid['funder'] = $aid['funder']['name'];
 
             foreach ($aid['environmentalTopics'] as $environmentalTopic) {
                 $environmentalTopicCategories = $environmentalTopic['environmentalTopicCategories'];
             }
 
-            $environmentalTopicCategoriesNames = array_map(function($topic) {return $topic['name'];}, $environmentalTopicCategories);
-            $aid['environmentalTopicsCategories'] = implode(';', $environmentalTopicCategoriesNames);
-            $aid['environmentalTopics'] = implode(';', array_map(function($topic) {return $topic['name'] ;}, $aid['environmentalTopics']));
+            $environmentalTopicCategoriesAndSectorsNames = array_map(function($topic) {return $topic['name'];}, $environmentalTopicCategories);
+            $environmentalTopicCategoriesNames = array_filter($environmentalTopicCategoriesAndSectorsNames, function ($categoryName) {
+                return !str_starts_with($categoryName, 'Secteur');
+            });
+            $environmentalTopicSectorsName = array_filter($environmentalTopicCategoriesAndSectorsNames, function ($categoryName) {
+                return str_starts_with($categoryName, 'Secteur');
+            });
+            $aid['environmentalTopicsCategories'] = count($environmentalTopicCategoriesNames) > 0 ? "\"" . implode(',', $environmentalTopicCategoriesNames) . "\"" : null;
+            $aid['activitySector'] = count($environmentalTopicSectorsName) > 0 ? "\"" . implode(',', $environmentalTopicSectorsName) . "\"" : null;
+            $aid['environmentalTopics'] = "\"" . implode(';', array_map(function($topic) {return $topic['name'] ;}, $aid['environmentalTopics'])) . "\"";
             $aid['applicationEndDate'] = $aid['applicationEndDate'] !== null ? $aid['applicationEndDate']->format(\DateTime::ATOM) : null;
             $aid['applicationStartDate'] = $aid['applicationStartDate'] !== null ? $aid['applicationStartDate']->format(\DateTime::ATOM) : null;
             $aid['createdAt'] = $aid['createdAt'] !== null ? $aid['createdAt']->format(\DateTime::ATOM) : null;
