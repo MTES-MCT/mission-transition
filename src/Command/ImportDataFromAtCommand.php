@@ -137,7 +137,7 @@ class ImportDataFromAtCommand extends Command
             ->setEligibility($aidFromAt['eligibility'])
             ->setProjectExamples($aidFromAt['project_examples'])
             ->setFundingTypes($aidFromAt['aid_types'])
-            ->setApplicationStartDate(new \DateTime($aidFromAt['start_date']))
+            ->setApplicationStartDate(isset($aidFromAt['start_date']) ? new \DateTime($aidFromAt['start_date']) : null)
             ->setApplicationEndDate(isset($aidFromAt['submission_deadline']) ? new \DateTime($aidFromAt['submission_deadline']) : null)
             ->setSourceUpdatedAt(new \DateTime($aidFromAt['date_updated']))
             ->setContactGuidelines($aidFromAt['contact'])
