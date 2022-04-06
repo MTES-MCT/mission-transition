@@ -64,6 +64,7 @@ class AidCrudController extends AbstractCrudController
             TextareaField::new('eligibility', 'Éligibilités')->hideOnIndex(),
             TextareaField::new('contactGuidelines', 'Contact')->hideOnIndex(),
             UrlField::new('fundingSourceUrl', 'Site Financeur')->hideOnIndex(),
+            DateField::new('applicationStartDate', 'Date d\'ouverture'),
             DateField::new('applicationEndDate', 'Date de cloture'),
             UrlField::new('applicationUrl', 'URL du formulaire de candidature')->hideOnIndex(),
         ];
