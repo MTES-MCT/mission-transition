@@ -110,4 +110,31 @@ class InformationController extends AbstractController
     {
         return $this->render('information/mentions-legales.html.twig');
     }
+
+    /**
+     * @Route("/accessibilite", name="information_accessibility")
+     *
+     */
+    public function accessibility(): Response
+    {
+        return $this->render('information/accessibility.html.twig');
+    }
+
+    /**
+     * @Route("/donnee-personnelles-et-cookies", name="information_privacy")
+     *
+     */
+    public function privacy(): Response
+    {
+        return $this->render('information/privacy.html.twig');
+    }
+
+    /**
+     * @Route("/plan-du-site", name="information_sitemap")
+     *
+     */
+    public function sitemap(): Response
+    {
+        return $this->render('information/sitemap.html.twig');
+    }
 }

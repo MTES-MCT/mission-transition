@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    <div id="simple-page" class="fr-container fr-my-8w">
+        <div class="fr-grid-row--gutters">
+            <div class="fr-grid-col">
+                <h1>Plan du site</h1>
+                <p>
+                    <a href="{{path('homepage')}}" target="_blank">_Acceuil</a>
+                </p>
+                <br>
+                <div>
+                    <a href="#">_Comprendre</a>
+                    <ul>
+                        <li><a href="{{ path('information_tee_knowledge') }}">la transition écologique</a></li>
+                        <li><a href="{{ path('information_tee_knowledge', {'section': 'aides-publiques'}) }}">les aides publiques</a></li>
+                    </ul>
+                </div>
+                <br>
+                <p>
+                    <a href="{{path('search_results')}}" target="_blank">_Lancer une recherche</a><br>
+                    <a href="#" target="_blank">_Diagnostiquer</a><br>
+                    <a href="{{path('information_contact_advisor')}}" target="_blank">_Echanger avec un conseiller</a><br>
+                    <a href="{{path('information_who_are_we')}}" target="_blank">_Qui sommes-nous ?</a><br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
