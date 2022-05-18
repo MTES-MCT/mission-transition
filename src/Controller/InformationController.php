@@ -18,14 +18,6 @@ class InformationController extends AbstractController
     }
 
     /**
-     * @Route("/qui-sommes-nous", name="information_who_are_we")
-     */
-    public function whoAreWe(): Response
-    {
-        return $this->render('information/who_are_we.html.twig');
-    }
-
-    /**
      * @Route("/poser-une-question", name="information_contact_advisor")
      */
     public function contactAdvisor(): Response
