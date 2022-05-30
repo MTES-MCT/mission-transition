@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Enum\Status;
 use App\Repository\AideRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,16 +17,13 @@ use Doctrine\ORM\Mapping as ORM;
     collectionOperations: ['get'],
     itemOperations: ['get'],
 )]
+#[ApiFilter(PropertyFilter::class)]
 #[ApiFilter(SearchFilter::class, properties: [
-    'id' => 'exact',
-    'nomAide' => 'ipartial',
-    'nomAideNormalise' => 'ipartial',
-    'aapAmi' => 'exact',
-    'description' => 'ipartial',
-    'exempleProjet' => 'ipartial',
-    'sousThematique.nom' => 'iexact',
-    'idSource' => 'iend',
-    'typesAide.nom' => 'exact',
+    'zonesGeographiques' => 'exact',
+    'typesAide' => 'exact',
+    'sousThematiques' => 'exact',
+    'porteursAide' => 'exact',
+    'etatsAvancementProjet' => 'exact',
 ])]
 class Aide
 {
@@ -77,6 +75,7 @@ class Aide
     private $typesDepense;
 
     #[ORM\ManyToMany(targetEntity: ZoneGeographique::class)]
+    #[ApiFilter(SearchFilter::class, properties: ['zoneGeographiques.id' => 'exact'])]
     private $zonesGeographiques;
 
     #[ORM\Column(type: 'date', nullable: true)]

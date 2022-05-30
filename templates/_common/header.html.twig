@@ -61,9 +61,9 @@
                                 </ul>
                             </div>
                         </li>
-        {#                <li class="fr-nav__item">#}
-        {#                    <a class="fr-nav__link" {% if current_route is same as 'search_results'%} aria-current="page" {% endif %} href="{{ path('search_results') }}" target="_self">Lancer votre recherche</a>#}
-        {#                </li>#}
+                        <li class="fr-nav__item">
+                            <a class="fr-nav__link" {% if current_route is same as 'search'%} aria-current="page" {% endif %} href="{{ path('search') }}" target="_self">Lancer une recherche</a>
+                        </li>
                         <li class="fr-nav__item">
                             <a class="fr-nav__link" {% if current_route is same as 'information_contact_advisor'%} aria-current="page" {% endif %} href="{{ path('information_contact_advisor') }}" target="_self">Echanger avec un conseiller</a>
                         </li>

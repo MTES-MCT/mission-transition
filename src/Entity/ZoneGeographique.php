@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ZoneGeographiqueRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ZoneGeographiqueRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get'],
+    itemOperations: ['get'],
+)]
+
 class ZoneGeographique
 {
     #[ORM\Id]
@@ -18,6 +24,11 @@ class ZoneGeographique
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $couverture;
+
+    public function __toString(): string
+    {
+        return $this->nom;
+    }
 
     public function getId(): ?int
     {

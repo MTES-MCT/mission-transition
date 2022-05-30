@@ -11,6 +11,10 @@ api_platform:
     mercure: ~
     # Good cache defaults for REST APIs
     defaults:
+        pagination_client_items_per_page: true
         stateless: true
         cache_headers:
             vary: ['Content-Type', 'Authorization', 'Origin']
+        collection:
+            pagination:
+                enabled_parameter_name: pagination

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'France Transition' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('search') }}
+{% endblock %}
+
+{% block body %}
+<div id="search-engine"></div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('search') }}
+{% endblock %}
