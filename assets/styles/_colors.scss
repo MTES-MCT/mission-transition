@@ -7,7 +7,7 @@ $blue-ecume-975: #F4F6FE;
 $blue-default-france: #6A6AF4;
 $blue-france-700: #00006D;
 $blue-gradient-background: linear-gradient(238.24deg, #181b40 42.25%, #252a6b 106.2%);
-$green-menthe: #009081;
+$green-menthe: #49BC8D;
 $orange: #FFA07D;
 $orange-bold-light: #d14904;
 $orange-bold-dark: #ed7c52;
@@ -18,6 +18,7 @@ $white-lilac: #f6f8fc;
 $white-mystic: #dde5ea;
 $white-alabaster: #fbfbfb;
 $beige: #f9f8f6;
+$grey-magnolia: #f5f5fe;
 
 .bg-light {
     background-color: $white-lilac;
@@ -45,6 +46,10 @@ $beige: #f9f8f6;
 
 .bg-beige {
     background-color: $beige;
+}
+
+.bg-grey-magnolia {
+    background-color: $grey-magnolia;
 }
 
 .bg-blue-royal {

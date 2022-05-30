@@ -3,7 +3,7 @@
 @import 'components/cards';
 
 .homepage-background {
-    background: $white-lilac;
+    background: url("../img/homepage_illu.svg") no-repeat center, #E8EDFF;
 }
 
 .homepage-intro {
@@ -13,6 +13,13 @@
     align-items: center;
     justify-content: center;
     max-width: 932px;
+
+    h1 {
+        color: $blue-navy;
+        span {
+            color: $green-menthe;
+        }
+    }
 }
 
 .homepage-content {
@@ -69,8 +76,6 @@
 }
 
 .main-cta {
-    background-color: $blue-france;
-
     .main-cta_content {
         display: grid;
         grid-gap: 1.5rem;
@@ -104,7 +109,7 @@
     }
 
     .main-cta_content {
-        grid-template-columns: repeat(3, minmax(200px, 372px));
+        grid-template-columns: repeat(2, minmax(200px, 372px));
     }
 
     .category-choices {

@@ -1,0 +1,5 @@
+App\Entity\TypeDepense:
+    type_depense_1:
+        nom: "Fonctionnement"
+    type_depense_2:
+        nom: "Investissement"

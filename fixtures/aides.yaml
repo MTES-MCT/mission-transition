@@ -1,0 +1,113 @@
+App\Entity\Aide:
+    aide_{1..10}:
+        nomAide: <catchPhrase()>
+        nomAideNormalise: <catchPhrase()>
+        programmeAides: <randomElements(['France Relance', 'FSE - Fonds social européen'])>
+        porteursAide: <randomElements(['Conseil départemental de la Nièvre', 'ADEME'])>
+        instructeursAide: <randomElements(['Conseil départemental de la Nièvre', 'ADEME'])>
+        beneficicairesAide: ['Entreprises privées']
+        tauxSubventionMinimum: <numberBetween(20, 50)>
+        tauxSubventionMaximum: <numberBetween(60, 100)>
+        aapAmi: <boolean()>
+        description: <realText()>
+        exempleProjet: <text()>
+        sousThematiques: [ '@sous_thematique_5', '@sous_thematique_2' ]
+        idSource: <ean13()>
+        typesAide: ['@type_aide_*']
+        recurrenceAide: '@recurrence_aide_*'
+        etatsAvancementProjet: ['@etat_avancement_projet_*']
+        typesDepense: ['@type_depense_*']
+        zonesGeographiques: ['@zone_geographique_*']
+        dateOuverture: <datetime()>
+        datePreDepot: <datetime()>
+        dateCloture: <datetime()>
+        conditionsEligibilite: <realText()>
+        urlDescriptif: <url()>
+        urlDemarche: <url()>
+        contact: <realText()>
+        dateMiseAJour: <datetime()>
+        etat: "publié"
+    aide_{11..20}:
+        nomAide: <catchPhrase()>
+        nomAideNormalise: <catchPhrase()>
+        programmeAides: <randomElements(['France Relance', 'FSE - Fonds social européen'])>
+        porteursAide: <randomElements(['Conseil départemental de la Nièvre', 'ADEME'])>
+        instructeursAide: <randomElements(['Conseil départemental de la Nièvre', 'ADEME'])>
+        beneficicairesAide: ['Entreprises privées']
+        tauxSubventionMinimum: <numberBetween(20, 50)>
+        tauxSubventionMaximum: <numberBetween(60, 100)>
+        aapAmi: <boolean()>
+        description: <realText()>
+        exempleProjet: <text()>
+        sousThematiques: [ '@sous_thematique_6', '@sous_thematique_2' ]
+        idSource: <ean13()>
+        typesAide: ['@type_aide_*']
+        recurrenceAide: '@recurrence_aide_*'
+        etatsAvancementProjet: ['@etat_avancement_projet_*']
+        typesDepense: ['@type_depense_*']
+        zonesGeographiques: ['@zone_geographique_*']
+        dateOuverture: <datetime()>
+        datePreDepot: <datetime()>
+        dateCloture: <datetime()>
+        conditionsEligibilite: <realText()>
+        urlDescriptif: <url()>
+        urlDemarche: <url()>
+        contact: <realText()>
+        dateMiseAJour: <datetime()>
+        etat: "publié"
+    aid_brouillon_{1..10}:
+        nomAide: <catchPhrase()>
+        nomAideNormalise: <catchPhrase()>
+        programmeAides: <randomElements(['France Relance', 'FSE - Fonds social européen'])>
+        porteursAide: <randomElements(['Conseil départemental de la Nièvre', 'ADEME'])>
+        instructeursAide: <randomElements(['Conseil départemental de la Nièvre', 'ADEME'])>
+        beneficicairesAide: ['Entreprises privées']
+        tauxSubventionMinimum: <numberBetween(20, 50)>
+        tauxSubventionMaximum: <numberBetween(60, 100)>
+        aapAmi: <boolean()>
+        description: <realText()>
+        exempleProjet: <text()>
+        sousThematiques: [ '@sous_thematique_5', '@sous_thematique_2' ]
+        idSource: <ean13()>
+        typesAide: ['@type_aide_*']
+        recurrenceAide: '@recurrence_aide_*'
+        etatsAvancementProjet: ['@etat_avancement_projet_*']
+        typesDepense: ['@type_depense_*']
+        zonesGeographiques: ['@zone_geographique_*']
+        dateOuverture: <datetime()>
+        datePreDepot: <datetime()>
+        dateCloture: <datetime()>
+        conditionsEligibilite: <realText()>
+        urlDescriptif: <url()>
+        urlDemarche: <url()>
+        contact: <realText()>
+        dateMiseAJour: <datetime()>
+        etat: "brouillon"
+    aid_zone_geographique_11_{1..10}:
+        nomAide: <catchPhrase()>
+        nomAideNormalise: <catchPhrase()>
+        programmeAides: <randomElements(['France Relance', 'FSE - Fonds social européen'])>
+        porteursAide: <randomElements(['Conseil départemental de la Nièvre', 'ADEME'])>
+        instructeursAide: <randomElements(['Conseil départemental de la Nièvre', 'ADEME'])>
+        beneficicairesAide: ['Entreprises privées']
+        tauxSubventionMinimum: <numberBetween(20, 50)>
+        tauxSubventionMaximum: <numberBetween(60, 100)>
+        aapAmi: <boolean()>
+        description: <realText()>
+        exempleProjet: <text()>
+        sousThematiques: [ '@sous_thematique_6', '@sous_thematique_2' ]
+        idSource: <ean13()>
+        typesAide: ['@type_aide_*']
+        recurrenceAide: '@recurrence_aide_*'
+        etatsAvancementProjet: ['@etat_avancement_projet_*']
+        typesDepense: ['@type_depense_*']
+        zonesGeographiques: ['@zone_geographique_11']
+        dateOuverture: <datetime()>
+        datePreDepot: <datetime()>
+        dateCloture: <datetime()>
+        conditionsEligibilite: <realText()>
+        urlDescriptif: <url()>
+        urlDemarche: <url()>
+        contact: <realText()>
+        dateMiseAJour: <datetime()>
+        etat: "publié"

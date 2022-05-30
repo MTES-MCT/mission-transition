@@ -1,5 +1,0 @@
-App\Entity\AidType:
-    aid_type_1:
-        name: "Dispositif de financement"
-    aid_type_2:
-        name: "Aide en ingénierie"

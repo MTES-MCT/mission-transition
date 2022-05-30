@@ -1,4 +1,0 @@
-App\Entity\Funder:
-    funder_{0..10}:
-        name: <name()>
-        website: <url()>

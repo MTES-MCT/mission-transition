@@ -2,16 +2,17 @@
 
 namespace App\Command;
 
-use App\Entity\Aid;
-use App\Entity\AidType;
-use App\Entity\EnvironmentalTopic;
-use App\Entity\Funder;
-use App\Entity\Region;
-use App\Repository\AidRepository;
-use App\Repository\AidTypeRepository;
-use App\Repository\EnvironmentalTopicRepository;
-use App\Repository\FunderRepository;
-use App\Repository\RegionRepository;
+use App\Entity\Aide;
+use App\Entity\EtatAvancementProjet;
+use App\Entity\RecurrenceAide;
+use App\Entity\TypeAide;
+use App\Entity\TypeDepense;
+use App\Repository\AideRepository;
+use App\Repository\EtatAvancementProjetRepository;
+use App\Repository\RecurrenceAideRepository;
+use App\Repository\TypeAideRepository;
+use App\Repository\TypeDepenseRepository;
+use App\Repository\ZoneGeographiqueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,37 +22,41 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ImportDataFromAtCommand extends Command
 {
-    const BASE_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/?targeted_audiences=private_sector';
+    const BASE_AIDS_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/?targeted_audiences=private_sector';
+    const BASE_AID_TYPES_API_URL = 'https://aides-territoires.beta.gouv.fr/api/aids/types/';
 
     protected static $defaultName = 'app:import-data-from-at';
     protected static $defaultDescription = 'Importing data from AT';
 
     private HttpClientInterface $client;
     private EntityManagerInterface $em;
-    private AidRepository $aidRepository;
-    private FunderRepository $funderRepository;
-    private RegionRepository $regionRepository;
-    private AidTypeRepository $aidTypeRepository;
-    private EnvironmentalTopicRepository $environmentalTopicRepository;
+    private AideRepository $aideRepository;
+    private ZoneGeographiqueRepository $zoneGeographiqueRepository;
+    private TypeAideRepository $typeAideRepository;
+    private TypeDepenseRepository $typeDepenseRepository;
+    private RecurrenceAideRepository $recurrenceAideRepository;
+    private EtatAvancementProjetRepository $etatAvancementProjetRepository;
     protected int $newlyAdded = 0;
     protected int $newlyUpdated = 0;
 
     public function __construct(
         HttpClientInterface $client,
         EntityManagerInterface $em,
-        AidRepository $aidRepository,
-        FunderRepository $funderRepository,
-        RegionRepository $regionRepository,
-        AidTypeRepository $aidTypeRepository,
-        EnvironmentalTopicRepository $environmentalTopicRepository
+        AideRepository $aideRepository,
+        ZoneGeographiqueRepository $zoneGeographiqueRepository,
+        TypeAideRepository $typeAideRepository,
+        EtatAvancementProjetRepository $etatAvancementProjetRepository,
+        TypeDepenseRepository $typeDepenseRepository,
+        RecurrenceAideRepository $recurrenceAideRepository
     ) {
         $this->client = $client;
         $this->em = $em;
-        $this->aidRepository = $aidRepository;
-        $this->funderRepository = $funderRepository;
-        $this->regionRepository = $regionRepository;
-        $this->aidTypeRepository = $aidTypeRepository;
-        $this->environmentalTopicRepository = $environmentalTopicRepository;
+        $this->aideRepository = $aideRepository;
+        $this->zoneGeographiqueRepository = $zoneGeographiqueRepository;
+        $this->typeAideRepository = $typeAideRepository;
+        $this->typeDepenseRepository = $typeDepenseRepository;
+        $this->recurrenceAideRepository = $recurrenceAideRepository;
+        $this->etatAvancementProjetRepository = $etatAvancementProjetRepository;
         parent::__construct();
     }
 
@@ -67,12 +72,15 @@ class ImportDataFromAtCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $io->comment('Starting Aides-Territoires import.');
-        $io->comment('Requesting data from API...');
+        $io->comment('Requesting aid types from API...');
+        $this->loadAidTypes();
+
+        $io->comment('Requesting aid data from API...');
 
         $categories = $this->getEnvironmentalTopicsMapping();
 
         foreach ($categories as $key => $category) {
-            $nextUrl = self::BASE_API_URL.$key;
+            $nextUrl = self::BASE_AIDS_API_URL.$key;
             $io->info($category);
             while (null !== $nextUrl) {
                 $response = $this->client->request(
@@ -83,8 +91,8 @@ class ImportDataFromAtCommand extends Command
                 $results = $response['results'];
 
                 foreach ($results as $aidFromAt) {
-                    $aid = $this->aidRepository->findOneBy([
-                        'sourceId' => sprintf('at_%s', $aidFromAt['id']),
+                    $aid = $this->aideRepository->findOneBy([
+                        'idSource' => sprintf('at_%s', $aidFromAt['id']),
                     ]);
 
                     // New Aid
@@ -107,110 +115,164 @@ class ImportDataFromAtCommand extends Command
         return Command::SUCCESS;
     }
 
-    protected function createNewAid($aidFromAt): Aid
+    protected function loadAidTypes()
     {
-        $aid = new Aid();
-        $aid->setState(Aid::STATE_DRAFT);
+        $response = $this->client->request(
+            'GET',
+            self::BASE_AID_TYPES_API_URL
+        );
+        $response = $response->toArray();
+        $results = $response['results'];
+
+        foreach ($results as $aidType) {
+            $existingAidType = $this->retrieveExistingAidType($aidType['name']);
+            if ($existingAidType === null) {
+                $newAidType = $this->createAideType($aidType['name'], $aidType['type']);
+                $this->em->persist($newAidType);
+            }
+        }
+        $this->em->flush();
+    }
+
+    protected function createNewAid($aidFromAt): Aide
+    {
+        $aid = new Aide();
         return $this->updateAid($aidFromAt, $aid);
     }
 
-    public function updateAid(array $aidFromAt, Aid $aid): Aid
+    public function updateAid(array $aidFromAt, Aide $aid): Aide
     {
-        if (isset($aidFromAt['financers'][0])) {
-            $funder = $this->retrieveExistingeFunder($aidFromAt['financers'][0]);
-            if (null === $funder) {
-                $funder = $this->createFunder($aidFromAt['financers'][0], $aidFromAt['origin_url']);
-                $this->em->persist($funder);
-                $this->em->flush();
-            }
-        } else {
-            $funder = null;
-        }
-
         $aid
-            ->setSourceId(sprintf('at_%s', $aidFromAt['id']))
-            ->setName($aidFromAt['name'])
-            ->setFunder($funder)
-            ->setApplicationUrl($aidFromAt['application_url'])
-            ->setFundingSourceUrl($aidFromAt['origin_url'])
-            ->setAidDetails($aidFromAt['description'])
-            ->setEligibility($aidFromAt['eligibility'])
-            ->setProjectExamples($aidFromAt['project_examples'])
-            ->setFundingTypes($aidFromAt['aid_types'])
-            ->setApplicationStartDate(isset($aidFromAt['start_date']) ? new \DateTime($aidFromAt['start_date']) : null)
-            ->setApplicationEndDate(isset($aidFromAt['submission_deadline']) ? new \DateTime($aidFromAt['submission_deadline']) : null)
-            ->setSourceUpdatedAt(new \DateTime($aidFromAt['date_updated']))
-            ->setContactGuidelines($aidFromAt['contact'])
-            ->setLoanAmount($aidFromAt['loan_amount'])
-            ->setSubventionRateLowerBound($aidFromAt['subvention_rate_lower_bound'])
-            ->setSubventionRateUpperBound($aidFromAt['subvention_rate_upper_bound'])
-            ->setFundingTypes($aidFromAt['aid_types'])
+            ->setIdSource(sprintf('at_%s', $aidFromAt['id']))
+            ->setNomAide($aidFromAt['name'])
+            ->setNomAideNormalise($aidFromAt['name'])
+            ->setUrlDemarche($aidFromAt['application_url'])
+            ->setPorteursAide($aidFromAt['financers'])
+            ->setInstructeursAide($aidFromAt['instructors'])
+            ->setBeneficicairesAide($aidFromAt['targeted_audiences'])
+            ->setProgrammeAides($aidFromAt['programs'])
+            ->setUrlDescriptif($aidFromAt['origin_url'])
+            ->setAapAmi($aidFromAt['is_call_for_project'])
+            ->setDescription($aidFromAt['description'])
+            ->setConditionsEligibilite($aidFromAt['eligibility'])
+            ->setExempleProjet($aidFromAt['project_examples'])
+            ->setDateOuverture(isset($aidFromAt['start_date']) ? new \DateTime($aidFromAt['start_date']) : null)
+            ->setDateCloture(isset($aidFromAt['submission_deadline']) ? new \DateTime($aidFromAt['submission_deadline']) : null)
+            ->setDateMiseAJour(new \DateTime($aidFromAt['date_updated']))
+            ->setContact($aidFromAt['contact'])
+            ->setZoneGeographiqueSource($aidFromAt['perimeter'])
+            ->setThematiqueSource($aidFromAt['categories'])
+            ->setTauxSubventionMinimum($aidFromAt['subvention_rate_lower_bound'])
+            ->setTauxSubventionMaximum($aidFromAt['subvention_rate_upper_bound'])
         ;
 
         foreach ($aidFromAt['aid_types'] as $aidTypeName) {
-            $aidType = $this->retrieveExistingAidType($this->getTypesMapping($aidTypeName));
-            if (null === $aidType) {
-                $aidType = $this->createAidType($this->getTypesMapping($aidTypeName));
-                $this->em->persist($aidType);
-                $this->em->flush();
-            }
+            $aidType = $this->retrieveExistingAidType($aidTypeName);
 
-            $aid->addType($aidType);
+            if ($aidType !== null) {
+                $aid->addTypesAide($aidType);
+            }
         }
 
+        $recurrenceAide = $this->retrieveExistingRecurrence($aidFromAt['recurrence']);
+        if ($recurrenceAide === null) {
+            $recurrenceAide = $this->createRecurrence($aidFromAt['recurrence']);
+        }
+        $aid->setRecurrenceAide($recurrenceAide);
+
+        foreach ($aidFromAt['mobilization_steps'] as $mobilizationStepName) {
+            $typeDepense = $this->retrieveExistingAvancementProjet($mobilizationStepName);
+            if ($typeDepense === null) {
+                $typeDepense = $this->createAvancementProjet($mobilizationStepName);
+            }
+            $aid->addEtatsAvancementProjet($typeDepense);
+        }
+
+        foreach ($aidFromAt['destinations'] as $typeDepenseName) {
+            $typeDepense = $this->retrieveExistingTypeDepense($typeDepenseName);
+            if ($typeDepense === null) {
+                $typeDepense = $this->createTypeDepense($typeDepenseName);
+            }
+            $aid->addTypesDepense($typeDepense);
+        }
         return $aid;
     }
 
-    protected function retrieveExistingRegion(string $regionName): ?Region
+    protected function createAideType(string $aidTypeName, string $aidTypeCategory): TypeAide
     {
-        return $this->regionRepository->findOneBy([
-            'name' => $regionName,
-        ]);
-    }
-
-    protected function createAidType(string $aidTypeName): AidType
-    {
-        $aidType = new AidType();
+        $aidType = new TypeAide();
         $aidType
-            ->setName($aidTypeName)
+            ->setNom($aidTypeName)
+            ->setCategorie($aidTypeCategory)
         ;
+        $this->em->persist($aidType);
+        $this->em->flush();
 
         return $aidType;
     }
 
-    protected function retrieveExistingAidType(string $aidTypeName): ?AidType
+    protected function retrieveExistingAidType(string $aidTypeName): ?TypeAide
     {
-        return $this->aidTypeRepository->findOneBy([
-            'name' => $aidTypeName,
+        return $this->typeAideRepository->findOneBy([
+            'nom' => $aidTypeName,
         ]);
     }
 
-    protected function createRegion(string $regionName): Region
+    protected function createRecurrence(string $recurrenceName): RecurrenceAide
     {
-        $region = new Region();
-        $region
-            ->setName($regionName)
+        $recurrenceAide = new RecurrenceAide();
+        $recurrenceAide
+            ->setNom($recurrenceName)
         ;
-
-        return $region;
+        $this->em->persist($recurrenceAide);
+        $this->em->flush();
+        return $recurrenceAide;
     }
 
-    protected function retrieveExistingeFunder(string $funderName): ?Funder
+    protected function retrieveExistingRecurrence(string $recurrenceName): ?RecurrenceAide
     {
-        return $this->funderRepository->findOneBy([
-            'name' => $funderName,
+        return $this->recurrenceAideRepository->findOneBy([
+            'nom' => $recurrenceName,
         ]);
     }
 
-    protected function createFunder(string $funderName, string $funderUrl = null): Funder
+    protected function createAvancementProjet(string $etatAvancementName): EtatAvancementProjet
     {
-        $funder = new Funder();
-        $funder
-            ->setName($funderName)
-            ->setWebsite($funderUrl)
+        $etatAvancementProjet = new EtatAvancementProjet();
+        $etatAvancementProjet
+            ->setNom($etatAvancementName)
         ;
 
-        return $funder;
+        $this->em->persist($etatAvancementProjet);
+        $this->em->flush();
+
+        return $etatAvancementProjet;
+    }
+
+    protected function retrieveExistingAvancementProjet(string $etatAvancementName): ?EtatAvancementProjet
+    {
+        return $this->etatAvancementProjetRepository->findOneBy([
+            'nom' => $etatAvancementName,
+        ]);
+    }
+
+    protected function createTypeDepense(string $typeDepenseName): TypeDepense
+    {
+        $typeDepense = new TypeDepense();
+        $typeDepense
+            ->setNom($typeDepenseName)
+        ;
+        $this->em->persist($typeDepense);
+        $this->em->flush();
+
+        return $typeDepense;
+    }
+
+    protected function retrieveExistingTypeDepense(string $typeDepenseName): ?TypeDepense
+    {
+        return $this->typeDepenseRepository->findOneBy([
+            'nom' => $typeDepenseName,
+        ]);
     }
 
     protected function getEnvironmentalTopicsMapping(): array
@@ -236,42 +298,5 @@ class ImportDataFromAtCommand extends Command
             '&categories=risques-naturels' => 'Conservation et restauration des écosystèmes',
             '&categories=sols' => 'Conservation et restauration des écosystèmes',
         ];
-    }
-
-    protected function getTypesMapping(string $aidTypeName): string
-    {
-        if (!$aidTypeName) {
-            return 'Aide financière';
-        }
-
-        $mapping = [
-            'Subvention' => 'Aide financière',
-            'Prêt' => 'Aide financière',
-            'Avance récupérable' => 'Aide financière',
-            'Autre' => 'Aide financière',
-            'Ingénierie technique' => 'Aide en ingénierie',
-            'Ingénierie financière' => 'Aide en ingénierie',
-            'Ingénierie Juridique / administrative' => 'Aide en ingénierie',
-        ];
-
-        if (isset($mapping[$aidTypeName])) {
-            return $mapping[$aidTypeName];
-        }
-
-        return 'Aide financière';
-    }
-
-    protected function getPerimetersMapping($atRegion): string
-    {
-        $mapping = [
-            'Europe' => 'Continent',
-            'France' => Aid::PERIMETER_NATIONAL,
-        ];
-
-        if (isset($mapping[$atRegion])) {
-            return $mapping[$atRegion];
-        }
-
-        return Aid::PERIMETER_REGIONAL;
     }
 }

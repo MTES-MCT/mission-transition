@@ -1,0 +1,121 @@
+App\Entity\SousThematique:
+    sous_thematique_1:
+        nom: "Recherche, Développement & Innovation"
+        thematiques: ['@thematique_*']
+    sous_thematique_2:
+        nom: "Réduction de la consommation d'énergie"
+        thematiques: ['@thematique_*']
+    sous_thematique_3:
+        nom: "Bilan énergétique & Rénovation"
+        thematiques: ['@thematique_*']
+    sous_thematique_4:
+        nom: "Réduction du gaspillage"
+        thematiques: ['@thematique_*']
+    sous_thematique_5:
+        nom: "Tri, recyclage, réemploi & réparation"
+        thematiques: ['@thematique_*']
+    sous_thematique_6:
+        nom: "Performance environnementale de l'alimentation"
+        thematiques: ['@thematique_*']
+    sous_thematique_7:
+        nom: "Adapation au changement climatique"
+        thematiques: ['@thematique_*']
+    sous_thematique_8:
+        nom: "Infrastructures de transport & logistique"
+        thematiques: ['@thematique_*']
+    sous_thematique_9:
+        nom: "Aménagement d'ouvrages & Equipements"
+        thematiques: ['@thematique_*']
+    sous_thematique_10:
+        nom: "Digitalisation des commerces & artisans"
+        thematiques: ['@thematique_*']
+    sous_thematique_11:
+        nom: "Formation & Accompagnement"
+        thematiques: ['@thematique_*']
+    sous_thematique_12:
+        nom: "Formation & animation des acteurs locaux"
+        thematiques: ['@thematique_*']
+    sous_thematique_13:
+        nom: "Développement du ferroviaire"
+        thematiques: ['@thematique_*']
+    sous_thematique_14:
+        nom: "Développement du covoiturage & autopartage"
+        thematiques: ['@thematique_*']
+    sous_thematique_15:
+        nom: "Sensibilisation sur les consommations"
+        thematiques: ['@thematique_*']
+    sous_thematique_16:
+        nom: "Aide au développement de la filière"
+        thematiques: ['@thematique_*']
+    sous_thematique_17:
+        nom: "Formation & animation des acteurs locaux Secteur Eau & écosystèmes"
+        thematiques: ['@thematique_*']
+    sous_thematique_18:
+        nom: "Réduction des Pesticides"
+        thematiques: ['@thematique_*']
+    sous_thematique_19:
+        nom: "Acquisition foncière"
+        thematiques: ['@thematique_*']
+    sous_thematique_20:
+        nom: "Aide aux investissements & financements"
+        thematiques: ['@thematique_*']
+    sous_thematique_21:
+        nom: "Réduction de l'empreinte carbone"
+        thematiques: ['@thematique_*']
+    sous_thematique_22:
+        nom: "Restauration d'infrastructures"
+        thematiques: ['@thematique_*']
+    sous_thematique_23:
+        nom: "Réseaux de chaleur & Récupération de chaleur"
+        thematiques: ['@thematique_*']
+    sous_thematique_24:
+        nom: "Stockage de l'énergie"
+        thematiques: ['@thematique_*']
+    sous_thematique_25:
+        nom: "Amélioration de la qualité de l'air"
+        thematiques: ['@thematique_*']
+    sous_thematique_26:
+        nom: "Traitement & valorisation des biodéchets"
+        thematiques: ['@thematique_*']
+    sous_thematique_27:
+        nom: "Gestion de l'eau"
+        thematiques: ['@thematique_10']
+    sous_thematique_28:
+        nom: "Acquisition & extension des locaux"
+        thematiques: ['@thematique_*']
+    sous_thematique_29:
+        nom: "Développer le réseau de distribution d'énergie"
+        thematiques: ['@thematique_*']
+    sous_thematique_30:
+        nom: "Energies Renouvelables"
+        thematiques: ['@thematique_*']
+    sous_thematique_31:
+        nom: "Réhabilitation logements & sites industriels"
+        thematiques: ['@thematique_*']
+    sous_thematique_32:
+        nom: "Réduction des pesticides & pollutions"
+        thematiques: ['@thematique_*']
+    sous_thematique_33:
+        nom: "Biodiversité & Bien-être animal"
+        thematiques: ['@thematique_*']
+    sous_thematique_34:
+        nom: "Animation & développement économique et social"
+        thematiques: ['@thematique_*']
+    sous_thematique_35:
+        nom: "Développement de filières recyclage"
+        thematiques: ['@thematique_*']
+    sous_thematique_36:
+        nom: "Restauration écologique & adapation au changement climatique"
+        thematiques: ['@thematique_*']
+    sous_thematique_37:
+        nom: "Sensibilisation & Formation"
+        thematiques: ['@thematique_*']
+    sous_thematique_38:
+        nom: "Agriculture urbaine"
+        thematiques: ['@thematique_*']
+    sous_thematique_39:
+        nom: "Logistique de proximité"
+        thematiques: ['@thematique_*']
+    sous_thematique_40:
+        nom: "Aide au recrutement"
+        thematiques: ['@thematique_*']

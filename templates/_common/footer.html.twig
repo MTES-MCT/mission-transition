@@ -4,8 +4,8 @@
             <div class="fr-col-12">
                 <div class="fr-follow__newsletter">
                     <div>
-                        <h5 class="fr-h5 fr-follow__title">On a besoin de vous !</h5>
-                        <p class="fr-text--sm fr-follow__desc">Un aide financière qui manque sur la plateforme ? Des bugs que vous aimeriez remonter ? Faites-nous vos retours pour nous aider à améliorer notre outil.</p>
+                        <h5 class="fr-h5 fr-follow__title">Nous avons besoin de vous !</h5>
+                        <p class="fr-text--sm fr-follow__desc">Une aide financière qui manque sur la plateforme ? Des bugs que vous aimeriez remonter ? Faites-nous vos retours pour nous aider à améliorer notre outil.</p>
                     </div>
                     <div>
                         <a title="Envoyer un email - ouvre une nouvelle fenêtre" href="mailto:mission-transition-ecologique@developpement-durable.gouv.fr" target="_blank" rel="noopener">Nous contacter</a>
@@ -15,7 +15,7 @@
         </div>
     </div>
 </div>
-<footer class="fr-footer" role="contentinfo" id="">
+<footer class="fr-footer" role="contentinfo" id="footer">
     <div class="fr-container">
         <div class="fr-footer__body">
             <div class="fr-footer__brand fr-enlarge-link">
@@ -50,28 +50,30 @@
             <h4 class="fr-footer__partners-title">Nos partenaires</h4>
             <div class="fr-footer__partners-logos">
                 <div class="fr-footer__partners-main">
-                    <a class="footer__partners-link" target="_blank" href="https://place-des-entreprises.beta.gouv.fr/">
-                        <img class="fr-footer__logo" src="{{ asset('build/img/logo_pde.svg') }}" alt="Place des Entreprises">
-                    </a>
                     <a class="footer__partners-link" target="_blank" href="https://aides-territoires.beta.gouv.fr/">
-                        <img class="fr-footer__logo" src="{{ asset('build/img/logo_at.png') }}" alt="Aides Territoires">
+                        <img class="fr-footer__logo"  style="height: 5.625rem" src="{{ asset('build/img/logo_at.png') }}" alt="Aides Territoires">
                     </a>
                 </div>
                 <div class="fr-footer__partners-sub">
                     <ul>
                         <li>
+                            <a class="footer__partners-link" target="_blank" href="https://place-des-entreprises.beta.gouv.fr/">
+                                <img class="fr-footer__logo" style="height: 5.625rem" src="{{ asset('build/img/logo_pde.svg') }}" alt="Place des Entreprises">
+                            </a>
+                        </li>
+                        <li>
                             <a class="fr-footer__partners-link" href="https://www.ademe.fr/">
-                                <img class="fr-footer__logo" src="{{ asset('build/img/logo_ademe.svg') }}" alt="ADEME">
+                                <img class="fr-footer__logo" style="height: 5.625rem" src="{{ asset('build/img/logo_ademe.svg') }}" alt="ADEME">
                             </a>
                         </li>
                         <li>
                             <a class="fr-footer__partners-link" href="https://www.bpifrance.fr/">
-                                <img class="fr-footer__logo" src="{{ asset('build/img/logo_bpi.svg') }}" alt="BPI France">
+                                <img class="fr-footer__logo" style="height: 5.625rem" src="{{ asset('build/img/logo_bpi.svg') }}" alt="BPI France">
                             </a>
                         </li>
                         <li>
                             <a class="fr-footer__partners-link" href="https://www.cci.fr/">
-                                <img class="fr-footer__logo" src="{{ asset('build/img/logo_cci.svg') }}" alt="CCI France">
+                                <img class="fr-footer__logo" style="height: 5.625rem;width: 10rem;" src="{{ asset('build/img/logo_cci.svg') }}" alt="CCI France">
                             </a>
                         </li>
                         <li>
@@ -102,6 +104,9 @@
                 </li>
                 <li class="fr-footer__bottom-item">
                     <a class="fr-footer__bottom-link" href="https://github.com/ecolabdata/france-transition" target="_blank">Code source</a>
+                </li>
+                <li class="fr-footer__bottom-item">
+                    <a class="fr-footer__bottom-link" href="./api" target="_blank">API & documentation</a>
                 </li>
             </ul>
             <div class="fr-footer__bottom-copy">

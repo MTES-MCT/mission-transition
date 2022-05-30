@@ -1,0 +1,38 @@
+App\Entity\Thematique:
+    thematique_1:
+        nom: "Production & distribution d'énergie"
+        description: "Exemples de projets : Développement des énergies renouvelables, récupération de chaleurs, biomasse, diagnostic sur le marché hydrogène, étude de faisabilité (énergie renouvelable)"
+    thematique_2:
+        nom: "Gestion des bâtiments"
+        description: "Exemples de projets : Construction/rénovation de bâtiments énergétiquement exemplaires, bilan énergétique des bâtiments, amélioration de la qualité de l’air. "
+    thematique_3:
+        nom: "Mobilité des employés"
+        description: "Exemples de projets : Aide à l’acquisition de véhicules propres, soutien à la conversion d’un véhicule thermique vers un véhicule propre, soutien au covoiturage, investissement pour les PME/ETI du secteur ferroviaire. "
+    thematique_4:
+        nom: "Evolution des procédés industriels"
+        description: "Exemples de projets : Efficacité énergétique des procédés industriels, audit énergétique pour l’industrie, réduction des pollutions industrielles, décarbonation des outils industriels. "
+    thematique_5:
+        nom: "Innovation produits & services"
+        description: "Exemples de projets : Eco-conception, accompagnement aux levées de fonds, financement des investissements, démarche d’innovation, passer à une phase d’industrialisation, innovation sociale, crédit d’impôt recherche French Tech. "
+    thematique_6:
+        nom: "Gestion des déchets"
+        description: "Exemples de projets : Aide à l’investissement d’équipements de recyclage, économie circulaire, aide à l’investissement pour le réemploi de déchets, financement de diagnostic à la réparation / substitution d’emballage. "
+    thematique_7:
+        nom: "Ressources humaines"
+        description: "Exemples de projets : Aide au recrutement sur le thème environnement (VTE Vert), sensibilisation, formation, structuration de démarche RSE "
+    thematique_8:
+        nom: "Secteur Agriculture & Zones rurales"
+        description: "Exemples de projets : Accompagnement créateurs d’activités en milieu rural, soutien à l’innovation agricole, investissement en agroéquipements, soutien aux circuits courts / alimentation durable, réduction de produits phytosanitaires"
+    thematique_9:
+        nom: "Secteur Ville durable"
+        description: "Exemples de projets : Formation architecture/urbanisme/environnement, digitalisation des commerces de proximité, soutien des entreprises locales, aide à la création de TPE "
+    thematique_10:
+        nom: "Secteur Bois"
+        description: "Exemples de projets : Soutien au plateforme de stockage, soutien à l’investissement de la filière bois, atténuation du changement climatique sur la forêt "
+    thematique_11:
+        nom: "Secteur Eau & écosystèmes"
+        description: "Exemples de projets : Acquisition foncière, études aux travaux d’aménagement, réhabilitation de réserve d’eau, sensibilisation, aide à l’interdiction de l’épandage des boues (agriculture), restauration écologique des milieux humides"
+    thematique_12:
+        nom: "Secteur Infrastructure & Déchèterie"
+        description: "Exemples de projets : Soutien à l’innovation logistique, modernisation des déchèteries, adaptation des structures routières/ferroviaires "
+

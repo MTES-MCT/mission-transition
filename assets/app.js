@@ -5,9 +5,6 @@ import '@gouvfr/dsfr/dist/dsfr/dsfr.module';
 
 import './styles/app.scss';
 
-// start the Stimulus application
-import './bootstrap';
-
 document.addEventListener("DOMContentLoaded", function(event) {
     window.tarteaucitronForceLanguage = 'fr';
     tarteaucitron.init({

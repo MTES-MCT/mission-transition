@@ -1,0 +1,40 @@
+App\Entity\ZoneGeographique:
+    zone_geographique_1:
+        nom: 'Auvergne-Rhône-Alpes'
+        couverture: 'REGIONAL'
+    zone_geographique_2:
+        nom: 'Bourgogne-Franche-Comté'
+        couverture: 'REGIONAL'
+    zone_geographique_3:
+        nom: 'Bretagne'
+        couverture: 'REGIONAL'
+    zone_geographique_4:
+        nom: 'Centre-Val de Loire'
+        couverture: 'REGIONAL'
+    zone_geographique_5:
+        nom: 'Corse'
+        couverture: 'REGIONAL'
+    zone_geographique_6:
+        nom: 'Grand Est'
+        couverture: 'REGIONAL'
+    zone_geographique_7:
+        nom: 'Hauts-de-France'
+        couverture: 'REGIONAL'
+    zone_geographique_8:
+        nom: 'Île-de-France'
+        couverture: 'REGIONAL'
+    zone_geographique_9:
+        nom: 'Normandie'
+        couverture: 'REGIONAL'
+    zone_geographique_10:
+        nom: 'Occitanie'
+        couverture: 'REGIONAL'
+    zone_geographique_11:
+        nom: 'Pays de la Loire'
+        couverture: 'REGIONAL'
+    zone_geographique_12:
+        nom: "Provence-Alpes-Côte d'Azur"
+        couverture: 'REGIONAL'
+    zone_geographique_13:
+        nom: 'DOM-TOM'
+        couverture: 'REGIONAL'

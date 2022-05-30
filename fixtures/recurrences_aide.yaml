@@ -1,0 +1,7 @@
+App\Entity\RecurrenceAide:
+    recurrence_aide_1:
+        nom: "Permanente"
+    recurrence_aide_2:
+        nom: "Ponctuelle"
+    recurrence_aide_3:
+        nom: "Récurrente"

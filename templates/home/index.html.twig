@@ -12,71 +12,131 @@
         <div class="fr-container fr-py-6w homepage-intro">
             <div class="main-title">
                 <div class="fr-grid-row fr-mb-4w">
-                    <div class="col-12 mt-text-align-center"><h2>Vous voulez financer la transition écologique de votre entreprise ?</h2></div>
+                    <div class="col-12 mt-text-align-center"><h1><span class="color-green-menthe">Accélérez</span> et <span class="color-green-menthe">financez</span> la transition écologique de votre entreprise.</h1></div>
                 </div>
                 <div class="fr-grid-row">
                     <div class="col-12 mt-text-align-center mt-ma">
-                        <h5>
-                            Vous êtes au bon endroit. Mission Transition Écologique accompagne les petites et moyennes entreprises dans leur recherche de financement public pour leur transition écologique.
-                        </h5>
+                        <div id="search-engine-extension" class="fr-pb-6w">RECHERCHE</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="search-engine-extension" class="fr-pb-6w"></div>
-    </div>
-    <div class="fr-container fr-pb-9w fr-pt-6w funders">
-        <p class="fr-text--lead mt-text-align-center"><span>425 aides publiques actuellement recensées sur la plateforme</span><br>Quelques-uns des financeurs : </p>
-        <div class="fr-grid-row fr-mb-3w">
-            <div class="col-8 funders_logo_1">
-                <img src="{{ asset('build/img/logo_commission_europeenne.svg') }}" alt="logo Commission Européenne" width="192px">
-                <img src="{{ asset('build/img/logo_ademe.svg') }}" alt="logo ademe" width="68px">
-                <img src="{{ asset('build/img/logo_bpi.svg') }}" alt="logo BPI" width="161px">
-                <img src="{{ asset('build/img/logo_bdt.svg') }}" alt="logo banque des territoires" width="317px">
-                <img src="{{ asset('build/img/logo_france_agri_mer.svg') }}" alt="logo france agrimer" width="142px">
-                <img src="{{ asset('build/img/logo_cci_with_text.svg') }}" alt="logo chambre de commerce et de l'industrie" width="136px">
-            </div>
-        </div>
-        <div class="fr-grid-row">
-            <div class="col-8 funders_logo_2">
-                <img src="{{ asset('build/img/logo_nouvelle_aquitaine.svg') }}" alt="logo nouvelle aquitaine" width="144px">
-                <img src="{{ asset('build/img/logo_ile_de_france.svg') }}" alt="logo région île de France" width="185px">
-                <img src="{{ asset('build/img/logo_PACA.svg') }}" alt="logo région sud PACA" width="176px">
-                <img src="{{ asset('build/img/logo_BFC.svg') }}" alt="logo région bourgogne franche comté" width="161px">
-                <img src="{{ asset('build/img/logo_grand_est.svg') }}" alt="logo grand est" width="139px">
-                <img src="{{ asset('build/img/logo_occitanie.svg') }}" alt="logo occitanie" width="72px">
-                <img src="{{ asset('build/img/logo_guadeloupe.svg') }}" alt="logo guadeloupe" width="91px">
-            </div>
-        </div>
     </div>
     <div class="main-cta">
-        <div class="fr-container fr-pb-9w fr-pt-6w main-cta_content">
+        <div class="fr-container">
+            <div class="fr-grid-row fr-pt-9w fr-grid-row--center">
+                <h2 class="fr-h1 color-navy">Mieux comprendre...</h2>
+            </div>
+        </div>
+        <div class="fr-container fr-pb-9w fr-pt-4w main-cta_content">
             <div class="fr-card fr-enlarge-link">
                 <div class="fr-card__body">
                     <h4 class="fr-card__title">
-                        <a href="{{ path('information_contact_advisor') }}" class="fr-card__link">Echanger avec un conseiller</a>
+                        <a href="{{ path('information_tee_knowledge') }}" class="fr-card__link">La transition écologique</a>
                     </h4>
                     <p class="fr-card__desc">
-                        Vous cherchez une réponse à votre question ?
-                        Notre module “Rappel par un conseiller” vous propose de poser votre question et d’être rappelé par un conseiller spécialisé.</p>
+                        Amorcer la transition écologique et énergétique de son entreprise, c’est respecter les ressources et les individus, tout en assurant la pérennité de ses activités. Retrouvez les informations utiles à votre entreprise autour de ces enjeux.
+                    </p>
                 </div>
                 <div class="fr-card__img">
-                    <img src="{{ asset('build/img/illu_3.svg') }}" class="fr-responsive-img" alt="">
+                    <img src="{{ asset('build/img/tee.svg') }}" class="fr-responsive-img" alt="">
                 </div>
             </div>
             <div class="fr-card fr-enlarge-link">
                 <div class="fr-card__body">
                     <h4 class="fr-card__title">
-                        <a href="{{ path('information_tee_knowledge') }}" class="fr-card__link">Comprendre les aides publiques et la transition écologique</a>
+                        <a href="{{ path('information_tee_knowledge', {'section': 'aides-publiques'}) }}" class="fr-card__link">Les aides publiques</a>
                     </h4>
-                    <p class="fr-card__desc">Des explications sur le fonctionnement des aides publiques  et sur les projets possibles pour la transition écologique de votre entreprise.</p>
+                    <p class="fr-card__desc">L’Etat soutient les TPE, PME et ETI dans leurs projets en faveur de la transition écologique et énergétique à travers de nombreuses aides d’Etat proposées par différents organismes au niveau régional, national et européen.</p>
                 </div>
                 <div class="fr-card__img">
-                    <img src="{{ asset('build/img/illu_1.svg') }}" class="fr-responsive-img" alt="">
+                    <img src="{{ asset('build/img/aide_public.svg') }}" class="fr-responsive-img" alt="">
                 </div>
             </div>
         </div>
     </div>
+    <div class="fr-container--fluid bg-grey-magnolia">
+        <div class="fr-container fr-py-7w">
+            <div class="fr-grid-row fr-grid-row--center">
+                <div class="fr-col-12 mt-text-align-center fr-pb-md-5w fr-pt-4w">
+                    <h2 class="fr-h1 color-navy">Vous ne savez pas par où commencer ?</h2>
+                </div>
+                <div class="fr-col-12 fr-col-md-4">
+                    <img src="{{ asset('build/img/illu4.svg') }}" class="fr-responsive-img" alt="">
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                    <div class="fr-grid-row">
+                        <div class="fr-col-12">
+                            <p>
+                                L’expérience montre qu’il vaut mieux avoir d’abord un projet bien ciblé puis trouver l’aide adaptée plutôt que l’inverse.
+                            </p>
+                            <p class="fr-pt-3w">
+                                Nous vous proposons des outils pour trouver les meilleures aides pour votre entreprise, et si nécessaire vous pouvez même prendre contact avec des experts de la transition écologique !
+                            </p>
+                        </div>
+                        <div class="fr-col-12 fr-pt-4w">
+                            <button class="fr-btn fr-btn--secondary fr-icon-arrow-go-forward-line fr-btn--icon-right">
+                                Commencez un diagnostic
+                            </button>
+                        </div>
+                        <div class="fr-col-12 fr-pt-3w">
+                            <button class="fr-btn fr-btn--secondary fr-icon-arrow-go-forward-line fr-btn--icon-right">
+                                Contactez un conseiller
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fr-container">
+        <div class="fr-grid-row fr-grid-row--center fr-py-7w">
+            <div class="fr-col-12 mt-text-align-center">
+                <h2 class="fr-h1 color-navy">Une sélection de dispositifs, pour démarrer...</h2>
+            </div>
+            <div class="fr-card fr-enlarge-link fr-card--horizontal fr-card--lg">
+                <div class="fr-card__body">
+                    <div class="fr-card__content">
+                        <h4 class="fr-card__title">
+                            <a href="#">Intitulé de la carte (sur lequel se trouve le lien)</a>
+                        </h4>
+                        <p class="fr-card__desc">Lorem [...] elit ut.</p>
+                        <div class="fr-card__start">
+                            <p class="fr-card__detail fr-icon-warning-fill">détail (optionnel)</p>
+                        </div>
+                        <div class="fr-card__end">
+                            <p class="fr-card__detail fr-icon-warning-fill">détail (optionnel)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    <div class="fr-container fr-pb-9w fr-pt-6w funders">#}
+{#        <p class="fr-text--lead mt-text-align-center"><span>425 aides publiques actuellement recensées sur la plateforme</span><br>Quelques-uns des financeurs : </p>#}
+{#        <div class="fr-grid-row fr-mb-3w">#}
+{#            <div class="col-8 funders_logo_1">#}
+{#                <img src="{{ asset('build/img/logo_commission_europeenne.svg') }}" alt="logo Commission Européenne" width="192px">#}
+{#                <img src="{{ asset('build/img/logo_ademe.svg') }}" alt="logo ademe" width="68px">#}
+{#                <img src="{{ asset('build/img/logo_bpi.svg') }}" alt="logo BPI" width="161px">#}
+{#                <img src="{{ asset('build/img/logo_bdt.svg') }}" alt="logo banque des territoires" width="317px">#}
+{#                <img src="{{ asset('build/img/logo_france_agri_mer.svg') }}" alt="logo france agrimer" width="142px">#}
+{#                <img src="{{ asset('build/img/logo_cci_with_text.svg') }}" alt="logo chambre de commerce et de l'industrie" width="136px">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="fr-grid-row">#}
+{#            <div class="col-8 funders_logo_2">#}
+{#                <img src="{{ asset('build/img/logo_nouvelle_aquitaine.svg') }}" alt="logo nouvelle aquitaine" width="144px">#}
+{#                <img src="{{ asset('build/img/logo_ile_de_france.svg') }}" alt="logo région île de France" width="185px">#}
+{#                <img src="{{ asset('build/img/logo_PACA.svg') }}" alt="logo région sud PACA" width="176px">#}
+{#                <img src="{{ asset('build/img/logo_BFC.svg') }}" alt="logo région bourgogne franche comté" width="161px">#}
+{#                <img src="{{ asset('build/img/logo_grand_est.svg') }}" alt="logo grand est" width="139px">#}
+{#                <img src="{{ asset('build/img/logo_occitanie.svg') }}" alt="logo occitanie" width="72px">#}
+{#                <img src="{{ asset('build/img/logo_guadeloupe.svg') }}" alt="logo guadeloupe" width="91px">#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 {% endblock %}
 
 {% block javascripts%}

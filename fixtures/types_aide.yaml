@@ -1,0 +1,22 @@
+App\Entity\TypeAide:
+    type_aide_1:
+        nom: "Subvention"
+        categorie: "Aides financières"
+    type_aide_2:
+        nom: "Prêt"
+        categorie: "Aides financières"
+    type_aide_3:
+        nom: "Avance récupérable"
+        categorie: "Aides financières"
+    type_aide_4:
+        nom: "Autre aide financière"
+        categorie: "Aides financières"
+    type_aide_5:
+        nom: "Ingénierie technique"
+        categorie: "Aides en ingénierie"
+    type_aide_6:
+        nom: "Ingénierie financière"
+        categorie: "Aides en ingénierie"
+    type_aide_7:
+        nom: "Ingénierie Juridique / administrative"
+        categorie: "Aides en ingénierie"

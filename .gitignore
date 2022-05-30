@@ -1,6 +1,5 @@
-.php_cs.cache
-docker-compose.override.yaml
-.idea
+/docker/db/data
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -9,8 +8,17 @@ docker-compose.override.yaml
 /public/bundles/
 /var/
 /vendor/
-/symfony/
 ###< symfony/framework-bundle ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
@@ -18,9 +26,3 @@ docker-compose.override.yaml
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
-
-###> symfony/phpunit-bridge ###
-.phpunit
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###

@@ -23,13 +23,8 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('homepage', './assets/homepage.js')
-    .addEntry('search', './assets/search.js')
-    .addEntry('aid', './assets/aid.js')
-    .addEntry('your_project', './assets/your_project.js')
-    .addEntry('who_are_we', './assets/who_are_we.js')
     .addEntry('contact_advisor', './assets/contact_advisor.js')
     .addEntry('knowledge', './assets/knowledge.js')
-
     //Copying assets
     .copyFiles({
         from: './assets/img',
@@ -45,7 +40,7 @@ Encore
       to: 'static/[path][name].[ext]',
   })
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    .enableStimulusBridge('./assets/controllers.json')
+    // .enableStimulusBridge('./assets/controllers.json')
     .enableReactPreset()
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

@@ -1,0 +1,7 @@
+App\Entity\EtatAvancementProjet:
+    etat_avancement_projet_1:
+        nom: "Réflexion - conception"
+    etat_avancement_projet_2:
+        nom: "Mise en oeuvre - réalisation"
+    etat_avancement_projet_3:
+        nom: "Usage - valorisation"
