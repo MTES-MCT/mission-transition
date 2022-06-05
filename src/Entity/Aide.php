@@ -6,11 +6,13 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+use App\Entity\Util\EntityTimestampable;
 use App\Enum\Status;
 use App\Repository\AideRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: AideRepository::class)]
 #[ApiResource(
@@ -27,10 +29,16 @@ use Doctrine\ORM\Mapping as ORM;
 ])]
 class Aide
 {
+    use EntityTimestampable;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Gedmo\Slug(fields: ['nomAideNormalise'])]
+    private $slug;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $nomAide;
@@ -573,6 +581,18 @@ class Aide
     public function setZoneGeographiqueSource(?string $zoneGeographiqueSource): self
     {
         $this->zoneGeographiqueSource = $zoneGeographiqueSource;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

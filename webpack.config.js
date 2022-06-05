@@ -24,8 +24,10 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('homepage', './assets/homepage.js')
     .addEntry('contact_advisor', './assets/contact_advisor.js')
-  .addEntry('knowledge', './assets/knowledge.js')
-  .addEntry('search', './assets/search.js')
+    .addEntry('knowledge', './assets/knowledge.js')
+    .addEntry('search', './assets/search.js')
+    .addEntry('aid', './assets/aid.js')
+
     //Copying assets
     .copyFiles({
         from: './assets/img',

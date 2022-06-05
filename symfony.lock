@@ -16,6 +16,9 @@
     "api-platform/schema-generator": {
         "version": "v4.0.0"
     },
+    "behat/transliterator": {
+        "version": "v1.5.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.4"
     },
@@ -144,6 +147,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "gedmo/doctrine-extensions": {
+        "version": "v3.7.0"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.4.1"
     },
@@ -267,6 +273,18 @@
     },
     "sebastian/recursion-context": {
         "version": "4.0.4"
+    },
+    "stof/doctrine-extensions-bundle": {
+        "version": "1.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.2",
+            "ref": "e805aba9eff5372e2d149a9ff56566769e22819d"
+        },
+        "files": [
+            "config/packages/stof_doctrine_extensions.yaml"
+        ]
     },
     "symfony/asset": {
         "version": "v6.0.1"
@@ -632,6 +650,12 @@
             "version": "1.0",
             "ref": "fe5a50faf580eb58f08ada2abe8afbd2d4941e05"
         }
+    },
+    "twig/intl-extra": {
+        "version": "v3.4.0"
+    },
+    "twig/string-extra": {
+        "version": "v3.4.0"
     },
     "twig/twig": {
         "version": "v3.3.7"

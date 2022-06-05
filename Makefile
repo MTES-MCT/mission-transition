@@ -71,8 +71,9 @@ db: flush vendor
 	$(SYMFONY) doctrine:database:drop --if-exists --force
 	$(SYMFONY) doctrine:database:create --if-not-exists
 	$(SYMFONY) doctrine:migration:migrate --no-interaction
-	$(SYMFONY) hautelook:fixtures:load --no-interaction --purge-with-truncate
 
+fixtures:
+	$(SYMFONY) hautelook:fixtures:load --no-interaction --purge-with-truncate
 
 db-update: ## Update database with --force
 db-update: flush vendor

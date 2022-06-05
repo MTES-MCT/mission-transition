@@ -7,6 +7,7 @@ use App\Entity\EtatAvancementProjet;
 use App\Entity\RecurrenceAide;
 use App\Entity\TypeAide;
 use App\Entity\TypeDepense;
+use App\Enum\Status;
 use App\Repository\AideRepository;
 use App\Repository\EtatAvancementProjetRepository;
 use App\Repository\RecurrenceAideRepository;
@@ -143,6 +144,7 @@ class ImportDataFromAtCommand extends Command
     public function updateAid(array $aidFromAt, Aide $aid): Aide
     {
         $aid
+            ->setEtat(Status::PUBLISHED->value)
             ->setIdSource(sprintf('at_%s', $aidFromAt['id']))
             ->setNomAide($aidFromAt['name'])
             ->setNomAideNormalise($aidFromAt['name'])

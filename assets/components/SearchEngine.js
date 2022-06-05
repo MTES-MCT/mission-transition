@@ -12,10 +12,10 @@ const SearchEngine = () => {
 
     // Pagination
     const [totalItems, setTotalItems] = useState(true);
-    const [firstPagePath, setFirstPagePath] = useState(null);
-    const [lastPagePath, setLastPagePath] = useState(null);
-    const [previousPagePath, setPreviousPagePath] = useState(null);
-    const [nextPagePath, setNextPagePath] = useState(null);
+    const [firstPagePath, setFirstPagePath] = useState(undefined);
+    const [lastPagePath, setLastPagePath] = useState(undefined);
+    const [previousPagePath, setPreviousPagePath] = useState(undefined);
+    const [nextPagePath, setNextPagePath] = useState(undefined);
     const [currentPagePath, setCurrentPagePath] = useState('/api/aides?itemsPerPage=10&page=1');
     const [currentPageNumber, setCurrentPageNumber] = useState(1);
     const [lastPageNumber, setLastPageNumber] = useState(1);
@@ -53,7 +53,11 @@ const SearchEngine = () => {
         setTotalItems(response['hydra:totalItems']);
         setFirstPagePath(response['hydra:view']['hydra:first']);
         setLastPagePath(response['hydra:view']['hydra:last']);
-        setLastPageNumber(parseInt((response['hydra:view']['hydra:last']).slice(-1)));
+        if (response['hydra:view']['hydra:last'] !== undefined) {
+            setLastPageNumber(parseInt((response['hydra:view']['hydra:last']).slice(-1)));
+        } else {
+            setLastPageNumber(1);
+        }
         setPreviousPagePath(response['hydra:view']['hydra:previous']);
         setNextPagePath(response['hydra:view']['hydra:next'])
         setCurrentPageNumber(parseInt(currentPagePath.slice(-1)))
@@ -92,14 +96,14 @@ const SearchEngine = () => {
             <div className="fr-card__body" key={aid.id}>
                 <div className="fr-card__content">
                     <h4 className="fr-card__title">
-                        <a href="#">{aid.nomAideNormalise}</a>
+                        <a href={"/recherche/dispositif/" + aid.slug}>{aid.nomAideNormalise}</a>
                     </h4>
-                    <p className="fr-card__desc">{aid.description}</p>
+                    {/*<p className="fr-card__desc">{aid.description}</p>*/}
                     <div className="fr-card__start">
                         <p className="fr-card__detail fr-icon-warning-fill"></p>
                     </div>
                     <div className="fr-card__end">
-                        <p className="fr-card__detail fr-icon-warning-fill">détail (optionnel)</p>
+                        <p className="fr-card__detail fr-icon-warning-fill">Proposé par {aid.porteursAide.join(', ')}</p>
                     </div>
                 </div>
             </div>
@@ -203,6 +207,7 @@ const SearchEngine = () => {
         </div>
         <div className="fr-grid-row">
           <div className="fr-col-12 fr-col-md-3 fr-pr-3w filters">
+              <h3>Affinez votre recherche</h3>
               <div className="fr-select-group">
                   <label className="fr-label" htmlFor="selectRegion">
                       Régions
