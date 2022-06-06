@@ -12,7 +12,20 @@
     padding-top: 2vh;
     align-items: center;
     justify-content: center;
-    max-width: 932px;
+
+    .main-title {
+        max-width: 932px;
+        margin: auto;
+    }
+
+    #search-engine-extension {
+        width: 100%;
+
+        .search-forms {
+            background-color: $white;
+            border-radius: 10px;
+        }
+    }
 
     h1 {
         color: $blue-navy;
@@ -64,14 +77,6 @@
         img {
             display:inline-block;
         }
-    }
-}
-
-.search-engine-extension {
-    background-color: $white;
-
-    .selected {
-        box-shadow: inset 0 0 0 1px var(--border-default-grey),inset 0 -.25rem 0 0 var(--border-plain-blue-france);
     }
 }
 

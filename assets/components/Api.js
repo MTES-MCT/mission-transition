@@ -1,6 +1,6 @@
 import React from 'react'
 
-const fetchAids = (geographicalAreaId, aidTypeId, projectStatusId, subTopicId, path = '/api/aides?') => {
+const fetchAids = (geographicalAreaId, aidTypeId, projectStatusId, subTopicId, topicId, path = '/api/aides?') => {
 
   let geographicalAreaQueryString = '';
   if (geographicalAreaId !== '') {
@@ -22,7 +22,12 @@ const fetchAids = (geographicalAreaId, aidTypeId, projectStatusId, subTopicId, p
     subTopicQueryString = '&sousThematiques=' + subTopicId;
   }
 
-  return fetch(`${path}${geographicalAreaQueryString}${aidTypeQueryString}${projectStatusQueryString}${subTopicQueryString}`)
+  let topicQueryString = '';
+  if (topicId !== '') {
+    topicQueryString = '&thematiques=' + topicId;
+  }
+
+  return fetch(`${path}${geographicalAreaQueryString}${aidTypeQueryString}${projectStatusQueryString}${subTopicQueryString}${topicQueryString}`)
     .then(response => response.json())
 };
 
@@ -41,6 +46,11 @@ const fetchTopics = () => {
       .then(response => response.json())
 };
 
+const fetchSubTopics = () => {
+  return fetch('/api/sous_thematiques.json')
+      .then(response => response.json())
+};
+
 const fetchRecurrences = () => {
   return fetch('/api/recurrence_aides.json')
     .then(response => response.json())
@@ -56,4 +66,4 @@ const fetchGeographicalAreas = () => {
     .then(response => response.json())
 };
 
-export {fetchAids, fetchGeographicalAreas, fetchAidTypes, fetchProjectStatus, fetchTopics}
+export {fetchAids, fetchGeographicalAreas, fetchAidTypes, fetchProjectStatus, fetchTopics, fetchSubTopics}

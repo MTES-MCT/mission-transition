@@ -7,6 +7,35 @@ import {
     fetchTopics} from "./Api";
 
 const SearchEngine = () => {
+    let params = new URLSearchParams(window.location.search);
+    let initialGeographicalAreaId = '';
+    let initialAidTypeId = '';
+    let initialProjectStatusId = '';
+    let initialTopicId = '';
+    let initialSubTopicId = '';
+    let initialCurrentPageNumber = 1;
+    let initialCurrentPath = '/api/aides?itemsPerPage=10&page=1';
+
+    if (params.has('region')) {
+        initialGeographicalAreaId = params.get('region');
+    }
+    if (params.has('aidType')) {
+        initialAidTypeId = params.get('aidType');
+    }
+    if (params.has('projectStatus')) {
+        initialProjectStatusId = params.get('projectStatus');
+    }
+    if (params.has('topic')) {
+        initialTopicId = params.get('topic');
+    }
+    if (params.has('subTopic')) {
+        initialSubTopicId = params.get('subTopic');
+    }
+    if (params.has('page')) {
+        const page = parseInt(params.get('page'));
+        initialCurrentPageNumber = page;
+        initialCurrentPath = `/api/aides?itemsPerPage=10&page=${page}`;
+    }
     const [aids, setAids] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -16,8 +45,8 @@ const SearchEngine = () => {
     const [lastPagePath, setLastPagePath] = useState(undefined);
     const [previousPagePath, setPreviousPagePath] = useState(undefined);
     const [nextPagePath, setNextPagePath] = useState(undefined);
-    const [currentPagePath, setCurrentPagePath] = useState('/api/aides?itemsPerPage=10&page=1');
-    const [currentPageNumber, setCurrentPageNumber] = useState(1);
+    const [currentPagePath, setCurrentPagePath] = useState(initialCurrentPath);
+    const [currentPageNumber, setCurrentPageNumber] = useState(initialCurrentPageNumber);
     const [lastPageNumber, setLastPageNumber] = useState(1);
 
     // Filters options
@@ -28,57 +57,77 @@ const SearchEngine = () => {
     const [subTopics, setSubTopics] = useState([]);
 
     // Selected Filters
-    const [selectedGeographicalAreaId, setSelectedGeographicalAreaId] = useState('');
-    const [selectedAidTypeId, setSelectedAidTypeId] = useState('');
-    const [selectedProjectStatusId, setSelectedProjectStatusId] = useState('');
-    const [selectedTopic, setSelectedTopic] = useState({id: ''});
-    const [selectedSubTopicId, setSelectedSubTopicId] = useState('');
+    const [selectedGeographicalAreaId, setSelectedGeographicalAreaId] = useState(initialGeographicalAreaId);
+    const [selectedAidTypeId, setSelectedAidTypeId] = useState(initialAidTypeId);
+    const [selectedProjectStatusId, setSelectedProjectStatusId] = useState(initialProjectStatusId);
+    const [selectedTopicId, setSelectedTopicId] = useState(initialTopicId);
+    const [selectedSubTopicId, setSelectedSubTopicId] = useState(initialSubTopicId);
 
     useEffect(async() => {
-        setGeographicalAreas(await fetchGeographicalAreas())
-        setAidTypes(await fetchAidTypes())
-        setProjectStatus(await fetchProjectStatus())
-        setTopics(await fetchTopics())
+        setGeographicalAreas(await fetchGeographicalAreas());
+        setAidTypes(await fetchAidTypes());
+        setProjectStatus(await fetchProjectStatus());
+        const fetchedTopics = await fetchTopics();
+        setTopics(fetchedTopics);
+        if (params.has('topic')) {
+            const selectedTopic = fetchedTopics.find(t => t.id === parseInt(params.get('topic')));
+            if (selectedTopic) {
+                setSelectedTopicId(selectedTopic.id);
+                setSubTopics(selectedTopic.sousThematique)
+            }
+        }
     }, [])
 
-    useEffect(async() => {
-        setIsLoading(true);
-        let response = await fetchAids(
-            selectedGeographicalAreaId,
-            selectedAidTypeId,
-            selectedProjectStatusId,
-            selectedSubTopicId,
-            currentPagePath
-        );
-        setTotalItems(response['hydra:totalItems']);
-        setFirstPagePath(response['hydra:view']['hydra:first']);
-        setLastPagePath(response['hydra:view']['hydra:last']);
-        if (response['hydra:view']['hydra:last'] !== undefined) {
-            setLastPageNumber(parseInt((response['hydra:view']['hydra:last']).slice(-1)));
-        } else {
-            setLastPageNumber(1);
+    useEffect(() => {
+        params.set('region', selectedGeographicalAreaId);
+        params.set('aidType', selectedAidTypeId);
+        params.set('projetStatus', selectedProjectStatusId);
+        params.set('subTopic', selectedSubTopicId);
+        window.history.replaceState({}, '', `${location.pathname}?${params}`);
+        const fetchData = async () => {
+            setIsLoading(true);
+            let response = await fetchAids(
+                selectedGeographicalAreaId,
+                selectedAidTypeId,
+                selectedProjectStatusId,
+                selectedSubTopicId,
+                currentPagePath
+            );
+            setTotalItems(response['hydra:totalItems']);
+            setFirstPagePath(response['hydra:view']['hydra:first']);
+            setLastPagePath(response['hydra:view']['hydra:last']);
+            if (response['hydra:view']['hydra:last'] !== undefined) {
+                let urlParams = new URLSearchParams(response['hydra:view']['hydra:last']);
+                setLastPageNumber(parseInt(urlParams.get('page')));
+            } else {
+                setLastPageNumber(1);
+            }
+            setPreviousPagePath(response['hydra:view']['hydra:previous']);
+            setNextPagePath(response['hydra:view']['hydra:next'])
+            let urlParams = new URLSearchParams(currentPagePath);
+            setCurrentPageNumber(parseInt(urlParams.get('page')));
+            setAids(response['hydra:member']);
+
+            setIsLoading(false);
         }
-        setPreviousPagePath(response['hydra:view']['hydra:previous']);
-        setNextPagePath(response['hydra:view']['hydra:next'])
-        setCurrentPageNumber(parseInt(currentPagePath.slice(-1)))
-        setAids(response['hydra:member']);
-        setIsLoading(false);
+
+        fetchData();
     }, [selectedGeographicalAreaId, selectedAidTypeId, selectedProjectStatusId, selectedSubTopicId, currentPagePath]);
 
 
     const getAidsCards = () => {
         if (isLoading) {
             return <div className="fr-grid-row fr-grid-row--center">
-                <div className="fr-col-12 mt-text-align-center">
-                    <img src="build/img/illu4.svg" alt="Recherche en cours"/>
-                </div>
+                {/*<div className="fr-col-12 mt-text-align-center">*/}
+                {/*    <img src="build/img/illu4.svg" alt="Recherche en cours"/>*/}
+                {/*</div>*/}
                 <div className="fr-col-12 fr-pt-5w mt-text-align-center">
                     <h2 className="color-navy">Un instant, nous recherchons les aides disponibles...</h2>
                 </div>
             </div>
         }
 
-        if (aids.length === 0) {
+        if (aids.length === 0 && !isLoading) {
             return <div className="fr-grid-row fr-grid-row--center">
                 <div className="fr-col-12 mt-text-align-center">
                     <img src="build/img/illu4.svg" alt="Pas de résultats"/>
@@ -114,6 +163,9 @@ const SearchEngine = () => {
         if (newPath === undefined) {
             return false;
         }
+        let urlParams = new URLSearchParams(newPath);
+        params.set('page', urlParams.get('page'));
+        window.history.replaceState({}, '', `${location.pathname}?${params}`);
 
         setCurrentPagePath(newPath);
     }
@@ -122,13 +174,20 @@ const SearchEngine = () => {
         return <nav role="navigation" className="fr-pagination" aria-label="Pagination">
             <ul className="fr-pagination__list">
                 <li>
-                    <a className="fr-pagination__link fr-pagination__link--first" href={currentPageNumber === 1 ? undefined : '#'} onClick={e => onPaginationClick(firstPagePath)} aria-disabled={currentPageNumber === 1} role="link">
+                    <a className="fr-pagination__link fr-pagination__link--first"
+                       href={currentPageNumber <= 1 ? undefined : '#'}
+                       onClick={e => onPaginationClick(firstPagePath)}
+                       aria-disabled={currentPageNumber <= 1}
+                       role="link">
                         Première page
                     </a>
                 </li>
                 <li>
                     <a className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
-                       aria-disabled={currentPageNumber === 1} href={currentPageNumber === 1 ? undefined : '#'} role="link" onClick={e => onPaginationClick(previousPagePath)}>
+                       aria-disabled={currentPageNumber <= 1}
+                       href={currentPageNumber <= 1 ? undefined : '#'}
+                       onClick={e => onPaginationClick(previousPagePath)}
+                       role="link">
                         Page précédente
                     </a>
                 </li>
@@ -168,14 +227,20 @@ const SearchEngine = () => {
                 {/*    </a>*/}
                 {/*</li>*/}
                 <li>
-                    <a className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label" href={currentPageNumber === lastPageNumber ? undefined : '#'}
-                       aria-disabled={currentPageNumber === lastPageNumber} role="link" onClick={e => onPaginationClick(nextPagePath)}>
+                    <a className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
+                       href={currentPageNumber >= lastPageNumber ? undefined : '#'}
+                       aria-disabled={currentPageNumber >= lastPageNumber}
+                       onClick={e => onPaginationClick(nextPagePath)}
+                       role="link">
                         Page suivante
                     </a>
                 </li>
                 <li>
-                    <a className="fr-pagination__link fr-pagination__link--last" onClick={e => onPaginationClick(lastPagePath)} href={currentPageNumber === lastPageNumber ? undefined : '#'}
-                       aria-disabled={currentPageNumber === lastPageNumber} role="link">
+                    <a className="fr-pagination__link fr-pagination__link--last"
+                       onClick={e => onPaginationClick(lastPagePath)}
+                       href={currentPageNumber >= lastPageNumber ? undefined : '#'}
+                       aria-disabled={currentPageNumber >= lastPageNumber}
+                       role="link">
                         Dernière page
                     </a>
                 </li>
@@ -195,7 +260,9 @@ const SearchEngine = () => {
         const selectedTopic = topics.find(t => t.id === parseInt(e.target.value));
 
         if (selectedTopic) {
-            setSelectedTopic(selectedTopic);
+            params.set('topic', selectedTopic.id);
+            window.history.replaceState({}, '', `${location.pathname}?${params}`);
+            setSelectedTopicId(selectedTopic.id);
             setSubTopics(selectedTopic.sousThematique)
         }
     }
@@ -206,7 +273,7 @@ const SearchEngine = () => {
           RECHERCHE
         </div>
         <div className="fr-grid-row">
-          <div className="fr-col-12 fr-col-md-3 fr-pr-3w filters">
+          <div className="fr-col-12 fr-col-md-3 fr-pr-md-3w filters">
               <h3>Affinez votre recherche</h3>
               <div className="fr-select-group">
                   <label className="fr-label" htmlFor="selectRegion">
@@ -226,7 +293,7 @@ const SearchEngine = () => {
                   <label className="fr-label fr-pt-3w" htmlFor="selectTopic">
                       Thématique
                   </label>
-                  <select value={selectedTopic.id} onChange={handleTopicChange} className="fr-select" id="select" name="selectTopic">
+                  <select value={selectedTopicId} onChange={handleTopicChange} className="fr-select" id="select" name="selectTopic">
                       <option value="">Selectionnez une thématique</option>
                       {getMappedOptions(topics, 'id', 'nom')}
                   </select>
@@ -248,9 +315,10 @@ const SearchEngine = () => {
                   </select>
               </div>
           </div>
-          <div className="fr-col-12 fr-col-md-9 results">
-              { aids.length > 0 && <h2 className="mt-text-align-center color-navy fr-pb-3w">{totalItems} aides vous sont proposées</h2>}
-              { aids.length > 100 && <p className="fr-pb-3w">Cela fait beaucoup de choix ! Peut-être avez-vous une thématique en tête pour votre projet ?</p>}
+          <div className="fr-col-12 fr-col-md-9 fr-pt-3w results">
+              { aids.length > 0 && <h2 className="mt-text-align-center color-navy fr-pb-3w">{totalItems} aide{totalItems > 1 ? 's vous sont proposées' : ' vous est proposée'}</h2>}
+              { totalItems > 100 && <p className="fr-pb-3w mt-text-align-center">Cela fait beaucoup de choix ! Peut-être avez-vous une thématique en tête pour votre projet ?</p>}
+              { aids.length > 0 && getPagination()}
               { getAidsCards()}
               { aids.length > 0 && getPagination()}
           </div>
