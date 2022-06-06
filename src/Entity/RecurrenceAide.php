@@ -22,6 +22,11 @@ class RecurrenceAide
     #[ORM\Column(type: 'string', length: 255)]
     private $nom;
 
+    public function __toString(): string
+    {
+        return $this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

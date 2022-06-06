@@ -91,6 +91,7 @@ const SearchEngine = () => {
                 selectedAidTypeId,
                 selectedProjectStatusId,
                 selectedSubTopicId,
+                selectedTopicId,
                 currentPagePath
             );
             setTotalItems(response['hydra:totalItems']);

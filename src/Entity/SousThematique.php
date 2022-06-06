@@ -40,6 +40,11 @@ class SousThematique
         $this->thematiques = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return implode(" |", $this->thematiques->toArray()) . ' => ' . $this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

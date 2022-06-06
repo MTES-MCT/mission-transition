@@ -22,6 +22,11 @@ class EtatAvancementProjet
     #[ORM\Column(type: 'string', length: 255)]
     private $nom;
 
+    public function __toString(): string
+    {
+        return $this->nom;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

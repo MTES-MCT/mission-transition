@@ -64,7 +64,6 @@ const SearchEngineExtension = () => {
     const handleSubTopicChange = e => {
         setSelectedTopicPipeSubTopicIds(e.target.value);
         const [clickedTopicId, clickedSubTopicId] = e.target.value.split('|');
-        console.log(clickedTopicId, clickedSubTopicId);
         setSelectedSubTopicId(clickedSubTopicId);
         setSelectedTopicId(clickedTopicId);
     }
