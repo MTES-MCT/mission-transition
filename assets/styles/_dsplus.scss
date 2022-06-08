@@ -1,43 +1,10 @@
-//a {
-//    box-shadow: none;
-//}
-//
-///** Headings **/
-//.fr-header__service-title,
-//.fr-header__service-tagline {
-//    color: $blue-navy;
-//}
-//
-///** Buttons **/
-//.fr-btn {
-//    font-size: 14px;
-//    background-color: $blue-cobalt;
-//    border-radius: 6px;
-//}
-//
-//.fr-btn--secondary {
-//    background: #ffffff;
-//    box-shadow: 0 10px 20px rgba(2, 76, 187, 0.09);
-//    border-radius: 6px;
-//    color: $blue-navy;
-//}
-//
-//.fr-btn.big {
-//    padding: 16px;
-//}
-//
-///** Tags **/
-//.fr-tag {
-//    background-color: $grey-athens;
-//    color: $grey-river-bed;
-//}
-//
-//a[target='_blank' i]::after {
-//    content: none;
-//}
-//
-//@media only screen and (min-width: 768px) {
-//    .fr-btn {
-//        font-size: 18px;
-//    }
-//}
+.fr-card__icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .subtitle {
+    margin-right: auto;
+    padding: 10px;
+  }
+}

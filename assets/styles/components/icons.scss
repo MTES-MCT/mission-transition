@@ -36,13 +36,15 @@
     }
 }
 
-.mt-icon-circled {
+.mt-icon-wrapper {
     display: block;
-    background: $white;
     width: min-content;
-    padding: 8px;
-    border: 1px solid $white-mystic;
-    border-radius: 40px;
+
+    @at-root #{&}--circled {
+        border: 1px solid $white-mystic;
+        border-radius: 40px;
+        padding: 8px;
+    }
 
     @at-root #{&}--orange-bg {
         border: none;
