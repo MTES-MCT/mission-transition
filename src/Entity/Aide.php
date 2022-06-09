@@ -24,6 +24,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     'zonesGeographiques' => 'exact',
     'typesAide' => 'exact',
     'sousThematiques' => 'exact',
+    'sousThematiques.thematiques' => 'exact',
     'porteursAide' => 'exact',
     'etatsAvancementProjet' => 'exact',
 ])]

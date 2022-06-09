@@ -83,6 +83,7 @@ const SearchEngine = () => {
         params.set('aidType', selectedAidTypeId);
         params.set('projetStatus', selectedProjectStatusId);
         params.set('subTopic', selectedSubTopicId);
+        params.set('topic', selectedTopicId);
         window.history.replaceState({}, '', `${location.pathname}?${params}`);
         const fetchData = async () => {
             setIsLoading(true);
@@ -113,7 +114,7 @@ const SearchEngine = () => {
         }
 
         fetchData();
-    }, [selectedGeographicalAreaId, selectedAidTypeId, selectedProjectStatusId, selectedSubTopicId, currentPagePath]);
+    }, [selectedGeographicalAreaId, selectedAidTypeId, selectedProjectStatusId, selectedTopicId, selectedSubTopicId, currentPagePath]);
 
 
     const getAidsCards = () => {

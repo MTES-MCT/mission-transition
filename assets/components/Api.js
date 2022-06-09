@@ -24,7 +24,7 @@ const fetchAids = (geographicalAreaId, aidTypeId, projectStatusId, subTopicId, t
 
   let topicQueryString = '';
   if (topicId !== '') {
-    topicQueryString = '&thematiques=' + topicId;
+    topicQueryString = '&sousThematiques.thematiques=' + topicId;
   }
 
   return fetch(`${path}${geographicalAreaQueryString}${aidTypeQueryString}${projectStatusQueryString}${subTopicQueryString}${topicQueryString}`)

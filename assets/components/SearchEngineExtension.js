@@ -11,7 +11,6 @@ const SearchEngineExtension = () => {
     const [selectedAidTypeId, setSelectedAidTypeId] = useState('');
     const [selectedTopicId, setSelectedTopicId] = useState('');
     const [selectedSubTopicId, setSelectedSubTopicId] = useState('');
-    const [selectedTopicPipeSubTopicIds, setSelectedTopicPipeSubTopicIds] = useState('');
     const [totalItems, setTotalItems] = useState(0);
 
     const getMappedOptions = (items, valueField, valueNameField) => {
@@ -19,16 +18,6 @@ const SearchEngineExtension = () => {
             key={index}
             value={item[valueField]}>{item[valueNameField]}
         </option>)
-    }
-
-    const getTopicsOptions = (topics) => {
-        return topics.map((topic, index) => (
-            <optgroup label={topic.nom} key={index}>
-                {topic.sousThematique.map((subTopic, index) => (
-                    <option key={index} value={`${topic.id}|${subTopic.id}`}>{subTopic.nom}</option>
-                ))}
-            </optgroup>
-        ))
     }
 
     useEffect(async() => {
@@ -43,14 +32,14 @@ const SearchEngineExtension = () => {
                 selectedGeographicalAreaId,
                 selectedAidTypeId,
                 '',
-                selectedSubTopicId,
-                ''
+                '',
+                selectedTopicId
             );
             setTotalItems(response['hydra:totalItems']);
         }
 
         fetchData();
-    }, [selectedGeographicalAreaId, selectedAidTypeId, selectedSubTopicId]);
+    }, [selectedGeographicalAreaId, selectedAidTypeId, selectedTopicId]);
 
     const onButtonClick = () => {
         let params = new URLSearchParams(window.location.search);
@@ -59,13 +48,6 @@ const SearchEngineExtension = () => {
         params.set('subTopic', selectedSubTopicId);
         params.set('topic', selectedTopicId);
         window.location.href = `/recherche?${params}`;
-    }
-
-    const handleSubTopicChange = e => {
-        setSelectedTopicPipeSubTopicIds(e.target.value);
-        const [clickedTopicId, clickedSubTopicId] = e.target.value.split('|');
-        setSelectedSubTopicId(clickedSubTopicId);
-        setSelectedTopicId(clickedTopicId);
     }
 
     return (
@@ -93,9 +75,9 @@ const SearchEngineExtension = () => {
                     <label className="fr-h3" htmlFor="selectTopic">dans la thématique</label>
                 </div>
                 <div className="fr-col-12 fr-col-md-4 fr-pt-md-2w">
-                    <select value={selectedTopicPipeSubTopicIds} onChange={handleSubTopicChange} className="fr-select" id="select" name="selectTopic">
+                    <select value={selectedTopicId} onChange={(e) => setSelectedTopicId(e.target.value)} className="fr-select" id="select" name="selectTopic">
                         <option value="">Selectionnez une thématique</option>
-                        {getTopicsOptions(topics)}
+                        {getMappedOptions(topics, 'id', 'nom')}
                     </select>
                 </div>
             </div>
