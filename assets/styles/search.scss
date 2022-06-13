@@ -1,3 +1,5 @@
+@import 'components/cards';
+
 #search-engine {
   .results {
     height: 100%;
@@ -5,5 +7,22 @@
   }
   .fr-pagination__list {
     justify-content: center;
+  }
+
+  .fr-card__icons {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #search-engine {
+    .fr-card__icons {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto;
+      align-items: center;
+    }
   }
 }

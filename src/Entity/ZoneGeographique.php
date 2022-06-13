@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ZoneGeographiqueRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ZoneGeographiqueRepository::class)]
 #[ApiResource(
@@ -17,12 +18,15 @@ class ZoneGeographique
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("read")]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("read")]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups("read")]
     private $couverture;
 
     public function __toString(): string

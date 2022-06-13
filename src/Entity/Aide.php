@@ -13,11 +13,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AideRepository::class)]
 #[ApiResource(
     collectionOperations: ['get'],
     itemOperations: ['get'],
+    normalizationContext: ['groups' => ['read']]
 )]
 #[ApiFilter(PropertyFilter::class)]
 #[ApiFilter(SearchFilter::class, properties: [
@@ -27,6 +29,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     'sousThematiques.thematiques' => 'exact',
     'porteursAide' => 'exact',
     'etatsAvancementProjet' => 'exact',
+    'description' => 'ipartial',
 ])]
 class Aide
 {
@@ -35,104 +38,137 @@ class Aide
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("read")]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Gedmo\Slug(fields: ['nomAideNormalise'])]
+    #[Groups("read")]
     private $slug;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups("read")]
     private $nomAide;
 
     #[ORM\Column(type: 'text')]
+    #[Groups("read")]
     private $nomAideNormalise;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("read")]
     private $tauxSubventionMinimum;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("read")]
     private $tauxSubventionMaximum;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups("read")]
     private $tauxSubventionCommentaire;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups("read")]
     private $aapAmi;
 
     #[ORM\Column(type: 'text')]
+    #[Groups("read")]
     private $description;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups("read")]
     private $exempleProjet;
 
     #[ORM\ManyToMany(targetEntity: SousThematique::class, mappedBy: 'aides')]
+    #[Groups("read")]
     private $sousThematiques;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups("read")]
     private $idSource;
 
     #[ORM\ManyToMany(targetEntity: TypeAide::class)]
+    #[Groups("read")]
     private $typesAide;
 
     #[ORM\ManyToOne(targetEntity: RecurrenceAide::class)]
+    #[Groups("read")]
     private $recurrenceAide;
 
     #[ORM\ManyToMany(targetEntity: EtatAvancementProjet::class)]
+    #[Groups("read")]
     private $etatsAvancementProjet;
 
     #[ORM\ManyToMany(targetEntity: TypeDepense::class)]
+    #[Groups("read")]
     private $typesDepense;
 
     #[ORM\ManyToMany(targetEntity: ZoneGeographique::class)]
+    #[Groups("read")]
     #[ApiFilter(SearchFilter::class, properties: ['zoneGeographiques.id' => 'exact'])]
     private $zonesGeographiques;
 
     #[ORM\Column(type: 'date', nullable: true)]
+    #[Groups("read")]
     private $dateOuverture;
 
     #[ORM\Column(type: 'date', nullable: true)]
+    #[Groups("read")]
     private $datePreDepot;
 
     #[ORM\Column(type: 'date', nullable: true)]
+    #[Groups("read")]
     private $dateCloture;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups("read")]
     private $conditionsEligibilite;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups("read")]
     private $urlDescriptif;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups("read")]
     private $urlDemarche;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups("read")]
     private $contact;
 
     #[ORM\Column(type: 'date', nullable: true)]
+    #[Groups("read")]
     private $dateMiseAJour;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("read")]
     private $etat;
 
     #[ORM\Column(type: 'simple_array', nullable: true)]
+    #[Groups("read")]
     private $programmeAides = [];
 
     #[ORM\Column(type: 'simple_array', nullable: true)]
+    #[Groups("read")]
     private $porteursAide = [];
 
     #[ORM\Column(type: 'simple_array', nullable: true)]
+    #[Groups("read")]
     private $porteursSiren = [];
 
     #[ORM\Column(type: 'simple_array', nullable: true)]
+    #[Groups("read")]
     private $instructeursAide = [];
 
     #[ORM\Column(type: 'simple_array', nullable: true)]
+    #[Groups("read")]
     private $beneficicairesAide = [];
 
     #[ORM\Column(type: 'array', nullable: true)]
+    #[Groups("read")]
     private $thematiqueSource = [];
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups("read")]
     private $zoneGeographiqueSource;
 
     public function __construct()

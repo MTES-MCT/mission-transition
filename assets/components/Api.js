@@ -1,6 +1,6 @@
 import React from 'react'
 
-const fetchAids = (geographicalAreaId, aidTypeId, projectStatusId, subTopicId, topicId, path = '/api/aides?') => {
+const fetchAids = (geographicalAreaId, aidTypeId, projectStatusId, subTopicId, topicId, searchValue = '', path = '/api/aides?') => {
 
   let geographicalAreaQueryString = '';
   if (geographicalAreaId !== '') {
@@ -27,7 +27,12 @@ const fetchAids = (geographicalAreaId, aidTypeId, projectStatusId, subTopicId, t
     topicQueryString = '&sousThematiques.thematiques=' + topicId;
   }
 
-  return fetch(`${path}${geographicalAreaQueryString}${aidTypeQueryString}${projectStatusQueryString}${subTopicQueryString}${topicQueryString}`)
+  let searchQueryString = '';
+  if (searchValue !== '') {
+    searchQueryString = '&description=' + searchValue;
+  }
+
+  return fetch(`${path}${geographicalAreaQueryString}${aidTypeQueryString}${projectStatusQueryString}${subTopicQueryString}${topicQueryString}${searchQueryString}`)
     .then(response => response.json())
 };
 

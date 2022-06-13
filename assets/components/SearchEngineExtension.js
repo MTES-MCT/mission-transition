@@ -33,7 +33,7 @@ const SearchEngineExtension = () => {
                 selectedAidTypeId,
                 '',
                 '',
-                selectedTopicId
+                selectedTopicId,
             );
             setTotalItems(response['hydra:totalItems']);
         }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TypeAideRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TypeAideRepository::class)]
 #[ApiResource(
@@ -17,12 +18,15 @@ class TypeAide
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("read")]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("read")]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("read")]
     private $categorie;
 
     public function __toString(): string

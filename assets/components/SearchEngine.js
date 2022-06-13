@@ -15,6 +15,7 @@ const SearchEngine = () => {
     let initialSubTopicId = '';
     let initialCurrentPageNumber = 1;
     let initialCurrentPath = '/api/aides?itemsPerPage=10&page=1';
+    let initialDescription = '';
 
     if (params.has('region')) {
         initialGeographicalAreaId = params.get('region');
@@ -30,6 +31,9 @@ const SearchEngine = () => {
     }
     if (params.has('subTopic')) {
         initialSubTopicId = params.get('subTopic');
+    }
+    if (params.has('description')) {
+        initialDescription = params.get('description');
     }
     if (params.has('page')) {
         const page = parseInt(params.get('page'));
@@ -55,6 +59,7 @@ const SearchEngine = () => {
     const [projectStatus, setProjectStatus] = useState([]);
     const [topics, setTopics] = useState([]);
     const [subTopics, setSubTopics] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
 
     // Selected Filters
     const [selectedGeographicalAreaId, setSelectedGeographicalAreaId] = useState(initialGeographicalAreaId);
@@ -62,6 +67,7 @@ const SearchEngine = () => {
     const [selectedProjectStatusId, setSelectedProjectStatusId] = useState(initialProjectStatusId);
     const [selectedTopicId, setSelectedTopicId] = useState(initialTopicId);
     const [selectedSubTopicId, setSelectedSubTopicId] = useState(initialSubTopicId);
+    const [appliedTag, setAppliedTag] = useState(initialDescription);
 
     useEffect(async() => {
         setGeographicalAreas(await fetchGeographicalAreas());
@@ -84,6 +90,12 @@ const SearchEngine = () => {
         params.set('projetStatus', selectedProjectStatusId);
         params.set('subTopic', selectedSubTopicId);
         params.set('topic', selectedTopicId);
+        params.set('description', appliedTag);
+        if (params.has('page') && params.get('page') <= currentPageNumber.toString()) {
+            params.set('page', '1');
+            setCurrentPageNumber(1);
+            setCurrentPagePath('/api/aides?itemsPerPage=10&page=1');
+        }
         window.history.replaceState({}, '', `${location.pathname}?${params}`);
         const fetchData = async () => {
             setIsLoading(true);
@@ -93,6 +105,7 @@ const SearchEngine = () => {
                 selectedProjectStatusId,
                 selectedSubTopicId,
                 selectedTopicId,
+                appliedTag,
                 currentPagePath
             );
             setTotalItems(response['hydra:totalItems']);
@@ -114,15 +127,39 @@ const SearchEngine = () => {
         }
 
         fetchData();
-    }, [selectedGeographicalAreaId, selectedAidTypeId, selectedProjectStatusId, selectedTopicId, selectedSubTopicId, currentPagePath]);
+    }, [selectedGeographicalAreaId, selectedAidTypeId, selectedProjectStatusId, selectedTopicId, selectedSubTopicId, currentPagePath, appliedTag]);
 
+
+    const getGeographicalZoneNames = (geographicalZones) => {
+        return geographicalZones.map(zone => zone.nom).join(', ');
+    }
+
+    const getFormattedDate = date => {
+        return new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium'}).format(new Date(date))
+    }
+
+    const handleNationalAidsCtaClick = e => {
+        e.preventDefault();
+        setSelectedGeographicalAreaId(geographicalAreas.find(t => t.nom === "France").id);
+    }
+
+    const getNationalAidsCta = () => {
+        return (
+            <div className="fr-card fr-card--horizontal fr-card--lg fr-mb-3w">
+                <div className="fr-card__body" key={999}>
+                    <div className="fr-card__content">
+                        <h4 className="fr-card__title">
+                            <a href="#" onClick={handleNationalAidsCtaClick}>Cliquez ici pour retrouver les aides nationales</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     const getAidsCards = () => {
         if (isLoading) {
             return <div className="fr-grid-row fr-grid-row--center">
-                {/*<div className="fr-col-12 mt-text-align-center">*/}
-                {/*    <img src="build/img/illu4.svg" alt="Recherche en cours"/>*/}
-                {/*</div>*/}
                 <div className="fr-col-12 fr-pt-5w mt-text-align-center">
                     <h2 className="color-navy">Un instant, nous recherchons les aides disponibles...</h2>
                 </div>
@@ -143,22 +180,54 @@ const SearchEngine = () => {
             </div>
         }
 
-        return aids.map(aid => <div className="fr-card fr-enlarge-link fr-card--horizontal fr-card--lg fr-mb-3w">
-            <div className="fr-card__body" key={aid.id}>
-                <div className="fr-card__content">
-                    <h4 className="fr-card__title">
-                        <a href={"/recherche/dispositif/" + aid.slug}>{aid.nomAideNormalise}</a>
-                    </h4>
-                    {/*<p className="fr-card__desc">{aid.description}</p>*/}
-                    <div className="fr-card__start">
-                        <p className="fr-card__detail fr-icon-warning-fill"></p>
-                    </div>
-                    <div className="fr-card__end">
-                        <p className="fr-card__detail fr-icon-warning-fill">Proposé par {aid.porteursAide.join(', ')}</p>
+        let aidCards = aids.map(aid => <div className="fr-card fr-enlarge-link fr-card--horizontal fr-card--lg fr-mb-3w">
+                <div className="fr-card__body" key={aid.id}>
+                    <div className="fr-card__content">
+                        <h4 className="fr-card__title">
+                            <a href={"/recherche/dispositif/" + aid.slug}>{aid.nomAideNormalise}</a>
+                        </h4>
+                        <div className="fr-card__start">
+                            <p className="fr-card__detail fr-icon-warning-fill"></p>
+                        </div>
+                        <div className="fr-card__end">
+                            <div className="fr-card__icons fr-pb-3w">
+                                {aid.zonesGeographiques.length > 0 && (
+                                    <div>
+                                        <span className="mt-icon-wrapper mt-icon-wrapper--inline">
+                                            <span className="mt-icon mt-icon--tag"></span>
+                                        </span>
+                                        <span className="subtitle">{getGeographicalZoneNames(aid.zonesGeographiques)}</span>
+                                    </div>
+                                )}
+                                {aid.aapAmi && (
+                                    <div>
+                                        <span className="mt-icon-wrapper mt-icon-wrapper--inline">
+                                            <span className="mt-icon mt-icon--euro"></span>
+                                        </span>
+                                        <span className="subtitle">Appel à projet</span>
+                                    </div>
+                                )}
+                                {aid.dateCloture && (
+                                    <div>
+                                        <span className="mt-icon-wrapper mt-icon-wrapper--inline">
+                                            <span className="mt-icon mt-icon--time"></span>
+                                        </span>
+                                        <span className="subtitle">{getFormattedDate(aid.dateCloture)}</span>
+                                    </div>
+                                )}
+                            </div>
+                            <p className="fr-card__detail fr-icon-warning-fill">Proposé par {aid.porteursAide.join(', ')}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>)
+        );
+
+        if (selectedGeographicalAreaId !== geographicalAreas.find(t => t.nom === "France").id) {
+            aidCards = [aidCards, getNationalAidsCta()]
+        }
+
+        return aidCards;
     }
 
     const onPaginationClick = (newPath) => {
@@ -198,36 +267,6 @@ const SearchEngine = () => {
                         {currentPageNumber}
                     </a>
                 </li>
-                {/*<li>*/}
-                {/*    <a className="fr-pagination__link" href="#" title="Page 2">*/}
-                {/*        2*/}
-                {/*    </a>*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <a className="fr-pagination__link fr-displayed-lg" href="#" title="Page 3">*/}
-                {/*        3*/}
-                {/*    </a>*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <a className="fr-pagination__link fr-displayed-lg">*/}
-                {/*        …*/}
-                {/*    </a>*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <a className="fr-pagination__link fr-displayed-lg" href="#" title="Page 130">*/}
-                {/*        130*/}
-                {/*    </a>*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <a className="fr-pagination__link fr-displayed-lg" href="#" title="Page 131">*/}
-                {/*        131*/}
-                {/*    </a>*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <a className="fr-pagination__link" href="#" title="Page 132">*/}
-                {/*        132*/}
-                {/*    </a>*/}
-                {/*</li>*/}
                 <li>
                     <a className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
                        href={currentPageNumber >= lastPageNumber ? undefined : '#'}
@@ -259,8 +298,12 @@ const SearchEngine = () => {
 
     const handleTopicChange = e => {
         e.preventDefault();
-        const selectedTopic = topics.find(t => t.id === parseInt(e.target.value));
+        if (e.target.value === "") {
+            setSelectedTopicId('');
+            return;
+        }
 
+        const selectedTopic = topics.find(t => t.id === parseInt(e.target.value));
         if (selectedTopic) {
             params.set('topic', selectedTopic.id);
             window.history.replaceState({}, '', `${location.pathname}?${params}`);
@@ -269,15 +312,59 @@ const SearchEngine = () => {
         }
     }
 
+    const handleSearchInput = e => {
+        e.preventDefault();
+        setSearchValue(e.target.value);
+    }
+
+    const handleSearchSubmit = e => {
+        e.preventDefault();
+        setAppliedTag(searchValue);
+        setCurrentPageNumber(1);
+        setCurrentPagePath('/api/aides?itemsPerPage=10&page=1');
+        params.set('page', '1');
+    }
+
+    const handleKeyDown = e => {
+        if (e.key !== "Enter") {
+            return;
+        }
+        setAppliedTag(searchValue);
+        setCurrentPageNumber(1);
+        setCurrentPagePath('/api/aides?itemsPerPage=10&page=1');
+        params.set('page', '1');
+    }
+
+    const handleTagDeletion = e => {
+        e.preventDefault();
+        setAppliedTag('');
+    }
+
     return (
       <div className="fr-container">
         <div className="fr-grid-row fr-grid-row--center fr-pt-8w fr-pb-3w fr-pb-md-8w">
-          RECHERCHE
+            <div className="fr-col-12">
+                <div className="fr-search-bar fr-search-bar--lg" id="search-2" role="search">
+                    <label className="fr-label" htmlFor="search-input">
+                        Rechercher un mot, une expression, une référence...
+                    </label>
+                    <input className="fr-input" placeholder="Rechercher un mot, une expression, une référence..." type="search" id="search-input"
+                           name="search-input" value={searchValue} onChange={handleSearchInput} onKeyDown={handleKeyDown}/>
+                    <button onClick={handleSearchSubmit} className="fr-btn">
+                        Rechercher
+                    </button>
+                </div>
+            </div>
         </div>
         <div className="fr-grid-row">
           <div className="fr-col-12 fr-col-md-3 fr-pr-md-3w filters">
               <h3>Affinez votre recherche</h3>
-              <div className="fr-select-group">
+              {appliedTag && (
+                  <button className="fr-tag fr-tag--dismiss fr-mb-4w"
+                          aria-label={`Retirer ${appliedTag}`}
+                          onClick={handleTagDeletion}>{appliedTag}</button>
+              )}
+              <div className="fr-select-group fr-pb-6w">
                   <label className="fr-label" htmlFor="selectRegion">
                       Régions
                   </label>
@@ -320,7 +407,6 @@ const SearchEngine = () => {
           <div className="fr-col-12 fr-col-md-9 fr-pt-3w results">
               { aids.length > 0 && <h2 className="mt-text-align-center color-navy fr-pb-3w">{totalItems} aide{totalItems > 1 ? 's vous sont proposées' : ' vous est proposée'}</h2>}
               { totalItems > 100 && <p className="fr-pb-3w mt-text-align-center">Cela fait beaucoup de choix ! Peut-être avez-vous une thématique en tête pour votre projet ?</p>}
-              { aids.length > 0 && getPagination()}
               { getAidsCards()}
               { aids.length > 0 && getPagination()}
           </div>
