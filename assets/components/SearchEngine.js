@@ -143,16 +143,22 @@ const SearchEngine = () => {
         setSelectedGeographicalAreaId(geographicalAreas.find(t => t.nom === "France").id);
     }
 
+    const isTimeForLyonCard = (index) => {
+        if (geographicalAreas.length === 0) {
+            return false;
+        }
+
+        if (index !== 4) {
+            return false;
+        }
+
+        return parseInt(selectedGeographicalAreaId) === geographicalAreas.find(t => t.nom === "Auvergne-Rhône-Alpes").id;
+    }
+
     const getNationalAidsCta = () => {
         return (
-            <div className="fr-card fr-card--horizontal fr-card--lg fr-mb-3w">
-                <div className="fr-card__body" key={999}>
-                    <div className="fr-card__content">
-                        <h4 className="fr-card__title">
-                            <a href="#" onClick={handleNationalAidsCtaClick}>Cliquez ici pour retrouver les aides nationales</a>
-                        </h4>
-                    </div>
-                </div>
+            <div className="mt-text-align-center fr-mb-3w" key={999}>
+                <a className="fr-btn" href="#search-input" onClick={handleNationalAidsCtaClick}>Cliquez ici pour retrouver les aides nationales</a>
             </div>
         )
     }
@@ -180,50 +186,79 @@ const SearchEngine = () => {
             </div>
         }
 
-        let aidCards = aids.map(aid => <div className="fr-card fr-enlarge-link fr-card--horizontal fr-card--lg fr-mb-3w">
-                <div className="fr-card__body" key={aid.id}>
-                    <div className="fr-card__content">
-                        <h4 className="fr-card__title">
-                            <a href={"/recherche/dispositif/" + aid.slug}>{aid.nomAideNormalise}</a>
-                        </h4>
-                        <div className="fr-card__start">
-                            <p className="fr-card__detail fr-icon-warning-fill"></p>
-                        </div>
-                        <div className="fr-card__end">
-                            <div className="fr-card__icons fr-pb-3w">
-                                {aid.zonesGeographiques.length > 0 && (
-                                    <div>
-                                        <span className="mt-icon-wrapper mt-icon-wrapper--inline">
-                                            <span className="mt-icon mt-icon--tag"></span>
-                                        </span>
-                                        <span className="subtitle">{getGeographicalZoneNames(aid.zonesGeographiques)}</span>
-                                    </div>
-                                )}
-                                {aid.aapAmi && (
-                                    <div>
-                                        <span className="mt-icon-wrapper mt-icon-wrapper--inline">
-                                            <span className="mt-icon mt-icon--euro"></span>
-                                        </span>
-                                        <span className="subtitle">Appel à projet</span>
-                                    </div>
-                                )}
-                                {aid.dateCloture && (
-                                    <div>
-                                        <span className="mt-icon-wrapper mt-icon-wrapper--inline">
-                                            <span className="mt-icon mt-icon--time"></span>
-                                        </span>
-                                        <span className="subtitle">{getFormattedDate(aid.dateCloture)}</span>
-                                    </div>
-                                )}
+        let aidCards = aids.map((aid, index) =>
+            <>
+                <div className="fr-card fr-enlarge-link fr-card--horizontal fr-mb-3w" key={aid.id}>
+                    <div className="fr-card__body">
+                        <div className="fr-card__content">
+                            <h4 className="fr-card__title">
+                                <a href={"/recherche/dispositif/" + aid.slug}>{aid.nomAideNormalise}</a>
+                            </h4>
+                            <div className="fr-card__start">
+                                <p className="fr-card__detail fr-icon-warning-fill"></p>
                             </div>
-                            <p className="fr-card__detail fr-icon-warning-fill">Proposé par {aid.porteursAide.join(', ')}</p>
+                            <div className="fr-card__end">
+                                <div className="fr-card__icons fr-pb-3w">
+                                    {aid.zonesGeographiques.length > 0 && (
+                                        <div>
+                                            <span className="mt-icon-wrapper mt-icon-wrapper--inline">
+                                                <span className="mt-icon mt-icon--tag"></span>
+                                            </span>
+                                            <span className="subtitle">{getGeographicalZoneNames(aid.zonesGeographiques)}</span>
+                                        </div>
+                                    )}
+                                    {aid.aapAmi && (
+                                        <div>
+                                            <span className="mt-icon-wrapper mt-icon-wrapper--inline">
+                                                <span className="mt-icon mt-icon--euro"></span>
+                                            </span>
+                                            <span className="subtitle">Appel à projet</span>
+                                        </div>
+                                    )}
+                                    {aid.dateCloture && (
+                                        <div>
+                                            <span className="mt-icon-wrapper mt-icon-wrapper--inline">
+                                                <span className="mt-icon mt-icon--time"></span>
+                                            </span>
+                                            <span className="subtitle">Date de clôture : {getFormattedDate(aid.dateCloture)}</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <p className="fr-card__detail fr-icon-warning-fill">Proposé par {aid.porteursAide.join(', ')}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                {isTimeForLyonCard(index) && (
+                    <div className="fr-card fr-card--horizontal fr-mb-3w region-card" key={aid.id * 1000}>
+                        <div className="fr-card__body">
+                            <div className="fr-card__content">
+                                <h4 className="fr-card__title color-navy">
+                                    Entreprise industrielle ? Consultez le guide pratique de la Métropole de Lyon !
+                                </h4>
+                                <div className="fr-card__end">
+                                    <div>
+                                        <a target="_blank" href="https://business.onlylyon.com/actualites/article/publication-du-guide-des-dispositifs-d-accompagnement-a-la-transition-ecologique-pour-les-entreprises-industrielles-de-la-metropole-de-lyon" className="fr-btn fr-btn--secondary">
+                                            Consulter le guide
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="fr-card__header">
+                            <div className="fr-card__img">
+                                <img className="fr-responsive-img" src="build/img/illu_metropole_lyon.png"
+                                     alt="Métropole de Lyon"/>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </>
         );
 
-        if (selectedGeographicalAreaId !== geographicalAreas.find(t => t.nom === "France").id) {
+        if (geographicalAreas.length > 0 &&
+            parseInt(selectedGeographicalAreaId) !== geographicalAreas.find(t => t.nom === "France").id &&
+            currentPageNumber === lastPageNumber) {
             aidCards = [aidCards, getNationalAidsCta()]
         }
 

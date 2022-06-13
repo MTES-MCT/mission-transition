@@ -14,6 +14,10 @@
     grid-template-columns: auto;
     grid-template-rows: auto auto auto;
   }
+
+  .region-card {
+    background-color: $grey-magnolia;
+  }
 }
 
 @media only screen and (min-width: 768px) {
