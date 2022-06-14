@@ -20,6 +20,15 @@
   }
 }
 
+.main-cta {
+    .main-cta_content {
+        display: grid;
+        grid-gap: 1.5rem;
+        margin: auto;
+        justify-content: center;
+    }
+}
+
 @media only screen and (min-width: 768px) {
   #search-engine {
     .fr-card__icons {
