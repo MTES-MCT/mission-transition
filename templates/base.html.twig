@@ -2,7 +2,7 @@
 {% set current_route_params = app.request.attributes.get('_route_params') %}
 
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }} data-fr-reset">
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -50,10 +50,25 @@
 
     </head>
     <body class="{% block body_class '' %}">
+        <div class="fr-skiplinks">
+            <nav class="fr-container" role="navigation" aria-label="Accès rapide">
+                <ul class="fr-skiplinks__list">
+                    <li>
+                        <a class="fr-link" href="#main">Contenu</a>
+                    </li>
+                    <li>
+                        <a class="fr-link" href="#modal-833">Menu</a>
+                    </li>
+                    <li>
+                        <a class="fr-link" href="#footer">Pied de page</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         <div class="wrapper">
             {% include './_common/header.html.twig' %}
 
-            <main>
+            <main role="main" id="main">
                 {% block body %}{% endblock %}
             </main>
 
