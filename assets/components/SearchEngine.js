@@ -143,7 +143,7 @@ const SearchEngine = () => {
         setSelectedGeographicalAreaId(geographicalAreas.find(t => t.nom === "France").id);
     }
 
-    const isTimeForLyonCard = (index) => {
+    const isItTimeForHighlightedCard = (index, regionName) => {
         if (geographicalAreas.length === 0) {
             return false;
         }
@@ -152,7 +152,7 @@ const SearchEngine = () => {
             return false;
         }
 
-        return parseInt(selectedGeographicalAreaId) === geographicalAreas.find(t => t.nom === "Auvergne-Rhône-Alpes").id;
+        return parseInt(selectedGeographicalAreaId) === geographicalAreas.find(t => t.nom === regionName).id;
     }
 
     const getNationalAidsCta = () => {
@@ -229,7 +229,7 @@ const SearchEngine = () => {
                         </div>
                     </div>
                 </div>
-                {isTimeForLyonCard(index) && (
+                {isItTimeForHighlightedCard(index, 'Auvergne-Rhône-Alpes') && (
                     <div className="fr-card fr-card--horizontal fr-mb-3w region-card" key={aid.id * 1000}>
                         <div className="fr-card__body">
                             <div className="fr-card__content">
@@ -247,8 +247,56 @@ const SearchEngine = () => {
                         </div>
                         <div className="fr-card__header">
                             <div className="fr-card__img">
-                                <img className="fr-responsive-img" src="build/img/illu_metropole_lyon.png"
+                                <img className="fr-responsive-img" src="build/img/illu_metropole_lyon.svg"
                                      alt="Métropole de Lyon"/>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {isItTimeForHighlightedCard(index, 'Nouvelle-Aquitaine') && (
+                    <div className="fr-card fr-card--horizontal fr-mb-3w region-card" key={aid.id * 1000}>
+                        <div className="fr-card__body">
+                            <div className="fr-card__content">
+                                <h4 className="fr-card__title color-navy">
+                                    À la recherche d'une aide pour votre entreprise en Nouvelle-Aquitaine ? Lancez une recherche sur le Guide des Aides !
+                                </h4>
+                                <div className="fr-card__end">
+                                    <div>
+                                        <a target="_blank" href="https://les-aides.nouvelle-aquitaine.fr/resultats?Profil=Entreprise&Transition=Biodiversit%C3%A9--Climat--D%C3%A9chets--%C3%89conomie%20circulaire--%C3%89conomies%20d%27%C3%A9nergie--%C3%89nergies%20renouvelables--Environnement--Littoral&" className="fr-btn fr-btn--secondary">
+                                            Consulter le guide
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="fr-card__header">
+                            <div className="fr-card__img">
+                                <img className="fr-responsive-img" src="build/img/logo_naq.svg"
+                                     alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {isItTimeForHighlightedCard(index, 'Occitanie') && (
+                    <div className="fr-card fr-card--horizontal fr-mb-3w region-card" key={aid.id * 1000}>
+                        <div className="fr-card__body">
+                            <div className="fr-card__content">
+                                <h4 className="fr-card__title color-navy">
+                                    À la recherche d'une aide pour votre entreprise en Occitanie ? Consultez le portail de la transition écologique et énergétique en Occitanie !
+                                </h4>
+                                <div className="fr-card__end">
+                                    <div>
+                                        <a target="_blank" href="https://www.laregion.fr/-transition-ecologique-energetique-" className="fr-btn fr-btn--secondary">
+                                            Consulter le guide
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="fr-card__header">
+                            <div className="fr-card__img">
+                                <img className="fr-responsive-img" src="build/img/logo_occitanie.svg"
+                                     alt=""/>
                             </div>
                         </div>
                     </div>
