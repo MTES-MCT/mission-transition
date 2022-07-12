@@ -15,16 +15,16 @@ class CreateAdminCommand extends Command
 {
     protected static $defaultName = 'app:create-admin';
 
-    protected UserPasswordHasherInterface $encoder;
+    protected UserPasswordHasherInterface $passwordHasher;
     protected AdminRepository $adminRepository;
     protected EntityManagerInterface $em;
 
     public function __construct(
-        UserPasswordHasherInterface $encoder,
-        AdminRepository $adminRepository,
-        EntityManagerInterface $em
+        UserPasswordHasherInterface $passwordHasher,
+        AdminRepository             $adminRepository,
+        EntityManagerInterface      $em
     ) {
-        $this->encoder = $encoder;
+        $this->passwordHasher = $passwordHasher;
         $this->adminRepository = $adminRepository;
         $this->em = $em;
         parent::__construct();
@@ -36,7 +36,7 @@ class CreateAdminCommand extends Command
             ->setDescription('Creates a admin user.')
             ->setHelp('[COMMAND] {email} {password}')
             ->addArgument('email', InputArgument::REQUIRED, 'The email of the user.')
-            ->addArgument('password', InputArgument::REQUIRED, 'User password')
+            ->addArgument('password', InputArgument::REQUIRED, 'The plain password of the new user')
         ;
     }
 
@@ -56,9 +56,11 @@ class CreateAdminCommand extends Command
         $admin = new Admin();
         $admin
             ->setEmail($input->getArgument('email'))
-            ->setPassword($this->encoder->hashPassword($admin, $input->getArgument('password')))
             ->setRoles(['ROLE_ADMIN'])
         ;
+
+        $hashedPassword = $this->passwordHasher->hashPassword($admin, $input->getArgument('password'));
+        $admin->setPassword($hashedPassword);
 
         $this->em->persist($admin);
         $this->em->flush();

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Aide;
 use App\Entity\EtatAvancementProjet;
 use App\Entity\RecurrenceAide;
@@ -50,7 +51,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::section('Base de données');
+        yield MenuItem::section('Données du moteur');
         yield MenuItem::linkToCrud('Dispositifs', 'fas fa-list', Aide::class)->setController(AideCrudController::class);
         yield MenuItem::linkToCrud('Dispositifs à traiter', 'fas fa-list', Aide::class)->setController(AideACategoriserCrudController::class);
         yield MenuItem::linkToCrud('Types d\'aide', 'fas fa-list', TypeAide::class);
@@ -60,5 +61,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Sous-thématiques', 'fas fa-list', SousThematique::class);
         yield MenuItem::linkToCrud('Types de dépense', 'fas fa-list', TypeDepense::class);
         yield MenuItem::linkToCrud('Zones géographiques', 'fas fa-list', ZoneGeographique::class);
+        yield MenuItem::section('Gestion');
+        yield MenuItem::linkToCrud('Comptes admin', 'fas fa-list', Admin::class);
     }
 }

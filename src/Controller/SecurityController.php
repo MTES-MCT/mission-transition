@@ -17,14 +17,24 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('@EasyAdmin/page/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('@EasyAdmin/page/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'translation_domain' => 'admin',
+            'page_title' => 'Backoffice Mission Transition',
+            'csrf_token_intention' => 'authenticate',
+            'target_path' => $this->generateUrl('admin'),
+            'username_label' => 'Votre adresse email',
+            'username_parameter' => 'email',
+            'password_label' => 'Votre mot de passe',
+            'password_parameter' => 'password',
+            'sign_in_label' => 'Connexion',
+        ]);
     }
 
     /**
      * @Route("/logout", name="app_logout")
      */
     public function logout(): void
-    {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
-    }
+    {}
 }
