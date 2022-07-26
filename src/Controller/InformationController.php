@@ -129,4 +129,13 @@ class InformationController extends AbstractController
     {
         return $this->render('information/sitemap.html.twig');
     }
+
+    /**
+     * @Route("/integration", name="information_integration")
+     *
+     */
+    public function integration(): Response
+    {
+        return $this->render('information/integration.html.twig');
+    }
 }

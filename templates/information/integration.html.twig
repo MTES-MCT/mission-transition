@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Integration du moteur de rechercher Mission Transition{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    <div id="simple-page" class="fr-container fr-my-8w">
+        <div class="fr-grid-row--gutters">
+            <div class="fr-grid-col">
+                <h1>Intégration de notre moteur de recherche</h1>
+                <h2>Introduction</h2>
+                <p>
+                    Cette page est consacrée à la réutilisation, par des organismes partenaires, des données présentes
+                    sur l’API Mission Transition Ecologique ; ainsi qu'à l’intégration de notre moteur de recherche des
+                    financements publics pour la transition écologique des entreprises directement sur votre plateforme
+                    en ligne.
+                </p>
+                <br>
+                <p>
+                    <i>
+                        Si vous cherchez plutôt à intégrer vos données, afin qu'elle soient publiées sur le site Mission
+                        Transition Ecologique, sachez que nous récupérons actuellement le flux de données de la Startup
+                        d’Etat Aides Territoires. <br> Ainsi pour ajouter vos données à leur flux vous pouvez consulter la
+                        page d’Aides Territoires : <a
+                            href="https://github.com/MTES-MCT/aides-territoires/wiki/Comment-publier-vos-donn%C3%A9es-pour-une-reprise-sur-Aides-territoires" target="_blank">Comment publier vos données pour une reprise sur Aides territoires</a>
+                        <br>Pour plus d'information sur l'API d'Aides Territoires rendez-vous sur la <a
+                            href="https://aides-territoires.beta.gouv.fr/api/swagger/?version=1.4" target="_blank">Documentation de l’API</a>.
+                    </i>
+                </p>
+                <br>
+                <h2>Mode d'emploi</h2>
+                <p>
+                    Vous bénéficiez d'un service en ligne pour accompagner la transformation d'entreprises de toute
+                    taille et souhaitez y intégrer un moteur de recherche des dispositifs publics disponibles pour
+                    financer leur transition écologique ? Nous avons la solution qu'il vous faut ! Très facilement,
+                    intégrez notre moteur de recherche des aides publiques écologiques à votre plate-forme.
+                </p>
+                <br>
+                <p>
+                    <b>
+                        SOLUTION 1 : Disposez de l'API permettant d'accéder aux données publiées chaque mois sur
+                        Mission Transition Ecologique et provenant de financeurs publics au niveau régional, national
+                        ainsi que certaines aides européennes. Cette API vous permettra de sélectionner les dispositifs
+                        que vous souhaitez valoriser sur votre plate-forme. Pour accéder à la documentation, <a
+                            href="{{ path('api_entrypoint') }}" target="_blank">cliquez ici</a>.
+                    </b>
+                </p>
+                <br>
+                <p>
+                    <b>
+                        SOLUTION 2 : Intégrez directement le moteur de recherche sous la forme d’une iframe à votre
+                        plate-forme pour faire bénéficier d'un parcours sans couture à vos entreprises !
+                    </b>
+                </p>
+                <br>
+                <p>Pour ce faire il vous suffit de copier/coller le code ci-dessous sur la page de votre choix : </p>
+                <br>
+                <code>
+                    &lt;iframe id="mteSearchEngine"
+                            title="Moteur de recherche Mission Transition"
+                            src="http://mission-transition-ecologique.beta.gouv.fr/recherche-iframe?region=&aidType=&projetStatus=&subTopic=&topic=&description=&target=blank"&gt;
+                    &lt;/iframe&gt;
+                </code>
+                <br><br>
+                <p>
+                    Une fois la recherche lancée directement dans l'iframe, les résultats de recherche vont s’afficher.
+                    Au clic sur l’un des dispositifs d’aide disponible, l'entreprise va être redirigée vers la fiche
+                    dédiée du dispositif sur le site Mission Transition Ecologique.
+                </p>
+                <br>
+                <p>
+                    Le site Notre Environnement intègre notre moteur de recherche sur la page : <a
+                        target="_blank" href="https://www.notre-environnement.gouv.fr/actualites/breves/article/mission-transition-ecologique-le-gps-du-financement-de-la-transition-des">Mission Transition Écologique, le GPS du financement de la transition des entreprises</a>
+                </p>
+                <br>
+                <h2>Question</h2>
+                <p>
+                    Pour poser une question ou signaler un problème, vous pouvez nous contacter via le lien se trouvant dans le pied de page.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
