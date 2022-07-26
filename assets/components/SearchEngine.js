@@ -186,13 +186,18 @@ const SearchEngine = () => {
             </div>
         }
 
+        let linkTarget = '_self';
+        if (params.has('target')) {
+          linkTarget = '_blank';
+        }
+
         let aidCards = aids.map((aid, index) =>
             <>
                 <div className="fr-card fr-enlarge-link fr-card--horizontal fr-mb-3w" key={aid.id}>
                     <div className="fr-card__body">
                         <div className="fr-card__content">
                             <h4 className="fr-card__title">
-                                <a href={"/recherche/dispositif/" + aid.slug}>{aid.nomAideNormalise}</a>
+                                <a href={"/recherche/dispositif/" + aid.slug} target={linkTarget}>{aid.nomAideNormalise}</a>
                             </h4>
                             <div className="fr-card__start">
                                 <p className="fr-card__detail fr-icon-warning-fill"></p>
