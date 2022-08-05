@@ -5,6 +5,12 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('contact_advisor') }}
+    <style>
+        iframe {
+            width: 1px;
+            min-width: 100%;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -16,10 +22,9 @@
             </h5>
         </div>
         <div class="contact-advisor__iframe fr-pt-8w mt-text-align-center">
-            <iframe id="pde"
-                    title="Choisir une problématique et envoyer une demande"
-                    src="https://place-des-entreprises.beta.gouv.fr/e/aide-entreprises/france-transition-ecologique">
-            </iframe>
+            <iframe id="pdeIframe"
+                    src="https://place-des-entreprises.beta.gouv.fr/aide-entreprise/mon-iframe"
+                    title="Choisir une problématique et envoyer une demande"></iframe>
         </div>
         <div class="contact-advisor__footer fr-py-5w">
                 <img src="{{ asset('build/img/logo_pde_no_text.svg') }}" alt="">
@@ -31,4 +36,7 @@
 {% block javascripts%}
     {{ parent() }}
     {{ encore_entry_script_tags('contact_advisor') }}
+    <script>
+        iFrameResize({ }, '#pdeIframe’)
+    </script>
 {% endblock %}
