@@ -23,7 +23,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 
-class AideCrudController extends AbstractCrudController
+class AideCategoriseCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
@@ -39,6 +39,14 @@ class AideCrudController extends AbstractCrudController
             )
             ->add('zonesGeographiques')
         ;
+    }
+
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        $qb->andWhere($qb->expr()->gt('size(entity.sousThematiques)', 0));
+        $qb->andWhere($qb->expr()->gt('size(entity.zonesGeographiques)', 0));
+        return $qb;
     }
 
     public function configureFields(string $pageName): iterable

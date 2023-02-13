@@ -52,8 +52,9 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::section('Données du moteur');
-        yield MenuItem::linkToCrud('Dispositifs', 'fas fa-list', Aide::class)->setController(AideCrudController::class);
+        yield MenuItem::linkToCrud('Tous les dispositifs', 'fas fa-list', Aide::class);
         yield MenuItem::linkToCrud('Dispositifs à traiter', 'fas fa-list', Aide::class)->setController(AideACategoriserCrudController::class);
+        yield MenuItem::linkToCrud('Dispositifs traités', 'fas fa-list', Aide::class)->setController(AideCategoriseCrudController::class);
         yield MenuItem::linkToCrud('Types d\'aide', 'fas fa-list', TypeAide::class);
         yield MenuItem::linkToCrud('Etats d\'avancement de projet', 'fas fa-list', EtatAvancementProjet::class);
         yield MenuItem::linkToCrud('Recurrence des aides', 'fas fa-list', RecurrenceAide::class);
