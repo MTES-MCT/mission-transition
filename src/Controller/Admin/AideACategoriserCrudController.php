@@ -45,7 +45,7 @@ class AideACategoriserCrudController extends AbstractCrudController
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
         $qb->andWhere($qb->expr()->eq('size(entity.sousThematiques)', 0));
-        $qb->andWhere($qb->expr()->eq('size(entity.zonesGeographiques)', 0));
+        $qb->orWhere($qb->expr()->eq('size(entity.zonesGeographiques)', 0));
         return $qb;
     }
 
