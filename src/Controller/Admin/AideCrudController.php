@@ -7,6 +7,7 @@ use App\Form\AidStateFilterType;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
@@ -39,6 +40,14 @@ class AideCrudController extends AbstractCrudController
             )
             ->add('zonesGeographiques')
         ;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Aide')
+            ->setEntityLabelInPlural('Toutes les aides')
+            ;
     }
 
     public function configureFields(string $pageName): iterable
