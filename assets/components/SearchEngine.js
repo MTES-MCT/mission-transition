@@ -446,7 +446,7 @@ const SearchEngine = () => {
         </div>
         <div className="fr-grid-row">
           <div className="fr-col-12 fr-col-md-3 fr-pr-md-3w filters">
-              <h3>Affinez votre recherche</h3>
+              <h3>Affinez votre recherche !!</h3>
               {appliedTag && (
                   <button className="fr-tag fr-tag--dismiss fr-mb-4w"
                           aria-label={`Retirer ${appliedTag}`}
