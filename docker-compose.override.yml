@@ -9,6 +9,7 @@ services:
       - ./var:/srv/api/var:rw
     environment:
       APP_ENV: dev
+      NODE_OPTIONS: --openssl-legacy-provider
 
   caddy:
     volumes:
