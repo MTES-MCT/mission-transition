@@ -9,10 +9,46 @@
 
 {% block body %}
     <div class="homepage-background">
+        <div class="fr-container fr-py-10w homepage-intro">
+            <div class="fr-grid-row">
+                <div class="col-12 fr-my-10w mt-text-align-center">
+                    <h1 class="fr-mb-0">
+                        <span class="color-green-menthe">TPE &amp; PME</span>
+                        engagez votre entreprise<br>
+                        dans la
+                        <span class="color-green-menthe">transition</span>
+                        écologique
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-cta">
+        <div class="fr-container">
+            <div class="fr-pb-10w fr-pt-5w fr-my-5w">
+                <gov-aid-tree-app
+                    id="main-widget"
+                    show-header="false"
+                    show-footer="false"
+                    show-stepper="false"
+                    show-message="false"
+                    msg="fr | Le widget <img src='https://github.com/betagouv/transition-ecologique-entreprises-widget/raw/main/images/logos/logo-gov-aid-tree-cropped.png' height='25px'> GOV-AID-TREE <br>pour aider les entreprises <br>dans leur transition écologique !, en | The GOV-AID-TREE widget to find your aid program !"
+                    seed="track_needs"
+                    locale="fr"
+                    dataset-url="/public/data/eco-aides.json"
+                    max-depth=3
+                    debug-switch="false"
+                    debug="false"
+                    >
+                </gov-aid-tree-app>
+                <script type="module" defer src="https://gov-aid-tree-poc.netlify.app/gov-aid-tree-app.umd.js"></script>
+            </div>
+        </div>
+    </div>
+    <div class="homepage-background">
         <div class="fr-container fr-py-6w homepage-intro">
             <div class="fr-grid-row">
-                <div class="col-12 fr-mb-4w mt-text-align-center main-title"><h1><span class="color-green-menthe">Accélérez</span> et <span class="color-green-menthe">financez</span>
-                <br>la transition écologique de votre entreprise.</h1></div>
+                <div class="col-12 fr-mb-4w mt-text-align-center main-title"><h1><span class="color-green-menthe">Accélérez</span> et <span class="color-green-menthe">financez</span> la transition écologique de votre entreprise.</h1></div>
                 <div class="col-12 mt-text-align-center search" id="search-engine-extension"></div>
             </div>
         </div>
