@@ -4,10 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Thematique;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ThematiqueCrudController extends AbstractCrudController
 {
@@ -16,12 +12,14 @@ class ThematiqueCrudController extends AbstractCrudController
         return Thematique::class;
     }
 
+    /*
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id'),
-            TextField::new('nom'),
-            TextEditorField::new('description')
+            TextField::new('title'),
+            TextEditorField::new('description'),
         ];
     }
+    */
 }
