@@ -23,6 +23,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 
 class AideACategoriserCrudController extends AbstractCrudController
 {
@@ -34,11 +36,19 @@ class AideACategoriserCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
+            ->add(TextFilter::new('idSource')
+                ->setLabel('ID de l\'aide')
+            )
+            ->add(EntityFilter::new('sousThematiques')
+                ->setLabel('Sous-thématiques')
+            )
+            ->add(EntityFilter::new('zonesGeographiques')
+                ->setLabel('Zones Géographiques')
+            )
             ->add(BooleanFilter::new('etat')
                 ->setLabel('Etat')
                 ->setFormType(AidStateFilterType::class)
             )
-            ->add('zonesGeographiques')
         ;
     }
 
