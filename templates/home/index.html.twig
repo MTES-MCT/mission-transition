@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="homepage-background">
+    {# <div class="homepage-background">
         <div class="fr-container fr-py-10w homepage-intro">
             <div class="fr-grid-row">
                 <div class="col-12 fr-my-10w mt-text-align-center">
@@ -22,10 +22,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> #}
     <div class="main-cta">
-        <div class="fr-container">
-            <div class="fr-pb-10w fr-pt-5w fr-my-5w">
+        <div class="">
+            <div class="fr-pb-6w">
                 <gov-aid-tree-app
                     id="main-widget"
                     show-header="false"
@@ -41,18 +41,19 @@
                     debug="false"
                     >
                 </gov-aid-tree-app>
-                <script type="module" defer src="https://gov-aid-tree.osc-fr1.scalingo.io/gov-aid-tree-app.umd.js"></script>
+                <script type="module" defer src="http://localhost:4242/dist/gov-aid-tree-app.umd.js"></script>
+                {# <script type="module" defer src="https://staging.transition-ecologique-des-entreprises.incubateur.net/gov-aid-tree-app.umd.js"></script> #}
             </div>
         </div>
     </div>
-    <div class="homepage-background">
+    {# <div class="homepage-background">
         <div class="fr-container fr-py-6w homepage-intro">
             <div class="fr-grid-row">
                 <div class="col-12 fr-mb-4w mt-text-align-center main-title"><h1><span class="color-green-menthe">Accélérez</span> et <span class="color-green-menthe">financez</span> la transition écologique de votre entreprise.</h1></div>
                 <div class="col-12 mt-text-align-center search" id="search-engine-extension"></div>
             </div>
         </div>
-    </div>
+    </div> #}
     <div class="main-cta">
         <div class="fr-container">
             <div class="fr-grid-row fr-pt-9w fr-grid-row--center">
@@ -116,7 +117,7 @@
         </div>
     </div>
 
-    <div class="fr-container">
+    {# <div class="fr-container">
         <div class="fr-grid-row fr-grid-row--center fr-py-7w">
             <div class="fr-col-12 mt-text-align-center">
                 <h2 class="fr-h1 color-navy">Une sélection de dispositifs, pour démarrer...</h2>
@@ -435,7 +436,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> #}
     <div class="fr-container fr-pb-9w fr-pt-6w funders">
         <div class="fr-col-12 mt-text-align-center fr-pb-md-5w fr-pb-4w">
             <h2 class="fr-h1 color-navy">Quelques-uns des financeurs :</h2>
